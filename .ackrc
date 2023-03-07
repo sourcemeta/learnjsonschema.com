@@ -1,0 +1,3 @@
+--ignore-dir=vendor
+--ignore-dir=dist
+--ignore-dir=resources

@@ -1,0 +1,19 @@
+{{ range (.types) }}
+  {{ if eq (.) "any" }}
+    <span class="badge" style="background-color: #e6194B;">Any</span>
+  {{ else if eq (.) "object" }}
+    <span class="badge" style="background-color: #f58231;">Object</span>
+  {{ else if eq (.) "array" }}
+    <span class="badge" style="background-color: #f032e6;">Array</span>
+  {{ else if eq (.) "string" }}
+    <span class="badge" style="background-color: #bfef45; color: #000;">String</span>
+  {{ else if eq (.) "boolean" }}
+    <span class="badge" style="background-color: #42d4f4;">Boolean</span>
+  {{ else if eq (.) "number" }}
+    <span class="badge" style="background-color: #4363d8;">Number</span>
+  {{ else if eq (.) "null" }}
+    <span class="badge" style="background-color: #911eb4;">Null</span>
+  {{ else }}
+    {{ errorf "Unrecognized instance type: %q" . }}
+  {{ end }}
+{{ end }}

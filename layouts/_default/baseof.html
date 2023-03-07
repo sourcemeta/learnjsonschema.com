@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="referrer" content="no-referrer">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+    <link rel="canonical" href="{{ .Site.BaseURL }}">
+    <meta name="description" content="{{ block "description" . }}{{ .Site.Params.Description }}{{ end }}">
+    <meta name="googlebot" content="notranslate">
+
+    <link rel="icon" href="{{ .Site.BaseURL }}/favicon.ico" sizes="any">
+    <link rel="icon" href="{{ .Site.BaseURL }}/icon.svg" type="image/svg+xml">
+    <link rel="manifest" href="{{ .Site.BaseURL }}/manifest.webmanifest">
+
+    {{ $style := resources.Get "main.scss" | toCSS (dict "outputStyle" "compressed") }}
+		<link rel="stylesheet" href="{{ $style.Permalink }}">
+
+    <script defer data-domain="learnjsonschema.com" src="https://plausible.io/js/script.outbound-links.js"></script>
+
+    <script type="application/ld+json">
+      {
+        "@context" : "https://schema.org",
+        "@type" : "WebSite",
+        "name" : "{{ .Site.Title }}",
+        "url" : "{{ .Site.BaseURL }}",
+        "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+        "author": {
+          "@type": "Organization"
+          "name": "Sourcemeta Ltd",
+          "email": "hello@sourcemeta.com",
+          "location": {
+            "@type": "PostalAddress",
+            "addressLocality": "London, United Kingdom",
+            "postalCode": "WC2H 9JQ",
+            "streetAddress": "71-75 Shelton Street"
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="h-100 bg-light">
+    {{ partial "navigation.html" . }}
+
+    {{ block "main" . }}
+    {{ end }}
+
+    {{ partial "footer.html" . }}
+
+    {{ $js := resources.Get "main.js" | js.Build (dict "minify" true "target" "es2015") }}
+    <script async src="{{ $js.Permalink }}"></script>
+  </body>
+</html>

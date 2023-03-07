@@ -1,0 +1,177 @@
+{{ define "title" }}{{ if eq .Page.Section .Title }}JSON Schema {{ .Title }}{{ else }}{{ .Title }} vocabulary ({{ .Page.Section }}){{ end }}{{ end }}
+{{ define "description" }}Reference documentation for {{ if eq .Page.Section .Title }}JSON Schema {{ .Title }}{{ else }}the {{ .Title }} JSON Schema {{ .Page.Section }} vocabulary{{ end }}. {{ .Summary }}{{ end }}
+
+{{ define "main" }}
+{{ $dialect := .Page.Section }}
+{{ $dialectURL := $dialect | printf "/%s" }}
+{{ $githubURL := .File.Path | printf "%s/blob/main/content/%s" .Site.Params.GitHub }}
+
+{{ if eq .Page.Section .Title }}
+  {{ partial "breadcrumb.html" (dict
+    "dialect" $dialect
+    "githubURL" $githubURL ) }}
+{{ else }}
+  {{ $vocabulary := .Title }}
+  {{ partial "breadcrumb.html" (dict
+    "dialect" $dialect
+    "dialectURL" (ref . $dialectURL)
+    "vocabulary" $vocabulary
+    "githubURL" $githubURL ) }}
+{{ end }}
+
+<div class="d-flex bg-body">
+  {{ partial "sidebar.html" . }}
+  <div class="flex-xl-grow-1 mw-100">
+    <main class="px-3 px-lg-5 pt-4 pb-3">
+      <header class="mb-3">
+        <h1>{{ .Title }}
+          {{ if eq .Page.Section .Title }}
+          <span class="badge bg-secondary fs-6 align-middle"
+            data-bs-toggle="tooltip" data-bs-title="A dialect is a version of JSON Schema">Dialect</span>
+          {{ else }}
+          <span class="badge bg-secondary fs-6 align-middle"
+            data-bs-toggle="tooltip" data-bs-title="A vocabulary is a bundle of well-defined JSON Schema keywords">Vocabulary</span>
+          {{ end }}
+
+          {{ partial "vocabulary-badges.html" .Params }}
+        </h1>
+        <p class="lead">{{ .Summary }}</p>
+      </header>
+
+      <div class="table-responsive shadow-sm mt-3 mb-4" data-nosnippet>
+        <table class="table table-bordered table-light mb-0">
+          {{ if ne .Page.Section .Title }}
+            <tr>
+              <th scope="row">Dialect</th>
+              <td>{{ partial "dialect-badge.html" (dict "name" $dialect "url" (ref . $dialectURL)) }}</td>
+            </tr>
+            <tr>
+              <th scope="row">URI</th>
+              <td class="text-break">
+                <a target="_blank" href="{{ .Params.uri }}">
+                  {{ .Params.uri }}
+                  <i class="bi bi-box-arrow-up-right ms-1"></i>
+                </a>
+              </td>
+            </tr>
+          {{ end }}
+          <tr>
+            <th scope="row">Specification</th>
+            <td class="text-break">
+              <a target="_blank" href="{{ .Params.specification }}">
+                {{ .Params.specification }}
+                <i class="bi bi-box-arrow-up-right ms-1"></i>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Metaschema</th>
+            <td class="text-break">
+              <a target="_blank" href="{{ .Params.metaschema }}"> {{ .Params.metaschema }}
+                <i class="bi bi-box-arrow-up-right ms-1"></i>
+              </a>
+            </td>
+          </tr>
+
+          {{ if ne .Page.Section .Title }}
+            {{ if isset .Params "related" }}
+              <tr>
+                <th scope="row">Also see</th>
+                <td class="text-break">
+                  <ul class="mb-0 ps-4">
+                    {{ range (.Params.related) }}
+                      <li>
+                        {{ $relatedVocabularyURL := . | printf "/%s/%s" $dialect }}
+                        <a href="{{ ref $ $relatedVocabularyURL }}">{{ title (replace . "-" " ") }}</a>
+                      </li>
+                    {{ end }}
+                  </ul>
+                </td>
+              </tr>
+            {{ end }}
+          {{ end }}
+        </table>
+      </div>
+
+      {{ .Content }}
+
+      {{ if eq .Page.Section .Title }}
+        <h2>Using this dialect</h2>
+        {{ $coreVocabularyURL := "core" | printf "%s/%s" $dialectURL }}
+        {{ $schemaKeywordURL := "schema" | printf "%s/%s" $coreVocabularyURL }}
+
+        <p>To make use of this dialect, declare your schemas to have the dialect metaschema using the <a href="{{ ref . $schemaKeywordURL }}">$schema</a> keyword. For example:</p>
+        <div class="highlight">
+          <pre tabindex="0"><code class="language-json" data-lang="json">{
+  <span style="color: #998; font-style: italic;">...</span>
+  <span style="color: #0a3069;">"$schema"</span>: <span style="color: #0a3069;">"{{ .Params.metaschema }}"</span>,
+  <span style="color: #998; font-style: italic;">...</span>
+}</code></pre>
+        </div>
+
+        <h2>Vocabularies</h2>
+        <p>A curated set of vocabularies defined for this JSON Schema dialect.</p>
+
+        {{ range sort .Sections "Params.index" "asc" }}
+          <h3>{{ .Title }} {{ partial "vocabulary-badges.html" .Params }}</h3>
+
+          {{ $vocabularyURL := (replace .Title " " "-") | lower | printf "%s/%s" $dialectURL }}
+          <p>{{ .Summary }} <a href="{{ ref $ $vocabularyURL }}">Read more about this vocabulary</a>.</p>
+          {{ partial "keyword-summary.html" . }}
+        {{ end }}
+      {{ else }}
+        <h2>Using this vocabulary</h2>
+
+        {{ if .Params.mandatory }}
+          <p>This vocabulary is mandatory on this dialect. It is available by default and cannot be removed.</p>
+        {{ else }}
+          {{ if .Params.default }}
+            <div class="alert alert-secondary shadow-sm" role="alert">
+              <h3 class="alert-heading h5">
+                <i class="bi bi-info-circle me-1"></i> Your metaschema is likely already declaring this vocabulary</h3>
+              <p class="mb-0">This vocabulary is included by default when using the official metaschema of this dialect:
+              <a href="{{ .Page.Parent.Params.metaschema }}">{{ .Page.Parent.Params.metaschema }}</a>. Unless you are using a custom metaschema, there is nothing else you need to do.</p>
+            </div>
+          {{ end }}
+
+          {{ $coreVocabularyURL := "core" | printf "%s/%s" $dialectURL }}
+          {{ $vocabularyKeywordURL := "vocabulary" | printf "%s/%s" $coreVocabularyURL }}
+          <p>To make use of this vocabulary, modify your metaschema to declare the use of this vocabulary using the <a href="{{ ref . $vocabularyKeywordURL }}">$vocabulary</a> keyword and evaluate the vocabulary metaschema if your metaschema.</p>
+          <p>If the vocabulary must be present for an implementation to proceed:</p>
+          <div class="highlight">
+            <pre tabindex="0"><code class="language-json" data-lang="json">{
+    <span style="color: #998; font-style: italic;">...</span>
+    <span style="color: #0a3069;">"$vocabulary"</span>: {
+      <span style="color: #998; font-style: italic;">...</span>
+      <span style="color: #0a3069;">"{{ .Params.uri }}"</span>: <span style="color: #0550ae;">true</span>
+    },
+    <span style="color: #0a3069;">"allOf"</span>: [
+      { <span style="color: #0a3069;">"$ref"</span>: <span style="color: #0a3069;">"{{ .Params.metaschema }}"</span> }
+    ],
+    <span style="color: #998; font-style: italic;">...</span>
+  }</code></pre>
+          </div>
+          <p>If it is optional for implementations to understand this vocabulary to proceed:</p>
+          <div class="highlight">
+            <pre tabindex="0"><code class="language-json" data-lang="json">{
+    <span style="color: #998; font-style: italic;">...</span>
+    <span style="color: #0a3069;">"$vocabulary"</span>: {
+      <span style="color: #998; font-style: italic;">...</span>
+      <span style="color: #0a3069;">"{{ .Params.uri }}"</span>: <span style="color: #0550ae;">false</span>
+    },
+    <span style="color: #0a3069;">"allOf"</span>: [
+      { <span style="color: #0a3069;">"$ref"</span>: <span style="color: #0a3069;">"{{ .Params.metaschema }}"</span> }
+    ],
+    <span style="color: #998; font-style: italic;">...</span>
+  }</code></pre>
+          </div>
+        {{ end }}
+
+        <h2>Keywords</h2>
+        {{ partial "keyword-summary.html" . }}
+      {{ end }}
+    </main>
+    {{ partial "help.html" . }}
+  </div>
+</div>
+{{ end }}

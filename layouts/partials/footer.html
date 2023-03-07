@@ -1,0 +1,29 @@
+<footer class="border-top py-3 bg-light">
+  <div class="container-fluid d-flex flex-column-reverse flex-md-row align-items-center">
+    <div class="d-flex align-items-center my-3 my-md-0 flex-grow-1">
+      <img src="{{ .Site.BaseURL }}/sourcemeta.svg" alt="Sourcemeta Logo" class="me-2" width="30" height="30">
+      <p class="text-muted mb-0 flex-grow-1">© {{ dateFormat "2006" now }}
+        <a target="_blank" href="{{ .Site.Params.Sourcemeta }}" class="text-body">Sourcemeta Ltd</a></p>
+    </div>
+    <ul class="nav flex-column flex-sm-row text-center">
+      <li class="nav-item">
+        <a class="nav-link text-secondary" target="_blank" href="{{ .Site.Params.jsonschema }}">
+          <i class="bi bi-box-arrow-up-right"></i>
+          JSON Schema
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-secondary" target="_blank" href="{{ .Site.Params.Slack }}">
+          <i class="bi bi-slack"></i>
+          Slack
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-secondary" target="_blank" href="{{ .Site.Params.GitHub }}">
+          <i class="bi bi-github"></i>
+          GitHub
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>

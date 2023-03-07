@@ -1,0 +1,11 @@
+{{ if .official }}
+  <span class="badge bg-success fs-6 align-middle"
+    data-bs-toggle="tooltip" data-bs-title="This vocabulary is defined by the JSON Schema organization">
+    <i class="bi bi-award-fill"></i> Official</span>
+{{ end }}
+
+{{ if .default }}
+  <span class="badge bg-info fs-6 align-middle"
+    data-bs-toggle="tooltip" data-bs-title="This vocabulary is available by default when using its dialect main metaschema">
+    <i class="bi bi-check-circle-fill"></i> Included By Default</span>
+{{ end }}

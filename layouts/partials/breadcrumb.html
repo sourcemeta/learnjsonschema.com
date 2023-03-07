@@ -1,0 +1,37 @@
+<nav aria-label="breadcrumb" class="d-flex align-items-center bg-light bg-gradient border-bottom px-3 py-2 shadow-sm">
+  <ol class="breadcrumb mb-0 flex-grow-1 justify-content-center justify-content-md-start">
+    {{ if isset . "keyword" }}
+      <li class="breadcrumb-item">
+        <small>Dialect:</small> <a href="{{ .dialectURL }}">{{ .dialect }}</a>
+      </li>
+      <li class="breadcrumb-item">
+        <small>Vocabulary:</small> <a href="{{ .vocabularyURL }}">{{ .vocabulary }}</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <small>Keyword:</small> <span class="font-monospace">{{ .keyword }}</span>
+      </li>
+    {{ else if isset . "vocabulary" }}
+      <li class="breadcrumb-item">
+        <small>Dialect:</small> <a href="{{ .dialectURL }}">{{ .dialect }}</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <small>Vocabulary:</small> {{ .vocabulary }}
+      </li>
+    {{ else if isset . "dialect" }}
+      <li class="breadcrumb-item active" aria-current="page">
+        <small>Dialect:</small> {{ .dialect }}
+      </li>
+    {{ else }}
+      {{ errorf "Invalid breadcrumb instantiation" }}
+    {{ end }}
+  </ol>
+
+  {{ if isset . "githubURL" }}
+    <small class="d-none d-md-block">
+      <a target="_blank" href="{{ .githubURL }}" class="text-decoration-none text-secondary">
+        <i class="bi bi-pencil-square"></i>
+        Edit this page on GitHub
+      </a>
+    </small>
+  {{ end }}
+</nav>

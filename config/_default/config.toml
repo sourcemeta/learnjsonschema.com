@@ -1,0 +1,17 @@
+languageCode = 'en-us'
+title = 'Reference documentation for JSON Schema'
+staticDir = [ './vendor/bootstrap-icons/font/fonts', './static' ]
+paginate = 100000000
+
+[Params]
+description = 'Reference documentation for JSON Schema'
+github = 'https://github.com/sourcemeta/learnjsonschema.com'
+slack = 'https://json-schema.org/slack'
+sourcemeta = 'https://github.com/sourcemeta'
+jsonschema = 'https://json-schema.org'
+
+[markup]
+  [markup.highlight]
+    lineNos = false
+    noClasses = true
+    style = 'github'

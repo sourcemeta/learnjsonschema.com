@@ -1,0 +1,24 @@
+<div class="table-responsive shadow-sm mt-3 mb-4">
+  <table class="table table-bordered mb-0">
+    <thead>
+      <tr>
+        <th scope="col">Keyword</th>
+        <th scope="col">Kind</th>
+        <th scope="col">Instance</th>
+        <th scope="col">Summary</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range sort .Paginator.Pages "Params.index" "asc" }}
+        <tr>
+          <td class="font-monospace">
+            <a href="{{ .Permalink }}">{{ .Params.keyword }}</a>
+          </td>
+          <td>{{ partial "kind-badges.html" (dict "values" .Params.kind) }}</td>
+          <td>{{ partial "instance-badges.html" (dict "types" .Params.instance) }}</td>
+          <td>{{ .Summary }}</td>
+        </tr>
+      {{ end }}
+    </tbody>
+  </table>
+</div>

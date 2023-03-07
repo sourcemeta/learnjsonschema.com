@@ -1,0 +1,20 @@
+{{ range (.values) }}
+  {{ if eq (.) "identifier" }}
+    <span class="badge" style="background-color: #800000;"
+      data-bs-toggle="tooltip" data-bs-title="Control schema identification through setting a URI for the schema and/or changing how the base URI is determined">Identifier</span>
+  {{ else if eq (.) "annotation" }}
+    <span class="badge" style="background-color: #9A6324;"
+      data-bs-toggle="tooltip" data-bs-title="Attach information to an instance for application use">Annotation</span>
+  {{ else if eq (.) "assertion" }}
+    <span class="badge" style="background-color: #808000;"
+      data-bs-toggle="tooltip" data-bs-title="Produce a boolean result when applied to an instance">Assertion</span>
+  {{ else if eq (.) "applicator" }}
+    <span class="badge" style="background-color: #469990;"
+      data-bs-toggle="tooltip" data-bs-title="Apply one or more subschemas to a particular location in the instance, and combine or modify their results">Applicator</span>
+  {{ else if eq (.) "location" }}
+    <span class="badge" style="background-color: #000075;"
+      data-bs-toggle="tooltip" data-bs-title="Do not directly affect results, but reserve a place for a specific purpose to ensure interoperability">Reserved Location</span>
+  {{ else }}
+    {{ errorf "Unrecognized kind: %q" . }}
+  {{ end }}
+{{ end }}
