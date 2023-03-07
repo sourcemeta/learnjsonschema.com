@@ -64,6 +64,23 @@
               </a>
             </td>
           </tr>
+          {{ if isset .Params "authors" }}
+            <tr>
+              <th scope="row">Authors</th>
+              <td class="text-break">
+                <ul class="mb-0 ps-0 font-monospace list-unstyled">
+                  {{ range (.Params.authors) }}
+                    <li>
+                      <a target="_blank" href="https://github.com/{{ . }}">
+                        <img class="rounded" src="https://github.com/{{ . }}.png?size=60" width="30" height="30">
+                        @{{ . }}
+                      </a>
+                    </li>
+                  {{ end }}
+                </ul>
+              </td>
+            </tr>
+          {{ end }}
           <tr>
             <th scope="row">Metaschema</th>
             <td class="text-break">
