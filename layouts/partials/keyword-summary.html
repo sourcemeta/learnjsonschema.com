@@ -2,9 +2,19 @@
   <table class="table table-bordered mb-0">
     <thead>
       <tr>
-        <th scope="col">Keyword</th>
+        <th scope="col">
+          {{ partial "term.html" (dict
+            "term" "Keyword"
+            "tooltip" "A keyword is a property defined in a schema"
+            "glossary" "keyword" ) }}
+        </th>
         <th scope="col">Kind</th>
-        <th scope="col">Instance</th>
+        <th scope="col">
+          {{ partial "term.html" (dict
+            "term" "Instance"
+            "tooltip" "An instance is a JSON document described by a schema"
+            "glossary" "instance" ) }}
+        </th>
         <th scope="col">Summary</th>
       </tr>
     </thead>

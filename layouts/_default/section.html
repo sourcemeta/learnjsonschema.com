@@ -42,7 +42,12 @@
         <table class="table table-bordered table-light mb-0">
           {{ if ne .Page.Section .Title }}
             <tr>
-              <th scope="row">Dialect</th>
+              <th scope="row">
+                {{ partial "term.html" (dict
+                  "term" "Dialect"
+                  "tooltip" "A dialect is a version of JSON Schema"
+                  "glossary" "draft" ) }}
+              </th>
               <td>{{ partial "dialect-badge.html" (dict "name" $dialect "url" (ref . $dialectURL)) }}</td>
             </tr>
             <tr>
@@ -82,7 +87,12 @@
             </tr>
           {{ end }}
           <tr>
-            <th scope="row">Metaschema</th>
+            <th scope="row">
+              {{ partial "term.html" (dict
+                "term" "Metaschema"
+                "tooltip" "A metaschema is a schema that validates other schemas"
+                "glossary" "meta-schema" ) }}
+            </th>
             <td class="text-break">
               <a target="_blank" href="{{ .Params.metaschema }}"> {{ .Params.metaschema }}
                 <i class="bi bi-box-arrow-up-right ms-1"></i>
