@@ -9,8 +9,8 @@ Reference documentation for [JSON Schema](https://json-schema.org).
 
 ### Running Locally
 
-Make you have [Hugo](https://gohugo.io) and run the following command from the
-top-level of the project:
+Make sure you have [Hugo](https://gohugo.io) and run the following command from
+the top-level of the project:
 
 ```sh
 make
