@@ -4,8 +4,14 @@ summary: "A vocabulary that defines keywords that impose requirements for succes
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6"
 authors:
   - github: awwright
+    first: Austin
+    last: Wright
   - github: handrews
+    first: Henry
+    last: Andrews
   - github: relequestual
+    first: Ben
+    last: Hutton
 uri: "https://json-schema.org/draft/2020-12/vocab/validation"
 metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
 official: true

@@ -73,12 +73,12 @@
             <tr>
               <th scope="row">Authors</th>
               <td class="text-break">
-                <ul class="mb-0 ps-0 font-monospace list-unstyled">
+                <ul class="mb-0 ps-0 list-unstyled">
                   {{ range (.Params.authors) }}
                     <li class="my-1">
                       <a target="_blank" href="https://github.com/{{ .github }}">
                         <img class="rounded" src="https://github.com/{{ .github }}.png?size=60" width="30" height="30">
-                        @{{ .github }}
+                        {{ .first }} {{ .last }}
                       </a>
                     </li>
                   {{ end }}
