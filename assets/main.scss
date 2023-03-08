@@ -50,6 +50,22 @@ $bootstrap-icons-font: bootstrap-icons;
 $bootstrap-icons-font-dir: "./";
 @import "../vendor/bootstrap-icons/font/bootstrap-icons.scss";
 
+// Highlight
+@import "./highlight.scss";
+.highlight {
+  @extend .bg-light;
+  @extend .border;
+  @extend .px-2;
+  @extend .py-2;
+  @extend .my-3;
+
+  > pre {
+    @extend .mb-0;
+  }
+}
+
+// Other
+
 #search {
   min-width: 400px;
 }
@@ -77,16 +93,4 @@ a {
 
 article table {
   @extend .table;
-}
-
-.highlight {
-  @extend .bg-light;
-  @extend .border;
-  @extend .px-2;
-  @extend .py-2;
-  @extend .my-3;
-
-  > pre {
-    @extend .mb-0;
-  }
 }

@@ -13,5 +13,4 @@ jsonschema = 'https://json-schema.org'
 [markup]
   [markup.highlight]
     lineNos = false
-    noClasses = true
-    style = 'github'
+    noClasses = false
