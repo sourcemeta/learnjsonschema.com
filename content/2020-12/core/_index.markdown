@@ -4,9 +4,17 @@ summary: "A mandatory vocabulary that defines keywords that are either required 
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-8"
 authors:
   - github: awwright
+    first: Austin
+    last: Wright
   - github: handrews
+    first: Henry
+    last: Andrews
   - github: relequestual
+    first: Ben
+    last: Hutton
   - github: gregsdennis
+    first: Greg
+    last: Dennis
 uri: "https://json-schema.org/draft/2020-12/vocab/core"
 metaschema: "https://json-schema.org/draft/2020-12/meta/core"
 official: true
