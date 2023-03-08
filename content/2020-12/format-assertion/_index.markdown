@@ -2,7 +2,10 @@
 title: "Format Assertion"
 summary: "A vocabulary to defines and asserts semantic information about string-encoded values."
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.2.2"
-authors: [ "awwright", "handrews", "relequestual" ]
+authors:
+  - github: awwright
+  - github: handrews
+  - github: relequestual
 uri: "https://json-schema.org/draft/2020-12/vocab/format-assertion"
 metaschema: "https://json-schema.org/draft/2020-12/meta/format-assertion"
 official: true
