@@ -183,33 +183,14 @@
           {{ $vocabularyKeywordURL := "vocabulary" | printf "%s/%s" $coreVocabularyURL }}
           <p>To make use of this vocabulary, modify your metaschema to declare the use of this vocabulary using the <a href="{{ ref . $vocabularyKeywordURL }}">$vocabulary</a> keyword and evaluate the vocabulary metaschema if your metaschema.</p>
           <p>If the vocabulary must be present for an implementation to proceed:</p>
-          <div class="highlight">
-            <pre tabindex="0"><code class="language-json" data-lang="json">{
-    <span style="color: #998; font-style: italic;">...</span>
-    <span style="color: #0a3069;">"$vocabulary"</span>: {
-      <span style="color: #998; font-style: italic;">...</span>
-      <span style="color: #0a3069;">"{{ .Params.uri }}"</span>: <span style="color: #0550ae;">true</span>
-    },
-    <span style="color: #0a3069;">"allOf"</span>: [
-      { <span style="color: #0a3069;">"$ref"</span>: <span style="color: #0a3069;">"{{ .Params.metaschema }}"</span> }
-    ],
-    <span style="color: #998; font-style: italic;">...</span>
-  }</code></pre>
-          </div>
+
+          {{ $usingVocabularyRequired := .Params.metaschema | printf "{\n  ...\n  \"$vocabulary\": {\n    ...\n    \"%s\": true\n  },\n  \"allOf\": [\n    { \"$ref\": \"%s\" }\n  ]\n}" .Params.uri }}
+          {{ transform.Highlight $usingVocabularyRequired "json" }}
+
           <p>If it is optional for implementations to understand this vocabulary to proceed:</p>
-          <div class="highlight">
-            <pre tabindex="0"><code class="language-json" data-lang="json">{
-    <span style="color: #998; font-style: italic;">...</span>
-    <span style="color: #0a3069;">"$vocabulary"</span>: {
-      <span style="color: #998; font-style: italic;">...</span>
-      <span style="color: #0a3069;">"{{ .Params.uri }}"</span>: <span style="color: #0550ae;">false</span>
-    },
-    <span style="color: #0a3069;">"allOf"</span>: [
-      { <span style="color: #0a3069;">"$ref"</span>: <span style="color: #0a3069;">"{{ .Params.metaschema }}"</span> }
-    ],
-    <span style="color: #998; font-style: italic;">...</span>
-  }</code></pre>
-          </div>
+
+          {{ $usingVocabularyOptional := .Params.metaschema | printf "{\n  ...\n  \"$vocabulary\": {\n    ...\n    \"%s\": false\n  },\n  \"allOf\": [\n    { \"$ref\": \"%s\" }\n  ]\n}" .Params.uri }}
+          {{ transform.Highlight $usingVocabularyOptional "json" }}
         {{ end }}
 
         <h2>Keywords</h2>
