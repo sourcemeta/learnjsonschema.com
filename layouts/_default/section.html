@@ -128,13 +128,8 @@
         {{ $schemaKeywordURL := "schema" | printf "%s/%s" $coreVocabularyURL }}
 
         <p>To make use of this dialect, declare your schemas to have the dialect metaschema using the <a href="{{ ref . $schemaKeywordURL }}">$schema</a> keyword. For example:</p>
-        <div class="highlight">
-          <pre tabindex="0"><code class="language-json" data-lang="json">{
-  <span style="color: #998; font-style: italic;">...</span>
-  <span style="color: #0a3069;">"$schema"</span>: <span style="color: #0a3069;">"{{ .Params.metaschema }}"</span>,
-  <span style="color: #998; font-style: italic;">...</span>
-}</code></pre>
-        </div>
+        {{ $usingDialect := .Params.metaschema | printf "{\n  \"$schema\": \"%s\" \n}" }}
+        {{ transform.Highlight $usingDialect "json" }}
 
         <h2>Citing this dialect</h2>
 
