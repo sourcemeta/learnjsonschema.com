@@ -3,8 +3,6 @@ Learn JSON Schema
 
 **[www.learnjsonschema.com](https://www.learnjsonschema.com)**
 
-[<img src="static/icon.svg" align="right" width="100">](https://json-schema.org)
-
 Reference documentation for [JSON Schema](https://json-schema.org).
 
 ### Running Locally
