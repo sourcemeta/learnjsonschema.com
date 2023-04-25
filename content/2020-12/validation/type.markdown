@@ -17,3 +17,4 @@ The supported types are:
 - `"array"`
 - `"number"`
 - `"string"`
+- `"integer"`  
