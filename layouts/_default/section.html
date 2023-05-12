@@ -181,7 +181,7 @@
 
           {{ $coreVocabularyURL := "core" | printf "%s/%s" $dialectURL }}
           {{ $vocabularyKeywordURL := "vocabulary" | printf "%s/%s" $coreVocabularyURL }}
-          <p>To make use of this vocabulary, modify your metaschema to declare the use of this vocabulary using the <a href="{{ ref . $vocabularyKeywordURL }}">$vocabulary</a> keyword and evaluate the vocabulary metaschema if your metaschema.</p>
+          <p>To make use of this vocabulary, modify your metaschema to declare the use of this vocabulary using the <a href="{{ ref . $vocabularyKeywordURL }}">$vocabulary</a> keyword and evaluate its metaschema.</p>
           <p>If the vocabulary must be present for an implementation to proceed:</p>
 
           {{ $usingVocabularyRequired := .Params.metaschema | printf "{\n  ...\n  \"$vocabulary\": {\n    ...\n    \"%s\": true\n  },\n  \"allOf\": [\n    { \"$ref\": \"%s\" }\n  ]\n}" .Params.uri }}
