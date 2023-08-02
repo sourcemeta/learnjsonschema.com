@@ -7,6 +7,7 @@ instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-10.2.2.1"
 metaschema: "https://json-schema.org/draft/2020-12/meta/applicator"
 index: -9999
+introduced_in: draft7
 related:
   - vocabulary: applicator
     keyword: then

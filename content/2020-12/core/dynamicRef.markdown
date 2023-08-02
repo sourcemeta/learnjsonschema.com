@@ -6,6 +6,7 @@ kind: [ "applicator" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-8.2.3.1"
 metaschema: "https://json-schema.org/draft/2020-12/meta/core"
+introduced_in: 2020-12
 interdependencies:
   - vocabulary: core
     keyword: $dynamicAnchor

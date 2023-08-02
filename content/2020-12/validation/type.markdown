@@ -6,6 +6,7 @@ kind: [ "assertion" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6.1.1"
 metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
+introduced_in: draft1
 index: -99999
 ---
 
@@ -18,4 +19,4 @@ The supported types are:
 - `"number"`
 - `"integer"`
 - `"string"`
-- `"integer"`  
+- `"integer"`
