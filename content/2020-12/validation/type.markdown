@@ -16,4 +16,5 @@ The supported types are:
 - `"object"`
 - `"array"`
 - `"number"`
+- `"integer"`
 - `"string"`
