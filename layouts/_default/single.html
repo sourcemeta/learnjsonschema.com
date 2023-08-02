@@ -58,6 +58,14 @@
               </td>
             </tr>
             <tr>
+              <th scope="row">
+                Introduced In
+              </th>
+              <td class="text-break">
+                {{ partial "dialect-badge.html" (dict "name" (.Params.introduced_in)) }}
+              </td>
+            </tr>
+            <tr>
               <th scope="row">Vocabulary</th>
               <td class="text-break">
                 <a href="{{ ref . .Parent.RelPermalink }}">{{ .Parent.Params.title }}</a>

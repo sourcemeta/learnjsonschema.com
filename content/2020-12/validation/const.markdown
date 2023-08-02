@@ -7,6 +7,7 @@ instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6.1.3"
 metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
 index: -99997
+introduced_in: draft6
 related:
   - vocabulary: validation
     keyword: enum

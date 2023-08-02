@@ -7,6 +7,7 @@ instance: [ "number" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6.2.5"
 metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
 index: -999
+introduced_in: draft3
 related:
   - vocabulary: validation
     keyword: exclusiveMaximum

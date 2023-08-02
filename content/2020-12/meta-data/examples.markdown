@@ -6,6 +6,7 @@ kind: [ "annotation" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-9.5"
 metaschema: "https://json-schema.org/draft/2020-12/meta/meta-data"
+introduced_in: draft6
 related:
   - vocabulary: meta-data
     keyword: title

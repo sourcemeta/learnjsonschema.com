@@ -6,6 +6,7 @@ kind: [ "applicator", "annotation" ]
 instance: [ "array" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-10.3.1.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/applicator"
+introduced_in: draft1
 interdependencies:
   - vocabulary: applicator
     keyword: prefixItems
