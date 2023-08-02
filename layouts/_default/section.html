@@ -100,6 +100,18 @@
             </td>
           </tr>
 
+          {{ if isset .Params "bowtie" }}
+            <tr>
+              <th scope="row">Implementations</th>
+              <td class="text-break">
+                <a target="_blank" href="{{ .Params.bowtie }}">
+                  {{ .Params.bowtie }}
+                  <i class="bi bi-box-arrow-up-right ms-1"></i>
+                </a>
+              </td>
+            </tr>
+          {{ end }}
+
           {{ if ne .Page.Section .Title }}
             {{ if isset .Params "related" }}
               <tr>
