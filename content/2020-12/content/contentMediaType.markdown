@@ -1,7 +1,7 @@
 ---
 keyword: "contentMediaType"
 signature: "String"
-summary: "Declares the media type of the string instance."
+summary: "This keyword declares the media type of the string instance."
 kind: [ "annotation" ]
 instance: [ "string" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-8.4"
