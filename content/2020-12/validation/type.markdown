@@ -19,4 +19,4 @@ The supported types are:
 - `"number"`
 - `"integer"`
 - `"string"`
-- `"integer"`
+
