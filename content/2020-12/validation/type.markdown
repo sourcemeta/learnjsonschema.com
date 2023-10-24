@@ -34,10 +34,14 @@ numbers. Still, JSON Schema provides the `integer` logical type.
 }
 {{< /schema >}}
 
-{{< instance-pass "A JSON integer" >}}
+{{< instance-pass "An integer is valid" >}}
 42
 {{< /instance-pass >}}
 
-{{< instance-fail "A JSON string" >}}
+{{< instance-pass "A real number is valid" >}}
+3.14
+{{< /instance-pass >}}
+
+{{< instance-fail "A string is not valid" >}}
 "foo"
 {{< /instance-fail >}}
