@@ -117,6 +117,11 @@ article table {
   @extend .bg-danger;
 }
 
-.code + .code {
+.code + .code-instance,
+.code-instance + .code-instance {
   @extend .border-top-0;
+}
+
+.code-instance + .code-schema {
+  @extend .mt-4;
 }
