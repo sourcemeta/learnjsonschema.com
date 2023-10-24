@@ -45,3 +45,22 @@ numbers. Still, JSON Schema provides the `integer` logical type.
 {{< instance-fail "A string is not valid" >}}
 "foo"
 {{< /instance-fail >}}
+
+{{< schema "A schema that describes boolean or array instances" >}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": [ "boolean", "array" ]
+}
+{{< /schema >}}
+
+{{< instance-pass "The true boolean is valid" >}}
+true
+{{< /instance-pass >}}
+
+{{< instance-fail "A number is invalid" >}}
+1234
+{{< /instance-fail >}}
+
+{{< instance-pass "An arbitrary array is valid" >}}
+[ 1, 2, 3 ]
+{{< /instance-pass >}}
