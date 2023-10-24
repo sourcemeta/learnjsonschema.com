@@ -3,6 +3,8 @@
 
 // Overrides
 $blue: #0969da;
+$success: rgba(213, 255, 230, 1);
+$danger: rgba(255, 213, 213, 1);
 
 // Required components
 @import "../vendor/bootstrap/scss/variables";
@@ -93,4 +95,28 @@ a {
 
 article table {
   @extend .table;
+}
+
+.code,
+.code .border-end,
+.code .border-bottom {
+  border-color: #aaa !important;
+}
+
+.code .highlight {
+  @extend .py-3;
+  @extend .m-0;
+  @extend .border-0;
+}
+
+.code.bg-success .highlight {
+  @extend .bg-success;
+}
+
+.code.bg-danger .highlight {
+  @extend .bg-danger;
+}
+
+.code + .code {
+  @extend .border-top-0;
 }

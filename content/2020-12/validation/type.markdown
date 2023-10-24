@@ -10,13 +10,34 @@ introduced_in: draft1
 index: -99999
 ---
 
-The supported types are:
+The supported types are as follows:
 
-- `"null"`
-- `"boolean"`
-- `"object"`
-- `"array"`
-- `"number"`
-- `"integer"`
-- `"string"`
+| Type        | Description                              |
+|-------------|------------------------------------------|
+| `"null"`    | The JSON null constant                   |
+| `"boolean"` | The JSON true or false constants         |
+| `"object"`  | A JSON object                            |
+| `"array"`   | A JSON array                             |
+| `"number"`  | A JSON number                            |
+| `"integer"` | A JSON number that represents an integer |
+| `"string"`  | A JSON string                            |
 
+Note that the JSON grammar does not distinguish between integer and real
+numbers. Still, JSON Schema provides the `integer` logical type.
+
+## Examples
+
+{{< schema "A schema that describes numeric instances" >}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "number"
+}
+{{< /schema >}}
+
+{{< instance-pass "A JSON integer" >}}
+42
+{{< /instance-pass >}}
+
+{{< instance-fail "A JSON string" >}}
+"foo"
+{{< /instance-fail >}}
