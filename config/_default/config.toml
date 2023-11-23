@@ -7,7 +7,6 @@ paginate = 100000000
 description = 'Reference documentation for JSON Schema'
 github = 'https://github.com/sourcemeta/learnjsonschema.com'
 slack = 'https://json-schema.org/slack'
-sourcemeta = 'https://github.com/sourcemeta'
 jsonschema = 'https://json-schema.org'
 
 [markup]
