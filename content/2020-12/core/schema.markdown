@@ -16,3 +16,17 @@ related:
   - vocabulary: core
     keyword: $defs
 ---
+
+## Examples
+
+{{<schema "This declaration indicates that the schema follows the specifications outlined in JSON Schema Draft 2020-12">}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
+{{</schema>}}
+
+{{<schema "This declaration indicates that the schema follows the specifications outlined in JSON Schema Draft 7">}}
+{
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
+{{</schema>}}
