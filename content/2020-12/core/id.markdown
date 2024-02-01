@@ -1,7 +1,7 @@
 ---
 keyword: "$id"
 signature: "URI Reference"
-summary: 'The "$id" keyword declares an identifier for the schema and establishes the base URI for resolving other URI references within the schema. The "$id" keyword is resolved against the base URI of the overall object.'
+summary: 'The `$id` keyword declares an identifier for the schema and establishes the base URI for resolving other URI references within the schema. This keyword is resolved against the base URI of the overall object.'
 kind: ["identifier"]
 instance: ["any"]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-8.2.1"
@@ -17,7 +17,7 @@ related:
 
 ## Examples
 
-{{<schema "Declaring an Identifier for the Schema">}}
+{{<schema `Declaring an Identifier for the Schema`>}}
 {
   "$id": "http://example.com/schemas/address.json",
   "type": "object",
@@ -30,7 +30,7 @@ related:
 -  _The __$id__ keyword declares the identifier "http://example.com/schemas/address.json" for the schema. This identifier can be used to reference the schema from other parts of the document or external documents._
 
 
-{{<schema "Establishing Base URI for Resolving References">}}
+{{<schema `Establishing Base URI for Resolving References`>}}
 {
   "$id": "https://example.com/main-schema",
   "type": "object",
