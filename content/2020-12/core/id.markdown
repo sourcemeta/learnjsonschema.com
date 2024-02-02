@@ -14,3 +14,121 @@ related:
   - vocabulary: core
     keyword: $vocabulary
 ---
+
+The `$id` keyword declares an identifier for the schema and establishes the base URI for resolving other URI references within the schema. This keyword is resolved against the base URI of the overall object. The top level `$id` of a schema, if present, should be absolute.
+
+## Examples
+
+{{<schema `Declaring an identifier for the schema`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/address.json",
+  "type": "string"
+}
+{{</schema>}}
+
+{{<instance-pass `A string is valid`>}}
+"Hello World!"
+{{</instance-pass>}}
+
+
+- _The `$id` keyword declares the identifier `http://example.com/schemas/address.json` for the schema. This identifier can be used to reference the schema from other parts of the document or external documents._
+
+{{<schema `Nested subschema with relative $id`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/main-schema",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "age": { "type": "number" },
+    "currentAddress": {
+      "$id": "/address",
+      "type": "object",
+      "properties": {
+        "city": { "type": "string" },
+        "postalCode": { "type": "number" }
+      },
+      "required": ["city", "postalCode"]
+    },
+    "permanentAddress": {
+      "$ref": "https://example.com/address"
+    }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with all the required properties is valid`>}}
+{
+  "name": "John Doe",
+  "age": 30,
+  "currentAddress": {
+    "city": "Example City",
+    "postalCode": 12345
+  },
+  "permanentAddress": {
+    "city": "Another City",
+    "postalCode": 67890
+  }
+}
+{{</instance-pass>}}
+
+- The base URI for this schema is `https://example.com/main-schema`. The _address_ subschema has a relative URI `/address`, which resolving against the base URI will result into `https://example.com/address`. Now this URI can be used to reference the  _address_ schema from other parts of the document or external documents.
+
+{{<schema `Nested subschema with absolute $id`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/family-info",
+  "type": "object",
+  "properties": {
+    "name": {
+      "$id": "https://example.com/name",
+      "type": "string"
+    },
+    "fatherName": { "$ref": "https://example.com/name" },
+    "motherName": { "$ref": "https://example.com/name" }
+  },
+  "required": ["name", "fatherName", "motherName"]
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with all the required properties is valid`>}}
+{
+  "name": "John",
+  "fatherName": "Peter",
+  "motherName": "Julia"
+}
+{{</instance-pass>}}
+
+- Here, the _name_ subschema has an absolute URI `https://example.com/name`, which can be used to reference the  _name_ schema from other parts of the document or external documents.
+
+{{<schema  `Schema with URN as value of $id`>}}
+{
+  "$id": "urn:example:vehicle",
+  "type": "object",
+  "properties": {
+    "car": {
+      "$ref": "urn:example:vehicle:car"
+    }
+  },
+  "$defs": {
+    "car": {
+      "$id": "urn:example:vehicle:car",
+      "type": "object",
+      "properties": {
+        "brand": {"type": "string"},
+        "price": {"type": "number" }
+      }
+    }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with correct datatype is valid`>}}
+{
+  "car": {
+    "brand": "foo",
+    "price": 100000
+  }
+}
+{{</instance-pass>}}
