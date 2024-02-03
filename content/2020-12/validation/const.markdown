@@ -20,6 +20,8 @@ The `const` keyword in JSON Schema restricts a property value to a single, speci
 * Applies to various JSON data types, including numbers, strings, booleans, objects, and arrays.
 * Takes precedence over other validation keywords like `type` and `enum`.
 
+## Examples
+
 {{<schema `Schema with a specific string value`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
