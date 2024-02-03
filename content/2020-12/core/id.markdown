@@ -102,7 +102,7 @@ The `$id` keyword declares an identifier for the schema and establishes the base
 
 - Here, the _name_ subschema has an absolute URI `https://example.com/name`, which can be used to reference the  _name_ schema from other parts of the document or external documents.
 
-{{<schema  `Schema with URN as value of $id`>}}
+{{<schema `Schema with URN as value of $id`>}}
 {
   "$id": "urn:example:vehicle",
   "type": "object",
