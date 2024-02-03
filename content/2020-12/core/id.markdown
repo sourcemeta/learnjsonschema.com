@@ -15,8 +15,7 @@ related:
     keyword: $vocabulary
 ---
 
-
-The `$id` keyword declares an identifier for the schema and sets a URI reference for the schema. This keyword introduces a new schema resource.
+The `$id` keyword declares the URI for a schema, usually set at the top level. However, any subschema has the flexibility to declare its own `$id` to distinguish itself with a distinct URI. Each subschema with an `$id` in a compound schema is called a _schema resource_.
 
 * The top-level schema resource is referred to as the root schema resource.
 * The identifier of the root schema resource, if set, must be an absolute URI.
