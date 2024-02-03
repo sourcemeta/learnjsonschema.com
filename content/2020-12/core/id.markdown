@@ -43,7 +43,7 @@ The `$id` keyword declares an identifier for the schema and establishes the base
     "name": { "type": "string" },
     "age": { "type": "number" },
     "currentAddress": {
-      "$id": "/address",
+      "$id": "address",
       "type": "object",
       "properties": {
         "city": { "type": "string" },
