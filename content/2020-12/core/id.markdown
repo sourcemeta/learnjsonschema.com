@@ -49,7 +49,7 @@ The `$id` keyword declares an identifier for the schema and establishes the base
         "city": { "type": "string" },
         "postalCode": { "type": "number" }
       },
-      "required": ["city", "postalCode"]
+      "required": [ "city", "postalCode" ]
     },
     "permanentAddress": {
       "$ref": "https://example.com/address"
