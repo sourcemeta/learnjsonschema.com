@@ -74,3 +74,38 @@ The `pattern` keyword in JSON Schema is designed to define a regular expression 
 {{</instance-fail>}}
 - _This keyword can be combined with other string-related keywords, such as `maxLength` and `minLength`, for comprehensive validation._
 
+{{<schema `Schema with regular expression for some specific pattern`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "string",
+  "pattern": "apple"
+}
+{{</schema>}}
+
+{{<instance-pass `An instance matching the pattern is valid`>}}
+"apple"
+{{</instance-pass>}}
+
+{{<instance-pass `An instance is also valid if the pattern matches anywhere within the string`>}}
+"I love apples!"
+{{</instance-pass>}}
+
+- _When defining regular expressions, it's crucial to note that a string is considered valid if the expression matches anywhere within it, as demonstrated in the above example._
+
+- _To avoid this and ensure that the entire string exactly matches the `pattern`, you would surround the regular expression with `^` and `$`. See the example below._
+
+{{<schema `Schema with a regular expression enforcing an exact pattern match`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "string",
+  "pattern": "^apple$"
+}
+{{</schema>}}
+
+{{<instance-pass `An instance matching the pattern is valid`>}}
+"apple"
+{{</instance-pass>}}
+
+{{<instance-fail `An instance containing characters other than "apple" is invalid`>}}
+"I love apples!"
+{{</instance-fail>}}
