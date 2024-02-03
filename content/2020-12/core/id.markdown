@@ -32,7 +32,7 @@ The `$id` keyword declares an identifier for the schema and establishes the base
 {{</instance-pass>}}
 
 
-- _The `$id` keyword declares the identifier `http://example.com/schemas/address.json` for the schema. This identifier can be used to reference the schema from other parts of the document or external documents._
+- _The `$id` keyword declares the URI `http://example.com/schemas/address.json` as the identifier for the schema. This URI serves as the base URI for resolving other URIs within the schema resource._
 
 {{<schema `Nested subschema with relative $id`>}}
 {
