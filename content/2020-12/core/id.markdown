@@ -15,7 +15,17 @@ related:
     keyword: $vocabulary
 ---
 
-The `$id` keyword declares an identifier for the schema and establishes the base URI for resolving other URI references within the schema. This keyword is resolved against the base URI of the overall object. The top level `$id` of a schema, if present, should be absolute.
+
+The `$id` keyword declares an identifier for the schema and sets a URI reference for the schema. This keyword introduces a new schema resource.
+
+* The top-level schema resource is referred to as the root schema resource.
+* The identifier of the root schema resource, if set, must be an absolute URI.
+* The presence of an identifier sets a new base URI for such schema resource.
+
+It's worth noting that if the `$id` identifier is a URL, it's common for the URL to respond with the schema when accessed through a web browser, but this behavior is not mandatory; the URL primarily serves as an identifier. Additionally, for non-locatable URIs, such as those not intended for direct accessibility over the declared protocol (e.g., HTTPS), it is advisable to consider using URNs.
+
+_**Note:** Check out the [URI RFC](https://datatracker.ietf.org/doc/html/rfc3986) to gain a deeper understanding of how resolution works, providing valuable insights into the essential role of URIs in JSON Schema._
+
 
 ## Examples
 
@@ -28,7 +38,7 @@ The `$id` keyword declares an identifier for the schema and establishes the base
 {{</schema>}}
 
 {{<instance-pass `A string is valid`>}}
-"Hello World!"
+"123 Main Street, Anytown, USA"
 {{</instance-pass>}}
 
 
@@ -52,7 +62,7 @@ The `$id` keyword declares an identifier for the schema and establishes the base
       "required": [ "city", "postalCode" ]
     },
     "permanentAddress": {
-      "$ref": "https://example.com/address"
+      "$ref": "address"
     }
   }
 }
@@ -104,6 +114,7 @@ The `$id` keyword declares an identifier for the schema and establishes the base
 
 {{<schema `Schema with URN as value of $id`>}}
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:example:vehicle",
   "type": "object",
   "properties": {
@@ -132,3 +143,30 @@ The `$id` keyword declares an identifier for the schema and establishes the base
   }
 }
 {{</instance-pass>}}
+
+- _When using URNs, it's important to note that there are no relative URNs; they must be fully specified._
+
+{{<schema `Schema with tag URI as value of $id`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tag:example.com,2024:schemas/person",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "age": {
+      "type": "integer"
+    }
+  }
+}
+
+{{</schema>}}
+{{<instance-pass `An instance with correct datatype is valid`>}}
+{
+  "name": "John",
+  "age": "72"
+}
+{{</instance-pass>}}
+
+- A tag URI, (defined in [RFC 4151](http://www.faqs.org/rfcs/rfc4151.html)), is a type of URN used for uniquely identifying resources, typically within a specific context or domain. It consists of a 'tag:' scheme followed by a date and a unique string, providing a human-readable and globally unique identifier. In JSON Schema, a tag URI can be used as the value for the `$id`` keyword to uniquely identify the schema.
