@@ -25,6 +25,7 @@ related:
 
 {{<schema `Schema with string enum`>}}
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "string",
   "enum": ["red", "green", "blue"]
 }
@@ -40,6 +41,7 @@ related:
 
 {{<schema `Schema with number enum`>}}
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "number",
   "enum": [2, 46, 100]
 }
@@ -59,6 +61,7 @@ related:
 
 {{<schema `Schema with mixed-type enum`>}}
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "enum": [ "red", 123, true, { "foo": "bar" }, [ 1, 2 ], null ]
 }
 {{</schema>}}
