@@ -20,14 +20,21 @@ related:
 ---
 
 The `enum` keyword specifies a validation constraint for an instance, defining a set of permissible values. The value of the `enum` keyword must be an array containing at least one element, and these elements should be unique. The validation succeeds if the value of the instance matches one of the elements in the `enum` array.
+<<<<<<< HEAD
 
 _**Note:** When using  `enum`, it's recommended not to include `type` as it is redundant. While it's not mandatory to exclude `type` with `enum`, combining `enum` and `type` is considered an anti-pattern, so it's better to avoid doing so._
+=======
+>>>>>>> ed9bfdaffd42ef06d951889e4c87700f72833e28
 
 ## Examples
 
 {{<schema `Schema with string enum`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+<<<<<<< HEAD
+=======
+  "type": "string",
+>>>>>>> ed9bfdaffd42ef06d951889e4c87700f72833e28
   "enum": [ "red", "green", "blue" ]
 }
 {{</schema>}}
@@ -43,6 +50,10 @@ _**Note:** When using  `enum`, it's recommended not to include `type` as it is r
 {{<schema `Schema with number enum`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+<<<<<<< HEAD
+=======
+  "type": "number",
+>>>>>>> ed9bfdaffd42ef06d951889e4c87700f72833e28
   "enum": [ 2, 46, 100 ]
 }
 {{</schema>}}
