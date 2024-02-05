@@ -43,7 +43,7 @@ The `enum` keyword specifies a validation constraint for an instance, defining a
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "number",
-  "enum": [2, 46, 100]
+  "enum": [ 2, 46, 100 ]
 }
 {{</schema>}}
 
