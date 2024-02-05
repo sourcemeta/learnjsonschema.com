@@ -15,6 +15,24 @@ related:
     keyword: $vocabulary
 ---
 
+{{< alert "Good to know!" >}}
+Generally, `schema` and `schema resource` might create confusion. Let's clarify the terminology first:
+
+**Schema**: This refers to the entire JSON boolean or JSON object passed to a validator.
+
+**Schema Resource**: A schema may consist of one or more schema resources, and a schema resource is essentially an `$id` boundary. When you introduce nested schema objects with `$id` in your schema, you create new schema resources.
+
+**Schema Object**: This is a single subschema in the schema tree, considering only its immediate keywords and not including nested subschemas.
+
+
+_Relationships_:
+* A _schema_ has one or more schema resources.
+* A _schema resource_ has one or more schema objects.
+* A _schema object_ has one or more keywords.
+
+_**Note**: A schema resource does not include its children schema resources, as they are conceptually distinct entities, despite being nested. Nevertheless, they are all part of the same schema. See the last example._
+{{< /alert >}}
+
 The `$id` keyword declares the URI for a schema, usually set at the top level. However, any subschema has the flexibility to declare its own `$id` to distinguish itself with a distinct URI. Each subschema with an `$id` in a compound schema is called a _schema resource_.
 
 * The top-level schema resource is referred to as the root schema resource.
@@ -151,12 +169,8 @@ _**Note:** Check out the [URI RFC](https://datatracker.ietf.org/doc/html/rfc3986
   "$id": "tag:example.com,2024:schemas/person",
   "type": "object",
   "properties": {
-    "name": {
-      "type": "string"
-    },
-    "age": {
-      "type": "integer"
-    }
+    "name": { "type": "string" },
+    "age": { "type": "integer" }
   }
 }
 
