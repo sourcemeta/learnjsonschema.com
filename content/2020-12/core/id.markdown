@@ -183,3 +183,27 @@ _**Note:** Check out the [URI RFC](https://datatracker.ietf.org/doc/html/rfc3986
 {{</instance-pass>}}
 
 - A tag URI, (defined in [RFC 4151](http://www.faqs.org/rfcs/rfc4151.html)), is a type of URN used for uniquely identifying resources, typically within a specific context or domain. It consists of a 'tag:' scheme followed by a date and a unique string, providing a human-readable and globally unique identifier. In JSON Schema, a tag URI can be used as the value for the `$id`` keyword to uniquely identify the schema.
+
+ ---
+
+{{<schema `Clarifying schema terminology`>}}
+{
+  "$schema": "https://json-schena.org/draft/2020-12/schema",
+  "$id": "https://example.com",
+  "type": "object",
+  "properties": {
+    "foo": {
+      "$id": "foo",
+      "type": "array",
+      "items": { "type": "boolean" }
+    },
+    "bar": {
+      "$id": "bar",
+      "type": "number"
+    },
+    "baz": { "type": "string" }
+  }
+}
+{{</schema>}}
+
+-  Whenever a schema object has `$id`, a new ***schema resource*** is introduced. In our case, we have three schema resources: one with the `https://example.com` id, one with the `foo` id, and one with the `bar` id. The `https://example.com` schema resource is the ***root schema resource***.
