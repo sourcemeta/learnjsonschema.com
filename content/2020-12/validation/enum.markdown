@@ -27,7 +27,7 @@ The `enum` keyword specifies a validation constraint for an instance, defining a
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "string",
-  "enum": ["red", "green", "blue"]
+  "enum": [ "red", "green", "blue" ]
 }
 {{</schema>}}
 
