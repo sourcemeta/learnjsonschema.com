@@ -30,7 +30,7 @@ _Relationships_:
 * A _schema resource_ has one or more schema objects.
 * A _schema object_ has one or more keywords.
 
-_**Note**: A schema resource does not include its children schema resources, as they are conceptually distinct entities, despite being nested. Nevertheless, they are all part of the same schema. See the last example._
+_**Note**: A schema resource does not include its children schema resources, as they are conceptually distinct entities, despite being nested.  However, all of them are part of the same schema. Refer to the last example for clarification._
 {{< /alert >}}
 
 The `$id` keyword declares the URI for a schema, usually set at the top level. However, any subschema has the flexibility to declare its own `$id` to distinguish itself with a distinct URI. Each subschema with an `$id` in a compound schema is called a _schema resource_.
@@ -100,7 +100,7 @@ _**Note:** Check out the [URI RFC](https://datatracker.ietf.org/doc/html/rfc3986
 }
 {{</instance-pass>}}
 
-- The base URI for this schema is `https://example.com/main-schema`. The _address_ subschema has a relative URI `/address`, which resolving against the base URI will result into `https://example.com/address`. Now this URI can be used to reference the  _address_ schema from other parts of the document or external documents.
+- The base URI for this schema is `https://example.com/main-schema`. The _address_ subschema has a relative URI `address`, which resolving against the base URI will result into `https://example.com/address`. Now this URI can be used to reference the  _address_ schema from other parts of the document or external documents.
 
 {{<schema `Nested subschema with absolute $id`>}}
 {
@@ -115,7 +115,7 @@ _**Note:** Check out the [URI RFC](https://datatracker.ietf.org/doc/html/rfc3986
     "fatherName": { "$ref": "https://example.com/name" },
     "motherName": { "$ref": "https://example.com/name" }
   },
-  "required": ["name", "fatherName", "motherName"]
+  "required": [ "name", "fatherName", "motherName" ]
 }
 {{</schema>}}
 
@@ -144,8 +144,8 @@ _**Note:** Check out the [URI RFC](https://datatracker.ietf.org/doc/html/rfc3986
       "$id": "urn:example:vehicle:car",
       "type": "object",
       "properties": {
-        "brand": {"type": "string"},
-        "price": {"type": "number" }
+        "brand": { "type": "string" },
+        "price": { "type": "number" }
       }
     }
   }
@@ -182,11 +182,11 @@ _**Note:** Check out the [URI RFC](https://datatracker.ietf.org/doc/html/rfc3986
 }
 {{</instance-pass>}}
 
-- A tag URI, (defined in [RFC 4151](http://www.faqs.org/rfcs/rfc4151.html)), is a type of URN used for uniquely identifying resources, typically within a specific context or domain. It consists of a 'tag:' scheme followed by a date and a unique string, providing a human-readable and globally unique identifier. In JSON Schema, a tag URI can be used as the value for the `$id`` keyword to uniquely identify the schema.
+- A tag URI, (defined in [RFC 4151](http://www.faqs.org/rfcs/rfc4151.html)), is a type of URN used for uniquely identifying resources, typically within a specific context or domain. It consists of a 'tag:' scheme followed by a date and a unique string, providing a human-readable and globally unique identifier. In JSON Schema, a tag URI can be used as the value for the `$id` keyword to uniquely identify the schema.
 
  ---
 
-{{<schema `Clarifying schema terminology`>}}
+{{<schema `Clarifying schema terminologies`>}}
 {
   "$schema": "https://json-schena.org/draft/2020-12/schema",
   "$id": "https://example.com",
