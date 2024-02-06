@@ -18,7 +18,7 @@ related:
 {{< alert "Good to know!" >}}
 Generally, `schema` and `schema resource` might create confusion. Let's clarify the terminology first:
 
-**Schema**: This refers to the entire JSON boolean or JSON object passed to a validator.
+**Schema**: This refers to the entire JSON boolean or JSON object passed to an evaluator.
 
 **Schema Resource**: A schema may consist of one or more schema resources, and a schema resource is essentially an `$id` boundary. When you introduce nested schema objects with `$id` in your schema, you create new schema resources.
 
