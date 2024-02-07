@@ -25,7 +25,6 @@ The `const` keyword in JSON Schema restricts a property value to a single, speci
 {{<schema `Schema with a specific string value`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "string",
   "const": "hello"
 }
 {{</schema>}}
@@ -41,7 +40,6 @@ The `const` keyword in JSON Schema restricts a property value to a single, speci
 {{<schema `Schema with a specific number value`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "number",
   "const": 3.14159
 }
 {{</schema>}}
@@ -74,6 +72,6 @@ The `const` keyword in JSON Schema restricts a property value to a single, speci
  { "name": "John Doe", "age": 30 }
 {{</instance-pass>}}
 
-{{<instance-fail `An instance not matching the const value is invalid`>}}
+{{<instance-fail `An instance not matching the exact object structure is invalid`>}}
  { "name": "Robert", "age": 30 }
 {{</instance-fail>}}
