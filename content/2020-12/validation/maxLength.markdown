@@ -17,7 +17,7 @@ related:
     keyword: format
 ---
 
-The `maxLength` keyword is used to specify the maximum length of a string. It is used to enforce a constraint on the maximum number of characters allowed for a string value.
+The `maxLength` keyword is used to specify the maximum length of a string instance. It is used to enforce a constraint on the maximum number of characters allowed for a string instance.
 
 * Applies only to string data types.
 * Value must be a non-negative integer.
