@@ -125,3 +125,10 @@ article table {
 .code-instance + .code-schema {
   @extend .mt-4;
 }
+
+.alert {
+  background-color: #fffdbd;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
