@@ -45,7 +45,7 @@ The `minLength` keyword is used to specify the minimum length of a string instan
 {{<schema `Schema which allows either a string with at least 3 characters or a numeric value`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": ["string", "number"],
+  "type": [ "string", "number" ],
   "minLength": 3
 }
 
