@@ -17,7 +17,7 @@ related:
     keyword: format
 ---
 
-The `minLength` keyword is used to specify the minimum length of a string. It defines the minimum number of characters that a valid string must have to satisfy the schema.
+The `minLength` keyword is used to specify the minimum length of a string instance. It defines the minimum number of characters that a valid string must have to satisfy the schema.
 
 * Applies only to string data types.
 * Value must be a non-negative integer.
