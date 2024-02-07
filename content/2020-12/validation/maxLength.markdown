@@ -45,7 +45,7 @@ The `maxLength` keyword is used to specify the maximum length of a string instan
 {{<schema `Schema allowing either a string with a maximum of 20 characters or a numeric value`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": ["string", "number"],
+  "type": [ "string", "number" ],
   "maxLength": 20
 }
 
