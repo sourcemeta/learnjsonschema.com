@@ -72,6 +72,10 @@ The `pattern` keyword in JSON Schema is designed to define a regular expression 
 {{<instance-fail `An instance with special character in invalid`>}}
 "invalid#username"
 {{</instance-fail>}}
+
+{{<instance-fail `An instance that matches the regex but goes out of bounds is invalid`>}}
+"username_toolong123"
+{{</instance-fail>}}
 - _This keyword can be combined with other string-related keywords, such as `maxLength` and `minLength`, for comprehensive validation._
 
 {{<schema `Schema with regular expression for some specific pattern`>}}
