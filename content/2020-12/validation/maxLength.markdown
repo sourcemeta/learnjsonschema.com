@@ -63,7 +63,7 @@ The `maxLength` keyword is used to specify the maximum length of a string instan
 55
 {{</instance-pass>}}
 
-{{<schema `Schema for maximum string length validation with unicode characters`>}}
+{{<schema `Schema for maximum string length validation with Unicode characters`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "string",
@@ -76,5 +76,5 @@ The `maxLength` keyword is used to specify the maximum length of a string instan
 {{</instance-pass>}}
 
 {{<instance-fail `An instance with more than 3 characters is invalid`>}}
-"\u0048\u0065\u006C\u006C\u006F" // --> 'Hello'
+"\u0048\u0065\u006C\u006C\u006F" // --> "Hello"
 {{</instance-fail>}}
