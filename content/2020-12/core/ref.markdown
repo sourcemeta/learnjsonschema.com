@@ -21,3 +21,76 @@ related:
   - vocabulary: core
     keyword: $defs
 ---
+
+The `$ref` keyword is used to statically reference a schema. This is useful for avoiding code duplication and promoting modularity when describing complex data structures.
+* The value of `$ref` is set to a URI reference, which may be either relative or absolute according to [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986).
+* A URI reference may include a [JSON Pointer](https://datatracker.ietf.org/doc/html/rfc6901) in a URI fragment (e.g., `#/foo/bar`), but it's important to note that these fragments apply to both relative and absolute URIs.
+
+{{<alert>}}
+ _**Note:** It's crucial to understand that an absolute URI does not necessarily denote a remote reference. An absolute URI can point to a local schema if the schema declares nested `$id` or if it points to itself. Conversely, a relative URI can point to a remote schema by leveraging base URI resolution._
+{{</alert>}}
+
+## Examples
+
+{{<schema `Using a relative reference:` >}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "http://example.com/schemas/product.json",
+  "type": "object",
+  "required": [ "productId", "name" ],
+  "properties": {
+    "productId": { "type": "integer" },
+    "name": { "$ref": "#/$defs/string" }
+  },
+  "$defs": {
+    "string": { "type": "string" }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `Instance including all the required properties is valid` >}}
+{
+  "productId": 123,
+  "name": "Widget"
+}
+{{</instance-pass>}}
+
+{{<instance-fail `Instance missing the required properties is invalid` >}}
+{
+  "name": "Gadget"
+}
+{{</instance-fail>}}
+
+{{<schema `Using an absolute referece to the previous schema` >}}
+{
+  "$id": "http://example.com/schemas/order.json",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": { "$ref": "schemas/product.json" }
+    }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `Each item in the "items" array includes both the "productId" and "name" properties required by the referenced product schema` >}}
+{
+  "items": [
+    { "productId": 123, "name": "Widget" },
+    { "productId": 456, "name": "Gadget" }
+  ]
+}
+// Assuming http://example.com/schemas/product.json defines the product schema
+
+{{</instance-pass>}}
+
+{{<instance-fail `The first item is missing the "productId" property and the second item is missing the "name" property required by the product schema.` >}}
+{
+  "items": [
+    { "name": "Widget" },
+    { "productId": 456 }
+  ]
+}
+
+{{</instance-fail>}}
