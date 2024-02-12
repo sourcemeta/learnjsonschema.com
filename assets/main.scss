@@ -5,6 +5,7 @@
 $blue: #0969da;
 $success: rgba(213, 255, 230, 1);
 $danger: rgba(255, 213, 213, 1);
+$warning: #ffff6a;
 
 // Required components
 @import "../vendor/bootstrap/scss/variables";
@@ -126,9 +127,6 @@ article table {
   @extend .mt-4;
 }
 
-.alert {
-  background-color: #fffdbd;
-  padding: 10px;
-  border: 1px solid #ccc;
-  margin-bottom: 15px;
+.alert > :last-child {
+  @extend .mb-0;
 }
