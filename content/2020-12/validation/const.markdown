@@ -15,10 +15,14 @@ related:
     keyword: type
 ---
 
-The `const` keyword in JSON Schema restricts a property value to a single, specific constant, applicable to any data type, including null. Its usage is functionally similar to an `enum` with a single value. Instances validate successfully only if their property value precisely matches the specified constant.
+The `const` keyword in restricts an instance to a specific value. Its usage is functionally similar to an `enum` with a single value. Instances validate successfully only if their property value deeply matches the specified constant.
 
 * Applies to various JSON data types, including numbers, strings, booleans, objects, and arrays.
 * Takes precedence over other validation keywords like `type` and `enum`.
+
+{{<alert>}}
+_**Note:** It is best practice to avoid using the `type` keyword or any other validation keyword with `const`, as `const` takes precedence over them. Therefore, it is better not to use them together._
+{{</alert>}}
 
 ## Examples
 
@@ -55,11 +59,6 @@ The `const` keyword in JSON Schema restricts a property value to a single, speci
 {{<schema `Schema with a fixed object structure`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "name": { "type": "string" },
-    "age": { "type": "number" }
-  },
   "const": { "name": "John Doe", "age": 30 }
 }
 {{</schema>}}
