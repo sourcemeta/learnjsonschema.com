@@ -24,7 +24,7 @@ The `$anchor` keyword is used to assign a unique identifier to a subschema withi
 * Its value must be a valid identifier starting with a letter and containing letters, digits, hyphens, underscores, colons, or periods.
 * This keyword allows for the creation of plain name fragments, providing a flexible alternative to using JSON Pointer fragments which require knowledge of the schema's structure.
 * By using `$anchor`, schemas can be written with reusable components that aren't tied to specific structural locations.
-* These subschemas with named anchor are derived from the nearest `$id` or document base URI.
+* An anchor is resolved against the base URI of its schema resource
 
 ## Examples
 
