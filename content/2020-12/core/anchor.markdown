@@ -18,7 +18,6 @@ related:
     keyword: $dynamicAnchor
 ---
 
-
 The `$anchor` keyword is used to assign a unique identifier to a subschema within the scope of its containing schema. This identifier can then be referenced elsewhere in the schema using the `$ref` keyword.
 
 * Its value must be a valid identifier starting with a letter and containing letters, digits, hyphens, underscores, colons, or periods.
