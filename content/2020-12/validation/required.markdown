@@ -16,3 +16,20 @@ related:
   - vocabulary: validation
     keyword: minProperties
 ---
+
+The `required` keyword is used to specify which properties must be present within an object instance.
+* The value of this keyword must be an array.
+* Elements of this array, if any, must be strings, and must be unique.
+* Omitting this keyword has the same behavior as an empty array.
+
+## Examples
+
+{{<schema>}}
+
+{{</schema>}}
+
+{{<instance-pass>}}
+{{</instance-pass>}}
+
+{{<instance-fail>}}
+{{</instance-fail>}}
