@@ -21,7 +21,7 @@ related:
 
 The `exclusiveMaximum` keyword is used to set an exclusive upper limit on numeric instances. It specifies that the numeric value being validated must be strictly less than (not equal to) the provided maximum value.
 
-* Applies only to number data types (integers and floats).
+* Applies only to number data types (integers and real numbers).
 * Validation succeeds if the number is strictly less than the specified `exclusiveMaximum`.
 
 ## Examples
@@ -46,16 +46,16 @@ The `exclusiveMaximum` keyword is used to set an exclusive upper limit on numeri
 10
 {{</instance-fail>}}
 
-{{<schema ` Schema allowing either a string value or a numeric value with an exclusive upper limit of 20`>}}
+{{<schema ` Schema allowing either a string value or a numeric value with an exclusive upper limit of 20.99`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": [ "string", "number" ],
-  "exclusiveMaximum": 20
+  "exclusiveMaximum": 20.99
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with a numeric value less than 20 is valid`>}}
-15
+{{<instance-pass `An instance with a numeric value less than 20.99 is valid`>}}
+15.67
 {{</instance-pass>}}
 
 {{<instance-fail `An instance with a boolean datatype is invalid`>}}
@@ -65,6 +65,10 @@ true
 {{<instance-pass `An instance with a string value is valid`>}}
 "Hello World!"
 {{</instance-pass>}}
+
+{{<instance-fail `An instance with a numeric value greater than 20.99 is invalid`>}}
+29
+{{</instance-fail>}}
 
 {{<schema `Schema with both 'maximum' and 'exclusiveMaximum' keywords`>}}
 {
