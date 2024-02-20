@@ -17,19 +17,77 @@ related:
     keyword: minProperties
 ---
 
-The `required` keyword is used to specify which properties must be present within an object instance.
+The `required` keyword is used in conjunction with the `properties` keyword to specify which properties must be present within an object instance.
 * The value of this keyword must be an array.
 * Elements of this array, if any, must be strings, and must be unique.
 * Omitting this keyword has the same behavior as an empty array.
+* The `required` keyword can also be used within nested object schemas.
 
 ## Examples
 
-{{<schema>}}
-
+{{<schema `Schema with the 'required' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "age": { "type": "number" }
+  },
+  "required": [ "name", "age" ]
+}
 {{</schema>}}
 
-{{<instance-pass>}}
+{{<instance-pass `An instance with all the required properties is valid`>}}
+{ "name": "John", "age": 65 }
 {{</instance-pass>}}
 
-{{<instance-fail>}}
+{{<instance-fail `An instance with missing required properties is invalid`>}}
+{ "name": "Doe" }
+{{</instance-fail>}}
+
+{{<schema `Schema with the 'required' keyword in nested subschemas`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "address": {
+      "type": "object",
+      "properties": {
+        "city": { "type": "string" },
+        "country": { "type": "string" }
+      },
+      "required": [ "city", "country" ]
+    }
+  },
+  "required": [ "address" ]
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with all the required properties is valid`>}}
+{
+  "name": "John",
+  "address": {
+    "city": "New York",
+    "country": "USA"
+  }
+}
+{{</instance-pass>}}
+
+{{<instance-fail `'name' property is missing in the root object`>}}
+{
+  "address": {
+    "city": "Hyderabad",
+    "country": "India"
+  }
+}
+{{</instance-fail>}}
+
+{{<instance-fail `'country' property is missing in the nested object`>}}
+{
+  "name": "Doe",
+  "address": {
+    "city": "Dallas"
+  }
+}
 {{</instance-fail>}}
