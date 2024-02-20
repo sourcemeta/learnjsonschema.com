@@ -21,7 +21,7 @@ related:
 
 The `exclusiveMinimum` keyword is used to set an exclusive lower limit on numeric instances. It specifies that the numeric value being validated must be strictly greater than (not equal to) the provided minimum value.
 
-* Applies only to number data types (integers and floats).
+* Applies only to number data types (integers and real numbers).
 * Validation succeeds if the number is strictly greater than the specified `exclusiveMinimum`.
 
 ## Examples
@@ -46,15 +46,15 @@ The `exclusiveMinimum` keyword is used to set an exclusive lower limit on numeri
 5
 {{</instance-fail>}}
 
-{{<schema ` Schema allowing either a string value or a numeric value with an exclusive lower limit of 10`>}}
+{{<schema ` Schema allowing either a string value or a numeric value with an exclusive lower limit of 10.2`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": [ "string", "number" ],
-  "exclusiveMinimum": 10
+  "exclusiveMinimum": 10.2
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with a numeric value greater than 10 is valid`>}}
+{{<instance-pass `An instance with a numeric value greater than 10.2 is valid`>}}
 15
 {{</instance-pass>}}
 
@@ -65,6 +65,10 @@ false
 {{<instance-pass `An instance with a string value is valid`>}}
 "Hello World!"
 {{</instance-pass>}}
+
+{{<instance-fail `An instance with a numeric value less than 10.2 is invalid`>}}
+10.01
+{{</instance-fail>}}
 
 {{<schema `Schema with both 'minimum' and 'exclusiveMinimum' keywords`>}}
 {
