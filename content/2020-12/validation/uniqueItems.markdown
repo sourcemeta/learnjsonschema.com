@@ -15,3 +15,80 @@ related:
   - vocabulary: applicator
     keyword: contains
 ---
+
+The `uniqueItems` keyword is used to ensure that all the items in an array are unique. This keyword is particularly useful when you need to enforce that an array contains no duplicate elements.
+* The value of this keyword must be a boolean.
+* This keyword, when set to true, specifies that all elements in an array must be unique.
+* If it is set to false, the array can contain duplicate items.
+* Omitting this keyword has the same behavior as a value of false.
+
+## Examples
+
+{{<schema `Schema with 'uniqueItems' property set to true`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "uniqueItems": true
+}
+{{</schema>}}
+
+{{<instance-pass `An array instance with unique elements is valid`>}}
+[ 1, "hello", true ]
+{{</instance-pass>}}
+
+{{<instance-fail `An instance with duplicate elements is invalid`>}}
+[ false, "world", 2, 2 ]
+{{</instance-fail>}}
+
+{{<schema>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "uniqueItems": false
+}
+
+// or
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array"
+}
+{{</schema>}}
+
+{{<instance-pass>}}
+{{</instance-pass>}}
+
+{{<instance-fail>}}
+{{</instance-fail>}}
+
+_**Note:** `uniqueItems` can be used with other array keywords like `items` and `prefixItems` to add more constraints to the instance. See the example below._
+
+{{<schema `Schema with 'uniqueItems' and 'items' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "integer" },
+      "name": { "type": "string" }
+    },
+    "required": [ "id", "name" ]
+  },
+  "uniqueItems": true
+}
+{{</schema>}}
+
+{{<instance-pass `An array instance with unique objects is valid`>}}
+[
+  { "id": 1, "name": "John" },
+  { "id": 2, "name": "Doe" }
+]
+{{</instance-pass>}}
+
+{{<instance-fail `An instance with duplicate objects is invalid`>}}
+[
+  { "id": 1, "name": "Jane" },
+  { "id": 1, "name": "Jane" }
+]
+{{</instance-fail>}}
