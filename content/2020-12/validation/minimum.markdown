@@ -18,3 +18,50 @@ related:
   - vocabulary: validation
     keyword: multipleOf
 ---
+
+The `minimum` keyword is used to set the lower limit on numeric instances. It specifies that the numeric value being validated must be greater than or equal to the provided minimum value.
+
+* Applies only to number data types (integers and floats).
+* Validation succeeds if the number is greater than or equal to the specified `minimum`.
+
+## Examples
+
+{{<schema `Schema defining the lower limit of 6 on numeric values`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "number",
+  "minimum": 6
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with a numeric value greater than 6 is valid`>}}
+8.1
+{{</instance-pass>}}
+
+{{<instance-fail `An instance with a numeric value less than 6 is invalid`>}}
+4
+{{</instance-fail>}}
+
+{{<instance-pass `An instance with a numeric value equal to 6 is valid`>}}
+6
+{{</instance-pass>}}
+
+{{<schema ` Schema allowing either a null value or a numeric value with a lower limit of 10.99`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": [ "null", "number" ],
+  "minimum": 10.99
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with a numeric value greater than or equal to 10.99 is valid`>}}
+15
+{{</instance-pass>}}
+
+{{<instance-fail `An instance with a string datatype is invalid`>}}
+"Hello World!"
+{{</instance-fail>}}
+
+{{<instance-pass `An instance with a null value is valid`>}}
+null
+{{</instance-pass>}}
