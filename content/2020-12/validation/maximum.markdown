@@ -46,15 +46,15 @@ The `maximum` keyword is used to set the upper limit on numeric instances. It sp
 10
 {{</instance-pass>}}
 
-{{<schema ` Schema allowing either a boolean value or a numeric value with an upper limit of 20`>}}
+{{<schema ` Schema allowing either a boolean value or a numeric value with an upper limit of 20.99`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": [ "boolean", "number" ],
-  "maximum": 20
+  "maximum": 20.99
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with a numeric value less than 20 is valid`>}}
+{{<instance-pass `An instance with a numeric value less than 20.99 is valid`>}}
 15
 {{</instance-pass>}}
 
