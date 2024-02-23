@@ -46,15 +46,15 @@ The `minimum` keyword is used to set the lower limit on numeric instances. It sp
 6
 {{</instance-pass>}}
 
-{{<schema ` Schema allowing either a null value or a numeric value with a lower limit of 10`>}}
+{{<schema ` Schema allowing either a null value or a numeric value with a lower limit of 10.99`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": [ "null", "number" ],
-  "minimum": 10
+  "minimum": 10.99
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with a numeric value greater than or reual to 10 is valid`>}}
+{{<instance-pass `An instance with a numeric value greater than or equal to 10.99 is valid`>}}
 15
 {{</instance-pass>}}
 
