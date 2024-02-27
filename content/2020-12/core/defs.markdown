@@ -51,7 +51,7 @@ The `$defs` keyword provides a standardized way to define reusable subschemas wi
   "minItems": 1,
   "items": { "$ref": "#/$defs/product" },
   "$defs": {
-      "product": {
+    "product": {
       "type": "object",
       "properties": {
         "name": { "type": "string" },
@@ -86,12 +86,12 @@ The `$defs` keyword provides a standardized way to define reusable subschemas wi
   "required": [ "title", "author" ],
   "$defs": {
     "author": {
-    "$anchor": "author",
+      "$anchor": "author",
       "type": "object",
       "properties": {
         "name": { "type": "string" },
         "age": { "type": "integer" }
-     }
+      }
     }
   }
 }
