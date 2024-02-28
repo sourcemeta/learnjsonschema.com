@@ -32,18 +32,21 @@ The `$ref` keyword is used to statically reference a schema. This is useful for 
 
 ## Examples
 
-{{<schema `Using a relative reference:` >}}
+{{<schema `Schema with a relative reference` >}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "http://example.com/schemas/product.json",
+  "$id": "https://example.com/schemas/product.json",
   "type": "object",
-  "required": [ "productId", "name" ],
   "properties": {
     "productId": { "type": "integer" },
-    "name": { "$ref": "#/$defs/string" }
+    "name": { "$ref": "string" }
   },
+  "required": [ "productId", "name" ],
   "$defs": {
-    "string": { "type": "string" }
+    "string": {
+      "$id": "string",
+      "type": "string"
+    }
   }
 }
 {{</schema>}}
@@ -61,9 +64,10 @@ The `$ref` keyword is used to statically reference a schema. This is useful for 
 }
 {{</instance-fail>}}
 
-{{<schema `Using an absolute referece to the previous schema` >}}
+{{<schema `Schema with an absolute referece to the previous schema` >}}
 {
-  "$id": "http://example.com/schemas/order.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/order.json",
   "type": "object",
   "properties": {
     "items": {
@@ -92,5 +96,121 @@ The `$ref` keyword is used to statically reference a schema. This is useful for 
     { "productId": 456 }
   ]
 }
-
 {{</instance-fail>}}
+
+{{<schema `Schema having an absolute reference with a JSON Pointer`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/product.json",
+  "$ref": "https://example.com/schemas/product.json#/$defs/string",
+  "$defs": {
+    "string": { "type": "string" }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with a string value is valid`>}}
+"John Doe"
+{{</instance-pass>}}
+
+{{<instance-fail `An instance with a boolean value is invalid`>}}
+true
+{{</instance-fail>}}
+
+{{<schema `Schema having absolute reference with an anchor`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/product.json",
+  "$ref": "https://example.com/schemas/product.json#string",
+  "$defs": {
+    "string": { "$anchor": "string", "type": "boolean" }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with a boolean value is valid`>}}
+false
+{{</instance-pass>}}
+
+{{<instance-fail `An instance with a numeric value is invalid`>}}
+99
+{{</instance-fail>}}
+
+{{<schema `Schema with a JSON Pointer`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com",
+  "type": "object",
+  "properties": {
+    "name": { "$ref": "#/$defs/string" }
+  },
+  "required": [ "name" ],
+  "$defs": {
+    "string": { "type": "string" }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `Instance including all the required properties is valid` >}}
+{
+  "name": "John Doe"
+}
+{{</instance-pass>}}
+
+{{<instance-fail `Instance with name property set to boolean is invalid` >}}
+{
+  "name": true
+}
+{{</instance-fail>}}
+
+{{<schema `Schema with an anchor`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com",
+  "type": "object",
+  "properties": {
+    "counter": { "$ref": "#counter" }
+  },
+  "required": [ "counter" ],
+  "$defs": {
+    "string": { "$anchor": "counter", "type": "number" }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `Instance including all the required properties is valid` >}}
+{
+  "counter": 51
+}
+{{</instance-pass>}}
+
+{{<instance-fail `Instance with counter property set to string is invalid` >}}
+{
+  "counter": "59"
+}
+{{</instance-fail>}}
+
+{{<schema `Schema with '$id' set to URN`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:example:vehicle",
+  "$ref": "urn:example:phone",
+  "$defs": {
+    "phone": {
+      "$id": "urn:example:phone",
+      "type": "number"
+    }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with a numeric value is valid` >}}
+7843559621
+{{</instance-pass>}}
+
+{{<instance-fail `An instance with a value other than a number is invalid` >}}
+{
+  "phone": 9866548907
+}
+{{</instance-fail>}}
+
