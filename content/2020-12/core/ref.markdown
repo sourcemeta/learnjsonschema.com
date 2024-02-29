@@ -24,7 +24,7 @@ related:
 
 The `$ref` keyword is used to statically reference a schema. This is useful for avoiding code duplication and promoting modularity when describing complex data structures.
 * The value of `$ref` is set to a URI reference, which may be either relative or absolute according to [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986).
-* A URI reference may include a [JSON Pointer](https://datatracker.ietf.org/doc/html/rfc6901) in a URI fragment (e.g., `#/foo/bar`)
+* A URI reference may include a [JSON Pointer](https://datatracker.ietf.org/doc/html/rfc6901) in a URI fragment (e.g., `#/foo/bar`).
 
 {{<alert>}}
  _**Note:** It's crucial to understand that an absolute URI does not necessarily denote a remote reference. An absolute URI can point to a local schema if the schema declares nested `$id`s or if it points to itself. Conversely, a relative URI can point to a remote schema by leveraging base URI resolution._
@@ -51,16 +51,17 @@ The `$ref` keyword is used to statically reference a schema. This is useful for 
 }
 {{</schema>}}
 
-{{<instance-pass `Instance including all the required properties is valid` >}}
+{{<instance-pass `An instance including all the required properties is valid` >}}
 {
   "productId": 123,
   "name": "Widget"
 }
 {{</instance-pass>}}
 
-{{<instance-fail `Instance missing the required properties is invalid` >}}
+{{<instance-fail `An object instance with name proeprty not set to string is invalid` >}}
 {
-  "name": "Gadget"
+  "productId": 217,
+  "name": 999
 }
 {{</instance-fail>}}
 
