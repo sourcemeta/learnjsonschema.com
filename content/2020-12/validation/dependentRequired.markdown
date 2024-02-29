@@ -20,3 +20,51 @@ related:
   - vocabulary: applicator
     keyword: else
 ---
+
+The `dependentRequired` keyword specifies a conditional dependency between properties within an instance. It ensures that if a certain property is present in an instance, then another specified set of properties must also be present. Essentially, it extends the functionality of required by allowing dependencies based on the existence of other properties. In short, if property A exists in an instance, then properties B, C, and D must also be present.
+* The value of this keyword must be an object.
+* Properties in this object, if any, must be arrays.
+* Elements in each array, if any, must be strings, and must be unique.
+
+## Examples
+
+{{<schema `Schema with the 'dependentRequired' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "age": { "type": "integer" },
+    "license": { "type": "string" }
+  },
+  "dependentRequired": {
+    "license": [ "age" ]
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with both 'age' and 'license' properties is valid`>}}
+{
+  "name": "John",
+  "age": 25,
+  "license": "XYZ123"
+}
+{{</instance-pass>}}
+
+{{<instance-fail `An instance with missing 'age' property when 'license' property is present is invalid`>}}
+{
+  "name": "John",
+  "license": "XYZ123"
+}
+{{</instance-fail>}}
+
+{{<instance-pass `An instance without 'license' property is valid`>}}
+{
+  "name": "John",
+  "age": 25
+}
+{{</instance-pass>}}
+
+{{<instance-pass `An empty object is also valid`>}}
+{}
+{{</instance-pass>}}
