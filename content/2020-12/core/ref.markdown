@@ -64,7 +64,7 @@ The `$ref` keyword is used to statically reference a schema. This is useful for 
 }
 {{</instance-fail>}}
 
-{{<schema `Schema with an absolute referece to the previous schema` >}}
+{{<schema `Schema with an absolute reference to the previous schema` >}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.com/schemas/order.json",
