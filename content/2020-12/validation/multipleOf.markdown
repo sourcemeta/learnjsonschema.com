@@ -25,7 +25,7 @@ The `multipleOf` keyword is used to specify that an instance must be a multiple 
 
 ## Examples
 
-{{<schema `Schema with 'multipleOf' keyword having an 'integer' value`>}}
+{{<schema `Schema with 'multipleOf' set to an integer`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "integer",
@@ -33,11 +33,11 @@ The `multipleOf` keyword is used to specify that an instance must be a multiple 
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with a multiple of 5 is valid`>}}
+{{<instance-pass `A numeric instance that is a multiple of 5 is valid`>}}
 10
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with a value not multiple of 5 is invalid`>}}
+{{<instance-fail `A numeric instance that is not a multiple of 5 is invalid.`>}}
 8
 {{</instance-fail>}}
 
@@ -45,7 +45,7 @@ The `multipleOf` keyword is used to specify that an instance must be a multiple 
 -15
 {{</instance-pass>}}
 
-{{<schema `Schema with 'multipleOf' keyword having a 'number' value`>}}
+{{<schema `Schema with 'multipleOf' set to a real number`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "number",
@@ -53,7 +53,7 @@ The `multipleOf` keyword is used to specify that an instance must be a multiple 
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with a multiple of 4.1 is valid`>}}
+{{<instance-pass `A numeric instance that is a multiple of 4.1 is valid`>}}
 8.2
 {{</instance-pass>}}
 
