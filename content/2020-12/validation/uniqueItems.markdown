@@ -40,28 +40,28 @@ The `uniqueItems` keyword is used to ensure that all the items in an array are u
 [ false, "world", 2, 2 ]
 {{</instance-fail>}}
 
-{{<schema>}}
+{{<schema `Schema without the 'uniqueItems' property or with 'uniqueItems' property set to false`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array"
+}
+  // or
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "array",
   "uniqueItems": false
 }
-
-// or
-
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array"
-}
 {{</schema>}}
 
-{{<instance-pass>}}
+{{<instance-pass `An array instance with unique elements is valid`>}}
+[ 1, "hello", true ]
 {{</instance-pass>}}
 
-{{<instance-fail>}}
-{{</instance-fail>}}
+{{<instance-pass `An array instance with duplicate elements is also valid`>}}
+[ false, "world", 2, 2 ]
+{{</instance-pass>}}
 
-_**Note:** `uniqueItems` can be used with other array keywords like `items` and `prefixItems` to add more constraints to the instance. See the example below._
+* _`uniqueItems` can be used with other array keywords like `items` and `prefixItems` to add more constraints to the instance. See the example below._
 
 {{<schema `Schema with 'uniqueItems' and 'items' keyword`>}}
 {
