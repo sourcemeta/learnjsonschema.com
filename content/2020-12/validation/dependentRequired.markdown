@@ -68,3 +68,54 @@ The `dependentRequired` keyword specifies a conditional dependency between prope
 {{<instance-pass `An empty object is also valid`>}}
 {}
 {{</instance-pass>}}
+
+{{<schema `Complex schema with the 'dependentRequired' keyword `>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "productName": { "type": "string" },
+    "productPriceUSD": { "type": "number" },
+    "units": { "type": "number" }
+  },
+  "patternProperties": {
+    "^paymentStatus$": { "enum": [ "success", "pending", "failed" ] }
+  },
+  "dependentRequired": {
+    "productPriceUSD": [ "productName" ],
+    "totalCost" : [ "productPriceUSD", "units" ],
+    "trackingId": [ "outForDelivery", "paymentStatus" ]
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with all the dependent properties is valid`>}}
+{
+  "productName": "Iphone",
+  "productPriceUSD": 399.99,
+  "units": 5,
+  "paymentStatus": "success",
+  "totalCost": 1599.99,
+  "trackingId" : 1414326241,
+  "outForDelivery": "yes"
+}
+{{</instance-pass>}}
+
+{{<instance-fail `An instance with missing 'productPriceUSD' property when 'totalCost' property is present is invalid`>}}
+{
+  "productName": "Iphone",
+  "units": 5,
+  "paymentStatus": "success",
+  "totalCost": 1599.99,
+  "trackingId" : 1414326241,
+  "outForDelivery": "yes"
+}
+{{</instance-fail>}}
+
+{{<instance-pass `An instance with 'productName' and 'productPriceUSD' is valid`>}}
+{
+  "productName": "Iphone",
+  "productPriceUSD": 399.99
+}
+// The 'totalCost' property is not present in this instance, so it will be valid regardless of the presence of 'units' or 'productPriceUSD' property.
+{{</instance-pass>}}
