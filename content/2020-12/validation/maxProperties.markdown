@@ -18,3 +18,75 @@ related:
   - vocabulary: applicator
     keyword: additionalProperties
 ---
+
+The `maxProperties` keyword is used to specify the maximum number of properties allowed in an object instnace. It is typically used to enforce constraints on the number of properties an object instance can have. If the number of properties in the object exceeds the value specified by `maxProperties`, the validation fails.
+* It applies specifically to object instances.
+* The value of this keyword must be a non-negative integer (0 or greater).
+* Setting `maxProperties` to 0 enforces an empty object instance.
+
+## Examples
+
+{{<schema `Schema with the 'maxProperties' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "maxProperties": 2
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with 2 or less properties is valid`>}}
+{ "foo": 3, "bar": "hi" }
+{{</instance-pass>}}
+
+{{<instance-fail `An instance with more than 2 properties is invalid`>}}
+{ "foo": 3, "bar": "hi", "baz": true }
+{{</instance-fail>}}
+
+{{<schema `Schema with the 'maxProperties' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "age": { "type": "integer" },
+    "address": { "type": "string" }
+  },
+  "maxProperties": 2
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with 2 or less properties is valid`>}}
+{ "name": "John", "age": 2 }
+{{</instance-pass>}}
+
+{{<instance-fail `An instance with more than 2 properties is invalid`>}}
+{ "name": "John", "age": 2, "address": "22/3, GCET Road, Ahmedabad, Gujarat" }
+{{</instance-fail>}}
+
+{{<schema `Schema with the 'maxProperties' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "patternProperties": {
+    "^[Aa]ge": { "type": "integer" }
+  },
+  "additionalProperties": { "type": "boolean" },
+  "maxProperties": 2
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with 2 or less properties is valid`>}}
+{ "Age": 22 }
+{{</instance-pass>}}
+
+{{<instance-fail `An instance with a property not declared in the 'additionalProperties' object must be boolean`>}}
+{ "Age": 2, "eligible": "yes" }
+{{</instance-fail>}}
+
+{{<instance-pass `An instance with 2 or less properties is valid`>}}
+{ "Age": 21, "eligible": true }
+{{</instance-pass>}}
+
+{{<instance-fail `An instance with more than 2 properties is invalid`>}}
+{ "Age": 21, "eligible": true, "isGraduated": true }
+{{</instance-fail>}}
+
