@@ -17,7 +17,7 @@ related:
     keyword: minProperties
 ---
 
-The `required` keyword is used in conjunction with the `properties` keyword to specify which properties must be present within an object instance.
+The `required` keyword is used to specify which properties must be present within an object instance.
 * The value of this keyword must be an array.
 * Elements of this array, if any, must be strings, and must be unique.
 * Omitting this keyword has the same behavior as an empty array.
@@ -126,5 +126,5 @@ The `required` keyword is used in conjunction with the `properties` keyword to s
   },
   "required": [ "name", "age", "name" ]
 }
-// Schema with duplicate values in the required list is invalid.
+// Schema with duplicate items in the required list is invalid.
 {{</schema>}}
