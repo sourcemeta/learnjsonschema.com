@@ -21,10 +21,10 @@ related:
     keyword: else
 ---
 
-The `dependentRequired` keyword specifies a conditional dependency between properties within an instance. It ensures that if a certain property is present in an instance, then another specified set of properties must also be present. Essentially, it extends the functionality of required by allowing dependencies based on the existence of other properties. In short, if property A exists in an instance, then properties B, C, and D must also be present.
+The `dependentRequired` keyword specifies a conditional dependency between properties within an instance. It ensures that if a certain property is present in an instance, then another specified set of properties must also be present. In short, if property A exists in an instance, then properties B, C, and D must also be present.
 * The value of this keyword must be an object.
 * Properties in this object, if any, must be arrays.
-* Elements in each array, if any, must be strings, and must be unique.
+* Items in each array, if any, must be strings, and must be unique.
 
 ## Examples
 
