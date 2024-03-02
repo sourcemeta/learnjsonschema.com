@@ -62,7 +62,7 @@ The `maxProperties` keyword is used to specify the maximum number of properties 
 { "name": "John", "age": 2, "address": "22/3, GCET Road, Ahmedabad, Gujarat" }
 {{</instance-fail>}}
 
-{{<schema `Schema with 'maxProperties', 'patternProperties' and 'additionalProperties' and the keywords`>}}
+{{<schema `Schema with 'maxProperties', 'patternProperties' and 'additionalProperties' keywords`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
@@ -79,7 +79,7 @@ The `maxProperties` keyword is used to specify the maximum number of properties 
 {{</instance-pass>}}
 
 {{<instance-fail `The value of 'eligible' property must be a boolean`>}}
-{ "Age": 2, "eligible": "yes" }
+{ "Age": 21, "eligible": "yes" }
 {{</instance-fail>}}
 
 {{<instance-pass `An instance with 2 or less properties is valid`>}}
@@ -111,4 +111,4 @@ The `maxProperties` keyword is used to specify the maximum number of properties 
 {{<instance-fail `An instance with more than 2 properties is invalid`>}}
 { "name": "John", "age": 42, "address": "some address" }
 {{</instance-fail>}}
-* _It is important to note that one should be super cautious when using the `required` and `maxProperties` keywords together in a schema because it can create a situation where the instance will always fail, as shown in the above example._
+* _It is important to note that one should be super cautious when using the `required` and `maxProperties` keywords together in a schema because it can create a situation where the instance will always fail the validation, as shown in the above example._
