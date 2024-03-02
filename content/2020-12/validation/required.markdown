@@ -29,9 +29,30 @@ The `required` keyword is used in conjunction with the `properties` keyword to s
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
+  "required": [ "foo" ]
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with all the required properties is valid`>}}
+{ "foo": "bar" }
+{{</instance-pass>}}
+
+{{<instance-fail `An instance with missing required properties is invalid`>}}
+{ "bar": false }
+{{</instance-fail>}}
+
+{{<instance-pass `An instance with all the required properties is valid`>}}
+{ "foo": [ "bar" ], "baz": 13 }
+{{</instance-pass>}}
+* _It is important to note that when the required properties are not defined in the `properties`, then the only requirement to make the instance valid is to have those properties present in the instance irrespective of their value's datatype._
+
+{{<schema `Schema with the 'required' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
   "properties": {
     "name": { "type": "string" },
-    "age": { "type": "number" }
+    "age": { "type": "integer" }
   },
   "required": [ "name", "age" ]
 }
@@ -43,6 +64,10 @@ The `required` keyword is used in conjunction with the `properties` keyword to s
 
 {{<instance-fail `An instance with missing required properties is invalid`>}}
 { "name": "Doe" }
+{{</instance-fail>}}
+
+{{<instance-fail `The value of 'age' property must be an integer`>}}
+{ "name": "John Doe", "age": "48" }
 {{</instance-fail>}}
 
 {{<schema `Schema with the 'required' keyword in nested subschemas`>}}
@@ -91,3 +116,15 @@ The `required` keyword is used in conjunction with the `properties` keyword to s
   }
 }
 {{</instance-fail>}}
+
+{{<schema>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" }
+  },
+  "required": [ "name", "age", "name" ]
+}
+// Schema with duplicate values in the required list is invalid.
+{{</schema>}}
