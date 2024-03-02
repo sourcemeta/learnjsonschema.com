@@ -26,7 +26,7 @@ The `maxProperties` keyword is used to specify the maximum number of properties 
 
 ## Examples
 
-{{<schema `Schema with the 'maxProperties' keyword`>}}
+{{<schema `Schema with 'maxProperties' keyword`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "maxProperties": 2
@@ -41,7 +41,7 @@ The `maxProperties` keyword is used to specify the maximum number of properties 
 { "foo": 3, "bar": "hi", "baz": true }
 {{</instance-fail>}}
 
-{{<schema `Schema with the 'maxProperties' keyword`>}}
+{{<schema `Schema with 'maxProperties' and 'properties' keywords`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
@@ -62,12 +62,12 @@ The `maxProperties` keyword is used to specify the maximum number of properties 
 { "name": "John", "age": 2, "address": "22/3, GCET Road, Ahmedabad, Gujarat" }
 {{</instance-fail>}}
 
-{{<schema `Schema with the 'maxProperties' keyword`>}}
+{{<schema `Schema with 'maxProperties', 'patternProperties' and 'additionalProperties' and the keywords`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "patternProperties": {
-    "^[Aa]ge": { "type": "integer" }
+    "^[Aa]ge$": { "type": "integer" }
   },
   "additionalProperties": { "type": "boolean" },
   "maxProperties": 2
@@ -78,7 +78,7 @@ The `maxProperties` keyword is used to specify the maximum number of properties 
 { "Age": 22 }
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with a property not declared in the 'additionalProperties' object must be boolean`>}}
+{{<instance-fail `The value of 'eligible' property must be a boolean`>}}
 { "Age": 2, "eligible": "yes" }
 {{</instance-fail>}}
 
@@ -90,3 +90,25 @@ The `maxProperties` keyword is used to specify the maximum number of properties 
 { "Age": 21, "eligible": true, "isGraduated": true }
 {{</instance-fail>}}
 
+{{<schema `Schema with 'maxProperties' and 'required' keywords`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "age": { "type": "integer" },
+    "address": { "type": "string" }
+  },
+  "required": [ "name", "age", "address" ],
+  "maxProperties": 2
+}
+{{</schema>}}
+
+{{<instance-fail `An instance without 'address' property is invalid`>}}
+{ "name": "John", "age": 42 }
+{{</instance-fail>}}
+
+{{<instance-fail `An instance with more than 2 properties is invalid`>}}
+{ "name": "John", "age": 42, "address": "some address" }
+{{</instance-fail>}}
+* _It is important to note that one should be super cautious when using the `required` and `maxProperties` keywords together in a schema because it can create a situation where the instance will always fail, as shown in the above example._
