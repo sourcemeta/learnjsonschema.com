@@ -25,6 +25,10 @@ The `maxItems` keyword is used to specify the maximum number of items allowed in
 * An array is valid if it has less than or equal to the specified number of elements.
 * Omitting `maxItems` means the array has no upper limit (unbounded).
 
+{{<alert>}}
+_**Note:**  `items`, `prefixItems`, and `contains` do not affect `maxItems`. The instance is first evaluated against `maxItems` (if present), and if it validates successfully, it is further evaluated against `items`, `prefixItems`, and `contains`._
+{{</alert>}}
+
 ## Examples
 
 {{<schema `Schema with 'maxItems' keyword`>}}
@@ -61,11 +65,11 @@ The `maxItems` keyword is used to specify the maximum number of items allowed in
 }
 {{</schema>}}
 
-{{<instance-pass `An array instance containing 3 or less items, which conform to the 'items' subschema, is valid.`>}}
+{{<instance-pass `An array instance containing 2 or less items, which conform to the 'items' subschema, is valid`>}}
 [ false ]
 {{</instance-pass>}}
 
-{{<instance-fail `An array instance with more than 3 elements is invalid`>}}
+{{<instance-fail `An array instance with more than 2 elements is invalid`>}}
 [ false, false, true ]
 {{</instance-fail>}}
 
