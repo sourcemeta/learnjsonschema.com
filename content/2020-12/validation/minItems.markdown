@@ -25,6 +25,10 @@ The `minItems` keyword specifies the minimum number of items that must be presen
 * An array is valid if it has at least the specified number of elements.
 * Omitting `minItems` keyword has the same behavior as a value of 0.
 
+{{<alert>}}
+_**Note:**  `items`, `prefixItems`, and `contains` do not affect `minItems`. The instance is first evaluated against `minItems` (if present), and if it validates successfully, it is further evaluated against `items`, `prefixItems`, and `contains`._
+{{</alert>}}
+
 ## Examples
 
 {{<schema `Schema with 'minItems' keyword`>}}
