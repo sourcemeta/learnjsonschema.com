@@ -35,11 +35,11 @@ The `maxItems` keyword is used to specify the maximum number of items allowed in
 }
 {{</schema>}}
 
-{{<instance-pass `An array instance with 3 or less elements is valid`>}}
+{{<instance-pass `An array instance with 3 or less items is valid`>}}
 [ 1, true, "hello" ]
 {{</instance-pass>}}
 
-{{<instance-fail `An array instance with more than 3 elements is invalid`>}}
+{{<instance-fail `An array instance with more than 3 items is invalid`>}}
 [ 1, 2, "apple", "banana", true ]
 {{</instance-fail>}}
 
@@ -51,3 +51,45 @@ The `maxItems` keyword is used to specify the maximum number of items allowed in
 }
 // Value of 'maxItems' cannot be negative.
 {{</schema>}}
+
+{{<schema `Schema with the 'maxItems' and 'items' keywords`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": { "type": "boolean" },
+  "maxItems": 2
+}
+{{</schema>}}
+
+{{<instance-pass `An array instance containing 3 or less items, which conform to the 'items' subschema, is valid.`>}}
+[ false ]
+{{</instance-pass>}}
+
+{{<instance-fail `An array instance with more than 3 elements is invalid`>}}
+[ false, false, true ]
+{{</instance-fail>}}
+
+{{<schema `Schema with the 'maxItems', 'prefixItems' and 'contains' keywords`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "prefixItems": [
+    { "type": "number" },
+    { "type": "string" }
+  ],
+  "contains": { "type": "boolean" },
+  "maxItems": 3
+}
+{{</schema>}}
+
+{{<instance-pass `An array instance containing 3 or less items, which successfully validates against 'prefixItems' and 'contains', is valid`>}}
+[ 1, "John", false ]
+{{</instance-pass>}}
+
+{{<instance-fail `An array instance with more than 3 elements is invalid`>}}
+[ 1, "John", "Doe", false ]
+{{</instance-fail>}}
+
+{{<instance-fail `First and second items should be number and string respectively`>}}
+[ "John", 1, false ]
+{{</instance-fail>}}
