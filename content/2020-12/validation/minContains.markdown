@@ -12,7 +12,7 @@ interdependencies:
     keyword: contains
 related:
   - vocabulary: validation
-    keyword: minContains
+    keyword: maxContains
   - vocabulary: applicator
     keyword: prefixItems
   - vocabulary: applicator
@@ -26,30 +26,34 @@ The `minContains` keyword is used in conjunction with the `contains` keyword to 
 
 ## Examples
 
-{{<schema `Schema with the 'maxContains' and 'contains' keyword`>}}
+{{<schema `Schema with the 'minContains' and 'contains' keyword`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "array",
   "contains": { "type": "string" },
-  "maxContains": 2
+  "minContains": 2
 }
 {{</schema>}}
 
-{{<instance-pass `An array instance with 2 or less items successfully validating against the 'contains' subschema is valid`>}}
-[ "Car", "Bus", 1, 2 ]
+{{<instance-pass `An array instance with 2 or more items successfully validating against the 'contains' subschema is valid`>}}
+[ "Car", "Bus", 1, 2, "Bike" ]
 {{</instance-pass>}}
 
-{{<instance-fail `An array instance with more than 2 items successfully validating against the 'contains' subschema is invalid`>}}
-[ "Car", "Bus", 1, 2, "Bike" ]
+{{<instance-fail `An array instance with less than 2 items successfully validating against the 'contains' subschema is invalid`>}}
+[ "Car", 1 ]
 {{</instance-fail>}}
 
-{{<schema `Schema with the 'maxContains' keyword`>}}
+{{<instance-fail `An empty array is invalid`>}}
+[]
+{{</instance-fail>}}
+
+{{<schema `Schema with the 'minContains' keyword`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "array",
-  "maxContains": 2
+  "minContains": 2
 }
-// If contains is not present, 'maxContains' has no effect on validation.
+// If contains is not present, 'minContains' has no effect on validation.
 {{</schema>}}
 
 {{<instance-pass `An array instance with any items is valid`>}}
@@ -59,3 +63,21 @@ The `minContains` keyword is used in conjunction with the `contains` keyword to 
 {{<instance-pass `An empty array is also valid`>}}
 []
 {{</instance-pass>}}
+
+{{<schema `Schema with the 'minContains' and 'contains' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "contains": { "type": "string" },
+  "minContains": 0
+}
+{{</schema>}}
+
+{{<instance-pass `An array instance with any items is valid`>}}
+[ "John", false, 29, { "foo": "bar" }, [ 5, 7 ] ]
+{{</instance-pass>}}
+
+{{<instance-pass `An empty array is also valid`>}}
+[]
+{{</instance-pass>}}
+* _It is important to note that the `contains` keyword requires at least one item of the array instance to validate against its subschema. However, when `minContains` is set to 0, the schema would behave as if it does not have the `contains` keyword, as shown in the above example._
