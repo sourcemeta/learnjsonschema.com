@@ -51,3 +51,45 @@ The `minItems` keyword specifies the minimum number of items that must be presen
 }
 // Value of 'minItems' cannot be negative.
 {{</schema>}}
+
+{{<schema `Schema with the 'minItems' and 'items' keywords`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": { "type": "boolean" },
+  "minItems": 2
+}
+{{</schema>}}
+
+{{<instance-pass `An array instance containing 2 or more items, which conform to the 'items' subschema, is valid`>}}
+[ false, false, true ]
+{{</instance-pass>}}
+
+{{<instance-fail `An array instance with less than 2 elements is invalid`>}}
+[ false ]
+{{</instance-fail>}}
+
+{{<schema `Schema with the 'minItems', 'prefixItems' and 'contains' keywords`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "prefixItems": [
+    { "type": "number" },
+    { "type": "string" }
+  ],
+  "contains": { "type": "boolean" },
+  "minItems": 3
+}
+{{</schema>}}
+
+{{<instance-pass `An array instance containing 3 or more items, which successfully validates against 'prefixItems' and 'contains', is valid`>}}
+[ 1, "John", false ]
+{{</instance-pass>}}
+
+{{<instance-fail `An array instance with less than 3 elements is invalid`>}}
+[ 1, "John" ]
+{{</instance-fail>}}
+
+{{<instance-fail `First and second items should be number and string respectively`>}}
+[ "John", 1, false ]
+{{</instance-fail>}}
