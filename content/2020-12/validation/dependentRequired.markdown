@@ -78,13 +78,10 @@ The `dependentRequired` keyword specifies a conditional dependency between prope
     "productPriceUSD": { "type": "number" },
     "units": { "type": "number" }
   },
-  "patternProperties": {
-    "^paymentStatus$": { "enum": [ "success", "pending", "failed" ] }
-  },
   "dependentRequired": {
     "productPriceUSD": [ "productName" ],
     "totalCost" : [ "productPriceUSD", "units" ],
-    "trackingId": [ "outForDelivery", "paymentStatus" ]
+    "trackingId": [ "outForDelivery" ]
   }
 }
 {{</schema>}}
@@ -94,7 +91,6 @@ The `dependentRequired` keyword specifies a conditional dependency between prope
   "productName": "Iphone",
   "productPriceUSD": 399.99,
   "units": 5,
-  "paymentStatus": "success",
   "totalCost": 1599.99,
   "trackingId" : 1414326241,
   "outForDelivery": "yes"
@@ -105,7 +101,6 @@ The `dependentRequired` keyword specifies a conditional dependency between prope
 {
   "productName": "Iphone",
   "units": 5,
-  "paymentStatus": "success",
   "totalCost": 1599.99,
   "trackingId" : 1414326241,
   "outForDelivery": "yes"
