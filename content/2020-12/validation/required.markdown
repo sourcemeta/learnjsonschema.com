@@ -21,7 +21,6 @@ The `required` keyword is used to specify which properties must be present withi
 * The value of this keyword must be an array.
 * Elements of this array, if any, must be strings, and must be unique.
 * Omitting this keyword has the same behavior as an empty array.
-* The `required` keyword can also be used within nested object schemas.
 
 ## Examples
 
