@@ -26,7 +26,7 @@ The `minItems` keyword specifies the minimum number of items that must be presen
 * Omitting `minItems` keyword has the same behavior as a value of 0.
 
 {{<alert>}}
-_**Note:**  `items`, `prefixItems`, and `contains` do not affect `minItems`. The instance independently evaluated against `minItems` (if present)._
+_**Note:** `items`, `prefixItems`, and `contains` do not affect `minItems`. The instance independently evaluated against `minItems` (if present)._
 {{</alert>}}
 
 ## Examples
