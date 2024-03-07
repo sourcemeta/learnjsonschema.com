@@ -26,7 +26,7 @@ The `maxItems` keyword is used to specify the maximum number of items allowed in
 * Omitting `maxItems` means the array has no upper limit (unbounded).
 
 {{<alert>}}
-_**Note:**  `items`, `prefixItems`, and `contains` do not affect `maxItems`. The instance is first evaluated against `maxItems` (if present), and if it validates successfully, it is further evaluated against `items`, `prefixItems`, and `contains`._
+_**Note:** `items`, `prefixItems`, and `contains` do not affect `minItems`. The instance independently evaluated against `minItems` (if present)._
 {{</alert>}}
 
 ## Examples
@@ -46,15 +46,6 @@ _**Note:**  `items`, `prefixItems`, and `contains` do not affect `maxItems`. The
 {{<instance-fail `An array instance with more than 3 items is invalid`>}}
 [ 1, 2, "apple", "banana", true ]
 {{</instance-fail>}}
-
-{{<schema `Schema with 'maxItems' keyword`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
-  "maxItems": -4
-}
-// Value of 'maxItems' cannot be negative.
-{{</schema>}}
 
 {{<schema `Schema with the 'maxItems' and 'items' keywords`>}}
 {
