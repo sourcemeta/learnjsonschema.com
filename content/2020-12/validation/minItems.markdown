@@ -26,7 +26,7 @@ The `minItems` keyword specifies the minimum number of items that must be presen
 * Omitting `minItems` keyword has the same behavior as a value of 0.
 
 {{<alert>}}
-_**Note:**  `items`, `prefixItems`, and `contains` do not affect `minItems`. The instance is first evaluated against `minItems` (if present), and if it validates successfully, it is further evaluated against `items`, `prefixItems`, and `contains`._
+_**Note:**  `items`, `prefixItems`, and `contains` do not affect `minItems`. The instance independently evaluated against `minItems` (if present)._
 {{</alert>}}
 
 ## Examples
@@ -46,15 +46,6 @@ _**Note:**  `items`, `prefixItems`, and `contains` do not affect `minItems`. The
 {{<instance-fail `An array instance with less than 3 elements is invalid`>}}
 [ 1, "apple" ]
 {{</instance-fail>}}
-
-{{<schema `Schema with 'minItems' keyword`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
-  "minItems": -2
-}
-// Value of 'minItems' cannot be negative.
-{{</schema>}}
 
 {{<schema `Schema with the 'minItems' and 'items' keywords`>}}
 {
