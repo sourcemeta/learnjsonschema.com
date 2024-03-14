@@ -40,6 +40,10 @@ The `uniqueItems` keyword is used to ensure that all the items in an array are u
 [ false, "world", 2, 2 ]
 {{</instance-fail>}}
 
+{{<instance-fail `An instance with duplicate complex structures (objects) is invalid`>}}
+[ { "name": "John" }, false, "world", 2, { "name": "John" } ]
+{{</instance-fail>}}
+
 {{<schema `Schema without the 'uniqueItems' property or with 'uniqueItems' property set to false`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
