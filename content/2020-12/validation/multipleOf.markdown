@@ -22,13 +22,13 @@ related:
 The `multipleOf` keyword is used to specify that an instance must be a multiple of a given number. The value of this keyword must be strictly greater than zero.
 * Applicable only to `number` and `integer` type.
 * Validates if an instance is divisible by the specified number.
+* Setting `multipleOf` to 0 is not valid.
 
 ## Examples
 
 {{<schema `Schema with 'multipleOf' set to an integer`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "integer",
   "multipleOf": 5
 }
 {{</schema>}}
@@ -44,6 +44,11 @@ The `multipleOf` keyword is used to specify that an instance must be a multiple 
 {{<instance-pass `-15 is a multiple of 5`>}}
 -15
 {{</instance-pass>}}
+
+{{<instance-pass `An instance with a string value is valid`>}}
+"foo"
+{{</instance-pass>}}
+- `multipleOf` only affects numeric instances and has no effect on other types of instances.
 
 {{<schema `Schema with 'multipleOf' set to a real number`>}}
 {
@@ -65,11 +70,7 @@ The `multipleOf` keyword is used to specify that an instance must be a multiple 
 0
 {{</instance-pass>}}
 
-{{<schema `Invalid Schema`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "number",
-  "multipleOf": 0
-}
-// The value of 'multipleOf' keyword cannot be zero or negative
-{{</schema>}}
+{{<instance-fail `An instance with a string value is invalid`>}}
+"foo"
+{{</instance-fail>}}
+- `multipleOf` only affects numeric instances and has no effect on other types of instances. However, the above instance failed due to the `type` constraint.
