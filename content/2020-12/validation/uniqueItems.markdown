@@ -43,6 +43,7 @@ The `uniqueItems` keyword is used to ensure that all the items in an array are u
 {{<instance-fail `An instance with duplicate complex structures (objects) is invalid`>}}
 [ { "name": "John" }, false, "world", 2, { "name": "John" } ]
 {{</instance-fail>}}
+* Element uniqueness also deeply applies for complex structures like objects.
 
 {{<schema `Schema without the 'uniqueItems' property or with 'uniqueItems' property set to false`>}}
 {
