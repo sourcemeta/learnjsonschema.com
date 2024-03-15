@@ -41,7 +41,7 @@ For all such properties, validation succeeds if the child instance validates aga
 - This annotation affects the behavior of `unevaluatedProperties` in parent schemas.
 - `unevaluatedProperties` cannot see outside the schema to which it belongs.
 - This keyword is similar to `additionalProperties` except that it can recognize properties declared in subschemas.
-- The annotation result of this keyword is the set of instance property names validated by this keyword's subschema. On evaluation, it produces an assertion of `true/false`.
+- The annotation result of this keyword is the set of instance property names validated by this keyword's subschema.
 
 ## Examples
 
