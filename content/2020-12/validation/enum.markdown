@@ -43,7 +43,7 @@ _**Note:** Using the `type` keyword along the `enum` keyword is considered an an
 {{<schema `Schema with number enum`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "enum": [ 2, 46, 100 ]
+  "enum": [ 2, 45, 100 ]
 }
 {{</schema>}}
 
