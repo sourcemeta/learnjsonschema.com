@@ -37,6 +37,10 @@ The `maxProperties` keyword is used to specify the maximum number of properties 
 { "foo": 3, "bar": "hi" }
 {{</instance-pass>}}
 
+{{<instance-pass `'minProperties' has no effect on values other than objects`>}}
+false
+{{</instance-pass>}}
+
 {{<instance-fail `An instance with more than 2 properties is invalid`>}}
 { "foo": 3, "bar": "hi", "baz": true }
 {{</instance-fail>}}
@@ -111,4 +115,22 @@ The `maxProperties` keyword is used to specify the maximum number of properties 
 {{<instance-fail `An instance with more than 2 properties is invalid`>}}
 { "name": "John", "age": 42, "address": "some address" }
 {{</instance-fail>}}
-* _It is important to note that one should be super cautious when using the `required` and `maxProperties` keywords together in a schema because it can create a situation where the instance will always fail the validation, as shown in the above example._
+* _It is important to note that one should be cautious when using the `required` and `maxProperties` keywords together in a schema because it can create a situation where the instance will always fail the validation, as shown in the above example._
+
+{{<schema `Schema with 'maxProperties' and 'minProperties' keywords`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "maxProperties": 2,
+  "minProperties": 4
+}
+{{</schema>}}
+
+{{<instance-fail `All object instances are invalid against the above schema`>}}
+{ "name": "John", "age": 42 }
+{{</instance-fail>}}
+
+{{<instance-pass `Any instance with a value other than an object is valid`>}}
+{ "name": "John", "age": 42 }
+{{</instance-pass>}}
+* _When using maxProperties and minProperties together in a schema to add extra constraints on the instance, one must make sure that the value of minProperties is not greater than maxProperties; otherwise, no object instance passes against that schema._
