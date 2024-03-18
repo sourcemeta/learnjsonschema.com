@@ -133,4 +133,4 @@ false
 {{<instance-pass `Any instance with a value other than an object is valid`>}}
 { "name": "John", "age": 42 }
 {{</instance-pass>}}
-* _When using maxProperties and minProperties together in a schema to add extra constraints on the instance, one must make sure that the value of minProperties is not greater than maxProperties; otherwise, no object instance passes against that schema._
+* _When using `maxProperties` and `minProperties` together in a schema to add extra constraints on the instance, one must make sure that the value of `minProperties` is not greater than `maxProperties`; otherwise, no object instance will be valid against that schema._
