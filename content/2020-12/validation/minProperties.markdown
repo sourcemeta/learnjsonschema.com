@@ -41,6 +41,10 @@ The `minProperties` keyword is used to specify the minimum number of properties 
 {}
 {{</instance-fail>}}
 
+{{<instance-pass `'minProperties' has no effect on values other than objects`>}}
+false
+{{</instance-pass>}}
+
 {{<schema `Schema with 'minProperties' and 'properties' keywords`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -80,4 +84,12 @@ The `minProperties` keyword is used to specify the minimum number of properties 
 
 {{<instance-fail `An instance with less than 2 properties is invalid`>}}
 { "Age": 67 }
+{{</instance-fail>}}
+
+{{<instance-pass `An instance with additional properties conforming to the 'additionalProperties' schema is valid`>}}
+{ "myAge": "22", "name": "John" }
+{{</instance-pass>}}
+
+{{<instance-fail `An instance with additional properties not conforming to the 'additionalProperties' schema is invalid`>}}
+{ "myAge": 22, "name": "John" }
 {{</instance-fail>}}
