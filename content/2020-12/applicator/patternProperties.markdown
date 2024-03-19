@@ -156,4 +156,4 @@ The annotation result of this keyword is the set of instance property names matc
   }
 }
 {{</instance-annotation>}}
-* _Property names not present in `properties` or `patternProperties` are evaluated against `additionalProperties`._
+* _Instance properties (keys) not present in `properties` or not matching any regex within `patternProperties` are evaluated against `additionalProperties`._
