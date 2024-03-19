@@ -45,8 +45,7 @@ The annotation result of this keyword is the set of instance property names matc
 * Each key within `properties` represents a property name in the object instance.
 * Omitting this keyword has the same assertion behavior as an empty object.
 
-
-{{<schema `Schema with 'proeprties' keyword`>}}
+{{<schema `Schema with 'properties' keyword`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
@@ -164,7 +163,7 @@ The annotation result of this keyword is the set of instance property names matc
 
 * _If you don't define a property using `properties` or `patternProperties`, but don't disallow it with `additionalProperties`, it would still be valid with any value._
 
-{{<schema `Schema with 'proeprties', 'patternProperties' and 'additionalProperties' keyword`>}}
+{{<schema `Schema with 'properties', 'patternProperties' and 'additionalProperties' keyword`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
