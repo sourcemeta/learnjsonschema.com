@@ -70,3 +70,90 @@ The annotation result of this keyword is the set of instance property names matc
   }
 }
 {{</instance-annotation>}}
+
+{{<instance-fail `An object instance with properties matching the regex and not conforming to the corresponding schema is invalid`>}}
+{ "name": "John Doe", "age": "21" }
+{{</instance-fail>}}
+* _Annotations are not produced when validation fails._
+
+{{<schema `Schema with patternProperties with boolean schemas`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "patternProperties": {
+    "^f.*": true,
+    "^b.*": false
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with properties not matching any regex is valid`>}}
+{ "zbaz": "zbaz" }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{
+  ...
+  "annotations": {
+    "patternProperties": []
+  }
+}
+{{</instance-annotation>}}
+
+{{<instance-fail `An instance with properties matching the regex with a 'false' schema is invalid`>}}
+{ "foo": "foo", "bar": "bar" }
+{{</instance-fail>}}
+
+{{<instance-pass `An instance with properties matching the regex with a 'true' schema, or/and with additional properties is valid`>}}
+{ "foo": "foo", "baz": "baz" }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{
+  ...
+  "annotations": {
+    "properties": [ "foo" ]
+  }
+}
+{{</instance-annotation>}}
+
+{{<schema `Schema with 'patternProperties', 'properties' and 'additionalProperties' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" }
+  },
+  "patternProperties": {
+    "[Aa]ge$": { "type": "number" }
+  },
+  "additionalProperties": true
+}
+{{</schema>}}
+
+{{<instance-fail `The value of the 'name' property must be a string`>}}
+{
+  "name": [ "John", "Doe" ],
+  "Age": 21,
+  "email": "foo@bar.com"
+}
+{{</instance-fail>}}
+
+{{<instance-pass `An object instance with properties conforming to the schema is valid`>}}
+{
+  "name": "John Doe",
+  "Age": 21,
+  "email": "foo@bar.com"
+}
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{
+  ...
+  "annotations": {
+    "properties": [ "name" ],
+    "patternProperties": [ "Age" ],
+    "additionalProperties": [ "email" ]
+  }
+}
+{{</instance-annotation>}}
+* _Property names not present in `properties` or `patternProperties` are evaluated against `additionalProperties`._
