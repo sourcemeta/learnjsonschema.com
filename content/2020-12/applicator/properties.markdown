@@ -41,7 +41,7 @@ The `properties` keyword is used to define the properties (keys) that an object 
 The annotation result of this keyword is the set of instance property names matched by this keyword. This annotation affects the behavior of `additionalProperties` and `unevaluatedProperties`.
 
 * The value of `properties` must be an object.
-* Each value of this object MUST be a valid JSON Schema.
+* Each value of this object must be a valid JSON Schema.
 * Each key within `properties` represents a property name in the object instance.
 * The value associated with each key is a JSON Schema that defines validation rules for that property.
 * Omitting this keyword has the same assertion behavior as an empty object.
@@ -97,7 +97,7 @@ The annotation result of this keyword is the set of instance property names matc
 }
 {{</instance-pass>}}
 
-{{<instance-fail `An object instance with properties conforming to the schema is valid`>}}
+{{<instance-fail `The value of 'Age' must be a number`>}}
 {
   "name": "John Doe",
   "Age": "21",
