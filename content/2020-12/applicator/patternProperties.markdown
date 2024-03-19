@@ -32,5 +32,15 @@ related:
 Annotations
 -----------
 
-The annotation result of this keyword is the set of instance property names
-matched by this keyword.
+The annotation result of this keyword is the set of instance property names matched by this keyword.
+
+## Explanation
+
+The `patternProperties` keyword is a variant of `properties` just with regular expression support. It maps regular expressions to schemas. If a property name matches the given regular expression, the property value must validate against the corresponding schema.
+
+The annotation result of this keyword is the set of instance property names matched by this keyword. This annotation affects the behavior of `additionalProperties` and `unevaluatedProperties`.
+
+* The value of `patternProperties` must be an object.
+* Each property name of this object should be a valid regular expression, according to the [ECMA-262](https://262.ecma-international.org/5.1/) regular expression dialect.
+* Each property value of this object must be a valid JSON Schema.
+* Omitting this keyword has the same assertion behavior as an empty object.
