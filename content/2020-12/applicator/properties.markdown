@@ -76,7 +76,47 @@ The annotation result of this keyword is the set of instance property names matc
 {{</instance-fail>}}
 * _Annotations are not produced when validation fails._
 
-{{<schema `Schema with no properties defined`>}}
+{{<schema `Schema with properties (keys) set to boolean values`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "foo": true,
+    "bar": false
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with no defined property is valid`>}}
+{ "baz": "baz" }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{
+  ...
+  "annotations": {
+    "properties": []
+  }
+}
+{{</instance-annotation>}}
+
+{{<instance-fail `An instance with 'false' property is invalid`>}}
+{ "foo": "foo", "bar": "bar" }
+{{</instance-fail>}}
+
+{{<instance-pass `An instance with 'true' property and additional properties is valid`>}}
+{ "foo": "foo", "baz": "baz" }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{
+  ...
+  "annotations": {
+    "properties": [ "foo" ]
+  }
+}
+{{</instance-annotation>}}
+
+{{<schema `Schema with no 'additionalProperties' defined`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
