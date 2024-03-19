@@ -44,3 +44,29 @@ The annotation result of this keyword is the set of instance property names matc
 * Each property name of this object should be a valid regular expression, according to the [ECMA-262](https://262.ecma-international.org/5.1/) regular expression dialect.
 * Each property value of this object must be a valid JSON Schema.
 * Omitting this keyword has the same assertion behavior as an empty object.
+
+## Examples
+
+{{<schema `Schema with 'patternProperties' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "patternProperties": {
+    "^[Nn]ame$": { "type": "string" },
+    "^[Aa]ge$": { "type": "number" }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `An object instance with properties matching the regex and conforming to the corresponding schema is valid`>}}
+{ "name": "John Doe", "age": 21 }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{
+  ...
+  "annotations": {
+    "patternProperties": [ "name", "age" ]
+  }
+}
+{{</instance-annotation>}}
