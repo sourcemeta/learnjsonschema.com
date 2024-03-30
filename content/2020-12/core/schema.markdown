@@ -85,4 +85,4 @@ The `$schema` keyword is a fundamental element in JSON Schema. It serves the two
   }
 }
 {{</schema>}}
-* _Embedded schemas within a bundled JSON document can have their own `$schema` declarations. This allows different parts of your schema to use the most suitable dialect for their specific needs, ensuring accurate validation and flexibility._
+* _Embedded schemas within a bundled JSON document can have their own `$schema` declarations. This allows different parts of your schema to use the most suitable dialect for their specific needs, ensuring accurate validation and flexibility. Check out [this](https://json-schema.org/blog/posts/bundling-json-schema-compound-documents) blog to learn more about schema bundling._
