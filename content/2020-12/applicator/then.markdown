@@ -45,7 +45,7 @@ The `then` keyword is used in conjunction with `if` to define a schema to be app
 }
 {{</schema>}}
 
-{{<instance-pass `An object instance that conforms to both the 'if' and 'then' subschema is valid`>}}
+{{<instance-pass `An object instance that conforms to both the 'if' and 'then' subschemas is valid`>}}
 { "foo": "foo", "bar": "bar" }
 {{</instance-pass>}}
 
@@ -62,5 +62,25 @@ The `then` keyword is used in conjunction with `if` to define a schema to be app
 {{</instance-fail>}}
 
 {{<schema `Schema with 'if' and 'then' without 'else'`>}}
-
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "if": {
+    "properties":
+      { "foo": { "const": "foo" }
+    }
+  },
+  "then": { "required": [ "bar" ] }
+}
 {{</schema>}}
+
+{{<instance-pass `An object instance conforming to both the 'if' and 'then' subschemas is valid`>}}
+{ "foo": "foo", "bar": "bar" }
+{{</instance-pass>}}
+
+{{<instance-fail `If an instance conforms to the 'if' subschema, then it must also conform to the 'then' subschema`>}}
+{ "foo": "foo" }
+{{</instance-fail>}}
+
+{{<instance-pass `An object instance not conforming to the 'if' subschemas is always valid`>}}
+{ "foo": "not foo", "baz": "baz" }
+{{</instance-pass>}}
