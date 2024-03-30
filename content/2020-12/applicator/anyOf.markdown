@@ -79,7 +79,7 @@ anyOf
 {{</instance-pass>}}
 
 {{<instance-fail `An instance that does not conform to any of the subschemas of 'anyOf' is invalid`>}}
-{ "foo": "foo", "bar": 33 }
+{ "foo": 33, "bar": "bar" }
 {{</instance-fail>}}
 
 {{<instance-pass `An instance conforming to all the subschemas of 'anyOf' is also valid`>}}
