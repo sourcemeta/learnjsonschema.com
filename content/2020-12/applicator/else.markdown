@@ -60,3 +60,27 @@ The `else` keyword is used in conjunction with `if` to define a schema to be app
 {{<instance-fail `An object instance that does not conform to both the 'if' and 'else' subschemas is invalid`>}}
 { "foo": "not foo" }
 {{</instance-fail>}}
+
+{{<schema `Schema with 'if' and 'else' without 'then'`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "if": {
+    "properties":
+      { "foo": { "const": "foo" }
+    }
+  },
+  "else": { "required": [ "baz" ] }
+}
+{{</schema>}}
+
+{{<instance-pass `An object instance that does not conform to the 'if' subschema but conforms to the 'else' subschemas is valid`>}}
+{ "foo": "not foo", "baz": "baz" }
+{{</instance-pass>}}
+
+{{<instance-fail `If an instance does not conform to the 'if' subschema, then it must conform to the 'else' subschema`>}}
+{ "foo": "not foo" }
+{{</instance-fail>}}
+
+{{<instance-pass `An object instance conforming to the 'if' subschemas is always valid`>}}
+{ "foo": "foo", "baz": "baz" }
+{{</instance-pass>}}
