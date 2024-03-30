@@ -28,7 +28,7 @@ The `then` keyword is used in conjunction with `if` to define a schema to be app
 
 * The value of this keyword must be a valid JSON Schema.
 * This keyword has no effect when `if` is absent.
-* This keyword has no effect when the instance fails to validate against `if` subschema.
+* This keyword has no effect when the instance fails validation against the `if` subschema.
 
 ## Examples
 
