@@ -10,10 +10,12 @@ introduced_in: draft7
 index: -9
 ---
 
-The `$comment` keyword provides a way to add descriptive comments to schema elements. These comments are meant for human readers and are ignored by validation processes. It's a useful feature for documenting the purpose or usage of particular parts of a schema.
+The `$comment` keyword is used to provide a way for schema authors to include explanatory or clarifying comments within the schema itself. However, it's important to note that JSON Schema implementations are not required to attach any specific meaning or behavior to `$comment`, and they may even ignore or strip it out entirely. Therefore, `$comment` is primarily useful for leaving notes to future editors of the schema rather than communicating with users of the schema.
 
 * The value of this keyword must be a string.
+* Implementations ignore `$comment` during validation.
 * It can be placed anywhere within a JSON Schema to provide additional context or explanation.
+* Some tools might even remove this keywords for size optimization.
 
 ## Examples
 
