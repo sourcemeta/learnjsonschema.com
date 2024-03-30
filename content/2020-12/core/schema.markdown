@@ -65,3 +65,24 @@ The `$schema` keyword is a fundamental element in JSON Schema. It serves the two
 }
 {{</schema>}}
 * _The above schema doesn't specify the dialect of JSON Schema it adheres to. Therefore, the implementation might determine the dialect independently, which could lead to unexpected results. For instance, if the implementation assumes the 2019-09 dialect, the schema would be considered valid. However, if it assumes the 2020-12 dialect, the schema would be invalid._
+
+{{<schema `Schema with nested '$schema' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Product schema",
+  "properties": {
+    "name": { "type": "string" },
+    "price": { "type": "number" },
+    "discount": {
+      "$ref": "#/$defs/discount"
+    }
+  },
+  "$defs": {
+    "discount": {
+      "$schema": "https://json-schema.org/draft/2019-09/schema",
+      "type": "number"
+    }
+  }
+}
+{{</schema>}}
+* _Embedded schemas within a bundled JSON document can have their own `$schema` declarations. This allows different parts of your schema to use the most suitable dialect for their specific needs, ensuring accurate validation and flexibility._
