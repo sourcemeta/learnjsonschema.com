@@ -32,5 +32,48 @@ However, it's important to note that `contentSchema` is merely an annotation and
 
 ## Examples
 
-{{<schema>}}
+{{<schema `Schema with 'contentSchema', 'contentMediaType' and 'contentEncoding' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "contentMediaType": "application/json",
+  "contentEncoding": "base64",
+  "contentSchema": {
+    "type": "object",
+    "properties": {
+      "name": { "type": "string" }
+    },
+    "required": [ "name" ]
+  }
+}
 {{</schema>}}
+
+{{<instance-pass `An instance with a properly stringified JSON document encoded in base64 is valid`>}}
+"eyAibmFtZSI6ICJKb2huIERvZSIgfQ=="    // --> { "name": "John Doe" }
+{{</instance-pass>}}
+
+{{<instance-pass `A validly-encoded invalid JSON document is also valid`>}}
+"eyAibmFtZSI6IH0="    // --> { "name": }
+{{</instance-pass>}}
+
+{{<instance-pass `An instance with non string value is ignored`>}}
+true
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{
+  "valid": true,
+  "keywordLocation": "/",
+  "instanceLocation": "",
+  "annotations": {
+    "contentEncoding": "base64",
+    "contentMediaType": "application/json",
+    "contentSchema": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" }
+      },
+      "required": [ "name" ]
+    }
+  }
+}
+{{</instance-annotation>}}
