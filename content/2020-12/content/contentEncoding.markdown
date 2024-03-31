@@ -39,7 +39,7 @@ The `contentEncoding` keyword is an annotation used to specify the encoding used
 
 ## Examples
 
-{{<schema>}}
+{{<schema `Schema with 'contentEncoding' keyword`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "contentEncoding": "base64"
