@@ -19,6 +19,15 @@ Annotations
 
 This keyword produces the content encoding name as the annotation value.
 
+## Proposed Content Encodings:
+
+| Encoding   | Description                                                                                     | Reference |
+|------------|-------------------------------------------------------------------------------------------------|-----------|
+| `"base16"` | Encoding scheme for binary data using a 16-character hexadecimal alphabet                       | [RFC 4648 §8](https://datatracker.ietf.org/doc/html/rfc4648#section-8) |
+| `"base32"` | Encoding scheme for binary data using a 32-character alphabet                                   | [RFC 4648 §6](https://datatracker.ietf.org/doc/html/rfc4648#section-6) |
+| `"base64"` | Common encoding scheme for representing binary data as a sequence of printable ASCII characters | [RFC 4648 §4](https://datatracker.ietf.org/doc/html/rfc4648#section-4) |
+
+
 ## Explanation
 
 The `contentEncoding` keyword is an annotation used to specify the encoding used to store the contents of a string, particularly when it represents binary data. It indicates how the string value should be interpreted and decoded. This keyword is not directly involved in the validation process but provides metadata about the content.
@@ -42,7 +51,7 @@ The `contentEncoding` keyword is an annotation used to specify the encoding used
 {{</instance-pass>}}
 
 {{<instance-pass `An incorrectly encoded base64 string is also valid`>}}
-"eyJmb28iOi%iYmFyIn0K"
+"This is not base64 encoded!"
 {{</instance-pass>}}
 
 {{<instance-pass `'contentEncoding' is irrelevant for instances with values other than strings`>}}
