@@ -59,7 +59,7 @@ The `$schema` keyword is a fundamental element in JSON Schema. It serves the two
 {{</schema>}}
 * _The value of the `items` keyword can be either a valid JSON Schema or an array of valid JSON Schemas according to the 2019-09 dialect of JSON Schema. However, in the 2020-12 dialect of JSON Schema, the `items` keyword can only have a single valid JSON Schema. Therefore, setting the `items` keyword to an array of JSON Schemas makes it invalid according to the 2020-12 specification._
 
-{{<schema>}}
+{{<schema `Schema with no dialect specified`>}}
 {
   "items": [{ "type": "number" }]
 }
