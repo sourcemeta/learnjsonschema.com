@@ -58,7 +58,7 @@ true
   "keywordLocation": "/",
   "instanceLocation": "",
   "annotations": {
-    "contentEncoding": "base64"
+    "contentEncoding": "base64",
     "contentMediaType": "application/json"
   }
 }
