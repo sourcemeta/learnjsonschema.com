@@ -18,7 +18,7 @@ related:
 ---
 
 The `$schema` keyword is a fundamental element in JSON Schema. It serves the two crucial purposes:
-1. **Dialect Identification:** It specifies the specific version (dialect) of JSON Schema the schema adheres to. This ensures implementations (tools and libraries) interpret the schema correctly based on the intended dialect's rules.
+1. **Dialect Identification:** It specifies the specific dialect of JSON Schema the schema adheres to. This ensures implementations (tools and libraries) interpret the schema correctly based on the intended dialect's rules and imported vocabularies.
 
 2. **Meta-Schema Validation:** The value of `$schema` is a URI pointing to a "meta-schema", which defines the structure and validation rules for JSON Schemas. A schema that describes another schema is called a "meta-schema". The schema is expected to be valid against its own meta-schema.
 
@@ -47,21 +47,21 @@ The `$schema` keyword is a fundamental element in JSON Schema. It serves the two
 {{<schema `Schema adhering to its meta-schema is valid`>}}
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
-  "items": [{ "type": "number" }]
+  "items": [ { "type": "number" } ]
 }
 {{</schema>}}
 
 {{<schema `Schema not adhering to its meta-schema is invalid`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "items": [{ "type": "number" }]
+  "items": [ { "type": "number" } ]
 }
 {{</schema>}}
 * _The value of the `items` keyword can be either a valid JSON Schema or an array of valid JSON Schemas according to the 2019-09 dialect of JSON Schema. However, in the 2020-12 dialect of JSON Schema, the `items` keyword can only have a single valid JSON Schema. Therefore, setting the `items` keyword to an array of JSON Schemas makes it invalid according to the 2020-12 specification._
 
 {{<schema `Schema with no dialect specified`>}}
 {
-  "items": [{ "type": "number" }]
+  "items": [ { "type": "number" } ]
 }
 {{</schema>}}
 * _The above schema doesn't specify the dialect of JSON Schema it adheres to. Therefore, the implementation might determine the dialect independently, which could lead to unexpected results. For instance, if the implementation assumes the 2019-09 dialect, the schema would be considered valid. However, if it assumes the 2020-12 dialect, the schema would be invalid._
