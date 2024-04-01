@@ -49,11 +49,9 @@ The `title` keyword in JSON Schema is used to provide a human-readable label for
 {{<instance-annotation>}}
 {
   "valid": true,
-  "keywordLocation": "/",
+  "keywordLocation": "/title",
   "instanceLocation": "",
-  "annotations": {
-    "title": "Age of a person"
-  }
+  "annotations": "Age of a person"
 }
 {{</instance-annotation>}}
 
@@ -99,51 +97,51 @@ The `title` keyword in JSON Schema is used to provide a human-readable label for
   /// ...
   {
     "valid": true,
-    "keywordLocation": "/",
+    "keywordLocation": "/title",
     "instanceLocation": "",
-    "annotations": {
-      "title": "Personal Info",
-      "properties": [ "name", "age" ],
-      "if": true
-    }
+    "annotations": "Personal Info"
   },
   {
     "valid": true,
-    "keywordLocation": "/if",
+    "keywordLocation": "/properties",
     "instanceLocation": "",
-    "annotations": {
-      "title": "if block",
-      "properties": [
-        "age"
-      ]
-    }
+    "annotations": [ "name", "age" ]
   },
   {
     "valid": true,
-    "keywordLocation": "/if/properties/age",
+    "keywordLocation": "/if/title",
+    "instanceLocation": "",
+    "annotations": "if block"
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/if/properties",
+    "instanceLocation": "",
+    "annotations": [ "age" ]
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/if/properties/age/title",
     "instanceLocation": "/age",
-    "annotations": {
-      "title": "'if' true"
-    }
+    "annotations": "'if' true"
   },
   {
     "valid": true,
-    "keywordLocation": "/then",
+    "keywordLocation": "/then/title",
     "instanceLocation": "",
-    "annotations": {
-      "title": "then block",
-      "properties": [
-        "eligible"
-      ]
-    }
+    "annotations": "then block",
   },
   {
     "valid": true,
-    "keywordLocation": "/then/properties/eligible",
-    "instanceLocation": "/eligible",
-    "annotations": {
-      "title": "then applied"
-    }
+    "keywordLocation": "/then/properties",
+    "instanceLocation": "",
+    "annotations": [ "eligible" ]
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/then/properties/eligible/title",
+    "instanceLocation": "",
+    "annotations": "then applied"
   },
   // ...
 ]
@@ -172,19 +170,15 @@ The `title` keyword in JSON Schema is used to provide a human-readable label for
   // ...
   {
     "valid": true,
-    "keywordLocation": "/",
+    "keywordLocation": "/title",
     "instanceLocation": "",
-    "annotations": {
-      "title": "Person's name"
-    }
+    "annotations": "Person's name"
   },
   {
     "valid": true,
-    "keywordLocation": "/$ref",
+    "keywordLocation": "/$ref/title",
     "instanceLocation": "",
-    "annotations": {
-      "title": "Person's name"
-    }
+    "annotations": "Person's name"
   },
   // ...
 ]
