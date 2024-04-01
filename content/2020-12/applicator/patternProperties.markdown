@@ -128,6 +128,46 @@ The annotation result of this keyword is the set of instance property names matc
 ]
 {{</instance-annotation>}}
 
+{{<schema `Schema with overlap between 'patternProperties' and 'properties'`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "foo": { "type": "string" }
+  },
+  "patternProperties": {
+    "^f": { "type": "string" }
+  }
+}
+{{</schema>}}
+
+{{<instance-fail `The value of 'foo' property must be a string`>}}
+{ "foo": [ "bar" ] }
+{{</instance-fail>}}
+
+{{<instance-pass `An object instance with properties conforming to the schema is valid`>}}
+{ "foo": "bar" }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/properties",
+    "instanceLocation": "",
+    "annotations": [ "foo" ]
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/patternProperties",
+    "instanceLocation": "",
+    "annotations": [ "foo" ]
+  },
+  // ...
+]
+{{</instance-annotation>}}
+
 {{<schema `Schema with 'patternProperties', 'properties' and 'additionalProperties' keyword`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
