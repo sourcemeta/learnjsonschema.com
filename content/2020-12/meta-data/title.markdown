@@ -140,7 +140,7 @@ The `title` keyword in JSON Schema is used to provide a human-readable label for
   {
     "valid": true,
     "keywordLocation": "/then/properties/eligible/title",
-    "instanceLocation": "",
+    "instanceLocation": "/eligible",
     "annotations": "then applied"
   },
   // ...
