@@ -36,7 +36,7 @@ The annotation result of this keyword is the set of instance property names matc
 
 ## Explanation
 
-The `patternProperties` keyword is a variant of `properties` just with regular expression support. It maps regular expressions to schemas. If a property name matches the given regular expression, the property value must validate against the corresponding schema.
+The `patternProperties` keyword is a variant of `properties` with regular expression support. It maps regular expressions to schemas. If a property name matches the given regular expression, the property value must validate against the corresponding schema.
 
 The annotation result of this keyword is the set of instance property names matched by this keyword. This annotation affects the behavior of `additionalProperties` and `unevaluatedProperties`.
 
@@ -63,12 +63,16 @@ The annotation result of this keyword is the set of instance property names matc
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{
-  ...
-  "annotations": {
-    "patternProperties": [ "name", "age" ]
-  }
-}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/patternProperties",
+    "instanceLocation": "",
+    "annotations": [ "name", "age" ]
+  },
+  // ...
+]
 {{</instance-annotation>}}
 
 {{<instance-fail `An object instance with properties matching the regex and not conforming to the corresponding schema is invalid`>}}
@@ -91,12 +95,16 @@ The annotation result of this keyword is the set of instance property names matc
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{
-  ...
-  "annotations": {
-    "patternProperties": []
-  }
-}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/patternProperties",
+    "instanceLocation": "",
+    "annotations": []
+  },
+  // ...
+]
 {{</instance-annotation>}}
 
 {{<instance-fail `An instance with properties matching the regex with a 'false' schema is invalid`>}}
@@ -104,16 +112,20 @@ The annotation result of this keyword is the set of instance property names matc
 {{</instance-fail>}}
 
 {{<instance-pass `An instance with properties matching the regex with a 'true' schema, or/and with additional properties is valid`>}}
-{ "foo": "foo", "baz": "baz" }
+{ "foo": "foo" }
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{
-  ...
-  "annotations": {
-    "properties": [ "foo" ]
-  }
-}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/patternProperties",
+    "instanceLocation": "",
+    "annotations": [ "foo" ]
+  },
+  // ...
+]
 {{</instance-annotation>}}
 
 {{<schema `Schema with 'patternProperties', 'properties' and 'additionalProperties' keyword`>}}
@@ -147,13 +159,27 @@ The annotation result of this keyword is the set of instance property names matc
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{
-  ...
-  "annotations": {
-    "properties": [ "name" ],
-    "patternProperties": [ "Age" ],
-    "additionalProperties": [ "email" ]
-  }
-}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/properties",
+    "instanceLocation": "",
+    "annotations": [ "name" ]
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/patternProperties",
+    "instanceLocation": "",
+    "annotations": [ "Age" ]
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/additionalProperties",
+    "instanceLocation": "",
+    "annotations": [ "email" ]
+  },
+  // ...
+]
 {{</instance-annotation>}}
 * _Instance properties (keys) not present in `properties` or not matching any regex within `patternProperties` are evaluated against `additionalProperties`._
