@@ -32,4 +32,125 @@ This keyword produces the annotation value `true` if the keyword is set to `true
 The `deprecated` keyword is used to indicate that a particular property should not be used and may be removed in the future. It provides a warning to users or applications that certain parts of the schema or are no longer recommended for use.
 
 * The value of this keyword must be a boolean.
-* * Omitting these keywords has the same behavior as values of false.
+* `deprecated` does not affect data validation but serves as an informative annotation.
+* A true value suggests that applications should avoid using the deprecated property, and the property might be removed in future schema versions.
+* Omitting these keywords has the same behavior as values of false.
+
+## Examples
+
+{{<schema `Schema with 'deprecated' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "deprecated": true,
+  "type": "number"
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with a numeric value is valid`>}}
+45
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{
+  "valid": true,
+  "keywordLocation": "/deprecated",
+  "instanceLocation": "",
+  "annotation": true
+}
+{{</instance-annotation>}}
+
+{{<schema `Schema with logical operators`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "foo": { "type": "boolean" },
+    "bar": { "type": "string" }
+  },
+  "if": {
+    "properties": {
+      "foo": { "const": true }
+    }
+  },
+  "then": {
+    "properties": {
+      "bar": { "deprecated": true }
+    }
+  },
+  "else": {
+    "properties": {
+      "bar": { "deprecated": false }
+    }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass>}}
+{ "foo": false, "bar": "bar" }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  /// ...
+  {
+    "valid": true,
+    "keywordLocation": "/else/properties/bar/deprecated",
+    "instanceLocation": "",
+    "annotation": false
+  },
+  // ...
+]
+{{</instance-annotation>}}
+
+{{<instance-pass>}}
+{ "foo": true, "bar": "bar" }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  /// ...
+  {
+    "valid": true,
+    "keywordLocation": "/then/properties/bar/deprecated",
+    "instanceLocation": "",
+    "annotation": true
+  },
+  // ...
+]
+{{</instance-annotation>}}
+
+{{<schema `Schema with multiple annotations for the same instance`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "deprecated": true,
+  "$ref": "#/$defs/name",
+  "$defs": {
+    "name": {
+      "deprecated": true,
+      "type": "string"
+    }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass>}}
+"John Doe"
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/deprecated",
+    "instanceLocation": "",
+    "annotation": true
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/$ref/deprecated",
+    "instanceLocation": "",
+    "annotation": true
+  },
+  // ...
+]
+{{</instance-annotation>}}
