@@ -69,7 +69,7 @@ The annotation result of this keyword is the set of instance property names matc
     "valid": true,
     "keywordLocation": "/patternProperties",
     "instanceLocation": "",
-    "annotations": [ "name", "age" ]
+    "annotation": [ "name", "age" ]
   },
   // ...
 ]
@@ -101,11 +101,12 @@ The annotation result of this keyword is the set of instance property names matc
     "valid": true,
     "keywordLocation": "/patternProperties",
     "instanceLocation": "",
-    "annotations": []
+    "annotation": []
   },
   // ...
 ]
 {{</instance-annotation>}}
+* _**Note:** If `patternProperties` does not match anything, it is still expected to produce an empty array annotation._
 
 {{<instance-fail `An instance with properties matching the regex with a 'false' schema is invalid`>}}
 { "foo": "foo", "bar": "bar" }
@@ -122,7 +123,7 @@ The annotation result of this keyword is the set of instance property names matc
     "valid": true,
     "keywordLocation": "/patternProperties",
     "instanceLocation": "",
-    "annotations": [ "foo" ]
+    "annotation": [ "foo" ]
   },
   // ...
 ]
@@ -156,13 +157,13 @@ The annotation result of this keyword is the set of instance property names matc
     "valid": true,
     "keywordLocation": "/properties",
     "instanceLocation": "",
-    "annotations": [ "foo" ]
+    "annotation": [ "foo" ]
   },
   {
     "valid": true,
     "keywordLocation": "/patternProperties",
     "instanceLocation": "",
-    "annotations": [ "foo" ]
+    "annotation": [ "foo" ]
   },
   // ...
 ]
@@ -205,19 +206,19 @@ The annotation result of this keyword is the set of instance property names matc
     "valid": true,
     "keywordLocation": "/properties",
     "instanceLocation": "",
-    "annotations": [ "name" ]
+    "annotation": [ "name" ]
   },
   {
     "valid": true,
     "keywordLocation": "/patternProperties",
     "instanceLocation": "",
-    "annotations": [ "Age" ]
+    "annotation": [ "Age" ]
   },
   {
     "valid": true,
     "keywordLocation": "/additionalProperties",
     "instanceLocation": "",
-    "annotations": [ "email" ]
+    "annotation": [ "email" ]
   },
   // ...
 ]
