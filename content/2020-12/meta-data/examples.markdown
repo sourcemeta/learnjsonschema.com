@@ -31,7 +31,129 @@ This keyword produces the list of examples as the annotation value.
 
 The `examples` keyword is used to provide an array of example instances associated with a particular schema that should ideally validate against the schema. These examples serve to illustrate the intended structure and constraints defined by the schema. While these examples are not used for validation purposes, they are helpful for explaining the schema's effect and purpose to readers or users.
 
-
+_**Note:** While it is recommended that the examples should validate against the subschema they are defined in, this requirement is not strictly enforced. However, it is strongly advised for people to ensure validation compatibility._
 
 * The value of this keyword must be an array.
+* Used to demonstrate how data should conform to the schema.
 * `examples` does not affect data validation but serves as an informative annotation.
+
+## Examples
+
+{{<schema `Schema with 'examples' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "examples": [ "foo", "bar", "Doe" ],
+  "type": "string"
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with a string value is valid`>}}
+"John"
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{
+  "valid": true,
+  "keywordLocation": "/examples",
+  "instanceLocation": "",
+  "annotation": [ "foo", "bar", "Doe" ]
+}
+{{</instance-annotation>}}
+
+{{<schema `Schema with logical operators`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "if": {
+    "properties": {
+      "foo": { "const": "foo" }
+    }
+  },
+  "then": {
+    "properties": {
+      "bar": {
+        "type": "array",
+        "examples": [ [ "foo" ], [ "bar", "baz" ] ]
+      }
+    }
+  },
+  "else": {
+      "properties": {
+      "bar": {
+        "type": "boolean",
+        "examples": [ false, true ]
+      }
+    }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass>}}
+{ "foo": "foo", "bar": [ "bar" ] }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  /// ...
+  {
+    "valid": true,
+    "keywordLocation": "/then/properties/bar/examples",
+    "instanceLocation": "",
+    "annotation": [ [ "foo" ], [ "bar", "baz" ] ]
+  },
+  // ...
+]
+{{</instance-annotation>}}
+
+{{<instance-pass>}}
+{ "foo": "not foo", "bar": true }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  /// ...
+  {
+    "valid": true,
+    "keywordLocation": "/else/properties/bar/examples",
+    "instanceLocation": "",
+    "annotation": [ false, true ]
+  },
+  // ...
+]
+{{</instance-annotation>}}
+
+{{<schema `Schema with multiple annotations for the same instance`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "examples": [ "John", "Karl" ],
+  "$ref": "#/$defs/name",
+  "$defs": {
+    "name": {
+      "examples": [ "John", "Karl" ],
+      "type": "string"
+    }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass>}}
+"John Doe"
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/examples",
+    "instanceLocation": "",
+    "annotation": [ "John", "Karl" ]
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/$ref/examples",
+    "instanceLocation": "",
+    "annotation": [ "John", "Karl" ]
+  },
+  // ...
+]
+{{</instance-annotation>}}
