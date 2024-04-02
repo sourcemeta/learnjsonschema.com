@@ -25,5 +25,11 @@ related:
 Annotations
 -----------
 
-This keyword produces the annotation value `true` if the keyword is set to
-`true`, or `false` otherwise.
+This keyword produces the annotation value `true` if the keyword is set to `true`, or `false` otherwise.
+
+## Explanation
+
+The `deprecated` keyword is used to indicate that a particular property should not be used and may be removed in the future. It provides a warning to users or applications that certain parts of the schema or are no longer recommended for use.
+
+* The value of this keyword must be a boolean.
+* * Omitting these keywords has the same behavior as values of false.
