@@ -51,7 +51,7 @@ The `title` keyword in JSON Schema is used to provide a human-readable label for
   "valid": true,
   "keywordLocation": "/title",
   "instanceLocation": "",
-  "annotations": "Age of a person"
+  "annotation": "Age of a person"
 }
 {{</instance-annotation>}}
 
@@ -99,49 +99,31 @@ The `title` keyword in JSON Schema is used to provide a human-readable label for
     "valid": true,
     "keywordLocation": "/title",
     "instanceLocation": "",
-    "annotations": "Personal Info"
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotations": [ "name", "age" ]
+    "annotation": "Personal Info"
   },
   {
     "valid": true,
     "keywordLocation": "/if/title",
     "instanceLocation": "",
-    "annotations": "if block"
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/if/properties",
-    "instanceLocation": "",
-    "annotations": [ "age" ]
+    "annotation": "if block"
   },
   {
     "valid": true,
     "keywordLocation": "/if/properties/age/title",
     "instanceLocation": "/age",
-    "annotations": "'if' true"
+    "annotation": "'if' true"
   },
   {
     "valid": true,
     "keywordLocation": "/then/title",
     "instanceLocation": "",
-    "annotations": "then block",
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/then/properties",
-    "instanceLocation": "",
-    "annotations": [ "eligible" ]
+    "annotation": "then block",
   },
   {
     "valid": true,
     "keywordLocation": "/then/properties/eligible/title",
     "instanceLocation": "/eligible",
-    "annotations": "then applied"
+    "annotation": "then applied"
   },
   // ...
 ]
@@ -172,13 +154,13 @@ The `title` keyword in JSON Schema is used to provide a human-readable label for
     "valid": true,
     "keywordLocation": "/title",
     "instanceLocation": "",
-    "annotations": "Person's name"
+    "annotation": "Person's name"
   },
   {
     "valid": true,
     "keywordLocation": "/$ref/title",
     "instanceLocation": "",
-    "annotations": "Person's name"
+    "annotation": "Person's name"
   },
   // ...
 ]
