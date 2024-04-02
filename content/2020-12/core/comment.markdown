@@ -16,7 +16,7 @@ The `$comment` keyword is used to provide a way for schema authors to include ex
 * Implementations ignore `$comment` during validation.
 * It will not even be collected as an annotation.
 * It can be placed anywhere within a JSON Schema to provide additional context or explanation.
-* Some tools might even remove this keywords for size optimization.
+* Some tools might even remove this keywords for size optimization. _[Learn more](https://json-schema.org/draft/2020-12/json-schema-core#section-8.3)_
 
 ## Examples
 
