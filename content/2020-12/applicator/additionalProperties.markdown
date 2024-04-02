@@ -70,7 +70,7 @@ The behavior of this keyword depends on the presence and annotation results of `
     "valid": true,
     "keywordLocation": "/properties",
     "instanceLocation": "",
-    "annotations": [ "foo" ]
+    "annotation": [ "foo" ]
   },
   // ...
 ]
@@ -104,13 +104,13 @@ The behavior of this keyword depends on the presence and annotation results of `
     "valid": true,
     "keywordLocation": "/properties",
     "instanceLocation": "",
-    "annotations": [ "name" ]
+    "annotation": [ "name" ]
   },
   {
     "valid": true,
     "keywordLocation": "/additionalProperties",
     "instanceLocation": "",
-    "annotations": [ "age" ]
+    "annotation": [ "age" ]
   },
   // ...
 ]
@@ -158,19 +158,19 @@ The behavior of this keyword depends on the presence and annotation results of `
     "valid": true,
     "keywordLocation": "/properties",
     "instanceLocation": "",
-    "annotations": [ "name" ]
+    "annotation": [ "name" ]
   },
   {
     "valid": true,
     "keywordLocation": "/patternProperties",
     "instanceLocation": "",
-    "annotations": [ "Age" ]
+    "annotation": [ "Age" ]
   },
   {
     "valid": true,
     "keywordLocation": "/additionalProperties",
     "instanceLocation": "",
-    "annotations": [ "email" ]
+    "annotation": [ "email" ]
   },
   // ...
 ]
@@ -221,13 +221,13 @@ The behavior of this keyword depends on the presence and annotation results of `
     "valid": true,
     "keywordLocation": "/properties",
     "instanceLocation": "",
-    "annotations": [ "name" ]
+    "annotation": [ "name" ]
   },
   {
     "valid": true,
     "keywordLocation": "/patternProperties",
     "instanceLocation": "",
-    "annotations": [ "Age" ]
+    "annotation": [ "Age" ]
   },
   // ...
 ]
