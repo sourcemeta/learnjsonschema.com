@@ -50,13 +50,25 @@ While the `format` keyword theoretically provides interoperable logical string t
 
 ## Examples
 
-{{<schema `Schema including the 'Format Assertion' vocabulary`>}}
+{{<schema `Custom meta-schema including the 'Format Assertion' vocabulary`>}}
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "https://example.com/custom-meta-schema",
+  "$id": "https://example.com/custom-meta-schema",
   "$vocabulary": {
+    "https://json-schema.org/draft/2020-12/vocab/core": true,
     "https://json-schema.org/draft/2020-12/vocab/format-assertion": true
   },
+  "allOf": [
+    { "$ref": "https://json-schema.org/draft/2020-12/meta/core" },
+    { "$ref": "https://json-schema.org/draft/2020-12/meta/format-assertion" }
+  ]
+}
+{{</schema>}}
+
+{{<schema `Schema with '$schema' set to custom meta-schema`>}}
+{
+  "$schema": "https://example.com/custom-meta-schema",
+  "$id": "https://example.com/schema",
   "format": "email"
 }
 {{</schema>}}
