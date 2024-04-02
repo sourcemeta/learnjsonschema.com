@@ -35,7 +35,7 @@ It's important to note that this keyword doesn't imply the schema itself is writ
 
 * The value of this keyword must be a boolean.
 * `readOnly` does not affect data validation but serves as an informative annotation.
-*  When set to true, the corresponding property value:
+*  When set to true, the corresponding value:
     - Will be included in the response received from the server (e.g., during a *GET* request).
     - Should not be modified by the client in requests sent to the server (e.g., during a *POST* or *PUT* request).
 * Omitting these keywords has the same behavior as values of false.
