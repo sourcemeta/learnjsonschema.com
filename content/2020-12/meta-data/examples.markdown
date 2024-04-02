@@ -26,3 +26,12 @@ Annotations
 -----------
 
 This keyword produces the list of examples as the annotation value.
+
+## Explanation
+
+The `examples` keyword is used to provide an array of example instances associated with a particular schema that should ideally validate against the schema. These examples serve to illustrate the intended structure and constraints defined by the schema. While these examples are not used for validation purposes, they are helpful for explaining the schema's effect and purpose to readers or users.
+
+
+
+* The value of this keyword must be an array.
+* `examples` does not affect data validation but serves as an informative annotation.
