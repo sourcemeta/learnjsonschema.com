@@ -44,20 +44,13 @@ The `$schema` keyword is a fundamental element in JSON Schema. It serves the two
 }
 {{</schema>}}
 
-{{<schema `Schema adhering to its meta-schema is valid`>}}
-{
-  "$schema": "https://json-schema.org/draft/2019-09/schema",
-  "items": [ { "type": "number" } ]
-}
-{{</schema>}}
-
 {{<schema `Schema not adhering to its meta-schema is invalid`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "items": [ { "type": "number" } ]
+  "properties": [ { "type": "number" } ]
 }
 {{</schema>}}
-* _The value of the `items` keyword can be either a valid JSON Schema or an array of valid JSON Schemas according to the 2019-09 dialect of JSON Schema. However, in the 2020-12 dialect of JSON Schema, the `items` keyword can only have a single valid JSON Schema. Therefore, setting the `items` keyword to an array of JSON Schemas makes it invalid according to the 2020-12 specification._
+* _The `properties` keyword can only be set to a single valid JSON Schema. Therefore, setting the `properties` keyword to an array of JSON Schemas makes the schema invalid according to the 2020-12 specification._
 
 {{<schema `Schema with no dialect specified`>}}
 {
