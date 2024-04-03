@@ -75,6 +75,19 @@ When using `format` from Format Annotation, it's recommended that you provide yo
 45
 {{</instance-pass>}}
 
+{{<instance-annotation>}}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/format",
+    "instanceLocation": "",
+    "annotation": "email"
+  },
+  // ...
+]
+{{</instance-annotation>}}
+
 {{<schema `Schema with the 'format' keyword having validation rules for email`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -94,3 +107,16 @@ When using `format` from Format Annotation, it's recommended that you provide yo
 {{<instance-pass `'format' keyword is irrelevant for instances with values other than strings`>}}
 true
 {{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/format",
+    "instanceLocation": "",
+    "annotation": "email"
+  },
+  // ...
+]
+{{</instance-annotation>}}
