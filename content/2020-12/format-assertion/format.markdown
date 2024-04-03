@@ -84,3 +84,16 @@ While the `format` keyword theoretically provides interoperable logical string t
 {{<instance-pass `'format' keyword is irrelevant for instances with values other than strings`>}}
 45
 {{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/format",
+    "instanceLocation": "",
+    "annotation": "email"
+  },
+  // ...
+]
+{{</instance-annotation>}}
