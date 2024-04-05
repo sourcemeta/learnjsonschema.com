@@ -116,3 +116,41 @@ The `if` keyword is used to conditionally apply a subschema based on whether a c
 { "foo": "foo", "baz": "baz" }
 {{</instance-pass>}}
 - _**Note:** If an instance passes the `if` subschema and the `then` subschema is not present, then the `then` subschema behaves as a boolean __true__ schema. Similarly, if an instance fails the `if` subschema and the `else` subschema is not present, then the `else` subschema behaves as a boolean __true__ schema._
+
+{{<schema `Schema with 'if' without 'then' and 'else'`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "if": {
+    "properties": {
+      "foo": {
+        "title": "This is foo!",
+        "const": "foo"
+      }
+    }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass>}}
+{ "foo": "foo" }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/if/properties",
+    "instanceLocation": "",
+    "annotation": [ "foo" ]
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/if/properties/foo/title",
+    "instanceLocation": "",
+    "annotation": "This is foo!"
+  },
+  // ...
+]
+{{</instance-annotation>}}
+* _Here, the annotations are collected from `if`’s subschema in the usual way, irrespective of whether `then` and `else` are present or not._
