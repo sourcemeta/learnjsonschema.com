@@ -26,7 +26,7 @@ related:
 The `not` keyword is used to declare that an instance only validates if it doesn't validate against the given subschema. It is essentially a way to define a rule that an instance should not match.
 
 * The value of this keyword must be a valid JSON Schema.
-* The boolean `false` schemas, are typically an alias to `{ not: {} }`.
+* The boolean `false` schema, can be thought as an alias to `{ not: {} }`.
 
 Annotations are dropped when an instance fails. Therefore, in the case of `not`, annotations are always dropped because:
 
