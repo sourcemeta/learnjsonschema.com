@@ -41,7 +41,6 @@ If the `items` subschema is applied to any positions within the instance array, 
 * The value of this keyword must be a valid JSON Schema.
 * `prefixItems` allows defining a fixed-length sequence of schemas for an array's initial items.
 * `items` applies its sub-schema to all elements after the `prefixItems` sequence (if present).
-* In the absence of `prefixItems`, `items` behaves identically to the pre-2020-12 `items` keyword, validating all array elements.
 * Analogous to `additionalProperties` for objects, `items` specifies a schema that each item in the array must adhere to. If an array has additional items beyond what's defined in `prefixItems`, they must conform to the schema specified under `items`.
 
 ## Examples
