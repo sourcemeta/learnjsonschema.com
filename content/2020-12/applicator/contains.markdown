@@ -38,6 +38,8 @@ The `contains` keyword is used to check if at least one element in an array inst
 
 An array instance is valid against `contains` if at least one of its elements is valid against the given schema, except when `minContains` is present and has a value of 0, in which case an array instance must be considered valid against the `contains` keyword, even if none of its elements is valid against the given schema.
 
+Similarly, if `maxContains` is present alongside `contains`, the instance will be considered valid as long as the number of elements successfully validating against the `contains` subschema does not exceed the specified limit defined by `maxContains`.
+
 * The value of this keyword must be a valid JSON Schema.
 * For data validation,  `items` validates all array elements against a single schema, `prefixItems` validates a fixed-length sequence at the array's beginning, and `contains` checks for at least one element matching a schema anywhere in the array.
 * The subschema must be applied to every array element, even after the first match has been found, to collect annotations for use by other keywords.
