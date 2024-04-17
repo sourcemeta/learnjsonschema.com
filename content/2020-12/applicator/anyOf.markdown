@@ -27,7 +27,7 @@ The `anyOf` keyword in JSON Schema is used to specify that an instance must vali
 
 * The value of this keyword must be a non-empty array.
 * Each item of the array must be a valid JSON Schema.
-anyOf
+
 ## Examples
 
 {{<schema `Schema with 'anyOf' keyword containing only one subschema`>}}
@@ -131,7 +131,7 @@ anyOf
 {{<instance-pass `An instance not conforming to the second subschema of 'anyOf' is also valid`>}}
 { "foo": true }
 {{</instance-pass>}}
-* _Remember, if any subschema within the `anyOf` keyword passes validation or has a boolean `true` value, the overall validation against `anyOf` stops at that point, indicating successful validation for this keyword._
+* _Remember, if any subschema within the `anyOf` keyword passes validation or has a boolean `true` value, the overall result of `anyOf` is considered valid._
 
 {{<schema `Schema with nested 'anyOf'`>}}
 {
@@ -158,7 +158,7 @@ anyOf
 {{<instance-pass `An instance not conforming to the second subschema of top-level 'anyOf' is also valid`>}}
 10
 {{</instance-pass>}}
-* _For the first instance above, validation passes against the first subschema within `anyOf`, causing validation to halt at that point. Consequently, the `anyOf` is deemed valid without further validation against the second subschema._
+* _For the first instance above, validation passes against the first subschema within `anyOf`, thereby making the `anyOf` keyword valid, regardless of the validation result against the second subschema._
 
 * _Similarly, for the second instance above, validation passes against the first subschema within `anyOf`. Even though the instance does not conform to the second subschema, validation does not proceed to validate against it, as it has already been successfully validated against the first subschema. Thus, the validation stops at that point, rendering the `anyOf` valid, despite the instance not conforming to the second subschema within the `anyOf`._
 
