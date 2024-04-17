@@ -23,11 +23,10 @@ related:
     keyword: not
 ---
 
-The `oneOf` keyword allows you to specify that exactly one of the provided subschemas must validate successfully against a given instance. It ensures that the instance validates against one and only one of the defined subschemas within the `oneOf` array.
+The `oneOf` keyword allows you to specify that exactly one of the provided subschemas must validate successfully against a given instance. It ensures that the instance validates against one and only one of the defined subschemas within the `oneOf` array. This behavior is akin to a logical "XOR" (exclusive OR) operation, where only one condition needs to be met for validation to pass.
 
 * The value of this keyword must be a non-empty array.
 * Each item of the array must be a valid JSON Schema.
-* The behaviour of `oneOf` is like an exclusive OR operation.
 
 ## Examples
 
