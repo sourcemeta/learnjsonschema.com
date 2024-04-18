@@ -59,12 +59,14 @@ The `contentEncoding` keyword is an annotation used to specify the encoding used
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{
-  "valid": true,
-  "keywordLocation": "/",
-  "instanceLocation": "",
-  "annotations": {
-    "contentEncoding": "base64"
-  }
-}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/contentEncoding",
+    "instanceLocation": "",
+    "annotation": "base64"
+  },
+  // ...
+]
 {{</instance-annotation>}}
