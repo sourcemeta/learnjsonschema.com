@@ -53,13 +53,20 @@ true
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{
-  "valid": true,
-  "keywordLocation": "/",
-  "instanceLocation": "",
-  "annotations": {
-    "contentEncoding": "base64",
-    "contentMediaType": "application/json"
-  }
-}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/contentEncoding",
+    "instanceLocation": "",
+    "annotation": "base64"
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/contentMediaType",
+    "instanceLocation": "",
+    "annotation": "application/json"
+  },
+  // ...
+]
 {{</instance-annotation>}}
