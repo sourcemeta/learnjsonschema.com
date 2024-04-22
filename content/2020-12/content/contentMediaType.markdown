@@ -25,9 +25,8 @@ The `contentMediaType` keyword in JSON Schema specifies the MIME type of the con
 
 * This keyword is purely an annotation and does not directly affect validation.
 * It describes the media type of the binary string after it has been decoded as specified in `contentEncoding`.
-* Using `contentMediaType` without `contentEncoding` may lead to ambiguity or errors.
+* It is recommended to set `contentEncoding` if `contentMediaType` is declared.
 * The value assigned to `contentMediaType` must be a valid IANA media type as described in [RFC 2046](https://www.rfc-editor.org/rfc/rfc2046.html).
-* It is recommended to use officially registered IANA media types to ensure interoperability and compatibility.
 * The list of all registered IANA media types can be found at [here](https://www.iana.org/assignments/media-types/media-types.xhtml).
 
 ## Examples
@@ -44,11 +43,11 @@ The `contentMediaType` keyword in JSON Schema specifies the MIME type of the con
 "eyAibmFtZSI6ICJKb2huIERvZSIgfQ=="    // --> { "name": "John Doe" }
 {{</instance-pass>}}
 
-{{<instance-pass `A validly-encoded invalid JSON document is also valid`>}}
+{{<instance-pass `An encoded value that represents invalid JSON data is still valid`>}}
 "eyAibmFtZSI6IH0="    // --> { "name": }
 {{</instance-pass>}}
 
-{{<instance-pass `An instance with non string value is ignored`>}}
+{{<instance-pass `A non-string instance is ignored`>}}
 true
 {{</instance-pass>}}
 
