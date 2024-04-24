@@ -22,7 +22,7 @@ This keyword produces the content schema as the annotation value.
 
 ## Explanation
 
-The `contentSchema` keyword allows you to specify a schema that describes the structure of the content within a string instance, particularly when used in conjunction with the `contentMediaType` keyword. This is useful when the string instance contains data conforming to a specific media type, such as JSON, XML, or plain text, and you want to define a schema for that content.
+The `contentSchema` keyword allows you to specify a schema that describes the structure of the content within a string instance, particularly when used in conjunction with the `contentMediaType` keyword. This is useful when the string instance contains data conforming to the JSON data model.
 
 However, it's important to note that `contentSchema` is merely an annotation and is not directly involved in the validation process. Instead, applications that consume JSON Schemas must use this information as they see fit. `contentSchema` must be a valid JSON Schema, but it is ignored if `contentMediaType` is absent.
 
