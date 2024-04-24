@@ -30,7 +30,12 @@ If this keyword is applied to any instance element, it produces an annotation va
 
 ## Explanation
 
-First, let's understand what evaluation means. `unevaluatedProperties` considers annotations from `properties`, `patternProperties`, and `additionalProperties`, both as adjacent keywords and in subschemas of adjacent keywords. Additionally, `unevaluatedProperties` is affected by other `unevaluatedProperties` in nested schemas (if present). Each of these keywords will produce an annotation of the properties that they've evaluated. For `properties`, it's just the listed keys intersected with what's in the instance; for `patternProperties`, it's the list of properties that matches at least one of the regexes; for `additionalProperties`, it's basically the rest of the properties. If any of these are in subschemas of adjacent keywords, and those subschemas fail validation, those annotations are dropped in that case. The effect is that those properties are not considered evaluated.
+First, let's understand what evaluation means. `unevaluatedProperties` considers annotations from `properties`, `patternProperties`, and `additionalProperties`, both as adjacent keywords and in subschemas of adjacent keywords. Additionally, `unevaluatedProperties` is affected by other `unevaluatedProperties` in nested schemas (if present). Each of these keywords will produce an annotation of the properties that they've evaluated.
+- For `properties`, it's just the listed keys intersected with what's in the instance.
+- For `patternProperties`, it's the list of properties that matches at least one of the regexes.
+- For `additionalProperties`, it's basically the rest of the properties.
+
+If any of these are in subschemas of adjacent keywords, and those subschemas fail validation, those annotations are dropped in that case. The effect is that those properties are not considered evaluated.
 
 Validation with `unevaluatedProperties` applies only to the child values of instance names that do not appear in the `properties`, `patternProperties`, `additionalProperties`, or `unevaluatedProperties` annotation results that apply to the instance location being validated.
 
