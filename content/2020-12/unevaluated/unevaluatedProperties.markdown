@@ -40,7 +40,6 @@ For all such properties, validation succeeds if the child instance validates aga
 - It considers annotations from `properties`, `patternProperties`, and `additionalProperties`, both as adjacent keywords and in subschemas of adjacent keywords.
 - This annotation affects the behavior of `unevaluatedProperties` in parent schemas.
 - `unevaluatedProperties` cannot see outside the schema to which it belongs.
-- This keyword is similar to `additionalProperties` except that it can recognize properties declared in subschemas.
 - The annotation result of this keyword is the set of instance property names validated by this keyword's subschema.
 
 ## Examples
@@ -59,6 +58,7 @@ For all such properties, validation succeeds if the child instance validates aga
 {{<instance-pass `'unevaluatedProperties' does not have any effect on instances other than an object`>}}
 "John Doe"
 {{</instance-pass>}}
+
 {{<instance-annotation>}}
 [
   // ...
@@ -71,6 +71,7 @@ For all such properties, validation succeeds if the child instance validates aga
   // ...
 ]
 {{</instance-annotation>}}
+
 * Here, no properties are defined in the above schema. Consequently, all properties in an object instance are considered unevaluated, and the `unevaluatedProperties` subschema applies to them. Since the subschema here is a boolean true, an instance with unevaluated properties, regardless of their value, is considered valid.
 
 {{<schema `Schema with 'unevaluatedProperties' set to boolean false`>}}
@@ -100,7 +101,6 @@ For all such properties, validation succeeds if the child instance validates aga
   "unevaluatedProperties": false
 }
 {{</schema>}}
-
 
 {{<instance-fail `An instance with unevaluated properties is invalid`>}}
 { "foo": "foo", "bar": 36, "fooBar": false }
@@ -252,7 +252,7 @@ For all such properties, validation succeeds if the child instance validates aga
 {{<instance-fail `An instance with unevaluated properties that do not conform to the 'unevaluatedProperties' subschema is invalid`>}}
 { "foo": "foo", "bar": 36, "fooBar": "string" }
 {{</instance-fail>}}
-For the above two instances, the annotation result of `properties` is → [ "foo" ], and the annotation result of nested `patternProperties` is → [ "bar" ]. The `unevaluatedProperties` recognizes the annotations from `properties` as well as `patternProperties` (as it can see through adjacent and nested applicators) and ensures that 'fooBar' remains unevaluated and its subschema applies to 'fooBar'.
+For the above two instances, the annotation result of `properties` is [ "foo" ], and the annotation result of nested `patternProperties` is [ "bar" ]. The `unevaluatedProperties` recognizes the annotations from `properties` as well as `patternProperties` (as it can see through adjacent and nested applicators) and ensures that 'fooBar' remains unevaluated and its subschema applies to 'fooBar'.
 * The first instance passes as it conforms to the unevaluated subschema.
 * The second instance fails as it does not conform to the unevaluated subschema.
 
