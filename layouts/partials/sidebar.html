@@ -1,40 +1,91 @@
-<aside id="sidebar" class="border-end position-relative d-none d-xl-block">
+<aside id="sidebar" class="border-end position-relative d-none d-xl-block" style="position:sticky; top:0;">
   <div class="px-4 py-4">
-    {{ range .Site.Sections }}
-      {{ $dialect := .Title }}
+    <!-- <select class="form-select" id="selectedDialect" onchange=redirectToURL(this.value)>
+      {{ range .Site.Sections }}
+        <option>
+          <a href="{{ .RelPermalink }}">{{ .RelPermalink }}</a>
+        </option>
+      {{ end }}
+    </select> -->
+
+    <select class="form-select" name="temp" aria-label="Default select example"  onchange="redirectToURL(this.value)">
+      
+      <option value="http://localhost:1313/2019-09/" >
+        2019-09
+      </option>
+      <option value="http://localhost:1313/2020-12/">
+        2020-12
+        </option>
+    </select>
+
+    <!-- I dk why indexes are starting from 1  -->
+    {{$selected_dialect := index (split .RelPermalink "/") 1}}
+
+    {{range .Site.Sections}}
+    {{ $dialect := .Title }}
+    {{if eq $dialect $selected_dialect}}
       {{ $dialectURL := $dialect | printf "/%s" }}
-      <a href="{{ ref . $dialectURL }}" class="h5 d-block fw-bold border-bottom text-decoration-none text-dark">{{ $dialect }}</a>
-      <ul class="nav flex-column text-nowrap mb-4">
-        {{ range sort .Sections "Params.index" "asc" }}
-          <li class="nav-item">
-            {{ $vocabulary := .Title }}
-            {{ $vocabularyURL := (replace $vocabulary " " "-") | lower | printf "%s/%s" $dialectURL }}
-            <a class="ps-0 nav-link text-body fw-bold" href="{{ ref $ $vocabularyURL }}">
-              <i class="bi bi-chevron-down"></i> {{ $vocabulary }}
-            </a>
-            <ul class="list-unstyled ms-3">
-              {{ range sort $.Site.RegularPages "Params.index" "asc" }}
-                {{ if eq .Section $dialect }}
-                  {{ if eq .Parent.Title $vocabulary }}
+
+          <!--DONE!!! <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+              Accordion Item #1
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+              <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            </div>
+          </div>
+        </div> -->
+
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+          {{ range sort .Page.Sections "Params.index" "asc" }}
+          <div class="accordion-item">
+              {{ $vocabulary := .Title }}
+              {{ $vocabularyURL := (replace $vocabulary " " "-") | lower | printf "%s/%s" $dialectURL }}
+              <!-- <a class="ps-0 nav-link text-body fw-bold" href="{{ ref $ $vocabularyURL }}">
+                <i class="bi bi-chevron-down"></i> {{ $vocabulary }}
+              </a> -->
+              <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" onclick="redirectToURL('{{ ref $ $vocabularyURL }}')" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                  {{$vocabulary}}
+                </button>
+              </h2>
+              <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+
+                  <ul class="list-unstyled ms-3">
+                    {{ range sort $.Site.RegularPages "Params.index" "asc" }}
+                    {{ if eq .Section $dialect }}
+                    {{ if eq .Parent.Title $vocabulary }}
                     {{ $keywordURL := (replace .Params.keyword "$" "") | printf "%s/%s" $vocabularyURL }}
                     <li>
                       {{ if eq $.Permalink .Permalink }}
-                        <a class="text-muted fw-bold text-decoration-none font-monospace active"
-                          href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
+                      <a class="text-muted fw-bold text-decoration-none font-monospace active"
+                      href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
                       {{ else }}
-                        <a class="text-black-50 text-decoration-none font-monospace"
-                          href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
+                      <a class="text-black-50 text-decoration-none font-monospace"
+                      href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
                       {{ end }}
                     </li>
-                  {{ end }}
-                {{ end }}
-              {{ end }}
-            </ul>
-          </li>
-        {{ end }}
-      </ul>
-    {{ end }}
-
+                    {{ end }}
+                    {{ end }}
+                    {{ end }}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          {{ end }}
+          </div>
+      {{end}}
+    {{end}}
     <small class="text-muted">More dialects coming soon!</small>
   </div>
 </aside>
+
+<script>
+  function redirectToURL(url) {
+    console.log("hello" + url);
+    window.location.href = url;
+  }
+</script>
