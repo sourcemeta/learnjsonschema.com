@@ -34,9 +34,11 @@ If this keyword is applied to any instance element, it produces an annotation va
 
 ## Explanation
 
-First, let's understand what evaluation means. `unevaluatedItems` considers annotations from `prefixItems`, `items`, and `contains`, both as adjacent keywords and in subschemas of adjacent keywords. Additionally, `unevaluatedItems` is affected by other `unevaluatedItems` in nested schemas (if present). Each of these keywords will produce an annotation of the locations that they've evaluated in the array.
+First, let's understand what evaluation means. `unevaluatedItems` considers annotations from `prefixItems`, `items`, and `contains`, both as adjacent keywords and in subschemas of adjacent keywords. Additionally, `unevaluatedItems` is affected by other `unevaluatedItems` in nested schemas (if present). Each of these keywords will produce an annotation of the indexes that they've evaluated in the array.
 - For `items`, it's boolean true.
 - For `prefixItems`, it is the largest index to which this keyword applied a subschema (the value may be a boolean true if a subschema was applied to every index of the instance).
 - For `contains`, it is an array of the indexes to which this keyword validates successfully when applying its subschema, in ascending order (the value may be a boolean true if the subschema validates successfully when applied to every index of the instance).
 
 If any of these are in subschemas of adjacent keywords, and those subschemas fail validation, those annotations are dropped in that case. The effect is that those properties are not considered evaluated.
+
+Validation with `unevaluatedItems` applies only to the indexes of the array instance that do not appear in the `properties`, `patternProperties`, `additionalProperties`, or `unevaluatedProperties` annotation results that apply to the instance location being validated.
