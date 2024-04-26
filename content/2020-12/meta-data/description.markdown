@@ -30,14 +30,14 @@ This keyword produces the description as the annotation value.
 
 ## Explanation
 
-The `description` keyword in JSON Schema is used to provide additional explanatory information about the schema or its parts. It does not affect data validation but serves as an informative annotation. The value of this keyword must be a string.
+The `description` keyword in JSON Schema is used to provide a human readable description for the schema. It does not affect data validation but serves as an informative annotation. The value of this keyword must be a string.
 
 ## Examples
 
 {{<schema `Schema with 'description' keyword`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "description": "The age of a person must not be less than zero",
+  "description": "The age of a person",
   "type": "number"
 }
 {{</schema>}}
@@ -66,19 +66,19 @@ The `description` keyword in JSON Schema is used to provide additional explanato
   "if": {
     "description": "if block",
     "properties": {
-      "age": { "description": "'if' true", "minimum": 18 }
+      "age": { "description": "Age", "minimum": 18 }
     }
   },
   "then": {
     "description": "then block",
     "properties": {
-      "eligible": { "description": "then applied", "const": true }
+      "eligible": { "description": "Eligible", "const": true }
     }
   },
   "else": {
     "description": "else block",
     "properties": {
-      "eligible": { "description": "else applied", "const": false }
+      "eligible": { "description": "Not eligible", "const": false }
     }
   }
 }
