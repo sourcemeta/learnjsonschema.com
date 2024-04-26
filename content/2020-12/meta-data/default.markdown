@@ -29,9 +29,9 @@ This keyword produces the default value as the annotation value.
 
 ## Explanation
 
-The `default` keyword in JSON Schema is used to specify a default value for an instance or its parts. This value is not used to fill in missing values during the validation process but can be used by non-validation tools such as documentation generators or form generators to provide hints to users.
+The `default` keyword in JSON Schema is used to specify a default value for an instance. This value is not automatically used to fill in missing values during the validation process but can be used by tools such as documentation or form generators.
 
-_**Note:** While it is recommended that the default value validate against its subschema, this requirement is not strictly enforced. However, it is strongly advised for people to ensure validation compatibility_
+_**Note:** While it is recommended that the default value validate against its subschema, this requirement is not strictly enforced._
 
 ## Examples
 
@@ -73,12 +73,12 @@ _**Note:** While it is recommended that the default value validate against its s
   },
   "then": {
     "properties": {
-      "degree_certificate": {
+      "degreeCertificate": {
         "type": "string",
         "default": "XXXXXX"
       }
     },
-    "required": [ "degree_certificate" ]
+    "required": [ "degreeCertificate" ]
   },
   "else": {
     "properties": {
@@ -96,7 +96,7 @@ _**Note:** While it is recommended that the default value validate against its s
 {
   "name": "Doe",
   "qulaification": "degree",
-  "degree_certificate": "XXYYZZ"
+  "degreeCertificate": "XXYYZZ"
 }
 {{</instance-pass>}}
 
@@ -117,7 +117,7 @@ _**Note:** While it is recommended that the default value validate against its s
   },
   {
     "valid": true,
-    "keywordLocation": "/then/properties/degree_certificate/default",
+    "keywordLocation": "/then/properties/degreeCertificate/default",
     "instanceLocation": "",
     "annotation": "XXXXXX",
   },
