@@ -382,7 +382,7 @@ For the above two instances, the annotation result of `properties` is [ "foo" ],
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with no unevaluated properties is valid`>}}
+{{<instance-pass `No properties remain unevaluated for the top-level 'unevaluatedProperties'`>}}
 { "foo": "foo", "bar": 101 }
 {{</instance-pass>}}
 
