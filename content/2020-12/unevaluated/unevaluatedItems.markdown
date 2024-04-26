@@ -42,3 +42,333 @@ First, let's understand what evaluation means. `unevaluatedItems` considers anno
 If any of these are in subschemas of adjacent keywords, and those subschemas fail validation, those annotations are dropped in that case. The effect is that those properties are not considered evaluated.
 
 Validation with `unevaluatedItems` applies only to the indexes of the array instance that do not appear in the `properties`, `patternProperties`, `additionalProperties`, or `unevaluatedProperties` annotation results that apply to the instance location being validated.
+
+## Examples
+
+{{<schema `Schema with 'unevaluatedItems' set to boolean true`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "unevaluatedItems ": true
+}
+{{</schema>}}
+
+{{<instance-pass `All object instances pass against the true schema`>}}
+[ "foo": "bar" ]
+{{</instance-pass>}}
+
+{{<instance-pass `'unevaluatedItems' does not have any effect on instances other than an array`>}}
+"John Doe"
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/unevaluatedItems",
+    "instanceLocation": "",
+    "annotation": "true"
+  },
+  // ...
+]
+{{</instance-annotation>}}
+* Here, no items are defined in the above schema. Consequently, all items in an array instance are considered unevaluated, and the `unevaluatedItems` subschema applies to them. Since the subschema here is a boolean true, an instance with unevaluated items, regardless of their value, is considered valid.
+
+{{<schema `Schema with 'unevaluatedItems' set to boolean false`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "unevaluatedItems": false
+}
+{{</schema>}}
+
+{{<instance-fail `All object instances fail against the false schema`>}}
+[ "foo", "bar" ]
+{{</instance-fail>}}
+
+{{<instance-pass `'unevaluatedItems' does not have any effect on instances other than an array`>}}
+[ "John", 46, false ]
+{{</instance-pass>}}
+
+{{<schema `Schema with 'unevaluatedItems', 'prefixItems', and 'contains', with unevaluatedItems set to boolean false`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "prefixItems": [ { "type": "string" } ],
+  "contains": { "type": "number" },
+  "unevaluatedItems": false
+}
+{{</schema>}}
+
+{{<instance-fail `An array instance with unevaluated items is invalid`>}}
+[ "foo", 101, false ]
+{{</instance-fail>}}
+
+{{<instance-pass `An array instance with no unevaluated items is valid`>}}
+[ "foo", 101, 77 ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/prefixItems",
+    "instanceLocation": "",
+    "annotation": 0
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/contains",
+    "instanceLocation": "",
+    "annotation": [ 1, 2 ]
+  },
+  // ...
+]
+{{</instance-annotation>}}
+
+* For the first instance, the annotation result of `prefixItems` is 0, and the annotation result of `contains` is [ 1 ]. However, the item at 2nd index (i.e., `false`) remains unevaluated, so the `unevaluatedItems` subschema applies to it. This subschema fails (as any instance against a false schema is always invalid), leading to the failure of the entire schema.
+
+* For the second instance, the annotation result of `prefixItems` is 0, and the annotation result of contains is [ 1, 2 ]. No items remain unevaluated; hence, the instance is considered valid.
+
+{{<schema `Schema with 'unevaluatedItems', 'prefixItems', and 'contains', with unevaluatedItems set to an object schema`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "prefixItems": [ { "type": "string" } ],
+  "contains": { "type": "number" },
+  "unevaluatedItems": { "type": "boolean" }
+}
+{{</schema>}}
+
+{{<instance-pass `An array instance with no unevaluated items is valid`>}}
+[ "foo", 101, 77 ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/prefixItems",
+    "instanceLocation": "",
+    "annotation": 0
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/contains",
+    "instanceLocation": "",
+    "annotation": [ 1, 2 ]
+  },
+  // ...
+]
+{{</instance-annotation>}}
+
+{{<instance-pass `An array instance with unevaluated items that conform to the 'unevaluatedItems' subschema is valid`>}}
+[ "foo", 101, false ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/prefixItems",
+    "instanceLocation": "",
+    "annotation": 0
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/contains",
+    "instanceLocation": "",
+    "annotation": [ 1 ]
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/unevaluatedItems",
+    "instanceLocation": "",
+    "annotation": true
+  },
+  // ...
+]
+{{</instance-annotation>}}
+
+{{<instance-fail `An array instance with unevaluated items that do not conform to the 'unevaluatedItems' subschema is valid`>}}
+[ "foo", 101, [ false ] ]
+{{</instance-fail>}}
+
+* For the first instance, there are no unevaluated items.
+
+* For the second instance, the item at 2nd index (i.e., `false`) remains unevaluated, and the `unevaluatedItems` subschema applies to it. `false` conforms to this subschema, and hence the instance is valid. The annotations produced by applicators are: `prefixItems` → 0, `contains` → [ 1 ], and `unevaluatedItems` → true.
+
+{{<schema `Schema with 'unevaluatedItems', and 'allOf' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "prefixItems": [ { "type": "string" } ],
+  "allOf" : [
+    {
+      true,
+      "prefixItems": [
+        {"const": "foo" },
+        { "type": "boolean" }
+      ]
+    }
+  ],
+  "unevaluatedItems": { "type": number }
+}
+{{</schema>}}
+
+{{<instance-pass `An array instance with unevaluated items that conform to the 'unevaluatedItems' subschema is valid`>}}
+[ "foo", false, 22 ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/prefixItems",
+    "instanceLocation": "",
+    "annotation": 0
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/allOf/0/prefixItems",
+    "instanceLocation": "",
+    "annotation": 1
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/unevaluatedItems",
+    "instanceLocation": "",
+    "annotation": true
+  },
+  // ...
+]
+{{</instance-annotation>}}
+
+{{<instance-fail `An array instance with unevaluated items that do not conform to the 'unevaluatedItems' subschema is valid`>}}
+[ "foo", 101, [ false ] ]
+{{</instance-fail>}}
+
+For the above two instances, the annotation result of top level `prefixItems` is 0, and the annotation result of the nested `prefixItems` is 1. The `unevaluatedItems` recognizes the annotations from top level `prefixItems` as well as nested `prefixItems` (as it can see through adjacent and nested applicators as only the produced annotations matter, not the schema structure) and ensures that the item at index 2 remains unevaluated and its subschema applies to it.
+
+* The first instance passes as it conforms to the unevaluated subschema.
+* The second instance fails as it does not conform to the unevaluated subschema.
+
+{{<schema `Schema with 'unevaluatedItems', and 'allOf' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "prefixItems": [ { "type": "string" } ],
+  "allOf" : [
+    {
+      true,
+      "items": true
+    }
+  ],
+  "unevaluatedItems": { "type": number }
+}
+{{</schema>}}
+
+{{<instance-pass `An array instance with unevaluated items that conform to the 'unevaluatedItems' subschema is valid`>}}
+[ "foo", false, 22 ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/prefixItems",
+    "instanceLocation": "",
+    "annotation": 0
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/allOf/0/items",
+    "instanceLocation": "",
+    "annotation": true
+  },
+  // ...
+]
+{{</instance-annotation>}}
+
+* Here, the nested `items` evaluated all the unevaluated items. So there's nothing left unevaluated.
+
+{{<schema `Schema with 'unevaluatedItems' and '#ref' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "prefixItems": [
+    { "type": "string" },
+    { "type": "boolean" }
+  ],
+  "$ref": "#/$defs/bar",
+  "unevaluatedItems": false,
+  "$defs": {
+    "bar": {
+      "contains": { "type": "number" }
+    }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `An instance with no unevaluated items is valid`>}}
+[ "foo", false, 22 ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/prefixItems",
+    "instanceLocation": "",
+    "annotation": 1
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/$ref/contains",
+    "instanceLocation": "",
+    "annotation": [ 2 ]
+  },
+  // ...
+]
+{{</instance-annotation>}}
+
+{{<instance-fail `An instance with unevaluated items is invalid`>}}
+[ "foo", false, "bar" ]
+{{</instance-fail>}}
+
+{{<schema `Schema with nested 'unevaluatedItems' keyword`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "prefixItems": [ { "type": "string" } ],
+  "allOf" : [
+    {
+      true,
+      "unevaluatedItems": true
+    }
+  ],
+  "unevaluatedItems": false
+}
+{{</schema>}}
+
+{{<instance-pass `No items left unevaluated for the top level 'unevaluatedItems'`>}}
+[ "foo", false, "bar" ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+[
+  // ...
+  {
+    "valid": true,
+    "keywordLocation": "/prefixItems",
+    "instanceLocation": "",
+    "annotation": 0
+  },
+  {
+    "valid": true,
+    "keywordLocation": "/allOf/0/unevaluatedItems",
+    "instanceLocation": "",
+    "annotation": true
+  },
+  // ...
+]
+{{</instance-annotation>}}
