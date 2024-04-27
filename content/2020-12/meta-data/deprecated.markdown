@@ -33,8 +33,8 @@ The `deprecated` keyword is used to indicate that a particular property should n
 
 * The value of this keyword must be a boolean.
 * `deprecated` does not affect data validation but serves as an informative annotation.
-* A true value suggests that applications should avoid using the deprecated property, and the property might be removed in future schema versions.
-* Omitting these keywords has the same behavior as values of false.
+* A true value suggests that applications should avoid using the deprecated property, and the property might be removed in future versions of the schema.
+* Omitting this keywords has the same behavior as values of false.
 
 ## Examples
 
@@ -94,7 +94,7 @@ The `deprecated` keyword is used to indicate that a particular property should n
   {
     "valid": true,
     "keywordLocation": "/else/properties/bar/deprecated",
-    "instanceLocation": "",
+    "instanceLocation": "/bar",
     "annotation": false
   },
   // ...
@@ -111,7 +111,7 @@ The `deprecated` keyword is used to indicate that a particular property should n
   {
     "valid": true,
     "keywordLocation": "/then/properties/bar/deprecated",
-    "instanceLocation": "",
+    "instanceLocation": "/bar",
     "annotation": true
   },
   // ...
