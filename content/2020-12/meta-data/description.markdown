@@ -51,7 +51,7 @@ The `description` keyword in JSON Schema is used to provide a human readable des
   "valid": true,
   "keywordLocation": "/description",
   "instanceLocation": "",
-  "annotation": "The age of a person must not be less than zero"
+  "annotation": "The age of a person"
 }
 {{</instance-annotation>}}
 
@@ -111,7 +111,7 @@ The `description` keyword in JSON Schema is used to provide a human readable des
     "valid": true,
     "keywordLocation": "/if/properties/age/description",
     "instanceLocation": "/age",
-    "annotation": "'if' true"
+    "annotation": "'Age"
   },
   {
     "valid": true,
@@ -123,7 +123,7 @@ The `description` keyword in JSON Schema is used to provide a human readable des
     "valid": true,
     "keywordLocation": "/then/properties/eligible/description",
     "instanceLocation": "/eligible",
-    "annotation": "then applied"
+    "annotation": "Eligible"
   },
   // ...
 ]
@@ -132,11 +132,11 @@ The `description` keyword in JSON Schema is used to provide a human readable des
 {{<schema `Schema with multiple annotations for the same instance`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "description": "Name of the person should not include special characters",
+  "description": "A person name",
   "$ref": "#/$defs/name",
   "$defs": {
     "name": {
-      "description": "Name of the person should not include special characters",
+      "description": "A person name",
       "type": "string"
     }
   }
@@ -154,13 +154,13 @@ The `description` keyword in JSON Schema is used to provide a human readable des
     "valid": true,
     "keywordLocation": "/description",
     "instanceLocation": "",
-    "annotation": "Name of the person should not include special characters"
+    "annotation": "A person name"
   },
   {
     "valid": true,
     "keywordLocation": "/$ref/description",
     "instanceLocation": "",
-    "annotation": "Name of the person should not include special characters"
+    "annotation": "A person name"
   },
   // ...
 ]
