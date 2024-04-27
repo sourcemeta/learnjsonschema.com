@@ -61,14 +61,14 @@ _**Note:** While it is recommended that the default value validate against its s
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "properties": {
     "name": { "type": "string", "default": "John" },
-    "education": {
+    "qualification": {
       "enum": [ "degree", "diploma" ],
       "default": "diploma"
     }
   },
   "if": {
     "properties": {
-      "education": { "const": "degree" }
+      "qualification": { "const": "degree" }
     }
   },
   "then": {
@@ -82,12 +82,12 @@ _**Note:** While it is recommended that the default value validate against its s
   },
   "else": {
     "properties": {
-      "diploma_certificate": {
+      "diplomaCertificate": {
         "type": "string",
         "default": "YYYYYY"
       }
     },
-    "required": [ "diploma_certificate" ]
+    "required": [ "diplomaCertificate" ]
   }
 }
 {{</schema>}}
@@ -95,7 +95,7 @@ _**Note:** While it is recommended that the default value validate against its s
 {{<instance-pass `An instance conforming to the schema is valid`>}}
 {
   "name": "Doe",
-  "qulaification": "degree",
+  "qualification": "degree",
   "degreeCertificate": "XXYYZZ"
 }
 {{</instance-pass>}}
@@ -106,19 +106,19 @@ _**Note:** While it is recommended that the default value validate against its s
   {
     "valid": true,
     "keywordLocation": "/properties/name/default",
-    "instanceLocation": "",
+    "instanceLocation": "/name",
     "annotation": "John"
   },
   {
     "valid": true,
-    "keywordLocation": "/properties/education/default",
-    "instanceLocation": "",
+    "keywordLocation": "/properties/qualification/default",
+    "instanceLocation": "/qualification",
     "annotation": "diploma"
   },
   {
     "valid": true,
     "keywordLocation": "/then/properties/degreeCertificate/default",
-    "instanceLocation": "",
+    "instanceLocation": "/degreeCertificate",
     "annotation": "XXXXXX",
   },
   // ...
