@@ -1,91 +1,304 @@
-<aside id="sidebar" class="border-end position-relative d-none d-xl-block" style="position:sticky; top:0;">
+<aside id="sidebar" class="border-end position-relative d-none d-xl-block" style="height: calc(100vh - 60px); overflow-y: auto">
+
   <div class="px-4 py-4">
-    <!-- <select class="form-select" id="selectedDialect" onchange=redirectToURL(this.value)>
-      {{ range .Site.Sections }}
-        <option>
-          <a href="{{ .RelPermalink }}">{{ .RelPermalink }}</a>
-        </option>
-      {{ end }}
-    </select> -->
+    <div style="flex-direction: row">
+      <select id="selectedDialect" style="border: none; outline: none" aria-label="Default select example" onchange="redirectToURL(this.value)">
+        {{ range .Site.Sections }}
+        <option value="{{ ref $ .RelPermalink }}">{{.Title}}</option>
+        {{end}}
+      </select>
 
-    <select class="form-select" name="temp" aria-label="Default select example"  onchange="redirectToURL(this.value)">
-      
-      <option value="http://localhost:1313/2019-09/" >
-        2019-09
-      </option>
-      <option value="http://localhost:1313/2020-12/">
-        2020-12
-        </option>
-    </select>
+      <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+        Group
+        <i class="bi bi-arrow-left-right"></i>
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onchange="handleToggle()"/>
+        </div>
+        <i class="bi bi-arrow-left-right"></i>
+        Alphabetically
+      </div>
+    </div>
+    <hr />
 
+    <!-- dropdown?? -->
     <!-- I dk why indexes are starting from 1  -->
-    {{$selected_dialect := index (split .RelPermalink "/") 1}}
+    {{$selected_dialect := index (split .RelPermalink "/") 1}} {{range
+    .Site.Sections}} {{ $dialect := .Title }} {{if eq $dialect
+    $selected_dialect}} {{ $dialectURL := $dialect | printf "/%s" }}
+    
+    <div class="accordion2" id="accordionPanelsStayOpenExample">
+        {{ range sort .Page.Sections "Params.index" "asc" }}
+        <div>
+          {{ $vocabulary := .Title }}
+          {{ $vocabularyURL := (replace $vocabulary " " "-") | lower | printf "%s/%s" $dialectURL }}
 
-    {{range .Site.Sections}}
-    {{ $dialect := .Title }}
-    {{if eq $dialect $selected_dialect}}
-      {{ $dialectURL := $dialect | printf "/%s" }}
-
-          <!--DONE!!! <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-              Accordion Item #1
+          <!-- <h2 class="accordion-header" id="panelsStayOpen-headingOne" > -->
+            <!-- </h2> -->
+          <div class="btn-group" >
+            <button class="accordion-button2">
+              <i class="bi bi-chevron-down" style="padding-right: 5px;"></i>
             </button>
-          </h2>
-          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+            <button class="custom-button ps-0 nav-link text-body fw-bold" onclick="redirectToURL('{{ ref $ $vocabularyURL }}')">
+              {{$vocabulary}}
+            </button>
+          </div>
+            
+          <div id="panel" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
             <div class="accordion-body">
-              <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+              <!-- TODO: correct position not using relative position -->
+              <ul class="list-unstyled ms-3" style="position: relative;left: -15px ">
+                {{ range sort $.Site.RegularPages "Params.index" "asc" }}
+                {{ if eq .Section $dialect }}
+                {{ if eq .Parent.Title $vocabulary }}
+                {{ $keywordURL := (replace .Params.keyword "$" "") | printf "%s/%s" $vocabularyURL }}
+                <li>
+                  {{ if eq $.Permalink .Permalink }}
+                  <a class="text-muted fw-bold text-decoration-none font-monospace active"
+                  href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
+                  {{ else }}
+                  <a class="text-black-50 text-decoration-none font-monospace"
+                  href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
+                  {{ end }}
+                </li>
+                {{ end }}
+                {{ end }}
+                {{ end }}
+              </ul>
             </div>
           </div>
-        </div> -->
+        </div>
+        {{ end }}
+    </div>
+       <!-- <details>
+        <summary onclick="redirectToURL(`www.google.com`)">Read More</summary>
+         <p>This is a native HTML5 accordion to hide and reveal content. Pretty cool, right?</p>
+       </details>  -->
+       
 
-      <div class="accordion" id="accordionPanelsStayOpenExample">
-          {{ range sort .Page.Sections "Params.index" "asc" }}
-          <div class="accordion-item">
-              {{ $vocabulary := .Title }}
-              {{ $vocabularyURL := (replace $vocabulary " " "-") | lower | printf "%s/%s" $dialectURL }}
-              <!-- <a class="ps-0 nav-link text-body fw-bold" href="{{ ref $ $vocabularyURL }}">
-                <i class="bi bi-chevron-down"></i> {{ $vocabulary }}
-              </a> -->
-              <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                <button class="accordion-button" type="button" onclick="redirectToURL('{{ ref $ $vocabularyURL }}')" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                  {{$vocabulary}}
-                </button>
-              </h2>
-              <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                <div class="accordion-body">
-
-                  <ul class="list-unstyled ms-3">
-                    {{ range sort $.Site.RegularPages "Params.index" "asc" }}
-                    {{ if eq .Section $dialect }}
-                    {{ if eq .Parent.Title $vocabulary }}
-                    {{ $keywordURL := (replace .Params.keyword "$" "") | printf "%s/%s" $vocabularyURL }}
-                    <li>
-                      {{ if eq $.Permalink .Permalink }}
-                      <a class="text-muted fw-bold text-decoration-none font-monospace active"
-                      href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
-                      {{ else }}
-                      <a class="text-black-50 text-decoration-none font-monospace"
-                      href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
-                      {{ end }}
-                    </li>
-                    {{ end }}
-                    {{ end }}
-                    {{ end }}
-                  </ul>
-                </div>
-              </div>
-            </div>
+    <!-- Code to arrange all keywords in ascending order -->
+    <div id="keywordListContainer" style="display: none">
+      <ul class="list-unstyled ms-3">
+        {{ range sort $.Site.RegularPages "Params.keyword" "asc" }} {{ if eq
+        .Section $dialect }} {{ $vocabulary := .Parent.Title }} {{
+        $vocabularyURL := (replace $vocabulary " " "-") | lower | printf "%s/%s"
+        $dialectURL }} {{ $keywordURL := (replace .Params.keyword "$" "") |
+        printf "%s/%s" $vocabularyURL }}
+        <li>
+          {{ if eq $.Permalink .Permalink }}
+          <a
+            class="text-muted fw-bold text-decoration-none font-monospace active"
+            href="{{ ref $ $keywordURL }}"
+            aria-current="true"
+            >{{ .Params.keyword }}</a
+          >
+          {{ else }}
+          <a
+            class="text-black-50 text-decoration-none font-monospace"
+            href="{{ ref $ $keywordURL }}"
+            >{{ .Params.keyword }}</a
+          >
           {{ end }}
-          </div>
-      {{end}}
-    {{end}}
-    <small class="text-muted">More dialects coming soon!</small>
+        </li>
+        {{ end }} {{ end }}
+      </ul>
+    </div>
+
+    {{end}} {{end}}
+    <small class="text-muted" style="padding-top: 10px;">More dialects coming soon!</small>
   </div>
 </aside>
 
-<script>
-  function redirectToURL(url) {
-    console.log("hello" + url);
-    window.location.href = url;
+<style>
+
+  .btn-group{
+    display: flex;
+    flex-direction: row;
+    padding-top: 5px;
+    position: relative;
+    left: -6px;
   }
+  /* Style the buttons that are used to open and close the accordion panel */
+  .accordion-button2 {
+    background-color: transparent;
+    color: #212529;
+    cursor: pointer;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+  }
+  
+  .custom-button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    text-align: right; /* Align the text to the right */
+    position: relative;
+    left: -6px;
+  }
+
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  /* .active, .accordion-button:hover {
+    background-color: #ccc;
+  } */
+
+  /* Style the accordion panel. Note: hidden by default */
+  #panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+  }
+
+
+  .rotate {
+    transform: rotate(180deg); /* Rotate the arrow 180 degrees */
+    transition: transform 0.3s ease; /* Add a transition effect */
+  }
+
+</style>
+
+<script>
+  var completeURL = window.location.href.split("/");
+  var pathUntilFirstSubpath = completeURL[0] + "//" + completeURL[2] + "/" + completeURL[3] + "/";
+  document.getElementById("selectedDialect").value = pathUntilFirstSubpath;
+
+  // Function to redirect to the selected URL
+  function redirectToURL(value) {
+    // Redirect to the selected URL
+    window.location.href = value;
+  }
+
+  // Function to handle the toggle switch
+  function handleToggle() {
+    // Get the toggle switch element
+    var toggleSwitch = document.getElementById("flexSwitchCheckDefault");
+    // Get the div containing the accordion
+    var accordionDiv = document.getElementById(
+      "accordionPanelsStayOpenExample"
+    );
+    // Get the div containing the list of keywords
+    var keywordListDiv = document.getElementById("keywordListContainer");
+
+    // Check if the toggle switch is checked
+    if (toggleSwitch.checked) {
+      // Toggle switch is unchecked, show the list of keywords and hide the accordion
+      accordionDiv.style.display = "none";
+      keywordListDiv.style.display = "block";
+    } else {
+      // Toggle switch is checked, show the accordion and hide the list of keywords
+      accordionDiv.style.display = "block";
+      keywordListDiv.style.display = "none";
+    }
+  }
+ 
+  var acc = document.getElementsByClassName("accordion-button2");
+  var i;
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      /* Toggle between adding and removing the "active" class,
+      to highlight the button that controls the panel */
+      this.classList.toggle("active");
+
+      // Toggle the "rotate" class to rotate the arrow
+      var arrow = this.querySelector('.bi-chevron-down');
+      console.log(arrow);
+      arrow.classList.toggle('rotate');
+
+      /* Toggle between hiding and showing the active panel */
+      var panel = this.parentElement.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+    });
+  }
+
+  // Function to store accordion state in sessionStorage
+  function storeAccordionState() {
+    var accordionState = {};
+    var acc = document.getElementsByClassName("accordion-button2");
+    console.log("yfcgvhbjn");
+    for (var i = 0; i < acc.length; i++) {
+      var panel = acc[i].parentElement.nextElementSibling;
+      accordionState[i] = {
+        active: acc[i].classList.contains("active"),
+        display: panel.style.display
+      };
+    }
+    console.log(accordionState);
+    sessionStorage.setItem("accordionState", JSON.stringify(accordionState));
+  }
+
+  // Function to retrieve accordion state from sessionStorage
+  function retrieveAccordionState() {
+    var accordionState = sessionStorage.getItem("accordionState");
+    console.log(accordionState);
+    if (accordionState) {
+      accordionState = JSON.parse(accordionState);
+      var acc = document.getElementsByClassName("accordion-button2");
+      for (var i = 0; i < acc.length; i++) {
+        if (accordionState[i].active) {
+          acc[i].classList.add("active");
+        }
+        var panel = acc[i].parentElement.nextElementSibling;
+        panel.style.display = accordionState[i].display;
+      }
+    }
+  }
+
+  // Call retrieveAccordionState when the document is ready
+  document.addEventListener("DOMContentLoaded", function() {
+    retrieveAccordionState();
+  });
+
+  // Add event listener to store accordion state before redirecting
+  window.addEventListener("beforeunload", function() {
+    storeAccordionState();
+  });
+
+  // Add event listener to clear sessionStorage when navigating to a new URL
+  // window.addEventListener("unload", function() {
+  //   sessionStorage.removeItem("accordionState");
+  // });
+
+  // // Function to load content via AJAX
+  // function loadContent(url) {
+  //     fetch(url)
+  //         .then(response => response.text())
+  //         .then(html => {
+  //             // Update sidebar content with fetched HTML
+  //             document.getElementById("sidebar").innerHTML = html;
+              
+  //             // Restore previous scroll position
+  //             document.getElementById("sidebar").scrollTop = storedScrollPosition;
+  //         })
+  //         .catch(error => console.error('Error loading content:', error));
+  // }
+
+  // // Store current scroll position before redirecting
+  // var storedScrollPosition = document.getElementById("sidebar").scrollTop;
+
+  // // Function to handle redirection with AJAX
+  // function redirectToURLWithAJAX(url) {
+  //     // Load content via AJAX
+  //     loadContent(url);
+  // }
+
+  // console.log(  document.querySelectorAll('a[href^="' + window.location.origin + '"]'));
+  // // Example usage:
+  // // Add event listener to links to redirect with AJAX
+  // document.querySelectorAll('a[href^="' + window.location.origin + '"]').forEach(anchor => {
+  //     anchor.addEventListener('click', function(event) {
+  //         event.preventDefault();
+  //         redirectToURLWithAJAX(this.getAttribute('href'));
+  //     });
+  // });
+
 </script>
+

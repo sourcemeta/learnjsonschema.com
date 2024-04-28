@@ -21,7 +21,7 @@
 
 <div class="d-flex bg-body flex-fill">
   {{ partial "sidebar.html" . }}
-  <div class="flex-xl-grow-1 mw-100">
+  <div id="main-content" class="flex-xl-grow-1 mw-100" style="height: calc(100vh - 60px); overflow-y: auto;">
     <main class="px-3 px-lg-5 pt-4 pb-3">
       <header class="mb-3">
         <h1>{{ .Title }}
