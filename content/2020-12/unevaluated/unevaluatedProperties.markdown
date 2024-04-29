@@ -30,12 +30,14 @@ The annotation result of this keyword is the set of instance property names vali
 
 ## Evaluation
 
-First, let's understand what evaluation means. `unevaluatedProperties` considers annotations from `properties`, `patternProperties`, and `additionalProperties`, both as adjacent keywords and in subschemas of adjacent keywords. Additionally, `unevaluatedProperties` is affected by other `unevaluatedProperties` in nested schemas (if present).
+Before delving into unevaluatedProperties, it's crucial to understand what evaluation means in this context.
 
-- `properties`, `patternProperties`, `additionalProperties`, and `unevaluatedProperties` emit annotations for the properties they validated against.
-- If `properties`, `patternProperties`, `additionalProperties`, or `unevaluatedProperties` emitted an annotation at the same instance location (independently of the schema location) for a certain property, that property is considered to have been evaluated.
-- By definition, the `unevaluatedProperties` keyword is always interpreted AFTER `properties`, `patternProperties`, `additionalProperties`.
-- As its name implies, `unevaluatedProperties` is an applicator that will apply to any object property not evaluated.
+`unevaluatedProperties` considers annotations from `properties`, `patternProperties`, and `additionalProperties`, both as adjacent keywords and in subschemas of adjacent keywords. Additionally, it is also affected by other `unevaluatedProperties` in nested schemas (if present).
+
+- The keywords `properties`, `patternProperties`, `additionalProperties`, and `unevaluatedProperties` produce annotations for the properties they successfully validate against.
+- If any of these keywords generate an annotation for a particular property at the same instance location (independently of the schema location), that property is considered as evaluated.
+- By definition, the `unevaluatedProperties` subschema is always applied after `properties`, `patternProperties`, and `additionalProperties` subschemas.
+- As its name implies, `unevaluatedProperties` applies to any object property that has not been previously evaluated.
 
 ## Explanation
 
@@ -320,7 +322,7 @@ For the above two instances, the annotation result of `properties` is [ "foo" ],
 {{</instance-annotation>}}
 
 * In the first case, there are no unevaluated properties.
-* In the second case, the nested `{ additionalProperties: true }` evaluated all the unevaluated properties. So there's nothing left unevaluated.
+* In the second case, the nested `{ additionalProperties: true }` evaluated all the remaining properties. So there's nothing left unevaluated.
 
 {{<schema `Schema with 'unevaluatedProperties' and '#ref' keyword`>}}
 {
