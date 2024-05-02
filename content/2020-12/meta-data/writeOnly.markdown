@@ -34,7 +34,7 @@ the `writeOnly` keyword is used to indicate that an instance value should be wri
 * The value of this keyword must be a boolean.
 * `writeOnly` does not affect data validation but serves as an informative annotation.
 *  It could be used to indicate you can set a value with a *PUT* request, but it would not be included when retrieving that record with a *GET* request.
-* Omitting these keywords has the same behavior as values of false.
+* Omitting this keyword has the same behavior as a value of false.
 
 ## Examples
 
