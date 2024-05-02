@@ -111,7 +111,7 @@ The `description` keyword in JSON Schema is used to provide a human readable des
     "valid": true,
     "keywordLocation": "/if/properties/age/description",
     "instanceLocation": "/age",
-    "annotation": "'Age"
+    "annotation": "Age"
   },
   {
     "valid": true,
