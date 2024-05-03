@@ -29,11 +29,10 @@ This keyword produces the annotation value `true` if the keyword is set to `true
 
 ## Explanation
 
-the `writeOnly` keyword is used to indicate that an instance value should be writable, but it won't be included when the instance is retrieved from the owning authority. It's important to note that this doesn't imply the schema itself is writable; schemas must be treated as immutable. Instead, the keyword specifies instances where read/write operation semantics are use case specific. This keyword is typically used in API contexts where certain data should be set but not revealed upon retrieval.
+the `writeOnly` keyword is used to indicate that an instance value should be writable, but it won't be included when the instance is retrieved from the owning authority. It's important to note that this doesn't imply the schema itself is writable; schemas must be treated as immutable. Instead, the keyword specifies instances where read/write operation semantics are use case specific.
 
 * The value of this keyword must be a boolean.
 * `writeOnly` does not affect data validation but serves as an informative annotation.
-*  It could be used to indicate you can set a value with a *PUT* request, but it would not be included when retrieving that record with a *GET* request.
 * Omitting this keyword has the same behavior as a value of false.
 
 ## Examples
@@ -62,9 +61,6 @@ the `writeOnly` keyword is used to indicate that an instance value should be wri
 {{<schema `Schema with logical operators`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "properties": {
-    "sensitive": { "type": "boolean" }
-  },
   "if": {
     "properties": {
       "sensitive": { "const": true }
