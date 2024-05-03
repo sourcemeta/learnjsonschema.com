@@ -29,15 +29,12 @@ This keyword produces the annotation value `true` if the keyword is set to `true
 
 ## Explanation
 
-The `readOnly` keyword is used to indicate that the value of a particular property is managed exclusively by the owning authority, and attempts by an application to modify the value of this property are expected to be ignored or rejected by that authority. This keyword is typically used in API contexts and it essentially means that the instance value should not be modified.
+The `readOnly` keyword is used to indicate that the value of a particular property is managed exclusively by the owning authority, and attempts by an application to modify the value of this property are expected to be ignored or rejected by that authority. It essentially means that the instance value should not be modified.
 
 It's important to note that this keyword doesn't imply the schema itself is writable; schemas must be treated as immutable. Instead, the keyword specifies instances where read/write operation semantics are use case specific.
 
 * The value of this keyword must be a boolean.
 * `readOnly` does not affect data validation but serves as an informative annotation.
-*  When set to true, the corresponding value:
-    - should be included in the response received from the server (e.g., during a *GET* request).
-    - should not be modified by the client in requests sent to the server (e.g., during a *POST* or *PUT* request).
 * Omitting this keyword has the same behavior as a value of false.
 
 ## Examples
@@ -66,9 +63,6 @@ It's important to note that this keyword doesn't imply the schema itself is writ
 {{<schema `Schema with logical operators`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "properties": {
-    "immutable": { "type": "boolean" }
-  },
   "if": {
     "properties": {
       "immutable": { "const": true }
