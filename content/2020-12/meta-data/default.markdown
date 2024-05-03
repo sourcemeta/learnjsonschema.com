@@ -75,7 +75,7 @@ _**Note:** While it is recommended that the default value validate against its s
     "properties": {
       "degreeCertificate": {
         "type": "string",
-        "default": "XXXXXX"
+        "default": "B0B8RKEZ90"
       }
     },
     "required": [ "degreeCertificate" ]
@@ -84,7 +84,7 @@ _**Note:** While it is recommended that the default value validate against its s
     "properties": {
       "diplomaCertificate": {
         "type": "string",
-        "default": "YYYYYY"
+        "default": "PW458C468E"
       }
     },
     "required": [ "diplomaCertificate" ]
@@ -96,7 +96,7 @@ _**Note:** While it is recommended that the default value validate against its s
 {
   "name": "Doe",
   "qualification": "degree",
-  "degreeCertificate": "XXYYZZ"
+  "degreeCertificate": "O5CYPZACTN"
 }
 {{</instance-pass>}}
 
@@ -119,7 +119,7 @@ _**Note:** While it is recommended that the default value validate against its s
     "valid": true,
     "keywordLocation": "/then/properties/degreeCertificate/default",
     "instanceLocation": "/degreeCertificate",
-    "annotation": "XXXXXX",
+    "annotation": "B0B8RKEZ90",
   },
   // ...
 ]
