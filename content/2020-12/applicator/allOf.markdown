@@ -22,3 +22,135 @@ related:
   - vocabulary: applicator
     keyword: not
 ---
+
+The `allOf` keyword is used to specify that a given instance must validate against all of the subschemas provided within an array. It's essentially a logical "AND" operation where all conditions must be met for validation to pass.
+
+* The value of this keyword must be a non-empty array.
+* Each item of the array must be a valid JSON Schema.
+
+## Examples
+
+{{<schema `Schema with 'allOf' keyword containing only one subschema`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "allOf": [
+    {
+      "properties": {
+        "foo": { "type": "string" }
+      },
+      "required": [ "foo" ]
+    }
+  ]
+}
+{{</schema>}}
+
+{{<instance-pass `An instance conforming to all the subschemas of 'allOf' is valid`>}}
+{ "foo": "foo" }
+{{</instance-pass>}}
+
+{{<instance-fail `The value of 'foo' must be a string`>}}
+{ "foo": [ "foo" ] }
+{{</instance-fail>}}
+
+{{<schema `Schema with 'allOf' keyword containing multiple subschemas`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "allOf": [
+    {
+      "properties": {
+        "foo": { "type": "string" }
+      },
+      "required": [ "foo" ]
+    },
+    {
+      "properties": {
+        "bar": { "type": "number" }
+      },
+      "required": [ "bar" ]
+    }
+  ]
+}
+{{</schema>}}
+
+{{<instance-pass `An instance conforming to all the subschemas of 'allOf' is valid`>}}
+{ "foo": "foo", "bar": 33 }
+{{</instance-pass>}}
+
+{{<instance-fail `An instance that does not conform to both subschemas within 'allOf' is invalid`>}}
+{ "foo": "foo" }
+{{</instance-fail>}}
+
+{{<schema `Schema with 'allOf' keyword containing some boolean subschemas`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "allOf": [
+    true,
+    {
+      "properties": {
+        "foo": { "type": "string" }
+      },
+      "required": [ "foo" ]
+    }
+  ]
+}
+{{</schema>}}
+
+{{<instance-pass `An instance conforming to all the subschemas of 'allOf' is valid`>}}
+{ "foo": "foo" }
+{{</instance-pass>}}
+
+{{<instance-fail `The value of 'foo' must be a string`>}}
+{ "foo": true }
+{{</instance-fail>}}
+
+{{<schema `Schema with 'allOf' keyword containing some boolean subschemas`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "allOf": [
+    false,
+    {
+      "properties": {
+        "foo": { "type": "string" }
+      },
+      "required": [ "foo" ]
+    }
+  ]
+}
+{{</schema>}}
+
+{{<instance-fail `An instance not conforming to the second subschema of 'allOf' is invalid`>}}
+{ "foo": false }
+{{</instance-fail>}}
+
+{{<instance-fail `An instance conforming to the second subschema of 'allOf' is also invalid`>}}
+{ "foo": "foo" }
+{{</instance-fail>}}
+* _Remember, if any subschema within the `allOf` keyword fails validation or has a boolean `false` value, the entire validation will always fail._
+
+{{<schema `Schema with nested 'allOf'`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "allOf": [
+    {
+      "allOf": [
+        { "type": "number" }
+      ]
+    },
+    {
+      "allOf": [
+        { "minimum": 18 }
+      ]
+    }
+  ]
+}
+{{</schema>}}
+
+{{<instance-pass `An instance conforming to all the subschemas including the nested 'allOf' is valid`>}}
+25
+{{</instance-pass>}}
+
+{{<instance-fail `The validation fails due to the 2nd subschema of the top-level 'allOf'`>}}
+10
+{{</instance-fail>}}
