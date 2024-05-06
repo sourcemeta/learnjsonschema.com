@@ -2,14 +2,15 @@
   <div class="px-4 py-4">
 
     {{$selected_dialect := index (split .RelPermalink "/") 1}}
-    <div class="dropdown">
-      <button class="dropdown-button fw-bold ps-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+
+    <small class="text-muted">Browser other dialects:</small>
+    <div class="dropdown mt-1">
+      <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         {{$selected_dialect}}
-        <i class="bi bi-chevron-down"></i>
       </button>
-      <ul class="dropdown-menu fw-bold" aria-labelledby="dropdownMenuButton">
+      <ul class="dropdown-menu">
         {{ range .Site.Sections }}
-        <li><a href="{{ ref $ .RelPermalink }}">{{ .Title }}</a></li>
+        <li><a class="dropdown-item" href="{{ ref $ .RelPermalink }}">{{ .Title }}</a></li>
         {{ end }}
       </ul>
     </div>
@@ -48,61 +49,5 @@
         {{ end }}
       </ul>
     {{ end }}
-
-    <small class="text-muted">More dialects coming soon!</small>
   </div>
 </aside>
-
-<style>
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 200px;
-    z-index: 1;
-    list-style-type: none;
-    left: -30px;
-    text-align: center;
-  }
-  
-  .dropdown:hover .dropdown-menu{
-    display: block;
-  }
-  
-  .dropdown-menu li a {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .dropdown-menu li a:hover {
-    background-color: #ddd;
-  }
-  
-  .dropdown-button {
-    background-color: transparent;
-    border: none;
-    color: #212529;
-    font-size: 1.25rem;
-    padding: 0;
-  }
-
-  .bi-chevron-down{
-    font-size: 1rem;
-  }
-  hr {
-    margin-top: 0px;
-  }
-
-  #sidebar {
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
-</style>
