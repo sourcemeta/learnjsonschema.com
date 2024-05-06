@@ -30,7 +30,7 @@ The annotation result of this keyword is the set of instance property names vali
 
 ## Evaluation
 
-Before delving into unevaluatedProperties, it's crucial to understand what evaluation means in this context.
+Before delving into `unevaluatedProperties`, it's crucial to understand what evaluation means in this context.
 
 `unevaluatedProperties` considers annotations from `properties`, `patternProperties`, and `additionalProperties`, both as adjacent keywords and in subschemas of adjacent keywords. Additionally, it is also affected by other `unevaluatedProperties` in nested schemas (if present).
 
