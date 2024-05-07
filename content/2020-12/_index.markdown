@@ -19,5 +19,5 @@ authors:
     last: Dennis
 metaschema: "https://json-schema.org/draft/2020-12/schema"
 year: 2020
-bowtie: "https://bowtie.report/#/draft2020-12"
+bowtie: "https://bowtie.report/#/dialects/draft2020-12"
 ---
