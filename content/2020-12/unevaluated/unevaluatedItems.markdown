@@ -45,7 +45,7 @@ Before delving into `unevaluatedItems`, it's crucial to understand what evaluati
 
 ## Explanation
 
-If no relevant annotations are present, the `unevaluatedItems` subschema must be applied to all locations in the array. If a boolean true value is present from any of the relevant annotations, `unevaluatedItems` must be ignored. Otherwise, the subschema must be applied to any index greater than the largest annotation value for `prefixItems`, which does not appear in any annotation value for `contains`.
+If no relevant annotations are present, the `unevaluatedItems` subschema must be applied to all locations in the array. If a boolean true value is present from any of the relevant annotations, `unevaluatedItems` is ignored. Otherwise, the subschema must be applied to any index greater than the largest annotation value for `prefixItems`, which does not appear in any annotation value for `contains`.
 
 - The value of `unevaluatedItems` must be a valid JSON Schema.
 - If this keyword is applied to any instance element, it produces an annotation value of `true`.
@@ -55,16 +55,12 @@ If no relevant annotations are present, the `unevaluatedItems` subschema must be
 {{<schema `Schema with 'unevaluatedItems' set to boolean true`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "unevaluatedItems ": true
+  "unevaluatedItems": true
 }
 {{</schema>}}
 
-{{<instance-pass `All object instances pass against the true schema`>}}
-[ "foo": "bar" ]
-{{</instance-pass>}}
-
-{{<instance-pass `'unevaluatedItems' does not have any effect on instances other than an array`>}}
-"John Doe"
+{{<instance-pass `All array instances pass against the true schema`>}}
+[ "foo", "bar" ]
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
@@ -79,6 +75,11 @@ If no relevant annotations are present, the `unevaluatedItems` subschema must be
   // ...
 ]
 {{</instance-annotation>}}
+
+{{<instance-pass `'unevaluatedItems' does not have any effect on instances other than an array`>}}
+"John Doe"
+{{</instance-pass>}}
+
 * Here, no items are defined in the above schema. Consequently, all items in an array instance are considered unevaluated, and the `unevaluatedItems` subschema applies to them. Since the subschema here is a boolean true, an instance with unevaluated items, regardless of their value, is considered valid.
 
 {{<schema `Schema with 'unevaluatedItems' set to boolean false`>}}
@@ -93,7 +94,7 @@ If no relevant annotations are present, the `unevaluatedItems` subschema must be
 {{</instance-fail>}}
 
 {{<instance-pass `'unevaluatedItems' does not have any effect on instances other than an array`>}}
-[ "John", 46, false ]
+{ "John": 46 }
 {{</instance-pass>}}
 
 {{<schema `Schema with 'unevaluatedItems', 'prefixItems', and 'contains', with unevaluatedItems set to boolean false`>}}
@@ -132,7 +133,7 @@ If no relevant annotations are present, the `unevaluatedItems` subschema must be
 ]
 {{</instance-annotation>}}
 
-* For the first instance, the annotation result of `prefixItems` is 0, and the annotation result of `contains` is [ 1 ]. However, the item at 2nd index (i.e., `false`) remains unevaluated, so the `unevaluatedItems` subschema applies to it. This subschema fails (as any instance against a false schema is always invalid), leading to the failure of the entire schema.
+* For the first instance, the annotation result of `prefixItems` is 0, and the annotation result of `contains` is [ 1 ]. However, the item at 2nd index (i.e., `false`) remains unevaluated, so the `unevaluatedItems` subschema applies to it. This subschema fails (as any instance against a false schema is always invalid), leading to validation failure.
 
 * For the second instance, the annotation result of `prefixItems` is 0, and the annotation result of contains is [ 1, 2 ]. No items remain unevaluated; hence, the instance is considered valid.
 
@@ -197,13 +198,13 @@ If no relevant annotations are present, the `unevaluatedItems` subschema must be
 ]
 {{</instance-annotation>}}
 
-{{<instance-fail `An array instance with unevaluated items that do not conform to the 'unevaluatedItems' subschema is valid`>}}
+{{<instance-fail `An array instance with unevaluated items that do not conform to the 'unevaluatedItems' subschema is invalid`>}}
 [ "foo", 101, [ false ] ]
 {{</instance-fail>}}
 
 * For the first instance, there are no unevaluated items.
 
-* For the second instance, the item at 2nd index (i.e., `false`) remains unevaluated, and the `unevaluatedItems` subschema applies to it. This item conforms to this subschema, and hence the instance is valid. The annotations produced by applicators are: `prefixItems` → 0, `contains` → [ 1 ], and `unevaluatedItems` → true.
+* For the second instance, the item at 2nd index (i.e., `false`) remains unevaluated, and the `unevaluatedItems` subschema applies to it. This item conforms to this subschema, and hence the instance is valid.
 
 {{<schema `Schema with 'unevaluatedItems', and 'allOf' keyword`>}}
 {
@@ -250,7 +251,7 @@ If no relevant annotations are present, the `unevaluatedItems` subschema must be
 ]
 {{</instance-annotation>}}
 
-{{<instance-fail `An array instance with unevaluated items that do not conform to the 'unevaluatedItems' subschema is valid`>}}
+{{<instance-fail `An array instance with unevaluated items that do not conform to the 'unevaluatedItems' subschema is invalid`>}}
 [ "foo", 101, [ false ] ]
 {{</instance-fail>}}
 
