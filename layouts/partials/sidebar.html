@@ -1,20 +1,7 @@
-<aside id="sidebar" class="border-end position-relative d-none d-xl-block">
-  <div class="px-4 py-4">
+<aside class="border-end position-relative d-none d-xl-block">
+  <div class="px-4 py-2">
 
     {{$selected_dialect := index (split .RelPermalink "/") 1}}
-
-    <small class="text-muted">Browser other dialects:</small>
-    <div class="dropdown mt-1">
-      <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        {{$selected_dialect}}
-      </button>
-      <ul class="dropdown-menu">
-        {{ range .Site.Sections }}
-        <li><a class="dropdown-item" href="{{ ref $ .RelPermalink }}">{{ .Title }}</a></li>
-        {{ end }}
-      </ul>
-    </div>
-    <hr>
 
     {{ range .Site.Sections }}
       {{ $dialect := .Title }}

@@ -8,13 +8,15 @@
 {{ $vocabularyURL := $vocabulary | lower | printf "%s/%s" $dialectURL }}
 {{ $githubURL := .File.Path | printf "%s/blob/main/content/%s" .Site.Params.GitHub }}
 
+{{ $siteSections := .Site.Sections }}
 {{ partial "breadcrumb.html" (dict
   "dialect" $dialect
   "dialectURL" (ref . $dialectURL)
   "vocabulary" $vocabulary
   "vocabularyURL" (ref . (replace $vocabularyURL " " "-"))
   "keyword" .Params.keyword
-  "githubURL" $githubURL ) }}
+  "githubURL" $githubURL
+  "siteSections" $siteSections ) }}
 
 <div class="d-flex bg-body flex-fill">
   {{ partial "sidebar.html" . }}

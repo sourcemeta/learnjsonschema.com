@@ -74,7 +74,8 @@ $bootstrap-icons-font-dir: "./";
 }
 
 #sidebar {
-  min-width: 265px;
+  // min-width: 265px;
+  overflow-y: auto
 }
 
 #sidebar > div {
@@ -82,7 +83,6 @@ $bootstrap-icons-font-dir: "./";
   @extend .top-0;
   @extend .start-0;
   @extend .bottom-0;
-  overflow-y: scroll;
 }
 
 // Tables with vertical headers collapse the headers by default
@@ -129,4 +129,8 @@ article table {
 
 .alert > :last-child {
   @extend .mb-0;
+}
+
+#dialect-dropdown{
+  padding-right: 10px;
 }

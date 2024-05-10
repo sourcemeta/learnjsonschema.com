@@ -1,4 +1,16 @@
-<nav aria-label="breadcrumb" class="d-flex align-items-center bg-light bg-gradient border-bottom px-3 py-2 shadow-sm">
+<nav aria-label="breadcrumb" class="d-flex align-items-center bg-light bg-gradient border-bottom px-3 py-1 shadow-sm">
+
+  <div id="dialect-dropdown" class="dropdown mt-1">
+    <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Other dialects
+    </button>
+    <ul class="dropdown-menu">
+      {{ range .siteSections }}
+          <li><a class="dropdown-item" href="{{ ref . .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+  </div>
+
   <ol class="breadcrumb mb-0 flex-grow-1 justify-content-center justify-content-md-start">
     {{ if isset . "keyword" }}
       <li class="breadcrumb-item">
