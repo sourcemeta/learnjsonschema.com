@@ -1,13 +1,19 @@
 <nav aria-label="breadcrumb" class="d-flex align-items-center bg-light bg-gradient border-bottom px-3 py-1 shadow-sm">
 
-  <div id="dialect-dropdown" class="dropdown mt-1">
-    <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+  {{$selected_dialect := .dialect}}
+  <div class="dropdown mt-1 pe-3" >
+    <button class="btn btn-outline-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
       Other dialects
     </button>
-    <ul class="dropdown-menu">
+    <!-- <ul class="dropdown-menu">
       {{ range .siteSections }}
+        {{if ne $selected_dialect .Title}}
           <li><a class="dropdown-item" href="{{ ref . .RelPermalink }}">{{ .Title }}</a></li>
+        {{end}}
       {{ end }}
+    </ul> -->
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item fs-6">More dialects coming soon!</a></li>
     </ul>
   </div>
 
