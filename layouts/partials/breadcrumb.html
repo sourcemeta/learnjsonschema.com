@@ -8,10 +8,10 @@
     <ul class="dropdown-menu">
       {{ range .siteSections }}
         {{ if ne $selected_dialect .Title }}
-          <li><a class="dropdown-item disabled" aria-disabled="true" href="{{ ref . .RelPermalink }}">{{ .Title }}</a></li>
+          <li><a class="dropdown-item" href="{{ ref . .RelPermalink }}">{{ .Title }}</a></li>
         {{ end }}
       {{ end }}
-      <li><a class="dropdown-item"> More coming soon! </a></li>
+      <li><a class="dropdown-item disabled" aria-disabled="true">More coming soon!</a></li>
     </ul>
   </div>
 
