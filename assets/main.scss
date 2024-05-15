@@ -2,10 +2,12 @@
 @import "../vendor/bootstrap/scss/functions";
 
 // Overrides
-$blue: #0969da;
+$primary: #0969da;
 $success: rgba(213, 255, 230, 1);
 $danger: rgba(255, 213, 213, 1);
 $warning: #ffff6a;
+$navbar-brand-font-size: 1.1rem;
+$navbar-padding-y: 1px;
 
 // Required components
 @import "../vendor/bootstrap/scss/variables";
