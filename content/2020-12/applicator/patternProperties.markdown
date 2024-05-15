@@ -6,6 +6,8 @@ kind: [ "applicator", "annotation" ]
 instance: [ "object" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-10.3.2.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/applicator"
+default:
+  value: "{}"
 tests:
   - draft2020-12/patternProperties.json
 index: -998
@@ -43,7 +45,6 @@ The annotation result of this keyword is the set of instance property names matc
 * The value of `patternProperties` must be an object.
 * Each property name of this object should be a valid regular expression, according to the [ECMA-262](https://262.ecma-international.org/5.1/) regular expression dialect.
 * Each property value of this object must be a valid JSON Schema.
-* Omitting this keyword has the same assertion behavior as an empty object.
 
 ## Examples
 

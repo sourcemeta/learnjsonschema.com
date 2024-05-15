@@ -6,6 +6,8 @@ kind: [ "applicator" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-10.2.2.3"
 metaschema: "https://json-schema.org/draft/2020-12/meta/applicator"
+default:
+  value: "{}"
 tests:
   - draft2020-12/if-then-else.json
 index: -9998

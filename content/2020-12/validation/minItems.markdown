@@ -6,6 +6,8 @@ kind: [ "assertion" ]
 instance: [ "array" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6.4.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
+default:
+  value: 0
 tests:
   - draft2020-12/minItems.json
 index: -9
@@ -25,7 +27,6 @@ The `minItems` keyword specifies the minimum number of items that must be presen
 * Applies to arrays only.
 * Value must be a non-negative integer.
 * An array is valid if it has at least the specified number of elements.
-* Omitting `minItems` keyword has the same behavior as a value of 0.
 
 {{<alert>}}
 _**Note:** `items`, `prefixItems`, and `contains` do not affect `minItems`. The instance independently evaluated against `minItems` (if present)._

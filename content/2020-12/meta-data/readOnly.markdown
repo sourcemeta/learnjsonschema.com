@@ -6,6 +6,8 @@ kind: [ "annotation" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-9.4"
 metaschema: "https://json-schema.org/draft/2020-12/meta/meta-data"
+default:
+  value: false
 introduced_in: draft7
 annotation:
    description: The boolean value set by this keyword
@@ -33,7 +35,6 @@ It's important to note that this keyword doesn't imply the schema itself is writ
 
 * The value of this keyword must be a boolean.
 * `readOnly` does not affect data validation but serves as an informative annotation.
-* Omitting this keyword has the same behavior as a value of false.
 
 ## Examples
 

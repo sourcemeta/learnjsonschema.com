@@ -6,6 +6,8 @@ kind: [ "annotation" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-9.4"
 metaschema: "https://json-schema.org/draft/2020-12/meta/meta-data"
+default:
+  value: false
 introduced_in: draft7
 annotation:
    description: The boolean value set by this keyword
@@ -31,7 +33,6 @@ the `writeOnly` keyword is used to indicate that an instance value should be wri
 
 * The value of this keyword must be a boolean.
 * `writeOnly` does not affect data validation but serves as an informative annotation.
-* Omitting this keyword has the same behavior as a value of false.
 
 ## Examples
 
