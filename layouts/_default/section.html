@@ -6,17 +6,20 @@
 {{ $dialectURL := $dialect | printf "/%s" }}
 {{ $githubURL := .File.Path | printf "%s/blob/main/content/%s" .Site.Params.GitHub }}
 
+{{ $siteSections := .Site.Sections }}
 {{ if eq .Page.Section .Title }}
   {{ partial "breadcrumb.html" (dict
     "dialect" $dialect
-    "githubURL" $githubURL ) }}
+    "githubURL" $githubURL
+    "siteSections" $siteSections ) }}
 {{ else }}
   {{ $vocabulary := .Title }}
   {{ partial "breadcrumb.html" (dict
     "dialect" $dialect
     "dialectURL" (ref . $dialectURL)
     "vocabulary" $vocabulary
-    "githubURL" $githubURL ) }}
+    "githubURL" $githubURL
+    "siteSections" $siteSections ) }}
 {{ end }}
 
 <div class="d-flex bg-body flex-fill">
