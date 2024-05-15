@@ -96,10 +96,10 @@
                 </a>
               </td>
             </tr>
-            {{ if isset .Params "interdependencies" }}
-              <tr>
-                <th scope="row">Affected By</th>
-                <td class="text-break">
+            <tr>
+              <th scope="row">Affected By</th>
+              <td class="text-break">
+                {{ if isset .Params "interdependencies" }}
                   <ul class="mb-0 ps-4">
                     {{ range (.Params.interdependencies) }}
                       <li>
@@ -110,9 +110,11 @@
                       </li>
                     {{ end }}
                   </ul>
-                </td>
-              </tr>
-            {{ end }}
+                {{ else }}
+                  <small>None</small>
+                {{ end }}
+              </td>
+            </tr>
 
             {{ if isset .Params "related" }}
               <tr>
