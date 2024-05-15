@@ -1,6 +1,7 @@
 ---
 keyword: "uniqueItems"
 signature: "Boolean"
+value: This keyword must be set to a boolean value
 summary: "If this keyword is set to the boolean value true, the instance validates successfully if all of its elements are unique."
 kind: [ "assertion" ]
 instance: [ "array" ]
@@ -21,9 +22,7 @@ related:
 ---
 
 The `uniqueItems` keyword is used to ensure that all the items in an array are unique. This keyword is particularly useful when you need to enforce that an array contains no duplicate elements.
-* The value of this keyword must be a boolean.
 * This keyword, when set to true, specifies that all elements in an array must be unique.
-* If it is set to false, the array can contain duplicate items.
 
 ## Examples
 

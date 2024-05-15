@@ -1,6 +1,7 @@
 ---
 keyword: "else"
 signature: "Schema"
+value: This keyword must be set to a valid JSON Schema
 summary: "When [`if`](/2020-12/applicator/if) is present, and the instance fails to validate against its subschema, then validation succeeds against this keyword if the instance successfully validates against this keyword's subschema."
 kind: [ "applicator" ]
 instance: [ "any" ]
@@ -30,7 +31,6 @@ related:
 
 The `else` keyword is used in conjunction with `if` to define a schema to be applied when a condition specified in the `if` keyword is false. It allows you to define alternative validation rules for instances that do not satisfy the conditions specified in the `if` keyword.
 
-* The value of this keyword must be a valid JSON Schema.
 * This keyword has no effect when `if` is absent.
 * This keyword has no effect when the instance passes validation against the `if` subschema.
 

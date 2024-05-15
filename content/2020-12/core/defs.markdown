@@ -1,6 +1,7 @@
 ---
 keyword: "$defs"
 signature: "Object<String, Schema>"
+value: This keyword must be set to an object where each value is a valid JSON Schema
 summary: "This keyword is used in meta-schemas to identify the required and optional vocabularies available for use in schemas described by that meta-schema."
 kind: [ "location" ]
 instance: [ "any" ]
@@ -19,7 +20,7 @@ related:
     keyword: $dynamicRef
 ---
 
-The `$defs` keyword provides a standardized way to define reusable subschemas within a single schema document, promoting modularity, reducing code duplication, and improving schema organization. Each subschema within `$defs` has a unique name, acting as a location for referencing, without directly affecting validation; its value must be a valid JSON Schema.
+The `$defs` keyword provides a standardized way to define reusable subschemas within a single schema document, promoting modularity, reducing code duplication, and improving schema organization. Each subschema within `$defs` has a unique name, acting as a location for referencing, without directly affecting validation.
 
 ## Examples
 

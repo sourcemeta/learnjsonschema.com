@@ -1,6 +1,7 @@
 ---
 keyword: "format"
 signature: "String"
+value: This keyword must be set to a string, preferrably one that is standardized by JSON Schema to ensure interoperability
 summary: "Define and assert semantic information about a string instance."
 kind: [ "annotation", "assertion" ]
 instance: [ "string" ]

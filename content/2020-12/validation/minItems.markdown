@@ -1,6 +1,7 @@
 ---
 keyword: "minItems"
 signature: "Integer"
+value: This keyword must be set to a zero or positive integer
 summary: "An array instance is valid if its size is greater than, or equal to, the value of this keyword."
 kind: [ "assertion" ]
 instance: [ "array" ]
@@ -24,8 +25,6 @@ related:
 ---
 
 The `minItems` keyword specifies the minimum number of items that must be present in an array. It can be used to define constraints on the size of an array, ensuring that it contains at least a certain number of elements.
-* Applies to arrays only.
-* Value must be a non-negative integer.
 * An array is valid if it has at least the specified number of elements.
 
 {{<alert>}}

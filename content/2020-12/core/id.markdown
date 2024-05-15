@@ -1,6 +1,7 @@
 ---
 keyword: "$id"
 signature: "URI Reference"
+value: This keyword must be set to an absolute URI or a relative reference as defined by [RFC3986](https://www.rfc-editor.org/info/rfc3986)without a fragment
 summary: "This keyword declares an identifier for the schema resource."
 kind: [ "identifier" ]
 instance: [ "any" ]

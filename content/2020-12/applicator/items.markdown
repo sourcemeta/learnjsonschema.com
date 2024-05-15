@@ -1,6 +1,7 @@
 ---
 keyword: "items"
 signature: "Schema"
+value: This keyword must be set to a valid JSON Schema
 summary: "Validation succeeds if each element of the instance not covered by `prefixItems` validates against this schema."
 kind: [ "applicator", "annotation" ]
 instance: [ "array" ]
@@ -43,7 +44,6 @@ The `items` keyword is used to validate arrays of arbitrary length where each it
 
 If the `items` subschema is applied to any positions within the instance array, it produces an annotation result of boolean *true*, indicating that all remaining array elements have been evaluated against this keyword's subschema. This annotation affects the behavior of `unevaluatedItems` in the *Unevaluated* vocabulary.
 
-* The value of this keyword must be a valid JSON Schema.
 * `prefixItems` allows defining a fixed-length sequence of schemas for an array's initial items.
 * `items` applies its sub-schema to all elements after the `prefixItems` sequence (if present).
 * Analogous to `additionalProperties` for objects, `items` specifies a schema that each item in the array must adhere to. If an array has additional items beyond what's defined in `prefixItems`, they must conform to the schema specified under `items`.

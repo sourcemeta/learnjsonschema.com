@@ -1,6 +1,7 @@
 ---
 keyword: "unevaluatedItems"
 signature: "Schema"
+value: This keyword must be set to a valid JSON Schema
 summary: "Validates array elements that did not successfully validate against other standard array applicators."
 kind: [ "applicator", "annotation" ]
 instance: [ "array" ]
@@ -38,9 +39,6 @@ Before delving into `unevaluatedItems`, it's crucial to understand what evaluati
 ## Explanation
 
 If no relevant annotations are present, the `unevaluatedItems` subschema must be applied to all locations in the array. If a boolean true value is present from any of the relevant annotations, `unevaluatedItems` is ignored. Otherwise, the subschema must be applied to any index greater than the largest annotation value for `prefixItems`, which does not appear in any annotation value for `contains`.
-
-- The value of `unevaluatedItems` must be a valid JSON Schema.
-- If this keyword is applied to any instance element, it produces an annotation value of `true`.
 
 ## Examples
 

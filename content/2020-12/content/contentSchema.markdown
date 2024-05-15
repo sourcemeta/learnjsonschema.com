@@ -1,6 +1,7 @@
 ---
 keyword: "contentSchema"
 signature: "Schema"
+value: This keyword must be set to a valid JSON Schema
 summary: "This keyword declares a schema which describes the structure of the string."
 kind: [ "annotation" ]
 instance: [ "string" ]

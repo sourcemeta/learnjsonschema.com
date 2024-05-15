@@ -1,6 +1,7 @@
 ---
 keyword: "examples"
 signature: "Array<Any>"
+value: This keyword must be set to an array of JSON values that preferrably successfully validates against the corresponding subschema
 summary: "This keyword is used to provide sample JSON values associated with a particular schema, for the purpose of illustrating usage."
 kind: [ "annotation" ]
 instance: [ "any" ]
@@ -35,7 +36,6 @@ The `examples` keyword is used to provide a list of example instances associated
 
 _**Note:** While it is recommended that the examples validate against the subschema they are defined in, this requirement is not strictly enforced._
 
-* The value of this keyword must be an array.
 * Used to demonstrate how data should conform to the schema.
 * `examples` does not affect data validation but serves as an informative annotation.
 

@@ -1,6 +1,7 @@
 ---
 keyword: "if"
 signature: "Schema"
+value: This keyword must be set to a valid JSON Schema
 summary: "This keyword declares a condition based on the validation result of the given schema."
 kind: [ "applicator" ]
 instance: [ "any" ]
@@ -28,7 +29,6 @@ related:
 
 The `if` keyword is used to conditionally apply a subschema based on whether a certain condition is met. It allows you to define different validation rules depending on whether an instance satisfies a condition or not. The validation outcome of this keyword's subschema has no direct effect on the overall validation result. Rather, it controls which of the `then` or `else` keywords are evaluated.
 
-* The value of this keyword must be a valid JSON Schema.
 * If an instance passes the validation against the `if` subschema, then it must also be validated against the `then` subschema, if present.
 * If an instance fails the validation against the `if` subschema, then it must also be validated against the `else` subschema, if present.
 * This keyword is meaningless without `then` and `else`.

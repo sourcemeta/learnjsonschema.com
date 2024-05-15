@@ -1,6 +1,7 @@
 ---
 keyword: "anyOf"
 signature: "Array<Schema>"
+value: This keyword must be set to a *non-empty* array, where each item is a valid JSON Schema
 summary: "An instance validates successfully against this keyword if it validates successfully against at least one schema defined by this keyword's value."
 kind: [ "applicator" ]
 instance: [ "any" ]
@@ -28,9 +29,6 @@ related:
 ---
 
 The `anyOf` keyword in JSON Schema is used to specify that an instance must validate against at least one of the schemas provided in an array. It allows you to define multiple schemas, and if the data validates against any one of them, the validation passes.
-
-* The value of this keyword must be a non-empty array.
-* Each item of the array must be a valid JSON Schema.
 
 ## Examples
 

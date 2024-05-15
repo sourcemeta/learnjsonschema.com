@@ -1,6 +1,7 @@
 ---
 keyword: "multipleOf"
 signature: "Number"
+value: This keyword must be set to a number that is not equal to zero
 summary: "A numeric instance is valid only if division by this keyword's value results in an integer."
 kind: [ "assertion" ]
 instance: [ "number" ]
@@ -24,9 +25,7 @@ related:
 ---
 
 The `multipleOf` keyword is used to specify that an instance must be a multiple of a given number. The value of this keyword must be strictly greater than zero.
-* Applicable only to `number` and `integer` type.
 * Validates if an instance is divisible by the specified number.
-* Setting `multipleOf` to 0 is not valid.
 
 ## Examples
 
