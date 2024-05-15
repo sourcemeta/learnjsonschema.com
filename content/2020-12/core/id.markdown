@@ -10,6 +10,15 @@ tests:
   - draft2020-12/optional/id.json
 index: -999
 introduced_in: draft6
+affects:
+  - vocabulary: core
+    keyword: $ref
+  - vocabulary: core
+    keyword: $dynamicRef
+  - vocabulary: core
+    keyword: $anchor
+  - vocabulary: core
+    keyword: $dynamicAnchor
 related:
   - vocabulary: core
     keyword: $schema

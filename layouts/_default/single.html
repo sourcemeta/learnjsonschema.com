@@ -176,6 +176,26 @@
               </td>
             </tr>
 
+            <tr>
+              <th scope="row">Affects</th>
+              <td class="text-break">
+                {{ if isset .Params "affects" }}
+                  <ul class="mb-0 ps-4">
+                    {{ range (.Params.affects) }}
+                      <li>
+                        {{ $affectedVocabularyURL := .vocabulary | printf "/%s/%s" $dialect }}
+                        {{ $affectedKeywordURL := (replace .keyword "$" "") | printf "%s/%s/%s" $dialect .vocabulary }}
+                        <a class="font-monospace" href="{{ ref $ $affectedKeywordURL }}">{{ .keyword }}</a>
+                        <small>(Vocabulary: <a href="{{ ref $ $affectedVocabularyURL }}">{{ title .vocabulary }}</a>)</small>
+                      </li>
+                    {{ end }}
+                  </ul>
+                {{ else }}
+                  <small>None</small>
+                {{ end }}
+              </td>
+            </tr>
+
             {{ if isset .Params "related" }}
               <tr>
                 <th scope="row">Also see</th>

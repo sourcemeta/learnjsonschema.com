@@ -14,6 +14,9 @@ introduced_in: 2020-12
 annotation:
    description: The largest index to which this keyword applied its subschema, or a boolean true if it was applied to every item of the instance
    kind: [ "number", "boolean" ]
+affects:
+  - vocabulary: applicator
+    keyword: items
 related:
   - vocabulary: applicator
     keyword: items

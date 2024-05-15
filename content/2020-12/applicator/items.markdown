@@ -21,6 +21,9 @@ interdependencies:
     keyword: minItems
   - vocabulary: validation
     keyword: maxItems
+affects:
+  - vocabulary: unevaluated
+    keyword: unevaluatedItems
 related:
   - vocabulary: applicator
     keyword: contains

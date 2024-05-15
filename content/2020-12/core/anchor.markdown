@@ -9,13 +9,14 @@ metaschema: "https://json-schema.org/draft/2020-12/meta/core"
 tests:
   - draft2020-12/anchor.json
 introduced_in: 2019-09
-related:
-  - vocabulary: core
-    keyword: $id
+affects:
   - vocabulary: core
     keyword: $ref
   - vocabulary: core
     keyword: $dynamicRef
+related:
+  - vocabulary: core
+    keyword: $id
   - vocabulary: core
     keyword: $dynamicAnchor
 ---

@@ -20,6 +20,9 @@ interdependencies:
     keyword: properties
   - vocabulary: applicator
     keyword: patternProperties
+affects:
+  - vocabulary: unevaluated
+    keyword: unevaluatedProperties
 related:
   - vocabulary: applicator
     keyword: dependentSchemas
