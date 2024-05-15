@@ -1,6 +1,7 @@
 ---
 keyword: "maxContains"
 signature: "Integer"
+value: This keyword must be set to a zero or positive integer
 summary: "The number of times that the [`contains`](/2020-12/applicator/contains) keyword (if set) successfully validates against the instance must be less than or equal to the given integer."
 kind: [ "assertion" ]
 instance: [ "array" ]
@@ -22,8 +23,6 @@ related:
 ---
 
 The `maxContains` keyword is used in conjunction with the `contains` keyword to specify the maximum number of items in an array instance that must validate against the `contains` subschema.
-* This keyword applies only to arrays.
-* The value of this keyword must be a non-negative integer.
 * If `contains` is not present within the same schema object, then this keyword has no effect.
 
 ## Examples

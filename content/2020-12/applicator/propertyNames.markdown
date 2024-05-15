@@ -1,6 +1,7 @@
 ---
 keyword: "propertyNames"
 signature: "Schema"
+value: This keyword must be set to a valid JSON Schema
 summary: "Validation succeeds if the schema validates against every property name in the instance."
 kind: [ "applicator" ]
 instance: [ "object" ]
@@ -34,9 +35,6 @@ related:
 ---
 
 The `propertyNames` keyword in is used to define constraints on the property names within an object instance. It allows you to specify a schema that all the property names in an object instance must adhere to.
-
-* The value of `propertyNames` must be a valid JSON Schema.
-* This keyword has no effect on instances other than objects.
 
 {{<alert>}}
 _**Note:** Note that the property names in any object instance will always be strings. Therefore, this schema only makes sense when applied to strings. Passing a schema here that matches something other than a string would be invalid._

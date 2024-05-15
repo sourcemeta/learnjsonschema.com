@@ -1,6 +1,7 @@
 ---
 keyword: "unevaluatedProperties"
 signature: "Schema"
+value: This keyword must be set to a valid JSON Schema
 summary: "Validates object properties that did not successfully validate against other standard object applicators."
 kind: [ "applicator", "annotation" ]
 instance: [ "object" ]
@@ -40,9 +41,6 @@ Before delving into `unevaluatedProperties`, it's crucial to understand what eva
 ## Explanation
 
 Validation with `unevaluatedProperties` applies only to the child values of instance names that do not appear in the `properties`, `patternProperties`, `additionalProperties`, or `unevaluatedProperties` annotation results that apply to the instance location being validated. For all such properties, validation succeeds if the child instance validates against the `unevaluatedProperties` schema.
-
-- The value of `unevaluatedProperties` must be a valid JSON Schema.
-- The annotation result of this keyword is the set of instance property names validated by this keyword's subschema.
 
 ## Examples
 

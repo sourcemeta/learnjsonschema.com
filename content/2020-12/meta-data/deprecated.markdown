@@ -1,6 +1,7 @@
 ---
 keyword: "deprecated"
 signature: "Boolean"
+value: This keyword must be set to a boolean value
 summary: "This keyword indicates that applications should refrain from using the declared property."
 kind: [ "annotation" ]
 instance: [ "any" ]
@@ -31,7 +32,6 @@ related:
 
 The `deprecated` keyword is used to indicate that a particular property should not be used and may be removed in the future. It provides a warning to users or applications that certain parts of the schema or are no longer recommended for use.
 
-* The value of this keyword must be a boolean.
 * `deprecated` does not affect data validation but serves as an informative annotation.
 * A true value suggests that applications should avoid using the deprecated property, and the property might be removed in future versions of the schema.
 

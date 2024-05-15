@@ -1,6 +1,7 @@
 ---
 keyword: "const"
 signature: "Any"
+value: This keyword must be set to a JSON value
 summary: "Validation succeeds if the instance is equal to this keyword's value."
 kind: [ "assertion" ]
 instance: [ "any" ]

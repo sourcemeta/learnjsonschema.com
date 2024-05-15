@@ -1,6 +1,7 @@
 ---
 keyword: "minimum"
 signature: "Number"
+value: This keyword must be set to a number
 summary: "Validation succeeds if the numeric instance is greater than or equal to the given number."
 kind: [ "assertion" ]
 instance: [ "number" ]
@@ -23,7 +24,6 @@ related:
 
 The `minimum` keyword is used to set the lower limit on numeric instances. It specifies that the numeric value being validated must be greater than or equal to the provided minimum value.
 
-* Applies only to number data types (integers and floats).
 * Validation succeeds if the number is greater than or equal to the specified `minimum`.
 
 ## Examples

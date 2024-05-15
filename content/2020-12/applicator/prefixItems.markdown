@@ -1,6 +1,7 @@
 ---
 keyword: "prefixItems"
 signature: "Array<Schema>"
+value: This keyword must be set to a *non-empty* array, where each item is a valid JSON Schema
 summary: "Validation succeeds if each element of the instance validates against the schema at the same position, if any."
 kind: [ "applicator", "annotation" ]
 instance: [ "array" ]
@@ -40,7 +41,6 @@ related:
 
 The `prefixItems` keyword is used to validate arrays by applying a schema to each corresponding index of the array. It differs from the `items` keyword in that it validates only a prefix of the array, up to the length of the `prefixItems` array. Each schema specified in `prefixItems` corresponds to an index in the input array.
 
-* The value of this keyword must be a non-empty array of valid JSON Schemas.
 * The annotation produced by this keyword affects the behavior of `items` and `unevaluatedItems`.
 * `items` is used to validate all items in an array that are not covered by `prefixItems`, while `prefixItems` validates only a prefix of the array.
 * `prefixItems` keyword does not constrain the length of the array. If the array is longer than this keyword's value, this keyword validates only the prefix of matching length.

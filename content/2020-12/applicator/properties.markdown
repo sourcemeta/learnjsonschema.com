@@ -1,6 +1,7 @@
 ---
 keyword: "properties"
 signature: "Object<String, Schema>"
+value: This keyword must be set to an object where each value is a valid JSON Schema
 summary: "Validation succeeds if, for each name that appears in both the instance and as a name within this keyword's value, the child instance for that name successfully validates against the corresponding schema."
 kind: [ "applicator", "annotation" ]
 instance: [ "object" ]
@@ -45,8 +46,6 @@ The `properties` keyword is used to define the properties (keys) that an object 
 
 The annotation result of this keyword is the set of instance property names matched by this keyword. This annotation affects the behavior of `additionalProperties` and `unevaluatedProperties`.
 
-* The value of `properties` must be an object.
-* Each property value of this object must be a valid JSON Schema.
 * Each key within `properties` represents a property name in the object instance.
 
 {{<schema `Schema with 'properties' keyword`>}}

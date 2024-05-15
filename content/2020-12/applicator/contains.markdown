@@ -1,6 +1,7 @@
 ---
 keyword: "contains"
 signature: "Schema"
+value: This keyword must be set to a valid JSON Schema
 summary: "Validation succeeds if the instance contains an element that validates against this schema."
 kind: [ "applicator", "annotation" ]
 instance: [ "array" ]
@@ -42,10 +43,8 @@ An array instance is valid against `contains` if at least one of its elements is
 
 Similarly, if `maxContains` is present alongside `contains`, the instance will be considered valid as long as the number of elements successfully validating against the `contains` subschema does not exceed the specified limit defined by `maxContains`.
 
-* The value of this keyword must be a valid JSON Schema.
 * For data validation,  `items` validates all array elements against a single schema, `prefixItems` validates a fixed-length sequence at the array's beginning, and `contains` checks for at least one element matching a schema anywhere in the array.
 * The subschema must be applied to every array element, even after the first match has been found, to collect annotations for use by other keywords.
-* The annotation produced by this keyword affects the behavior of `unevaluatedItems` in the *Unevaluated* vocabulary.
 
 ## Examples
 

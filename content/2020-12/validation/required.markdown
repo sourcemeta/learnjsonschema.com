@@ -1,6 +1,7 @@
 ---
 keyword: "required"
 signature: "Array<String>"
+value: This keyword must be set to a *non-empty* array of unique strings
 summary: "An object instance is valid against this keyword if every item in the array is the name of a property in the instance."
 kind: [ "assertion" ]
 instance: [ "object" ]
@@ -22,8 +23,6 @@ related:
 ---
 
 The `required` keyword is used to specify which properties must be present within an object instance.
-* The value of this keyword must be an array.
-* Elements of this array, if any, must be strings, and must be unique.
 
 ## Examples
 

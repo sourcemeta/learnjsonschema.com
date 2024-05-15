@@ -1,6 +1,7 @@
 ---
 keyword: "minContains"
 signature: "Integer"
+value: This keyword must be set to a zero or positive integer
 summary: "The number of times that the [`contains`](/2020-12/applicator/contains) keyword (if set) successfully validates against the instance must be greater than or equal to the given integer."
 kind: [ "assertion" ]
 instance: [ "array" ]

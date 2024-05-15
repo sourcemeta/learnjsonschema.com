@@ -1,6 +1,7 @@
 ---
 keyword: "additionalProperties"
 signature: "Schema"
+value: This keyword must be set to a valid JSON Schema
 summary: "Validation succeeds if the schema validates against each value not matched by other object applicators in this vocabulary."
 kind: [ "applicator", "annotation" ]
 instance: [ "object" ]
@@ -45,11 +46,6 @@ related:
 The `additionalProperties` keyword is used to control the handling of properties whose names are not listed in the `properties` keyword or match any of the regular expressions in the `patternProperties` keyword. By default any additional properties are allowed.
 
 The behavior of this keyword depends on the presence and annotation results of `properties` and `patternProperties` within the same schema object. Validation with `additionalProperties` applies only to the child values of instance names that do not appear in the annotation results of either `properties` or `patternProperties`.
-
-* The value of `additionalProperties` must be a valid JSON Schema.
-* Each property value of this object must be a valid JSON Schema.
-* The annotation result of this keyword is the set of instance property names validated by this keyword's subschema.
-* This annotation affects the behavior of `unevaluatedProperties` in the Unevaluated vocabulary.
 
 ## Examples
 

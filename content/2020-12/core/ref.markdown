@@ -1,6 +1,7 @@
 ---
 keyword: "$ref"
 signature: "URI Reference"
+value: This keyword must be set to an absolute URI or a relative reference as defined by [RFC3986](https://www.rfc-editor.org/info/rfc3986), where its fragment (if any) can consist of a JSON Pointer as defined by [RFC6901](https://datatracker.ietf.org/doc/html/rfc6901)
 summary: "This keyword is used to reference a statically identified schema."
 kind: [ "applicator" ]
 instance: [ "any" ]
@@ -29,8 +30,6 @@ related:
 ---
 
 The `$ref` keyword is used to statically reference a schema. This is useful for avoiding code duplication and promoting modularity when describing complex data structures.
-* The value of `$ref` is set to a URI reference, which may be either relative or absolute according to [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986).
-* A URI reference may include a [JSON Pointer](https://datatracker.ietf.org/doc/html/rfc6901) in a URI fragment (e.g., `#/foo/bar`).
 
 {{<alert>}}
  _**Note:** It's crucial to understand that an absolute URI does not necessarily denote a remote reference. An absolute URI can point to a local schema if the schema declares nested `$id`s or if it points to itself. Conversely, a relative URI can point to a remote schema by leveraging base URI resolution._

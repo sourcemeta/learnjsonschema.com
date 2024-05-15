@@ -1,6 +1,7 @@
 ---
 keyword: "contentEncoding"
 signature: "String"
+value: This keyword should be set to a standard (to increase interoperability) encoding name such as those defined in [RFC4648](https://www.rfc-editor.org/info/rfc4686)
 summary: "The string instance should be interpreted as encoded binary data and decoded using the encoding named by this property."
 kind: [ "annotation" ]
 instance: [ "string" ]
@@ -32,10 +33,9 @@ related:
 
 The `contentEncoding` keyword is an annotation used to specify the encoding used to store the contents of a string, particularly when it represents binary data. It indicates how the string value should be interpreted and decoded. This keyword is not directly involved in the validation process but provides metadata about the content.
 
-* The value of this property must be a string.
 * `contentEncoding` doesn't enforce strict validation. However, it's recommended to use it correctly to ensure compatibility with applications that might interpret the encoding.
 * It represents the type of binary encoding used for the string under question. Some of the common encodings are listed [here](#common-encodings).
-* While the JSON Schema specification doesn't publish a predefined list of possible encodings, it's recommended to follow standard names such as those defined in [RFC 4648](https://www.rfc-editor.org/info/rfc4686). This ensures interoperability and clarity across implementations.
+* The JSON Schema specification doesn't publish a predefined list of possible encodings
 
 ## Examples
 

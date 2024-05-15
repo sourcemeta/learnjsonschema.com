@@ -1,6 +1,7 @@
 ---
 keyword: "minProperties"
 signature: "Integer"
+value: This keyword must be set to a zero or positive integer
 summary: "An object instance is valid if its number of properties is greater than, or equal to, the value of this keyword."
 kind: [ "assertion" ]
 instance: [ "object" ]
@@ -24,8 +25,6 @@ related:
 ---
 
 The `minProperties` keyword is used to specify the inclusive minimum number of properties allowed in an object instnace. If the number of properties in the object is less than the value specified by `minProperties`, the validation fails.
-* It applies specifically to object instances.
-* The value of this keyword must be a non-negative integer (0 or greater).
 
 ## Examples
 

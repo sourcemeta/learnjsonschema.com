@@ -1,6 +1,7 @@
 ---
 keyword: "description"
 signature: "String"
+value: This keyword must be set to a string
 summary: "An explanation about the purpose of the instance described by the schema."
 kind: [ "annotation" ]
 instance: [ "any" ]
@@ -28,7 +29,7 @@ related:
 
 ## Explanation
 
-The `description` keyword in JSON Schema is used to provide a human readable description for the schema. It does not affect data validation but serves as an informative annotation. The value of this keyword must be a string.
+The `description` keyword in JSON Schema is used to provide a human readable description for the schema. It does not affect data validation but serves as an informative annotation.
 
 ## Examples
 

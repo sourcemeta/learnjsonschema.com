@@ -1,6 +1,7 @@
 ---
 keyword: "title"
 signature: "String"
+value: This keyword must be set to a string
 summary: "A preferably short description about the purpose of the instance described by the schema."
 kind: [ "annotation" ]
 instance: [ "any" ]
@@ -28,7 +29,7 @@ related:
 
 ## Explanation
 
-The `title` keyword in JSON Schema is used to provide a human-readable label for a schema or its parts. It does not affect data validation but serves as an informative annotation. The value of this keyword must be a string.
+The `title` keyword in JSON Schema is used to provide a human-readable label for a schema or its parts. It does not affect data validation but serves as an informative annotation.
 
 ## Examples
 

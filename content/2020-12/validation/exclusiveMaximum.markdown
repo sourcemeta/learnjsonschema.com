@@ -1,6 +1,7 @@
 ---
 keyword: "exclusiveMaximum"
 signature: "Number"
+value: This keyword must be set to a number
 summary: "Validation succeeds if the numeric instance is less than the given number."
 kind: [ "assertion" ]
 instance: [ "number" ]

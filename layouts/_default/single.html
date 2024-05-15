@@ -37,6 +37,16 @@
         <div class="table-responsive shadow-sm mt-3 mb-4" data-nosnippet>
           <table class="table table-bordered table-light mb-0">
             <tr>
+              <th scope="row">Value</th>
+              <td class="text-break">
+                {{ if isset .Params "value" }}
+                  <small>{{ .Params.value | markdownify }}</small>
+                {{ else }}
+                  {{ errorf "Keyword is missing value description" }}
+                {{ end }}
+              </td>
+            </tr>
+            <tr>
               <th scope="row">Kind</th>
               <td class="text-break">
                 {{ partial "kind-badges.html" (dict "values" .Params.kind) }}

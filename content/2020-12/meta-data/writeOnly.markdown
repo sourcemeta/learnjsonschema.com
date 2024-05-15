@@ -1,6 +1,7 @@
 ---
 keyword: "writeOnly"
 signature: "Boolean"
+value: This keyword must be set to a boolean value
 summary: "This keyword indicates that the value is never present when the instance is retrieved from the owning authority."
 kind: [ "annotation" ]
 instance: [ "any" ]
@@ -31,7 +32,6 @@ related:
 
 the `writeOnly` keyword is used to indicate that an instance value should be writable, but it won't be included when the instance is retrieved from the owning authority. It's important to note that this doesn't imply the schema itself is writable; schemas must be treated as immutable. Instead, the keyword specifies instances where read/write operation semantics are use case specific.
 
-* The value of this keyword must be a boolean.
 * `writeOnly` does not affect data validation but serves as an informative annotation.
 
 ## Examples

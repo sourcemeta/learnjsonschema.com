@@ -1,6 +1,7 @@
 ---
 keyword: "default"
 signature: "Any"
+value: This keyword must be set to a JSON value, preferrably that successfully validates against the corresponding subschema
 summary: "This keyword can be used to supply a default JSON value associated with a particular schema."
 kind: [ "annotation" ]
 instance: [ "any" ]

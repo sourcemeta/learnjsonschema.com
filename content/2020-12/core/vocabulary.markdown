@@ -1,6 +1,7 @@
 ---
 keyword: "$vocabulary"
 signature: "Object<URI, Boolean>"
+value: This keyword must be set to an object where each key is a JSON Schema vocabulary URI and each value is a boolean that represents whether the corresponding vocabulary is considered optional (false) or required (true)
 summary: "This keyword is used in meta-schemas to identify the required and optional vocabularies available for use in schemas described by that meta-schema."
 kind: [ "identifier" ]
 instance: [ "any" ]
