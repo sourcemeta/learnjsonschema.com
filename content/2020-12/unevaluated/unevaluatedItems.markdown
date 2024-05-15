@@ -12,16 +12,6 @@ interdependencies:
     keyword: prefixItems
   - vocabulary: applicator
     keyword: items
-  - vocabulary: validation
-    keyword: minItems
-  - vocabulary: validation
-    keyword: maxItems
-  - vocabulary: applicator
-    keyword: contains
-  - vocabulary: validation
-    keyword: minContains
-  - vocabulary: validation
-    keyword: maxContains
 related:
   - vocabulary: unevaluated
     keyword: unevaluatedProperties

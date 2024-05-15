@@ -14,10 +14,6 @@ interdependencies:
     keyword: patternProperties
   - vocabulary: applicator
     keyword: additionalProperties
-  - vocabulary: validation
-    keyword: minProperties
-  - vocabulary: validation
-    keyword: maxProperties
 related:
   - vocabulary: unevaluated
     keyword: unevaluatedItems
