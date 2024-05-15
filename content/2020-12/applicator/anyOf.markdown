@@ -6,6 +6,8 @@ kind: [ "applicator" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-10.2.1.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/applicator"
+tests:
+  - draft2020-12/anyOf.json
 index: -99999
 introduced_in: draft4
 related:

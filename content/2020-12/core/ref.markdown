@@ -6,6 +6,12 @@ kind: [ "applicator" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-8.2.3.1"
 metaschema: "https://json-schema.org/draft/2020-12/meta/core"
+tests:
+  - draft2020-12/ref.json
+  - draft2020-12/refRemote.json
+  - draft2020-12/infinite-loop-detection.json
+  - draft2020-12/optional/refOfUnknownKeyword.json
+  - draft2020-12/optional/cross-draft.json
 index: -99
 introduced_in: draft3
 interdependencies:

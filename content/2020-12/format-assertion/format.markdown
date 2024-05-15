@@ -6,6 +6,28 @@ kind: [ "annotation", "assertion" ]
 instance: [ "string" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.2.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/format-assertion"
+tests:
+  - draft2020-12/optional/format-assertion.json
+  - draft2020-12/optional/format/date-time.json
+  - draft2020-12/optional/format/date.json
+  - draft2020-12/optional/format/duration.json
+  - draft2020-12/optional/format/email.json
+  - draft2020-12/optional/format/hostname.json
+  - draft2020-12/optional/format/idn-email.json
+  - draft2020-12/optional/format/idn-hostname.json
+  - draft2020-12/optional/format/ipv4.json
+  - draft2020-12/optional/format/ipv6.json
+  - draft2020-12/optional/format/iri-reference.json
+  - draft2020-12/optional/format/iri.json
+  - draft2020-12/optional/format/json-pointer.json
+  - draft2020-12/optional/format/regex.json
+  - draft2020-12/optional/format/relative-json-pointer.json
+  - draft2020-12/optional/format/time.json
+  - draft2020-12/optional/format/unknown.json
+  - draft2020-12/optional/format/uri-reference.json
+  - draft2020-12/optional/format/uri-template.json
+  - draft2020-12/optional/format/uri.json
+  - draft2020-12/optional/format/uuid.json
 introduced_in: draft1
 annotation:
    description: The format name set by this keyword

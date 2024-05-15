@@ -6,6 +6,8 @@ kind: [ "applicator", "annotation" ]
 instance: [ "array" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-10.3.1.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/applicator"
+tests:
+  - draft2020-12/items.json
 introduced_in: draft1
 annotation:
    description: A boolean true if it applied to any item of the instance

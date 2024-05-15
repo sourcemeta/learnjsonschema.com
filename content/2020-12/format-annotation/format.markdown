@@ -6,6 +6,8 @@ kind: [ "annotation" ]
 instance: [ "string" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.2.1"
 metaschema: "https://json-schema.org/draft/2020-12/meta/format-annotation"
+tests:
+  - draft2020-12/format.json
 introduced_in: draft1
 annotation:
    description: The format name set by this keyword
