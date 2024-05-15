@@ -8,6 +8,9 @@ specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#sect
 metaschema: "https://json-schema.org/draft/2020-12/meta/applicator"
 index: -999
 introduced_in: draft1
+annotation:
+   description: The set of instance property names validated by this keyword's subschema
+   kind: [ "array" ]
 related:
   - vocabulary: applicator
     keyword: patternProperties
@@ -28,11 +31,6 @@ related:
   - vocabulary: unevaluated
     keyword: unevaluatedProperties
 ---
-
-Annotations
------------
-
-The annotation result of this keyword is the set of instance property names matched by this keyword.
 
 ## Explanation
 

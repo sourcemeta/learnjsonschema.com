@@ -7,15 +7,13 @@ instance: [ "string" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.2.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/format-assertion"
 introduced_in: draft1
+annotation:
+   description: The format name set by this keyword
+   kind: [ "string" ]
 related:
   - vocabulary: format-annotation
     keyword: format
 ---
-
-Annotations
------------
-
-This keyword produces the format name as the annotation value.
 
 Defined Formats
 ---------------

@@ -7,6 +7,9 @@ instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-9.3"
 metaschema: "https://json-schema.org/draft/2020-12/meta/meta-data"
 introduced_in: 2019-09
+annotation:
+   description: The boolean value set by this keyword
+   kind: [ "boolean" ]
 related:
   - vocabulary: meta-data
     keyword: title
@@ -21,11 +24,6 @@ related:
   - vocabulary: meta-data
     keyword: writeOnly
 ---
-
-Annotations
------------
-
-This keyword produces the annotation value `true` if the keyword is set to `true`, or `false` otherwise.
 
 ## Explanation
 

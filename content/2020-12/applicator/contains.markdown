@@ -7,6 +7,9 @@ instance: [ "array" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-10.3.1.3"
 metaschema: "https://json-schema.org/draft/2020-12/meta/applicator"
 introduced_in: draft6
+annotation:
+   description: A potentially empty array of the indexes to which this keyword's subschema validated successfully to (in ascending order), or a boolean true if it applied to every item of the instance
+   kind: [ "array", "boolean" ]
 interdependencies:
   - vocabulary: validation
     keyword: minContains
@@ -27,16 +30,11 @@ related:
     keyword: unevaluatedItems
 ---
 
-Annotations
------------
-
-This keyword produces an annotation value which is an array of the indexes to which this keyword validates successfully when applying its subschema, in ascending order. The value is the empty array if the instance is empty. The value may be a boolean *true* if the subschema validates successfully when applied to every index of the instance.
-
 ## Explanation
 
 The `contains` keyword is used to check if at least one element in an array instance validates against a specified sub-schema. It offers flexibility compared to `items`, which requires all elements to adhere to a single schema.
 
-An array instance is valid against `contains` if at least one of its elements is valid against the given schema, except when `minContains` is present and has a value of 0, in which case an array instance must be considered valid against the `contains` keyword, even if none of its elements is valid against the given schema. 
+An array instance is valid against `contains` if at least one of its elements is valid against the given schema, except when `minContains` is present and has a value of 0, in which case an array instance must be considered valid against the `contains` keyword, even if none of its elements is valid against the given schema.
 
 Similarly, if `maxContains` is present alongside `contains`, the instance will be considered valid as long as the number of elements successfully validating against the `contains` subschema does not exceed the specified limit defined by `maxContains`.
 

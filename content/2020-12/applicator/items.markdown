@@ -7,6 +7,9 @@ instance: [ "array" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-10.3.1.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/applicator"
 introduced_in: draft1
+annotation:
+   description: A boolean true if it applied to any item of the instance
+   kind: [ "boolean" ]
 interdependencies:
   - vocabulary: applicator
     keyword: prefixItems
@@ -26,11 +29,6 @@ related:
   - vocabulary: unevaluated
     keyword: unevaluatedItems
 ---
-
-Annotations
------------
-
-If this keyword is applied to any instance element, it produces an annotation value of `true`.
 
 ## Explanation
 

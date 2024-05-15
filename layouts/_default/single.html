@@ -96,6 +96,19 @@
                 </a>
               </td>
             </tr>
+
+            <tr>
+              <th scope="row">Annotation</th>
+              <td class="text-break">
+                {{ if isset .Params "annotation" }}
+                  {{ partial "instance-badges.html" (dict "types" .Params.annotation.kind) }}
+                  <small>{{ .Params.annotation.description }}</small>
+                {{ else }}
+                  <small>None</small>
+                {{ end }}
+              </td>
+            </tr>
+
             <tr>
               <th scope="row">Affected By</th>
               <td class="text-break">
