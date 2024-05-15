@@ -98,6 +98,26 @@
             </tr>
 
             <tr>
+              <th scope="row">Official Tests</th>
+              <td class="text-break">
+                {{ if isset .Params "tests" }}
+                  <ul class="mb-0 ps-4">
+                    {{ range (.Params.tests) }}
+                      <li>
+                        <a class="font-monospace" target="_blank" href="https://github.com/json-schema-org/JSON-Schema-Test-Suite/blob/main/tests/{{ . }}">
+                          {{ . }}
+                          <i class="bi bi-box-arrow-up-right ms-1"></i>
+                        </a>
+                      </li>
+                    {{ end }}
+                  </ul>
+                {{ else }}
+                  <small>None</small>
+                {{ end }}
+              </td>
+            </tr>
+
+            <tr>
               <th scope="row">Annotation</th>
               <td class="text-break">
                 {{ if isset .Params "annotation" }}

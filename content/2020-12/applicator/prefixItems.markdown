@@ -6,6 +6,8 @@ kind: [ "applicator", "annotation" ]
 instance: [ "array" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-10.3.1.1"
 metaschema: "https://json-schema.org/draft/2020-12/meta/applicator"
+tests:
+  - draft2020-12/prefixItems.json
 introduced_in: 2020-12
 annotation:
    description: The largest index to which this keyword applied its subschema, or a boolean true if it was applied to every item of the instance

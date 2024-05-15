@@ -6,6 +6,8 @@ kind: [ "annotation" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-9.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/meta-data"
+tests:
+  - draft2020-12/default.json
 introduced_in: draft1
 annotation:
    description: The default value set by this keyword

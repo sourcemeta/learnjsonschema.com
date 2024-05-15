@@ -6,6 +6,8 @@ kind: [ "annotation" ]
 instance: [ "string" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-8.5"
 metaschema: "https://json-schema.org/draft/2020-12/meta/content"
+tests:
+  - draft2020-12/content.json
 introduced_in: 2019-09
 annotation:
    description: The content schema set by this keyword

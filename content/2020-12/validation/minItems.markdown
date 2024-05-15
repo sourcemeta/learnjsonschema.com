@@ -6,6 +6,8 @@ kind: [ "assertion" ]
 instance: [ "array" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6.4.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
+tests:
+  - draft2020-12/minItems.json
 index: -9
 introduced_in: draft1
 related:
