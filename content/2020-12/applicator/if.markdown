@@ -10,11 +10,12 @@ tests:
   - draft2020-12/if-then-else.json
 index: -9999
 introduced_in: draft7
-related:
+affects:
   - vocabulary: applicator
     keyword: then
   - vocabulary: applicator
     keyword: else
+related:
   - vocabulary: applicator
     keyword: allOf
   - vocabulary: applicator

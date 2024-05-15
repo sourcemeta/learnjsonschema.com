@@ -11,7 +11,7 @@ default:
 tests:
   - draft2020-12/minContains.json
 introduced_in: 2019-09
-interdependencies:
+affects:
   - vocabulary: applicator
     keyword: contains
 related:

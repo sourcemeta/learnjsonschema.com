@@ -9,7 +9,7 @@ metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
 tests:
   - draft2020-12/maxContains.json
 introduced_in: 2019-09
-interdependencies:
+affects:
   - vocabulary: applicator
     keyword: contains
 related:

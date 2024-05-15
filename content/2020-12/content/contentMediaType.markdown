@@ -12,11 +12,12 @@ introduced_in: draft7
 annotation:
    description: The content media type set by this keyword
    kind: [ "string" ]
+affects:
+  - vocabulary: content
+    keyword: contentSchema
 related:
   - vocabulary: content
     keyword: contentEncoding
-  - vocabulary: content
-    keyword: contentSchema
 ---
 
 ## Explanation

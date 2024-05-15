@@ -15,11 +15,14 @@ introduced_in: draft3
 annotation:
    description: The set of instance property names validated by this keyword's subschema
    kind: [ "array" ]
+affects:
+  - vocabulary: applicator
+    keyword: additionalProperties
+  - vocabulary: unevaluated
+    keyword: unevaluatedProperties
 related:
   - vocabulary: applicator
     keyword: properties
-  - vocabulary: applicator
-    keyword: additionalProperties
   - vocabulary: applicator
     keyword: dependentSchemas
   - vocabulary: applicator
