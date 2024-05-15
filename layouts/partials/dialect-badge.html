@@ -1,35 +1,28 @@
 {{ if eq (.name) "2020-12" }}
   <a href="{{ .Site.BaseURL }}/{{ .name }}">
-    <span class="badge" style="background-color: #000000;">{{ .name }}</span>
+    <span class="badge text-bg-info">{{ .name }}</span>
   </a>
 {{ else if eq (.name) "2019-09" }}
-  <span class="badge"
-    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)"
-    style="background-color: #bbbbbb;">{{ .name }}</span>
+  <span class="badge text-bg-secondary"
+    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)">{{ .name }}</span>
 {{ else if eq (.name) "draft7" }}
-  <span class="badge"
-    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)"
-    style="background-color: #bbbbbb;">Draft 7</span>
+  <span class="badge text-bg-secondary"
+    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)">Draft 7</span>
 {{ else if eq (.name) "draft6" }}
-  <span class="badge"
-    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)"
-    style="background-color: #bbbbbb;">Draft 6</span>
+  <span class="badge text-bg-secondary"
+    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)">Draft 6</span>
 {{ else if eq (.name) "draft4" }}
-  <span class="badge"
-    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)"
-    style="background-color: #bbbbbb;">Draft 4</span>
+  <span class="badge text-bg-secondary"
+    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)">Draft 4</span>
 {{ else if eq (.name) "draft3" }}
-  <span class="badge"
-    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)"
-    style="background-color: #bbbbbb;">Draft 3</span>
+  <span class="badge text-bg-secondary"
+    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)">Draft 3</span>
 {{ else if eq (.name) "draft2" }}
-  <span class="badge"
-    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)"
-    style="background-color: #bbbbbb;">Draft 2</span>
+  <span class="badge text-bg-secondary"
+    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)">Draft 2</span>
 {{ else if eq (.name) "draft1" }}
-  <span class="badge"
-    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)"
-    style="background-color: #bbbbbb;">Draft 1</span>
+  <span class="badge text-bg-secondary"
+    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)">Draft 1</span>
 {{ else }}
   {{ errorf "Unrecognized dialect: %q" .name }}
 {{ end }}
