@@ -6,6 +6,8 @@ kind: [ "applicator", "annotation" ]
 instance: [ "array" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-11.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/unevaluated"
+default:
+  value: "{}"
 tests:
   - draft2020-12/unevaluatedItems.json
 introduced_in: 2019-09

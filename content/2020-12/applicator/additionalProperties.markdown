@@ -8,6 +8,8 @@ specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#sect
 metaschema: "https://json-schema.org/draft/2020-12/meta/applicator"
 tests:
   - draft2020-12/additionalProperties.json
+default:
+  value: "{}"
 index: -998
 introduced_in: draft1
 annotation:
@@ -45,7 +47,6 @@ The behavior of this keyword depends on the presence and annotation results of `
 * Each property value of this object must be a valid JSON Schema.
 * The annotation result of this keyword is the set of instance property names validated by this keyword's subschema.
 * This annotation affects the behavior of `unevaluatedProperties` in the Unevaluated vocabulary.
-* Omitting this keyword has the same assertion behavior as an empty object.
 
 ## Examples
 

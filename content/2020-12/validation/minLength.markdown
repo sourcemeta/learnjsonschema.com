@@ -6,6 +6,8 @@ kind: [ "assertion" ]
 instance: [ "string" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6.3.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
+default:
+  value: 0
 tests:
   - draft2020-12/minLength.json
 index: -9999

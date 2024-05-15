@@ -8,6 +8,8 @@ specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#sect
 metaschema: "https://json-schema.org/draft/2020-12/meta/applicator"
 tests:
   - draft2020-12/contains.json
+default:
+  value: "{}"
 introduced_in: draft6
 annotation:
    description: A potentially empty array of the indexes to which this keyword's subschema validated successfully to (in ascending order), or a boolean true if it applied to every item of the instance

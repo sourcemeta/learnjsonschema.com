@@ -125,6 +125,26 @@
             </tr>
 
             <tr>
+              <th scope="row">Default</th>
+              <td class="text-break">
+                {{ if isset .Params "default" }}
+                  {{ if isset .Params.default "description" }}
+                    <small>{{ .Params.default.description }}</small>
+                  {{ else if isset .Params.default "value" }}
+                    <code>{{ .Params.default.value }}</code>
+                  {{ else if isset .Params.default "logical_value" }}
+                    <small class="align-middle">As if it was set to the (invalid) value: </small>
+                    <code class="align-middle">{{ .Params.default.logical_value }}</code>
+                  {{ else }}
+                    {{ errorf "Invalid default" }}
+                  {{ end }}
+                {{ else }}
+                  <small>None</small>
+                {{ end }}
+              </td>
+            </tr>
+
+            <tr>
               <th scope="row">Annotation</th>
               <td class="text-break">
                 {{ if isset .Params "annotation" }}

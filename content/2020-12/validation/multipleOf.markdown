@@ -6,6 +6,8 @@ kind: [ "assertion" ]
 instance: [ "number" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6.2.1"
 metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
+default:
+  value: 1
 tests:
   - draft2020-12/multipleOf.json
 index: -999

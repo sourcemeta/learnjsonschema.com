@@ -6,6 +6,8 @@ kind: [ "assertion" ]
 instance: [ "array" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6.4.3"
 metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
+default:
+  value: false
 tests:
   - draft2020-12/uniqueItems.json
 introduced_in: draft2
@@ -22,7 +24,6 @@ The `uniqueItems` keyword is used to ensure that all the items in an array are u
 * The value of this keyword must be a boolean.
 * This keyword, when set to true, specifies that all elements in an array must be unique.
 * If it is set to false, the array can contain duplicate items.
-* Omitting this keyword has the same behavior as a value of false.
 
 ## Examples
 
