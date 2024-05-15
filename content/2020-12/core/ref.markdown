@@ -10,12 +10,12 @@ index: -99
 introduced_in: draft3
 interdependencies:
   - vocabulary: core
+    keyword: $id
+  - vocabulary: core
     keyword: $dynamicAnchor
   - vocabulary: core
     keyword: $anchor
 related:
-  - vocabulary: core
-    keyword: $id
   - vocabulary: core
     keyword: $dynamicRef
   - vocabulary: core

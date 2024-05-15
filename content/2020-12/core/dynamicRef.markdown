@@ -9,12 +9,12 @@ metaschema: "https://json-schema.org/draft/2020-12/meta/core"
 introduced_in: 2020-12
 interdependencies:
   - vocabulary: core
+    keyword: $id
+  - vocabulary: core
     keyword: $dynamicAnchor
   - vocabulary: core
     keyword: $anchor
 related:
-  - vocabulary: core
-    keyword: $id
   - vocabulary: core
     keyword: $ref
   - vocabulary: core
