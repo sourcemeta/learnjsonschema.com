@@ -7,6 +7,9 @@ instance: [ "array" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-10.3.1.1"
 metaschema: "https://json-schema.org/draft/2020-12/meta/applicator"
 introduced_in: 2020-12
+annotation:
+   description: The largest index to which this keyword applied its subschema, or a boolean true if it was applied to every item of the instance
+   kind: [ "number", "boolean" ]
 related:
   - vocabulary: applicator
     keyword: items
@@ -25,11 +28,6 @@ related:
   - vocabulary: unevaluated
     keyword: unevaluatedItems
 ---
-
-Annotations
------------
-
-This keyword produces an annotation value which is the largest index to which this keyword applied a subschema. The value MAY be a boolean true if a subschema was applied to every index of the instance.
 
 ## Explanation
 

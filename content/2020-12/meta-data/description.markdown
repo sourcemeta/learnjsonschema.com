@@ -8,6 +8,9 @@ specification: "https://json-schema.org/draft/2020-12/json-schema-validation.htm
 metaschema: "https://json-schema.org/draft/2020-12/meta/meta-data"
 index: -999
 introduced_in: draft1
+annotation:
+   description: The description set by this keyword
+   kind: [ "string" ]
 related:
   - vocabulary: meta-data
     keyword: title
@@ -22,11 +25,6 @@ related:
   - vocabulary: meta-data
     keyword: deprecated
 ---
-
-Annotations
------------
-
-This keyword produces the description as the annotation value.
 
 ## Explanation
 
