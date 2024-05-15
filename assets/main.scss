@@ -69,10 +69,6 @@ $bootstrap-icons-font-dir: "./";
 
 // Other
 
-#search {
-  min-width: 400px;
-}
-
 #sidebar {
   min-width: 260px;
 }
@@ -97,10 +93,8 @@ article table {
   @extend .table;
 }
 
-.code,
-.code .border-end,
-.code .border-bottom {
-  border-color: #aaa !important;
+.alert > :last-child {
+  @extend .mb-0;
 }
 
 .code .highlight {
@@ -124,8 +118,4 @@ article table {
 
 .code-instance + .code-schema {
   @extend .mt-4;
-}
-
-.alert > :last-child {
-  @extend .mb-0;
 }
