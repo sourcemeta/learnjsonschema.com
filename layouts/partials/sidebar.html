@@ -1,5 +1,5 @@
 <aside id="sidebar" class="border-end position-relative d-none d-xl-block">
-  <div class="px-4 py-2">
+  <div class="px-3 py-3">
     {{ range .Site.Sections }}
       {{ $dialect := .Title }}
       {{ $dialectURL := $dialect | printf "/%s" }}
@@ -8,7 +8,7 @@
           <li class="nav-item">
             {{ $vocabulary := .Title }}
             {{ $vocabularyURL := (replace $vocabulary " " "-") | lower | printf "%s/%s" $dialectURL }}
-            <a class="ps-0 nav-link text-body fw-bold" href="{{ ref $ $vocabularyURL }}">
+            <a class="ps-0 nav-link text-body fw-bold fs-6" href="{{ ref $ $vocabularyURL }}">
               <i class="bi bi-chevron-down"></i> {{ $vocabulary }}
             </a>
             <ul class="list-unstyled ms-3">

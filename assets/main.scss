@@ -6,7 +6,9 @@ $primary: #0969da;
 $success: rgba(213, 255, 230, 1);
 $danger: rgba(255, 213, 213, 1);
 $warning: #ffff6a;
-$navbar-brand-font-size: 1.1rem;
+$font-size-base: 1rem;
+$font-size-sm: $font-size-base * .9;
+$navbar-brand-font-size: $font-size-base * 1.1;
 $navbar-padding-y: 1px;
 
 // Required components
@@ -72,7 +74,8 @@ $bootstrap-icons-font-dir: "./";
 // Other
 
 #sidebar {
-  min-width: 260px;
+  min-width: 230px;
+  font-size: $font-size-sm;
 }
 
 #sidebar > div {
