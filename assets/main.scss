@@ -8,6 +8,9 @@ $navbar-brand-font-size: 1.1rem;
 $navbar-padding-y: 1px;
 $alert-border-radius: 0;
 
+// Follow browser's preferred theme
+$color-mode-type: media-query;
+
 // Required components
 @import "../vendor/bootstrap/scss/variables";
 @import "../vendor/bootstrap/scss/variables-dark";
