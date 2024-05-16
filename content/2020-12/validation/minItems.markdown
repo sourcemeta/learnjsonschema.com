@@ -27,10 +27,6 @@ related:
 The `minItems` keyword specifies the minimum number of items that must be present in an array. It can be used to define constraints on the size of an array, ensuring that it contains at least a certain number of elements.
 * An array is valid if it has at least the specified number of elements.
 
-{{<alert>}}
-_**Note:** `items`, `prefixItems`, and `contains` do not affect `minItems`. The instance independently evaluated against `minItems` (if present)._
-{{</alert>}}
-
 ## Examples
 
 {{<schema `Schema with 'minItems' keyword`>}}

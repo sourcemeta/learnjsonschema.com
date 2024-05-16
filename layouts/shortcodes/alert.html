@@ -1,7 +1,0 @@
-<!-- TODO: Migrate to richer alert shortcodes instead -->
-{{ $heading := .Get 0 }}
-
-<div class="alert alert-warning" role="alert">
-  <h5>{{ $heading | markdownify }}</h5>
-  <p>{{ .Inner | markdownify }}</p>
-</div>
