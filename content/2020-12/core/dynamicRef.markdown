@@ -1,7 +1,7 @@
 ---
 keyword: "$dynamicRef"
 signature: "URI Reference"
-value: This keyword must be set to an absolute URI or a relative reference as defined by [RFC3986](https://www.rfc-editor.org/info/rfc3986), where its fragment (if any) can consist of a JSON Pointer as defined by [RFC6901](https://datatracker.ietf.org/doc/html/rfc6901)
+value: This keyword must be set to an absolute URI or a relative reference as defined by [RFC 3986](https://www.rfc-editor.org/info/rfc3986), where its fragment (if any) can consist of a JSON Pointer as defined by [RFC 6901](https://datatracker.ietf.org/doc/html/rfc6901)
 summary: "This keyword is used to reference an identified schema, deferring the full resolution until runtime, at which point it is resolved each time it is encountered while evaluating an instance."
 kind: [ "applicator" ]
 instance: [ "any" ]

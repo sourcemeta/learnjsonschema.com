@@ -1,7 +1,7 @@
 ---
 keyword: "$ref"
 signature: "URI Reference"
-value: This keyword must be set to an absolute URI or a relative reference as defined by [RFC3986](https://www.rfc-editor.org/info/rfc3986), where its fragment (if any) can consist of a JSON Pointer as defined by [RFC6901](https://datatracker.ietf.org/doc/html/rfc6901)
+value: This keyword must be set to an absolute URI or a relative reference as defined by [RFC 3986](https://www.rfc-editor.org/info/rfc3986), where its fragment (if any) can consist of a JSON Pointer as defined by [RFC 6901](https://datatracker.ietf.org/doc/html/rfc6901)
 summary: "This keyword is used to reference a statically identified schema."
 kind: [ "applicator" ]
 instance: [ "any" ]
@@ -43,7 +43,7 @@ a remote reference.
 {{</common-pitfall>}}
 
 {{<learning-more>}} URIs play a central role in JSON Schema. Going through the
-URI [RFC3986](https://datatracker.ietf.org/doc/html/rfc3986) specification is a
+URI [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986) specification is a
 must for gaining a deeper understanding of references, identifiers, and
 anchors. More specifically, we recommend carefully studying [URI
 resolution](https://datatracker.ietf.org/doc/html/rfc3986#section-5), URLs vs
@@ -51,7 +51,7 @@ URNs, and the difference between a URI and a URI Reference.
 
 Additionally, a JSON Schema reference URI may contain a JSON Pointer. For this
 reason, we recommend reading the JSON Pointer
-[RFC6901](https://www.rfc-editor.org/rfc/rfc6901) specification, primarily its
+[RFC 6901](https://www.rfc-editor.org/rfc/rfc6901) specification, primarily its
 proposed [URI fragment identifier
 representation](https://www.rfc-editor.org/rfc/rfc6901#section-6).
 {{</learning-more>}}
