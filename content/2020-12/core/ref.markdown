@@ -31,9 +31,16 @@ related:
 
 The `$ref` keyword is used to statically reference a schema. This is useful for avoiding code duplication and promoting modularity when describing complex data structures.
 
-{{<alert>}}
- _**Note:** It's crucial to understand that an absolute URI does not necessarily denote a remote reference. An absolute URI can point to a local schema if the schema declares nested `$id`s or if it points to itself. Conversely, a relative URI can point to a remote schema by leveraging base URI resolution._
-{{</alert>}}
+{{<common-pitfall>}} Because of how URI resolution works, a reference to an
+absolute URI does not necessarily mean the reference points to a remote
+resource. Conversely, a reference to a relative URI does not necessarily mean
+the reference points to the current schema resource.
+
+When encountering a reference, a JSON Schema implementation will first resolve
+it into an absolute URI given the base URI of the schema. If the resulting
+destination is present in the schema, it will be a local reference. Otherwise,
+a remote reference.
+{{</common-pitfall>}}
 
 ## Examples
 
