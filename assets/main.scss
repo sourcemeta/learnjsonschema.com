@@ -3,7 +3,6 @@
 
 // Overrides
 $primary: #0969da;
-$success: rgba(213, 255, 230, 1);
 $danger: rgba(255, 213, 213, 1);
 $navbar-brand-font-size: 1.1rem;
 $navbar-padding-y: 1px;
@@ -111,8 +110,18 @@ article table {
   @extend .border-0;
 }
 
-.code.bg-success .highlight {
-  @extend .bg-success;
+// TODO: Upgrade to later versions of Bootstrap so we don't have
+// to manually specify this class ourselves.
+// See https://getbootstrap.com/docs/5.3/utilities/background/#background-color
+.bg-warning-subtle {
+  background-color: #ffff6a !important;
+}
+.bg-success-subtle {
+  background-color: rgba(213, 255, 230, 1) !important;
+}
+
+.code.bg-success-subtle .highlight {
+  @extend .bg-success-subtle;
 }
 
 .code.bg-danger .highlight {
@@ -126,11 +135,4 @@ article table {
 
 .code-instance + .code-schema {
   @extend .mt-4;
-}
-
-// TODO: Upgrade to later versions of Bootstrap so we don't have
-// to manually specify this class ourselves.
-// See https://getbootstrap.com/docs/5.3/utilities/background/#background-color
-.bg-warning-subtle {
-  background-color: #ffff6a;
 }
