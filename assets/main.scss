@@ -7,6 +7,7 @@ $success: rgba(213, 255, 230, 1);
 $danger: rgba(255, 213, 213, 1);
 $navbar-brand-font-size: 1.1rem;
 $navbar-padding-y: 1px;
+$alert-border-radius: 0;
 
 // Required components
 @import "../vendor/bootstrap/scss/variables";
@@ -94,8 +95,14 @@ article table {
   @extend .table;
 }
 
-.alert > :last-child {
-  @extend .mb-0;
+.alert {
+  @extend .border-top-0;
+  @extend .border-bottom-0;
+  @extend .border-end-0;
+  border-left-width: $spacer * 0.6;
+  & > :last-child {
+    @extend .mb-0;
+  }
 }
 
 .code .highlight {
