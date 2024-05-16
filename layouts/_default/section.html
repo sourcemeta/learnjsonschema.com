@@ -80,7 +80,8 @@
                   {{ range (.Params.authors) }}
                     <li class="my-1">
                       <a target="_blank" href="https://github.com/{{ .github }}">
-                        <img class="rounded" src="https://github.com/{{ .github }}.png?size=60" width="30" height="30" loading="lazy">
+                        <img class="rounded" src="https://github.com/{{ .github }}.png?size=60" width="30" height="30" loading="lazy"
+                          alt="Profile picture of GitHub user {{ .github }}">
                         {{ .first }} {{ .last }}
                         <i class="bi bi-box-arrow-up-right ms-1"></i>
                       </a>
@@ -151,8 +152,8 @@
 
         <ul class="nav nav-tabs mt-3" id="citations" role="tablist">
           <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="bibtex" data-bs-toggle="tab" data-bs-target="#bibtext-pane"
-              type="button" role="tab" aria-controls="bibtext-pane" aria-selected="true">BibTex</button>
+            <button class="nav-link active" id="bibtex" data-bs-toggle="tab"
+              type="button" role="tab" aria-expanded="true" aria-current="page">BibTex</button>
           </li>
         </ul>
         <div class="tab-content pt-3">
