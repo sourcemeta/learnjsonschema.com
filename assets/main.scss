@@ -121,3 +121,8 @@ article table {
 .code-instance + .code-schema {
   @extend .mt-4;
 }
+
+details:not([open]) summary i {
+  display: inline-block;
+  transform: rotate(-90deg); 
+}
