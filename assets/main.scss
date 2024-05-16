@@ -118,6 +118,17 @@ article table {
     @extend .border-0;
   }
 
+  @include media-breakpoint-up(sm) {
+    $code-block-indentation: 25px;
+    &.bg-success, &.bg-danger {
+      margin-left: $code-block-indentation;
+    }
+
+    &.bg-info {
+      margin-left: $code-block-indentation * 2;
+    }
+  }
+
   &.bg-success > .highlight {
     @extend .bg-success-subtle;
   }
