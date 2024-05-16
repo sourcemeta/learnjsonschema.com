@@ -74,13 +74,6 @@ $bootstrap-icons-font-dir: "./";
   min-width: 260px;
 }
 
-#sidebar > div {
-  @extend .position-absolute;
-  @extend .top-0;
-  @extend .start-0;
-  @extend .bottom-0;
-}
-
 // Tables with vertical headers collapse the headers by default
 table tr > th[scope="row"] {
   width: 1px;
