@@ -10,6 +10,7 @@ $alert-border-radius: 0;
 
 // Required components
 @import "../vendor/bootstrap/scss/variables";
+@import "../vendor/bootstrap/scss/variables-dark";
 @import "../vendor/bootstrap/scss/maps";
 @import "../vendor/bootstrap/scss/mixins";
 @import "../vendor/bootstrap/scss/root";
@@ -77,6 +78,15 @@ $bootstrap-icons-font-dir: "./";
 // Tables with vertical headers collapse the headers by default
 table tr > th[scope="row"] {
   width: 1px;
+}
+
+.table-highlight {
+  td, th {
+    background-color: $gray-100;
+    @include color-mode(dark) {
+      background-color: $gray-800;
+    }
+  }
 }
 
 a {
