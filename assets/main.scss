@@ -58,7 +58,7 @@ $bootstrap-icons-font-dir: "./";
 // Highlight
 @import "./highlight.scss";
 .highlight {
-  @extend .bg-light;
+  @extend .bg-light-subtle;
   @extend .border;
   @extend .px-2;
   @extend .py-2;
@@ -107,35 +107,24 @@ article table {
   }
 }
 
-.code .highlight {
-  @extend .py-3;
-  @extend .m-0;
-  @extend .border-0;
-}
+.code {
+  @extend .bg-opacity-50;
 
-// TODO: Upgrade to later versions of Bootstrap so we don't have
-// to manually specify this class ourselves.
-// See https://getbootstrap.com/docs/5.3/utilities/background/#background-color
-.bg-warning-subtle {
-  background-color: #ffff6a !important;
-}
-.bg-success-subtle {
-  background-color: rgba(213, 255, 230, 1) !important;
-}
+  & > .highlight {
+    @extend .py-3;
+    @extend .m-0;
+    @extend .border-0;
+  }
 
-.code.bg-success-subtle .highlight {
-  @extend .bg-success-subtle;
-}
+  &.bg-success > .highlight {
+    @extend .bg-success-subtle;
+  }
 
-.code.bg-danger .highlight {
-  @extend .bg-danger;
-}
+  &.bg-danger > .highlight {
+    @extend .bg-danger-subtle;
+  }
 
-.code + .code-instance,
-.code-instance + .code-instance {
-  @extend .border-top-0;
-}
-
-.code-instance + .code-schema {
-  @extend .mt-4;
+  &.bg-info > .highlight {
+    @extend .bg-info-subtle;
+  }
 }
