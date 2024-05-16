@@ -71,6 +71,20 @@
             </tr>
             <tr>
               <th scope="row">
+                Changed In
+              </th>
+              <td class="text-break">
+                {{ if isset .Params "changed_in" }}
+                  {{ range (.Params.changed_in) }}
+                    {{ partial "dialect-badge.html" (dict "name" (.)) }}
+                  {{ end }}
+                {{ else }}
+                  <small>None</small>
+                {{ end }}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
                 Introduced In
               </th>
               <td class="text-break">
