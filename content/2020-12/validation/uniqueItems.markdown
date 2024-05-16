@@ -19,6 +19,7 @@ related:
     keyword: items
   - vocabulary: applicator
     keyword: contains
+target_version: "mvp"
 ---
 
 The `uniqueItems` keyword is used to ensure that all the items in an array are unique. This keyword is particularly useful when you need to enforce that an array contains no duplicate elements.

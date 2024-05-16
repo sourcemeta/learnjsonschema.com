@@ -20,6 +20,7 @@ related:
     keyword: maxProperties
   - vocabulary: validation
     keyword: minProperties
+target_version: "mvp"
 ---
 
 The `required` keyword is used to specify which properties must be present within an object instance.

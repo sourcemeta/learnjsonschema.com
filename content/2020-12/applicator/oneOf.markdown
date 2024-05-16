@@ -26,6 +26,7 @@ related:
     keyword: else
   - vocabulary: applicator
     keyword: not
+target_version: "mvp"
 ---
 
 The `oneOf` keyword allows you to specify that exactly one of the provided subschemas must validate successfully against a given instance. It ensures that the instance validates against one and only one of the defined subschemas within the `oneOf` array. This behavior is akin to a logical "XOR" (exclusive OR) operation, where only one condition needs to be met for validation to pass.

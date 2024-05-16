@@ -20,6 +20,7 @@ related:
     keyword: format
   - vocabulary: applicator
     keyword: patternProperties
+target_version: "mvp"
 ---
 
 The `pattern` keyword in JSON Schema is designed to define a regular expression pattern that a string value within an instance must adhere to. This regular expression is specified as a string for the `pattern` keyword. It functions as follows:

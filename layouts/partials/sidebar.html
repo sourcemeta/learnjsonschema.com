@@ -19,10 +19,24 @@
                     <li>
                       {{ if eq $.Permalink .Permalink }}
                         <a class="text-muted fw-bold text-decoration-none font-monospace active"
-                          href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
+                          href="{{ ref $ $keywordURL }}" aria-current="true">
+                          {{ .Params.keyword }}
+
+                          {{ if eq .Params.target_version "mvp" }}
+                          <i class="bi bi-exclamation-square-fill" style="color: #e6194B"
+                             data-bs-toggle="tooltip" data-bs-title="It is should be in MVP (Minimal Viable Product)"></i>
+                          {{ end }}
+                        </a>
                       {{ else }}
                         <a class="text-black-50 text-decoration-none font-monospace"
-                          href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
+                          href="{{ ref $ $keywordURL }}">
+                          {{ .Params.keyword }}
+
+                          {{ if eq .Params.target_version "mvp" }}
+                          <i class="bi bi-exclamation-square-fill" style="color: #e6194B"
+                             data-bs-toggle="tooltip" data-bs-title="It is should be in MVP (Minimal Viable Product)"></i>
+                          {{ end }}
+                        </a>
                       {{ end }}
                     </li>
                   {{ end }}

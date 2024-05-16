@@ -20,6 +20,7 @@ related:
     keyword: exclusiveMinimum
   - vocabulary: validation
     keyword: multipleOf
+target_version: "mvp"
 ---
 
 The `maximum` keyword is used to set the upper limit on numeric instances. It specifies that the numeric value being validated must be less than or equal to the provided maximum value.

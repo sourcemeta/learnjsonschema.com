@@ -26,6 +26,7 @@ related:
     keyword: else
   - vocabulary: applicator
     keyword: not
+target_version: "mvp"
 ---
 
 The `anyOf` keyword in JSON Schema is used to specify that an instance must validate against at least one of the schemas provided in an array. It allows you to define multiple schemas, and if the data validates against any one of them, the validation passes.

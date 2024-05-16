@@ -20,6 +20,7 @@ related:
     keyword: pattern
   - vocabulary: format-annotation
     keyword: format
+target_version: "mvp"
 ---
 
 The `minLength` keyword is used to specify the minimum length of a string instance. It defines the minimum number of characters that a valid string must have to satisfy the schema.

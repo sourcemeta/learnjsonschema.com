@@ -16,6 +16,7 @@ annotation:
 related:
   - vocabulary: format-assertion
     keyword: format
+target_version: "mvp"
 ---
 
 Defined Formats

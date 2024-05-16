@@ -22,6 +22,7 @@ related:
     keyword: maxItems
   - vocabulary: applicator
     keyword: contains
+target_version: "mvp"
 ---
 
 The `minItems` keyword specifies the minimum number of items that must be present in an array. It can be used to define constraints on the size of an array, ensuring that it contains at least a certain number of elements.

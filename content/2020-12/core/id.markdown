@@ -25,6 +25,7 @@ related:
     keyword: $schema
   - vocabulary: core
     keyword: $vocabulary
+target_version: "mvp"
 ---
 
 {{< alert "Good to know!" >}}

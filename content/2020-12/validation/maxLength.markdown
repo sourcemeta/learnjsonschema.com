@@ -18,6 +18,7 @@ related:
     keyword: pattern
   - vocabulary: format-annotation
     keyword: format
+target_version: "mvp"
 ---
 
 The `maxLength` keyword is used to specify the maximum length of a string instance. It is used to enforce a constraint on the maximum number of characters allowed for a string instance.

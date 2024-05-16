@@ -38,6 +38,7 @@ related:
     keyword: maxProperties
   - vocabulary: unevaluated
     keyword: unevaluatedProperties
+target_version: "mvp"
 ---
 
 ## Explanation

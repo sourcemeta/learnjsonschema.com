@@ -20,6 +20,7 @@ related:
     keyword: anyOf
   - vocabulary: applicator
     keyword: oneOf
+target_version: "mvp"
 ---
 
 The `enum` keyword specifies a validation constraint for an instance, defining a set of permissible values. The validation succeeds if the value of the instance matches one of the elements in the `enum` array.

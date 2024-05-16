@@ -13,6 +13,7 @@ tests:
   - draft2020-12/type.json
 introduced_in: draft1
 index: -99999
+target_version: "mvp"
 ---
 
 The supported types are as follows:

@@ -20,6 +20,7 @@ related:
     keyword: minItems
   - vocabulary: applicator
     keyword: contains
+target_version: "mvp"
 ---
 
 The `maxItems` keyword is used to specify the maximum number of items allowed in an array. It can be used to define constraints on the size of an array within an array instance.

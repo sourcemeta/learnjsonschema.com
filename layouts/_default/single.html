@@ -223,6 +223,15 @@
                 </td>
               </tr>
             {{ end }}
+
+            {{ if isset .Params "target_version" }}
+            <tr>
+              <th scope="row">Metafora Version</th>
+              <td class="text-break">
+                {{ partial "version-badges.html" (dict "version" .Params.target_version) }}
+              </td>
+            </tr>
+            {{ end }}
           </table>
         </div>
 

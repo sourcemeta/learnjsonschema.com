@@ -5,9 +5,10 @@ paginate = 100000000
 
 [Params]
 description = 'Reference documentation for JSON Schema'
-github = 'https://github.com/intelligence-ai/learnjsonschema.com'
+github = 'https://github.com/1mrekq/metafora-jsonschema'
 slack = 'https://json-schema.org/slack'
 jsonschema = 'https://json-schema.org'
+frameworkName = 'Metafora'
 
 [markup]
   [markup.highlight]

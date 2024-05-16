@@ -26,6 +26,7 @@ related:
     keyword: writeOnly
   - vocabulary: meta-data
     keyword: deprecated
+target_version: "mvp"
 ---
 
 ## Explanation

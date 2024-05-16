@@ -36,6 +36,7 @@ related:
     keyword: uniqueItems
   - vocabulary: unevaluated
     keyword: unevaluatedItems
+target_version: "mvp"
 ---
 
 ## Explanation

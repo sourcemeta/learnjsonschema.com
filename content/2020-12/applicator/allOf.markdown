@@ -26,6 +26,7 @@ related:
     keyword: else
   - vocabulary: applicator
     keyword: not
+target_version: "mvp"
 ---
 
 The `allOf` keyword is used to specify that a given instance must validate against all of the subschemas provided within an array. It's essentially a logical "AND" operation where all conditions must be met for validation to pass.

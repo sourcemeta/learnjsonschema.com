@@ -18,6 +18,7 @@ related:
     keyword: $ref
   - vocabulary: core
     keyword: $dynamicRef
+target_version: "mvp"
 ---
 
 The `$defs` keyword provides a standardized way to define reusable subschemas within a single schema document, promoting modularity, reducing code duplication, and improving schema organization. Each subschema within `$defs` has a unique name, acting as a location for referencing, without directly affecting validation.

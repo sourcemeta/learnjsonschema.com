@@ -27,6 +27,7 @@ related:
     keyword: $dynamicRef
   - vocabulary: core
     keyword: $defs
+target_version: "mvp"
 ---
 
 The `$ref` keyword is used to statically reference a schema. This is useful for avoiding code duplication and promoting modularity when describing complex data structures.

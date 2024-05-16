@@ -18,6 +18,7 @@ related:
     keyword: $vocabulary
   - vocabulary: core
     keyword: $defs
+target_version: "mvp"
 ---
 
 The `$schema` keyword is a fundamental element in JSON Schema. It serves the two crucial purposes:
