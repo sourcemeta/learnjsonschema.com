@@ -1,6 +1,6 @@
-<div class="code code-instance bg-warning-subtle border">
-  <div class="d-flex align-items-center border-bottom">
-    <small class="px-2 py-1 border-end flex-grow-1"> Annotations</small>
+<div class="code bg-info">
+  <div class="d-flex align-items-center">
+    <small class="px-2 py-1 flex-grow-1">Annotations</small>
   </div>
   {{ $code := trim .Inner "\n" }} {{ transform.Highlight ($code) "json" }}
 </div>
