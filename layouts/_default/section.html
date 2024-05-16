@@ -181,13 +181,11 @@
           {{ partial "keyword-summary.html" . }}
         {{ end }}
       {{ else }}
-        <h2>Using this vocabulary</h2>
-
         {{ if .Params.mandatory }}
           <p>This vocabulary is mandatory on this dialect. It is available by default and cannot be removed.</p>
         {{ else }}
           {{ if .Params.default }}
-            <div class="alert alert-secondary shadow-sm" role="alert">
+            <div class="alert alert-info" role="alert">
               <h3 class="alert-heading h5">
                 <i class="bi bi-info-circle me-1"></i> Your metaschema is likely already declaring this vocabulary</h3>
               <p class="mb-0">This vocabulary is included by default when using the official metaschema of this dialect:
