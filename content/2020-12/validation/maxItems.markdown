@@ -26,10 +26,6 @@ The `maxItems` keyword is used to specify the maximum number of items allowed in
 * An array is valid if it has less than or equal to the specified number of elements.
 * Omitting `maxItems` means the array has no upper limit (unbounded).
 
-{{<alert>}}
-_**Note:** `items`, `prefixItems`, and `contains` do not affect `minItems`. The instance independently evaluated against `minItems` (if present)._
-{{</alert>}}
-
 ## Examples
 
 {{<schema `Schema with 'maxItems' keyword`>}}

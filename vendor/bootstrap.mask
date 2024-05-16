@@ -41,3 +41,7 @@ config.yml
 package-lock.json
 package.js
 package.json
+scss/tests
+.npmrc
+.stylelintrc.json
+hugo.yml

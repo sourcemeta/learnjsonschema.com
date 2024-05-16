@@ -23,9 +23,9 @@ The `const` keyword in restricts an instance to a specific value. Its usage is f
 * Applies to various JSON data types, including numbers, strings, booleans, objects, and arrays.
 * Takes precedence over other validation keywords like `type` and `enum`.
 
-{{<alert>}}
-_**Note:** It is best practice to avoid using the `type` keyword or any other validation keyword with `const`, as `const` takes precedence over them. Therefore, it is better not to use them together._
-{{</alert>}}
+{{<best-practice>}}
+It is best practice to avoid using the `type` keyword or any other validation keyword with `const`, as `const` takes precedence over them. Therefore, it is better not to use them together.
+{{</best-practice>}}
 
 ## Examples
 

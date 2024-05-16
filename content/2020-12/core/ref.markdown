@@ -31,9 +31,30 @@ related:
 
 The `$ref` keyword is used to statically reference a schema. This is useful for avoiding code duplication and promoting modularity when describing complex data structures.
 
-{{<alert>}}
- _**Note:** It's crucial to understand that an absolute URI does not necessarily denote a remote reference. An absolute URI can point to a local schema if the schema declares nested `$id`s or if it points to itself. Conversely, a relative URI can point to a remote schema by leveraging base URI resolution._
-{{</alert>}}
+{{<common-pitfall>}} Because of how URI resolution works, a reference to an
+absolute URI does not necessarily mean the reference points to a remote
+resource. Conversely, a reference to a relative URI does not necessarily mean
+the reference points to the current schema resource.
+
+When encountering a reference, a JSON Schema implementation will first resolve
+it into an absolute URI given the base URI of the schema. If the resulting
+destination is present in the schema, it will be a local reference. Otherwise,
+a remote reference.
+{{</common-pitfall>}}
+
+{{<learning-more>}} URIs play a central role in JSON Schema. Going through the
+URI [RFC3986](https://datatracker.ietf.org/doc/html/rfc3986) specification is a
+must for gaining a deeper understanding of references, identifiers, and
+anchors. More specifically, we recommend carefully studying [URI
+resolution](https://datatracker.ietf.org/doc/html/rfc3986#section-5), URLs vs
+URNs, and the difference between a URI and a URI Reference.
+
+Additionally, a JSON Schema reference URI may contain a JSON Pointer. For this
+reason, we recommend reading the JSON Pointer
+[RFC6901](https://www.rfc-editor.org/rfc/rfc6901) specification, primarily its
+proposed [URI fragment identifier
+representation](https://www.rfc-editor.org/rfc/rfc6901#section-6).
+{{</learning-more>}}
 
 ## Examples
 
