@@ -87,7 +87,7 @@ article table {
   @extend .table;
 }
 
-.alert {
+.alert:not(.border) {
   @extend .border-top-0;
   @extend .border-bottom-0;
   @extend .border-end-0;
