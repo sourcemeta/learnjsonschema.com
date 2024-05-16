@@ -1,7 +1,7 @@
 ---
 keyword: "contentMediaType"
 signature: "String"
-value: This keyword should be set to a valid media type as defined in [RFC2046](https://www.rfc-editor.org/rfc/rfc2046.html), like the registered [IANA](https://www.iana.org/assignments/media-types/media-types.xhtml) media types
+value: This keyword should be set to a valid media type as defined in [RFC 2046](https://www.rfc-editor.org/rfc/rfc2046.html), like the registered [IANA](https://www.iana.org/assignments/media-types/media-types.xhtml) media types
 summary: "This keyword declares the media type of the string instance."
 kind: [ "annotation" ]
 instance: [ "string" ]
