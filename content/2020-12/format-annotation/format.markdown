@@ -76,16 +76,7 @@ Defined Formats
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/format",
-    "instanceLocation": "",
-    "annotation": "email"
-  },
-  // ...
-]
+{ "keyword": "/format", "instance": "", "value": "email" }
 {{</instance-annotation>}}
 
 {{<schema `Schema with the 'format' keyword having validation rules for email`>}}
@@ -109,14 +100,5 @@ true
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/format",
-    "instanceLocation": "",
-    "annotation": "email"
-  },
-  // ...
-]
+{ "keyword": "/format", "instance": "", "value": "email" }
 {{</instance-annotation>}}

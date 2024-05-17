@@ -58,16 +58,7 @@ The `prefixItems` keyword is used to validate arrays by applying a schema to eac
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/prefixItems",
-    "instanceLocation": "",
-    "annotation": 0
-  },
-  // ...
-]
+{ "keyword": "/prefixItems", "instance": "", "value": 0 }
 {{</instance-annotation>}}
 
 {{<instance-fail `An array instance containing a string value is invalid`>}}
@@ -90,16 +81,7 @@ The `prefixItems` keyword is used to validate arrays by applying a schema to eac
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/prefixItems",
-    "instanceLocation": "",
-    "annotation": 1
-  },
-  // ...
-]
+{ "keyword": "/prefixItems", "instance": "", "value": 1 }
 {{</instance-annotation>}}
 
 {{<schema `Schema with 'prefixItems' and 'items' keyword`>}}
@@ -119,22 +101,8 @@ The `prefixItems` keyword is used to validate arrays by applying a schema to eac
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/prefixItems",
-    "instanceLocation": "",
-    "annotation": 1
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/items",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/prefixItems", "instance": "", "value": 1 }
+{ "keyword": "/items", "instance": "", "value": true }
 {{</instance-annotation>}}
 
 {{<instance-fail `The prefix items of the array instance not adhering to the corresponding subschema in 'prefixItems' is invalid`>}}

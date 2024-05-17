@@ -61,16 +61,7 @@ If the `items` subschema is applied to any positions within the instance array, 
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/items",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/items", "instance": "", "value": true }
 {{</instance-annotation>}}
 
 {{<instance-fail `An array instance containing a string value is invalid`>}}
@@ -94,16 +85,7 @@ If the `items` subschema is applied to any positions within the instance array, 
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/items",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/items", "instance": "", "value": true }
 {{</instance-annotation>}}
 * _Similarly, if the `items` is set to false, all the array instances will fail validation._
 
@@ -124,22 +106,8 @@ If the `items` subschema is applied to any positions within the instance array, 
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/prefixItems",
-    "instanceLocation": "",
-    "annotation": 1
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/items",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/prefixItems", "instance": "", "value": 1 }
+{ "keyword": "/items", "instance": "", "value": true }
 {{</instance-annotation>}}
 
 {{<instance-fail `The prefix items of the array instance must adhere to the subschemas in 'prefixItems' at their respective indexes`>}}
