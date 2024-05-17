@@ -36,9 +36,9 @@ related:
 
 The `propertyNames` keyword in is used to define constraints on the property names within an object instance. It allows you to specify a schema that all the property names in an object instance must adhere to.
 
-{{<alert>}}
+{{<common-pitfall>}}
 _**Note:** Note that the property names in any object instance will always be strings. Therefore, this schema only makes sense when applied to strings. Passing a schema here that matches something other than a string would be invalid._
-{{</alert>}}
+{{</common-pitfall>}}
 
 ## Examples
 

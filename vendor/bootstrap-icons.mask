@@ -18,3 +18,6 @@ package-lock.json
 package.json
 svg-sprite.json
 svgo.config.js
+.stylelintrc.json
+hugo.yml
+svgo.config.mjs

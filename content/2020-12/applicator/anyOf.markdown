@@ -164,9 +164,11 @@ The `anyOf` keyword in JSON Schema is used to specify that an instance must vali
 
 * _Similarly, for the second instance above, validation passes against the first subschema within `anyOf`. Even though the instance does not conform to the second subschema, validation does not proceed to validate against it, as it has already been successfully validated against the first subschema. Thus, the validation stops at that point, rendering the `anyOf` valid, despite the instance not conforming to the second subschema within the `anyOf`._
 
-{{<alert `Important note on performance`>}}
+{{<common-pitfall>}}
+Important note on performance and annotations:
+
 * When running validation only, a JSON Schema implementation may stop validating `anyOf` when it encounters a successful one. However, when collecting annotations, it must evaluate all of them.
 * The process of collecting annotations can impact runtime performance. For instance, if you collect annotations on a JSON Schema utilizing the `anyOf` applicator, the implementation is forced to evaluate the instance against every disjunction in the `anyOf` applicator. Conversely, if annotations are not collected, implementations may stop evaluation as soon as one `anyOf` subschema successfully validates against the instance.
 * In the interest of runtime efficiency, we recommend collecting annotations only if your specific use case demands it.
 
-{{</alert>}}
+{{</common-pitfall>}}

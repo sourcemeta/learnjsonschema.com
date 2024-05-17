@@ -29,13 +29,12 @@ The `$schema` keyword is a fundamental element in JSON Schema. It serves the two
 * The `$schema` keyword should be used in the document root schema object, and may be used in the root schema objects of embedded schema resources.
 * If this keyword is absent from the document root schema, the resulting behavior is implementation-defined.
 
-{{<alert>}}
-**Important:**
+{{<best-practice>}}
 * Declaring `$schema` is highly recommended for several reasons. It ensures clarity by explicitly stating the version of JSON Schema the schema follows. This helps JSON Schema implementations (tools and libraries) understand how to interpret and validate the schema accurately.
 * JSON Schema versions may introduce new keywords or modify existing ones. By specifying the `$schema`, you establish the specific vocabulary  that applies to your schema, preventing ambiguity, especially if you're using custom keywords.
 * The schema is expected to successfully validate against its own meta-schema, ensuring its correctness and adherence to the JSON Schema standard.
 * In scenarios where schemas are bundled together, you might encounter nested `$schema` keywords within the same resource. Each nested schema should still have its own `$schema` property to indicate its specific dialect.
-{{</alert>}}
+{{</best-practice>}}
 
 ## Examples
 
