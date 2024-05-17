@@ -27,8 +27,6 @@ related:
     keyword: deprecated
 ---
 
-## Explanation
-
 The `description` keyword in JSON Schema is used to provide a human readable description for the schema. It does not affect data validation but serves as an informative annotation.
 
 ## Examples

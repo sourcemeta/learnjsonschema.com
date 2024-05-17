@@ -28,8 +28,6 @@ related:
     keyword: deprecated
 ---
 
-## Explanation
-
 The `default` keyword in JSON Schema is used to specify a default value for an instance. This value is not automatically used to fill in missing values during the validation process but can be used by tools such as documentation or form generators.
 
 _**Note:** While it is recommended that the default value validate against its subschema, this requirement is not strictly enforced._

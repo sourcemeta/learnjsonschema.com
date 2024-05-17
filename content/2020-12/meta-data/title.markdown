@@ -27,8 +27,6 @@ related:
     keyword: deprecated
 ---
 
-## Explanation
-
 The `title` keyword in JSON Schema is used to provide a human-readable label for a schema or its parts. It does not affect data validation but serves as an informative annotation.
 
 ## Examples

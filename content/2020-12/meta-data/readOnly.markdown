@@ -28,8 +28,6 @@ related:
     keyword: deprecated
 ---
 
-## Explanation
-
 The `readOnly` keyword is used to indicate that the value of a particular property is managed exclusively by the owning authority, and attempts by an application to modify the value of this property are expected to be ignored or rejected by that authority. It essentially means that the instance value should not be modified.
 
 It's important to note that this keyword doesn't imply the schema itself is writable; schemas must be treated as immutable. Instead, the keyword specifies instances where read/write operation semantics are use case specific.

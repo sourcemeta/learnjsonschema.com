@@ -41,8 +41,6 @@ related:
     keyword: unevaluatedProperties
 ---
 
-## Explanation
-
 The `additionalProperties` keyword is used to control the handling of properties whose names are not listed in the `properties` keyword or match any of the regular expressions in the `patternProperties` keyword. By default any additional properties are allowed.
 
 The behavior of this keyword depends on the presence and annotation results of `properties` and `patternProperties` within the same schema object. Validation with `additionalProperties` applies only to the child values of instance names that do not appear in the annotation results of either `properties` or `patternProperties`.

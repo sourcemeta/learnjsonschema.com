@@ -30,8 +30,6 @@ related:
     keyword: deprecated
 ---
 
-## Explanation
-
 The `examples` keyword is used to provide a list of example instances associated with a particular schema that should ideally validate against the schema. These examples serve to illustrate the intended structure and constraints defined by the schema. While these examples are not used for validation purposes, they are helpful in providing sample valid instances against the schema they are defined in.
 
 _**Note:** While it is recommended that the examples validate against the subschema they are defined in, this requirement is not strictly enforced._
