@@ -123,6 +123,6 @@ article table {
 }
 
 details:not([open]) summary i {
-  display: inline-block;
+  @extend .d-inline-block;
   transform: rotate(-90deg); 
 }
