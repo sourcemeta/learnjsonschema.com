@@ -49,12 +49,7 @@ It's important to note that this keyword doesn't imply the schema itself is writ
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{
-  "valid": true,
-  "keywordLocation": "/readOnly",
-  "instanceLocation": "",
-  "annotation": true
-}
+{ "keyword": "/readOnly", "instance": "", "value": true }
 {{</instance-annotation>}}
 
 {{<schema `Schema with logical operators`>}}
@@ -79,16 +74,7 @@ It's important to note that this keyword doesn't imply the schema itself is writ
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  /// ...
-  {
-    "valid": true,
-    "keywordLocation": "/else/readOnly",
-    "instanceLocation": "",
-    "annotation": false
-  },
-  // ...
-]
+{ "keyword": "/else/readOnly", "instance": "", "value": false }
 {{</instance-annotation>}}
 
 {{<instance-pass>}}
@@ -96,16 +82,7 @@ It's important to note that this keyword doesn't imply the schema itself is writ
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  /// ...
-  {
-    "valid": true,
-    "keywordLocation": "/then/readOnly",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/then/readOnly", "instance": "", "value": true }
 {{</instance-annotation>}}
 
 {{<schema `Schema with multiple annotations for the same instance`>}}
@@ -127,20 +104,6 @@ It's important to note that this keyword doesn't imply the schema itself is writ
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/readOnly",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/$ref/readOnly",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/readOnly", "instance": "", "value": true }
+{ "keyword": "/$ref/readOnly", "instance": "", "value": true }
 {{</instance-annotation>}}
