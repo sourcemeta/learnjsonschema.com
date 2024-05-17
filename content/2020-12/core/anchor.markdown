@@ -1,26 +1,29 @@
 ---
 keyword: "$anchor"
 signature: "String"
+value: This keyword must be set to a string starting with a letter and containing letters, digits, hyphens, underscores, colons, or periods
 summary: "This keyword is used to create plain name fragments that are not tied to any particular structural location for referencing purposes, which are taken into consideration for static referencing."
 kind: [ "identifier" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-8.2.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/core"
+tests:
+  - draft2020-12/anchor.json
 introduced_in: 2019-09
-related:
-  - vocabulary: core
-    keyword: $id
+affects:
   - vocabulary: core
     keyword: $ref
   - vocabulary: core
     keyword: $dynamicRef
+related:
+  - vocabulary: core
+    keyword: $id
   - vocabulary: core
     keyword: $dynamicAnchor
 ---
 
 The `$anchor` keyword is used to assign a unique identifier to a subschema within its schema resource. This identifier can then be referenced elsewhere using the `$ref` keyword.
 
-* Its value must be a valid identifier starting with a letter and containing letters, digits, hyphens, underscores, colons, or periods.
 * The `$anchor` keyword allows for the creation of plain reusable name fragments that aren't tied to specific structural locations, offering a flexible alternative to using JSON Pointer fragments, which require knowledge of the schema's structure.
 * An anchor is resolved against the base URI of its schema resource.
 

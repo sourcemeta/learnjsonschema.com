@@ -1,12 +1,18 @@
 ---
 keyword: "default"
 signature: "Any"
+value: This keyword must be set to a JSON value, preferrably that successfully validates against the corresponding subschema
 summary: "This keyword can be used to supply a default JSON value associated with a particular schema."
 kind: [ "annotation" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-9.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/meta-data"
+tests:
+  - draft2020-12/default.json
 introduced_in: draft1
+annotation:
+   description: The default value set by this keyword
+   kind: [ "any" ]
 related:
   - vocabulary: meta-data
     keyword: title
@@ -21,13 +27,6 @@ related:
   - vocabulary: meta-data
     keyword: deprecated
 ---
-
-Annotations
------------
-
-This keyword produces the default value as the annotation value.
-
-## Explanation
 
 The `default` keyword in JSON Schema is used to specify a default value for an instance. This value is not automatically used to fill in missing values during the validation process but can be used by tools such as documentation or form generators.
 

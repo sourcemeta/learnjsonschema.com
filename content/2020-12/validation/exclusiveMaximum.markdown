@@ -1,11 +1,14 @@
 ---
 keyword: "exclusiveMaximum"
 signature: "Number"
+value: This keyword must be set to a number
 summary: "Validation succeeds if the numeric instance is less than the given number."
 kind: [ "assertion" ]
 instance: [ "number" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6.2.3"
 metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
+tests:
+  - draft2020-12/exclusiveMaximum.json
 index: -999
 introduced_in: draft3
 related:

@@ -1,13 +1,25 @@
 ---
 keyword: "$id"
 signature: "URI Reference"
+value: This keyword must be set to an absolute URI or a relative reference as defined by [RFC 3986](https://www.rfc-editor.org/info/rfc3986)without a fragment
 summary: "This keyword declares an identifier for the schema resource."
 kind: [ "identifier" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-8.2.1"
 metaschema: "https://json-schema.org/draft/2020-12/meta/core"
+tests:
+  - draft2020-12/optional/id.json
 index: -999
 introduced_in: draft6
+affects:
+  - vocabulary: core
+    keyword: $ref
+  - vocabulary: core
+    keyword: $dynamicRef
+  - vocabulary: core
+    keyword: $anchor
+  - vocabulary: core
+    keyword: $dynamicAnchor
 related:
   - vocabulary: core
     keyword: $schema
@@ -15,7 +27,7 @@ related:
     keyword: $vocabulary
 ---
 
-{{< alert "Good to know!" >}}
+{{<learning-more>}}
 Generally, `schema` and `schema resource` might create confusion. Let's clarify the terminology first:
 
 **Schema**: This refers to the entire JSON boolean or JSON object passed to an evaluator.
@@ -31,7 +43,7 @@ _Relationships_:
 * A _schema object_ has one or more keywords.
 
 _**Note**: A schema resource does not include its children schema resources, as they are conceptually distinct entities, despite being nested.  However, all of them are part of the same schema. Refer to the last example for clarification._
-{{< /alert >}}
+{{</learning-more>}}
 
 The `$id` keyword declares the URI for a schema, usually set at the top level. However, any subschema has the flexibility to declare its own `$id` to distinguish itself with a distinct URI. Each subschema with an `$id` in a compound schema is called a _schema resource_.
 

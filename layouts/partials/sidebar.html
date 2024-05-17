@@ -1,9 +1,8 @@
 <aside id="sidebar" class="border-end position-relative d-none d-xl-block">
-  <div class="px-4 py-4">
+  <div class="px-4 py-2 top-0 start-0 bottom-0">
     {{ range .Site.Sections }}
       {{ $dialect := .Title }}
       {{ $dialectURL := $dialect | printf "/%s" }}
-      <a href="{{ ref . $dialectURL }}" class="h5 d-block fw-bold border-bottom text-decoration-none text-dark">{{ $dialect }}</a>
       <ul class="nav flex-column text-nowrap mb-4">
         {{ range sort .Sections "Params.index" "asc" }}
           <li class="nav-item">
@@ -22,7 +21,7 @@
                         <a class="text-muted fw-bold text-decoration-none font-monospace active"
                           href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
                       {{ else }}
-                        <a class="text-black-50 text-decoration-none font-monospace"
+                        <a class="text-secondary text-decoration-none font-monospace"
                           href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
                       {{ end }}
                     </li>
@@ -34,7 +33,5 @@
         {{ end }}
       </ul>
     {{ end }}
-
-    <small class="text-muted">More dialects coming soon!</small>
   </div>
 </aside>

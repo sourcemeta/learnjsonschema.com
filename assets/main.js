@@ -1,3 +1,4 @@
+import './vendor/bootstrap/js/src/dropdown.js';
 import Tooltip from './vendor/bootstrap/js/src/tooltip.js';
 
 // Initialize tooltips

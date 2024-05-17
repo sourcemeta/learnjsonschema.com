@@ -1,11 +1,14 @@
 ---
 keyword: "$schema"
 signature: "URI"
+value: This keyword must be set to an absolute URI as defined by [RFC 3986](https://www.rfc-editor.org/info/rfc3986)
 summary: "This keyword is both used as a JSON Schema dialect identifier and as a reference to a JSON Schema which describes the set of valid schemas written for this particular dialect."
 kind: [ "identifier" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-8.1.1"
 metaschema: "https://json-schema.org/draft/2020-12/meta/core"
+default:
+  description: Implementation dependent
 index: -999
 introduced_in: draft3
 related:
@@ -22,18 +25,16 @@ The `$schema` keyword is a fundamental element in JSON Schema. It serves the two
 
 2. **Meta-Schema Validation:** The value of `$schema` is a URI pointing to a "meta-schema", which defines the structure and validation rules for JSON Schemas. A schema that describes another schema is called a "meta-schema". The schema is expected to be valid against its own meta-schema.
 
-* The value of this keyword must be a [URI](https://json-schema.org/draft/2020-12/json-schema-core#RFC3986).
 * The current schema must be valid against the meta-schema identified by this URI.
 * The `$schema` keyword should be used in the document root schema object, and may be used in the root schema objects of embedded schema resources.
 * If this keyword is absent from the document root schema, the resulting behavior is implementation-defined.
 
-{{<alert>}}
-**Important:**
+{{<best-practice>}}
 * Declaring `$schema` is highly recommended for several reasons. It ensures clarity by explicitly stating the version of JSON Schema the schema follows. This helps JSON Schema implementations (tools and libraries) understand how to interpret and validate the schema accurately.
 * JSON Schema versions may introduce new keywords or modify existing ones. By specifying the `$schema`, you establish the specific vocabulary  that applies to your schema, preventing ambiguity, especially if you're using custom keywords.
 * The schema is expected to successfully validate against its own meta-schema, ensuring its correctness and adherence to the JSON Schema standard.
 * In scenarios where schemas are bundled together, you might encounter nested `$schema` keywords within the same resource. Each nested schema should still have its own `$schema` property to indicate its specific dialect.
-{{</alert>}}
+{{</best-practice>}}
 
 ## Examples
 

@@ -1,11 +1,14 @@
 ---
 keyword: "maxProperties"
 signature: "Integer"
+value: This keyword must be set to a zero or positive integer
 summary: "An object instance is valid if its number of properties is less than, or equal to, the value of this keyword."
 kind: [ "assertion" ]
 instance: [ "object" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6.5.1"
 metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
+tests:
+  - draft2020-12/maxProperties.json
 index: -99
 introduced_in: draft4
 related:
@@ -20,8 +23,6 @@ related:
 ---
 
 The `maxProperties` keyword is used to specify the maximum number of properties allowed in an object instnace. It is typically used to enforce constraints on the number of properties an object instance can have. If the number of properties in the object exceeds the value specified by `maxProperties`, the validation fails.
-* It applies specifically to object instances.
-* The value of this keyword must be a non-negative integer (0 or greater).
 * Setting `maxProperties` to 0 enforces an empty object instance.
 
 ## Examples

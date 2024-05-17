@@ -8,13 +8,15 @@
 {{ $vocabularyURL := $vocabulary | lower | printf "%s/%s" $dialectURL }}
 {{ $githubURL := .File.Path | printf "%s/blob/main/content/%s" .Site.Params.GitHub }}
 
+{{ $siteSections := .Site.Sections }}
 {{ partial "breadcrumb.html" (dict
   "dialect" $dialect
   "dialectURL" (ref . $dialectURL)
   "vocabulary" $vocabulary
   "vocabularyURL" (ref . (replace $vocabularyURL " " "-"))
   "keyword" .Params.keyword
-  "githubURL" $githubURL ) }}
+  "githubURL" $githubURL
+  "siteSections" $siteSections ) }}
 
 <div class="d-flex bg-body flex-fill">
   {{ partial "sidebar.html" . }}
@@ -33,7 +35,17 @@
         </header>
 
         <div class="table-responsive shadow-sm mt-3 mb-4" data-nosnippet>
-          <table class="table table-bordered table-light mb-0">
+          <table class="table table-bordered table-highlight mb-0">
+            <tr>
+              <th scope="row">Value</th>
+              <td class="text-break">
+                {{ if isset .Params "value" }}
+                  <small>{{ .Params.value | markdownify }}</small>
+                {{ else }}
+                  {{ errorf "Keyword is missing value description" }}
+                {{ end }}
+              </td>
+            </tr>
             <tr>
               <th scope="row">Kind</th>
               <td class="text-break">
@@ -94,10 +106,70 @@
                 </a>
               </td>
             </tr>
-            {{ if isset .Params "interdependencies" }}
-              <tr>
-                <th scope="row">Affected By</th>
-                <td class="text-break">
+
+            <tr>
+              <th scope="row">Official Tests</th>
+              <td class="text-break">
+                {{ if isset .Params "tests" }}
+                  {{ if eq (len .Params.tests) 1 }}
+                    <a class="font-monospace" target="_blank" href="https://github.com/json-schema-org/JSON-Schema-Test-Suite/blob/main/tests/{{ index .Params.tests 0 }}">
+                      {{ index .Params.tests 0 }}
+                      <i class="bi bi-box-arrow-up-right ms-1"></i>
+                    </a>
+                  {{ else }}
+                    <ul class="mb-0 ps-4">
+                      {{ range (.Params.tests) }}
+                        <li>
+                          <a class="font-monospace" target="_blank" href="https://github.com/json-schema-org/JSON-Schema-Test-Suite/blob/main/tests/{{ . }}">
+                            {{ . }}
+                            <i class="bi bi-box-arrow-up-right ms-1"></i>
+                          </a>
+                        </li>
+                      {{ end }}
+                    </ul>
+                  {{ end }}
+                {{ else }}
+                  <small>None</small>
+                {{ end }}
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">Default</th>
+              <td class="text-break">
+                {{ if isset .Params "default" }}
+                  {{ if isset .Params.default "description" }}
+                    <small>{{ .Params.default.description }}</small>
+                  {{ else if isset .Params.default "value" }}
+                    <code>{{ .Params.default.value }}</code>
+                  {{ else if isset .Params.default "logical_value" }}
+                    <small class="align-middle">As if it was set to the (invalid) value: </small>
+                    <code class="align-middle">{{ .Params.default.logical_value }}</code>
+                  {{ else }}
+                    {{ errorf "Invalid default" }}
+                  {{ end }}
+                {{ else }}
+                  <small>None</small>
+                {{ end }}
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">Annotation</th>
+              <td class="text-break">
+                {{ if isset .Params "annotation" }}
+                  {{ partial "instance-badges.html" (dict "types" .Params.annotation.kind) }}
+                  <small>{{ .Params.annotation.description }}</small>
+                {{ else }}
+                  <small>None</small>
+                {{ end }}
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">Affected By</th>
+              <td class="text-break">
+                {{ if isset .Params "interdependencies" }}
                   <ul class="mb-0 ps-4">
                     {{ range (.Params.interdependencies) }}
                       <li>
@@ -108,13 +180,35 @@
                       </li>
                     {{ end }}
                   </ul>
-                </td>
-              </tr>
-            {{ end }}
+                {{ else }}
+                  <small>None</small>
+                {{ end }}
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">Affects</th>
+              <td class="text-break">
+                {{ if isset .Params "affects" }}
+                  <ul class="mb-0 ps-4">
+                    {{ range (.Params.affects) }}
+                      <li>
+                        {{ $affectedVocabularyURL := .vocabulary | printf "/%s/%s" $dialect }}
+                        {{ $affectedKeywordURL := (replace .keyword "$" "") | printf "%s/%s/%s" $dialect .vocabulary }}
+                        <a class="font-monospace" href="{{ ref $ $affectedKeywordURL }}">{{ .keyword }}</a>
+                        <small>(Vocabulary: <a href="{{ ref $ $affectedVocabularyURL }}">{{ title .vocabulary }}</a>)</small>
+                      </li>
+                    {{ end }}
+                  </ul>
+                {{ else }}
+                  <small>None</small>
+                {{ end }}
+              </td>
+            </tr>
 
             {{ if isset .Params "related" }}
               <tr>
-                <th scope="row">Also see</th>
+                <th scope="row">Also See</th>
                 <td class="text-break">
                   <ul class="mb-0 ps-4">
                     {{ range (.Params.related) }}

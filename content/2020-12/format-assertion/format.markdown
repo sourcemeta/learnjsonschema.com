@@ -1,21 +1,48 @@
 ---
 keyword: "format"
 signature: "String"
+value: This keyword must be set to a string, preferrably one that is standardized by JSON Schema to ensure interoperability
 summary: "Define and assert semantic information about a string instance."
 kind: [ "annotation", "assertion" ]
 instance: [ "string" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.2.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/format-assertion"
+tests:
+  - draft2020-12/optional/format-assertion.json
+  - draft2020-12/optional/format/date-time.json
+  - draft2020-12/optional/format/date.json
+  - draft2020-12/optional/format/duration.json
+  - draft2020-12/optional/format/email.json
+  - draft2020-12/optional/format/hostname.json
+  - draft2020-12/optional/format/idn-email.json
+  - draft2020-12/optional/format/idn-hostname.json
+  - draft2020-12/optional/format/ipv4.json
+  - draft2020-12/optional/format/ipv6.json
+  - draft2020-12/optional/format/iri-reference.json
+  - draft2020-12/optional/format/iri.json
+  - draft2020-12/optional/format/json-pointer.json
+  - draft2020-12/optional/format/regex.json
+  - draft2020-12/optional/format/relative-json-pointer.json
+  - draft2020-12/optional/format/time.json
+  - draft2020-12/optional/format/unknown.json
+  - draft2020-12/optional/format/uri-reference.json
+  - draft2020-12/optional/format/uri-template.json
+  - draft2020-12/optional/format/uri.json
+  - draft2020-12/optional/format/uuid.json
 introduced_in: draft1
+annotation:
+   description: The format name set by this keyword
+   kind: [ "string" ]
 related:
   - vocabulary: format-annotation
     keyword: format
 ---
 
-Annotations
------------
+## Explanation
 
-This keyword produces the format name as the annotation value.
+The `format` keyword of the "format-assertion" vocabulary allows for basic semantic identification of certain kinds of string values that are commonly used. It provides a way to specify logical formats for string types, such as dates, email addresses, URIs, etc. However, it's important to note that this vocabulary is not used by default in the official 2020-12 dialect of JSON Schema. If you want to utilize it, you would need to define your own custom dialect that includes this vocabulary.
+
+While the `format` keyword theoretically provides interoperable logical string type validation, many existing implementations may not support this vocabulary. Therefore, it's recommended to use the `format` keyword from the Format Annotation vocabulary (which is available out of the box) alongside any custom validation within the schema.
 
 Defined Formats
 ---------------
@@ -41,12 +68,6 @@ Defined Formats
 | `"json-pointer"`          | JSON Pointer         | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.7 |
 | `"relative-json-pointer"` | JSON Pointer         | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.7 |
 | `"regex"`                 | Regular Expressions  | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.8 |
-
-## Explanation
-
-The `format` keyword of the "format-assertion" vocabulary allows for basic semantic identification of certain kinds of string values that are commonly used. It provides a way to specify logical formats for string types, such as dates, email addresses, URIs, etc. However, it's important to note that this vocabulary is not used by default in the official 2020-12 dialect of JSON Schema. If you want to utilize it, you would need to define your own custom dialect that includes this vocabulary.
-
-While the `format` keyword theoretically provides interoperable logical string type validation, many existing implementations may not support this vocabulary. Therefore, it's recommended to use the `format` keyword from the Format Annotation vocabulary (which is available out of the box) alongside any custom validation within the schema.
 
 ## Examples
 

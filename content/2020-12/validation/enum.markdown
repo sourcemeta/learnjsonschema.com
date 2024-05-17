@@ -1,11 +1,14 @@
 ---
 keyword: "enum"
 signature: "Array<Any>"
+value: This keyword must be set to a *non-empty* array of unique JSON values
 summary: "Validation succeeds if the instance is equal to one of the elements in this keyword's array value."
 kind: [ "assertion" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6.1.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
+tests:
+  - draft2020-12/enum.json
 index: -99998
 introduced_in: draft1
 related:
@@ -19,7 +22,7 @@ related:
     keyword: oneOf
 ---
 
-The `enum` keyword specifies a validation constraint for an instance, defining a set of permissible values. The value of the `enum` keyword must be an array containing at least one element, and these elements should be unique. The validation succeeds if the value of the instance matches one of the elements in the `enum` array.
+The `enum` keyword specifies a validation constraint for an instance, defining a set of permissible values. The validation succeeds if the value of the instance matches one of the elements in the `enum` array.
 
 _**Note:** Using the `type` keyword along the `enum` keyword is considered an anti-pattern, as `enum` constraints instances tighter than `type`._
 

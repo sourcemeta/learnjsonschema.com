@@ -1,11 +1,14 @@
 ---
 keyword: "const"
 signature: "Any"
+value: This keyword must be set to a JSON value
 summary: "Validation succeeds if the instance is equal to this keyword's value."
 kind: [ "assertion" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6.1.3"
 metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
+tests:
+  - draft2020-12/const.json
 index: -99997
 introduced_in: draft6
 related:
@@ -20,9 +23,9 @@ The `const` keyword in restricts an instance to a specific value. Its usage is f
 * Applies to various JSON data types, including numbers, strings, booleans, objects, and arrays.
 * Takes precedence over other validation keywords like `type` and `enum`.
 
-{{<alert>}}
-_**Note:** It is best practice to avoid using the `type` keyword or any other validation keyword with `const`, as `const` takes precedence over them. Therefore, it is better not to use them together._
-{{</alert>}}
+{{<best-practice>}}
+It is best practice to avoid using the `type` keyword or any other validation keyword with `const`, as `const` takes precedence over them. Therefore, it is better not to use them together.
+{{</best-practice>}}
 
 ## Examples
 

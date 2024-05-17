@@ -12,7 +12,6 @@ js/src/alert.js
 js/src/button.js
 js/src/carousel.js
 js/src/collapse.js
-js/src/dropdown.js
 js/src/modal.js
 js/src/offcanvas.js
 js/src/popover.js
@@ -42,3 +41,7 @@ config.yml
 package-lock.json
 package.js
 package.json
+scss/tests
+.npmrc
+.stylelintrc.json
+hugo.yml

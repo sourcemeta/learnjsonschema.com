@@ -1,12 +1,18 @@
 ---
 keyword: "deprecated"
 signature: "Boolean"
+value: This keyword must be set to a boolean value
 summary: "This keyword indicates that applications should refrain from using the declared property."
 kind: [ "annotation" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-9.3"
 metaschema: "https://json-schema.org/draft/2020-12/meta/meta-data"
 introduced_in: 2019-09
+default:
+  value: false
+annotation:
+   description: The boolean value set by this keyword
+   kind: [ "boolean" ]
 related:
   - vocabulary: meta-data
     keyword: title
@@ -22,19 +28,10 @@ related:
     keyword: writeOnly
 ---
 
-Annotations
------------
-
-This keyword produces the annotation value `true` if the keyword is set to `true`, or `false` otherwise.
-
-## Explanation
-
 The `deprecated` keyword is used to indicate that a particular property should not be used and may be removed in the future. It provides a warning to users or applications that certain parts of the schema or are no longer recommended for use.
 
-* The value of this keyword must be a boolean.
 * `deprecated` does not affect data validation but serves as an informative annotation.
 * A true value suggests that applications should avoid using the deprecated property, and the property might be removed in future versions of the schema.
-* Omitting this keywords has the same behavior as values of false.
 
 ## Examples
 

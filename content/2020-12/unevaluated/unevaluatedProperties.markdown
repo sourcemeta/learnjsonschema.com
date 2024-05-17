@@ -1,12 +1,20 @@
 ---
 keyword: "unevaluatedProperties"
 signature: "Schema"
+value: This keyword must be set to a valid JSON Schema
 summary: "Validates object properties that did not successfully validate against other standard object applicators."
 kind: [ "applicator", "annotation" ]
 instance: [ "object" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-11.3"
 metaschema: "https://json-schema.org/draft/2020-12/meta/unevaluated"
+default:
+  value: "{}"
+tests:
+  - draft2020-12/unevaluatedProperties.json
 introduced_in: 2019-09
+annotation:
+   description: The set of instance property names validated by this keyword's subschema
+   kind: [ "array" ]
 interdependencies:
   - vocabulary: applicator
     keyword: properties
@@ -14,23 +22,16 @@ interdependencies:
     keyword: patternProperties
   - vocabulary: applicator
     keyword: additionalProperties
-  - vocabulary: validation
-    keyword: minProperties
-  - vocabulary: validation
-    keyword: maxProperties
 related:
   - vocabulary: unevaluated
     keyword: unevaluatedItems
 ---
 
-Annotations
------------
-
-The annotation result of this keyword is the set of instance property names validated by this keyword's subschema.
+Validation with `unevaluatedProperties` applies only to the child values of instance names that do not appear in the `properties`, `patternProperties`, `additionalProperties`, or `unevaluatedProperties` annotation results that apply to the instance location being validated. For all such properties, validation succeeds if the child instance validates against the `unevaluatedProperties` schema.
 
 ## Evaluation
 
-Before delving into `unevaluatedProperties`, it's crucial to understand what evaluation means in this context.
+It's crucial to understand what evaluation means in this context.
 
 `unevaluatedProperties` considers annotations from `properties`, `patternProperties`, and `additionalProperties`, both as adjacent keywords and in subschemas of adjacent keywords. Additionally, it is also affected by other `unevaluatedProperties` in nested schemas (if present).
 
@@ -38,13 +39,6 @@ Before delving into `unevaluatedProperties`, it's crucial to understand what eva
 - If any of these keywords generate an annotation for a particular property at the same instance location (independently of the schema location), that property is considered as evaluated.
 - By definition, the `unevaluatedProperties` subschema is always applied after `properties`, `patternProperties`, and `additionalProperties` subschemas.
 - As its name implies, `unevaluatedProperties` applies to any object property that has not been previously evaluated.
-
-## Explanation
-
-Validation with `unevaluatedProperties` applies only to the child values of instance names that do not appear in the `properties`, `patternProperties`, `additionalProperties`, or `unevaluatedProperties` annotation results that apply to the instance location being validated. For all such properties, validation succeeds if the child instance validates against the `unevaluatedProperties` schema.
-
-- The value of `unevaluatedProperties` must be a valid JSON Schema.
-- The annotation result of this keyword is the set of instance property names validated by this keyword's subschema.
 
 ## Examples
 

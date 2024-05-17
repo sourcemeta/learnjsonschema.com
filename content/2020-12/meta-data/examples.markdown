@@ -1,12 +1,20 @@
 ---
 keyword: "examples"
 signature: "Array<Any>"
+value: This keyword must be set to an array of JSON values that preferrably successfully validates against the corresponding subschema
 summary: "This keyword is used to provide sample JSON values associated with a particular schema, for the purpose of illustrating usage."
 kind: [ "annotation" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-9.5"
 metaschema: "https://json-schema.org/draft/2020-12/meta/meta-data"
+default:
+  value: "[]"
+tests:
+  - draft2020-12/optional/refOfUnknownKeyword.json
 introduced_in: draft6
+annotation:
+   description: The set of examples set by this keyword
+   kind: [ "array" ]
 related:
   - vocabulary: meta-data
     keyword: title
@@ -22,18 +30,10 @@ related:
     keyword: deprecated
 ---
 
-Annotations
------------
-
-This keyword produces the list of examples as the annotation value.
-
-## Explanation
-
 The `examples` keyword is used to provide a list of example instances associated with a particular schema that should ideally validate against the schema. These examples serve to illustrate the intended structure and constraints defined by the schema. While these examples are not used for validation purposes, they are helpful in providing sample valid instances against the schema they are defined in.
 
 _**Note:** While it is recommended that the examples validate against the subschema they are defined in, this requirement is not strictly enforced._
 
-* The value of this keyword must be an array.
 * Used to demonstrate how data should conform to the schema.
 * `examples` does not affect data validation but serves as an informative annotation.
 

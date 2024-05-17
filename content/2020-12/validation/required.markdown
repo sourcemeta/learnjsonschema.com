@@ -1,11 +1,16 @@
 ---
 keyword: "required"
 signature: "Array<String>"
+value: This keyword must be set to a *non-empty* array of unique strings
 summary: "An object instance is valid against this keyword if every item in the array is the name of a property in the instance."
 kind: [ "assertion" ]
 instance: [ "object" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6.5.3"
 metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
+default:
+  logical_value: "[]"
+tests:
+  - draft2020-12/required.json
 index: -99
 introduced_in: draft3
 related:
@@ -18,9 +23,6 @@ related:
 ---
 
 The `required` keyword is used to specify which properties must be present within an object instance.
-* The value of this keyword must be an array.
-* Elements of this array, if any, must be strings, and must be unique.
-* Omitting this keyword has the same behavior as an empty array.
 
 ## Examples
 

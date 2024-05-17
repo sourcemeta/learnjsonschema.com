@@ -1,11 +1,14 @@
 ---
 keyword: "maxItems"
 signature: "Integer"
+value: This keyword must be set to a zero or positive integer
 summary: "An array instance is valid if its size is less than, or equal to, the value of this keyword."
 kind: [ "assertion" ]
 instance: [ "array" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6.4.1"
 metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
+tests:
+  - draft2020-12/maxItems.json
 index: -9
 introduced_in: draft1
 related:
@@ -20,14 +23,8 @@ related:
 ---
 
 The `maxItems` keyword is used to specify the maximum number of items allowed in an array. It can be used to define constraints on the size of an array within an array instance.
-* Applies to arrays only.
-* Value must be a non-negative integer.
 * An array is valid if it has less than or equal to the specified number of elements.
 * Omitting `maxItems` means the array has no upper limit (unbounded).
-
-{{<alert>}}
-_**Note:** `items`, `prefixItems`, and `contains` do not affect `minItems`. The instance independently evaluated against `minItems` (if present)._
-{{</alert>}}
 
 ## Examples
 

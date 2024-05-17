@@ -1,4 +1,20 @@
-<nav aria-label="breadcrumb" class="d-flex align-items-center bg-light bg-gradient border-bottom px-3 py-2 shadow-sm">
+<nav aria-label="breadcrumb" class="d-flex align-items-center bg-light-subtle border-bottom px-3 py-2">
+
+  {{ $selected_dialect := .dialect }}
+  <div class="dropdown pe-3">
+    <button class="btn btn-outline-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Other dialects
+    </button>
+    <ul class="dropdown-menu">
+      {{ range .siteSections }}
+        {{ if ne $selected_dialect .Title }}
+          <li><a class="dropdown-item" href="{{ ref . .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      {{ end }}
+      <li><a class="dropdown-item disabled" aria-disabled="true">More coming soon!</a></li>
+    </ul>
+  </div>
+
   <ol class="breadcrumb mb-0 flex-grow-1 justify-content-center justify-content-md-start">
     {{ if isset . "keyword" }}
       <li class="breadcrumb-item">

@@ -1,40 +1,35 @@
 ---
 keyword: "unevaluatedItems"
 signature: "Schema"
+value: This keyword must be set to a valid JSON Schema
 summary: "Validates array elements that did not successfully validate against other standard array applicators."
 kind: [ "applicator", "annotation" ]
 instance: [ "array" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-11.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/unevaluated"
+default:
+  value: "{}"
+tests:
+  - draft2020-12/unevaluatedItems.json
 introduced_in: 2019-09
+annotation:
+   description: A boolean true if it applied to any item of the instance
+   kind: [ "boolean" ]
 interdependencies:
   - vocabulary: applicator
     keyword: prefixItems
   - vocabulary: applicator
     keyword: items
-  - vocabulary: validation
-    keyword: minItems
-  - vocabulary: validation
-    keyword: maxItems
-  - vocabulary: applicator
-    keyword: contains
-  - vocabulary: validation
-    keyword: minContains
-  - vocabulary: validation
-    keyword: maxContains
 related:
   - vocabulary: unevaluated
     keyword: unevaluatedProperties
 ---
 
-Annotations
------------
-
-If this keyword is applied to any instance element, it produces an annotation value of `true`.
+If no relevant annotations are present, the `unevaluatedItems` subschema must be applied to all locations in the array. If a boolean true value is present from any of the relevant annotations, `unevaluatedItems` is ignored. Otherwise, the subschema must be applied to any index greater than the largest annotation value for `prefixItems`, which does not appear in any annotation value for `contains`.
 
 ## Evaluation
 
-Before delving into `unevaluatedItems`, it's crucial to understand what evaluation means in this context.
+It's crucial to understand what evaluation means in this context.
 
 `unevaluatedItems` considers annotations from `prefixItems`, `items`, and `contains`, both as adjacent keywords and in subschemas of adjacent keywords. Additionally, it is also affected by other `unevaluatedItems` in nested schemas (if present).
 
@@ -42,13 +37,6 @@ Before delving into `unevaluatedItems`, it's crucial to understand what evaluati
 - If any of these keywords generate an annotation for a particular index, that index is considered as evaluated.
 - By definition, the `unevaluatedItems` subschema is always applied after  `prefixItems`, `items`, and `contains` subschemas.
 - As its name implies, `unevaluatedItems` applies to any array index that has not been previously evaluated.
-
-## Explanation
-
-If no relevant annotations are present, the `unevaluatedItems` subschema must be applied to all locations in the array. If a boolean true value is present from any of the relevant annotations, `unevaluatedItems` is ignored. Otherwise, the subschema must be applied to any index greater than the largest annotation value for `prefixItems`, which does not appear in any annotation value for `contains`.
-
-- The value of `unevaluatedItems` must be a valid JSON Schema.
-- If this keyword is applied to any instance element, it produces an annotation value of `true`.
 
 ## Examples
 

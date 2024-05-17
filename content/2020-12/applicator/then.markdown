@@ -1,11 +1,16 @@
 ---
 keyword: "then"
 signature: "Schema"
-summary: "When `if` is present, and the instance successfully validates against its subschema, then validation succeeds against this keyword if the instance also successfully validates against this keyword's subschema."
+value: This keyword must be set to a valid JSON Schema
+summary: "When [`if`](/2020-12/applicator/if) is present, and the instance successfully validates against its subschema, then validation succeeds against this keyword if the instance also successfully validates against this keyword's subschema."
 kind: [ "applicator" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-10.2.2.2"
 metaschema: "https://json-schema.org/draft/2020-12/meta/applicator"
+default:
+  value: "{}"
+tests:
+  - draft2020-12/if-then-else.json
 index: -9999
 introduced_in: draft7
 interdependencies:
@@ -26,7 +31,6 @@ related:
 
 The `then` keyword is used in conjunction with `if` to define a schema to be applied when a condition specified in the `if` keyword is true. It allows you to apply additional validation logic based on whether certain conditions are met.
 
-* The value of this keyword must be a valid JSON Schema.
 * This keyword has no effect when `if` is absent.
 * This keyword has no effect when the instance fails validation against the `if` subschema.
 

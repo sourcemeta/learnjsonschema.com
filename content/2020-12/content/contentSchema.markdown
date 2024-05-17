@@ -1,12 +1,20 @@
 ---
 keyword: "contentSchema"
 signature: "Schema"
+value: This keyword must be set to a valid JSON Schema
 summary: "This keyword declares a schema which describes the structure of the string."
 kind: [ "annotation" ]
 instance: [ "string" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-8.5"
 metaschema: "https://json-schema.org/draft/2020-12/meta/content"
+default:
+  value: "{}"
+tests:
+  - draft2020-12/content.json
 introduced_in: 2019-09
+annotation:
+   description: The content schema set by this keyword
+   kind: [ "object", "boolean" ]
 interdependencies:
   - vocabulary: content
     keyword: contentMediaType
@@ -15,14 +23,7 @@ related:
     keyword: contentEncoding
 ---
 
-Annotations
------------
-
-This keyword produces the content schema as the annotation value.
-
-## Explanation
-
-The `contentSchema` keyword allows you to specify a schema that describes the structure of the content within a string instance, particularly when used in conjunction with the `contentMediaType` keyword. This is useful when the string instance contains data conforming to the JSON data model. 
+The `contentSchema` keyword allows you to specify a schema that describes the structure of the content within a string instance, particularly when used in conjunction with the `contentMediaType` keyword. This is useful when the string instance contains data conforming to the JSON data model.
 
 However, it's important to note that `contentSchema` is merely an annotation and is not directly involved in the validation process. Instead, applications that consume JSON Schemas must use this information as they see fit. `contentSchema` must be a valid JSON Schema, but it is ignored if `contentMediaType` is absent.
 

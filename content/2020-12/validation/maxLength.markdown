@@ -1,11 +1,14 @@
 ---
 keyword: "maxLength"
 signature: "Integer"
+value: This keyword must be set to a zero or positive integer
 summary: "A string instance is valid against this keyword if its length is less than, or equal to, the value of this keyword."
 kind: [ "assertion" ]
 instance: [ "string" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6.3.1"
 metaschema: "https://json-schema.org/draft/2020-12/meta/validation"
+tests:
+  - draft2020-12/maxLength.json
 index: -9999
 introduced_in: draft1
 related:
@@ -19,8 +22,6 @@ related:
 
 The `maxLength` keyword is used to specify the maximum length of a string instance. It is used to enforce a constraint on the maximum number of characters allowed for a string instance.
 
-* Applies only to string data types.
-* Value must be a non-negative integer.
 * String length is counted in characters, not bytes.
 * Validation succeeds if the string length is less than or equal to the specified `maxLength`.
 

@@ -2,13 +2,17 @@
 @import "../vendor/bootstrap/scss/functions";
 
 // Overrides
-$blue: #0969da;
-$success: rgba(213, 255, 230, 1);
 $danger: rgba(255, 213, 213, 1);
-$warning: #ffff6a;
+$navbar-brand-font-size: 1.1rem;
+$navbar-padding-y: 1px;
+$alert-border-radius: 0;
+
+// Follow browser's preferred theme
+$color-mode-type: media-query;
 
 // Required components
 @import "../vendor/bootstrap/scss/variables";
+@import "../vendor/bootstrap/scss/variables-dark";
 @import "../vendor/bootstrap/scss/maps";
 @import "../vendor/bootstrap/scss/mixins";
 @import "../vendor/bootstrap/scss/root";
@@ -24,7 +28,7 @@ $warning: #ffff6a;
 @import "../vendor/bootstrap/scss/forms";
 @import "../vendor/bootstrap/scss/buttons";
 // @import "../vendor/bootstrap/scss/transitions";
-// @import "../vendor/bootstrap/scss/dropdown";
+@import "../vendor/bootstrap/scss/dropdown";
 // @import "../vendor/bootstrap/scss/button-group";
 @import "../vendor/bootstrap/scss/nav";
 @import "../vendor/bootstrap/scss/navbar";
@@ -56,7 +60,7 @@ $bootstrap-icons-font-dir: "./";
 // Highlight
 @import "./highlight.scss";
 .highlight {
-  @extend .bg-light;
+  @extend .bg-light-subtle;
   @extend .border;
   @extend .px-2;
   @extend .py-2;
@@ -69,25 +73,22 @@ $bootstrap-icons-font-dir: "./";
 
 // Other
 
-#search {
-  min-width: 400px;
-}
-
 #sidebar {
-  min-width: 265px;
-}
-
-#sidebar > div {
-  @extend .position-absolute;
-  @extend .top-0;
-  @extend .start-0;
-  @extend .bottom-0;
-  overflow-y: scroll;
+  min-width: 260px;
 }
 
 // Tables with vertical headers collapse the headers by default
 table tr > th[scope="row"] {
   width: 1px;
+}
+
+.table-highlight {
+  td, th {
+    background-color: $gray-100;
+    @include color-mode(dark) {
+      background-color: $gray-800;
+    }
+  }
 }
 
 a {
@@ -98,35 +99,45 @@ article table {
   @extend .table;
 }
 
-.code,
-.code .border-end,
-.code .border-bottom {
-  border-color: #aaa !important;
-}
-
-.code .highlight {
-  @extend .py-3;
-  @extend .m-0;
-  @extend .border-0;
-}
-
-.code.bg-success .highlight {
-  @extend .bg-success;
-}
-
-.code.bg-danger .highlight {
-  @extend .bg-danger;
-}
-
-.code + .code-instance,
-.code-instance + .code-instance {
+.alert:not(.border) {
   @extend .border-top-0;
+  @extend .border-bottom-0;
+  @extend .border-end-0;
+  border-left-width: $spacer * 0.6;
+  & > :last-child {
+    @extend .mb-0;
+  }
 }
 
-.code-instance + .code-schema {
-  @extend .mt-4;
-}
+.code {
+  @extend .bg-opacity-50;
 
-.alert > :last-child {
-  @extend .mb-0;
+  & > .highlight {
+    @extend .py-3;
+    @extend .m-0;
+    @extend .border-0;
+  }
+
+  @include media-breakpoint-up(sm) {
+    $code-block-indentation: 25px;
+    &.bg-success, &.bg-danger {
+      margin-left: $code-block-indentation;
+    }
+
+    &.bg-info {
+      margin-left: $code-block-indentation * 2;
+    }
+  }
+
+  &.bg-success > .highlight {
+    @extend .bg-success-subtle;
+  }
+
+  &.bg-danger > .highlight {
+    @extend .bg-danger-subtle;
+  }
+
+  &.bg-info > .highlight {
+    @extend .bg-info-subtle;
+  }
 }

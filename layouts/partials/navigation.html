@@ -1,27 +1,14 @@
-<nav class="navbar navbar-expand border-bottom bg-body shadow-sm">
+<nav class="navbar navbar-expand border-bottom bg-body ">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ .Site.BaseURL }}">
       <img src="{{ .Site.BaseURL }}/logo.svg" alt="Learn JSON Schema Logo"
-        height="45" class="me-1">
+        height="42" width="42" class="me-1">
       <span class="align-middle">JSON Schema Docs</span>
     </a>
-    <!-- TODO: Make search work
-    <div class="navbar-nav d-none d-md-block">
-      <div class="input-group">
-        <i class="input-group-text bi bi-search"></i>
-        <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search" disabled>
-      </div>
-    </div> -->
     <div class="navbar-nav">
-      <!-- TODO: Make search work -->
-      <a class="nav-link d-md-none" target="_blank" href="#" aria-label="Search">
-        <i class="bi bi-search fs-5"></i>
-      </a>
-      <a class="nav-link" target="_blank" href="{{ .Site.Params.Slack }}" aria-label="Join our Slack channel">
-        <i class="bi bi-slack fs-5"></i>
-      </a>
-      <a class="nav-link" target="_blank" href="{{ .Site.Params.GitHub }}" aria-label="View this project on GitHub">
-        <i class="bi bi-github fs-5"></i>
+      <a class="btn btn-sm btn-primary" target="_blank" href="{{ .Site.Params.GitHub }}" aria-label="View this project on GitHub">
+        <i class="align-middle bi bi-github fs-6"></i>
+        <small class="align-middle ms-1">Star on GitHub</small>
       </a>
     </div>
   </div>

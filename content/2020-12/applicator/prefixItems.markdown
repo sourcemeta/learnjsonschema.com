@@ -1,12 +1,23 @@
 ---
 keyword: "prefixItems"
 signature: "Array<Schema>"
+value: This keyword must be set to a *non-empty* array, where each item is a valid JSON Schema
 summary: "Validation succeeds if each element of the instance validates against the schema at the same position, if any."
 kind: [ "applicator", "annotation" ]
 instance: [ "array" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-10.3.1.1"
 metaschema: "https://json-schema.org/draft/2020-12/meta/applicator"
+default:
+  logical_value: "[]"
+tests:
+  - draft2020-12/prefixItems.json
 introduced_in: 2020-12
+annotation:
+   description: The largest index to which this keyword applied its subschema, or a boolean true if it was applied to every item of the instance
+   kind: [ "number", "boolean" ]
+affects:
+  - vocabulary: applicator
+    keyword: items
 related:
   - vocabulary: applicator
     keyword: items
@@ -26,19 +37,13 @@ related:
     keyword: unevaluatedItems
 ---
 
-Annotations
------------
-
-This keyword produces an annotation value which is the largest index to which this keyword applied a subschema. The value MAY be a boolean true if a subschema was applied to every index of the instance.
-
-## Explanation
-
 The `prefixItems` keyword is used to validate arrays by applying a schema to each corresponding index of the array. It differs from the `items` keyword in that it validates only a prefix of the array, up to the length of the `prefixItems` array. Each schema specified in `prefixItems` corresponds to an index in the input array.
 
-* The value of this keyword must be a non-empty array of valid JSON Schemas.
 * The annotation produced by this keyword affects the behavior of `items` and `unevaluatedItems`.
 * `items` is used to validate all items in an array that are not covered by `prefixItems`, while `prefixItems` validates only a prefix of the array.
 * `prefixItems` keyword does not constrain the length of the array. If the array is longer than this keyword's value, this keyword validates only the prefix of matching length.
+
+## Examples
 
 {{<schema `Schema with 'prefixItems' keyword`>}}
 {

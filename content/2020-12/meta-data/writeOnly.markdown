@@ -1,12 +1,18 @@
 ---
 keyword: "writeOnly"
 signature: "Boolean"
+value: This keyword must be set to a boolean value
 summary: "This keyword indicates that the value is never present when the instance is retrieved from the owning authority."
 kind: [ "annotation" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-9.4"
 metaschema: "https://json-schema.org/draft/2020-12/meta/meta-data"
+default:
+  value: false
 introduced_in: draft7
+annotation:
+   description: The boolean value set by this keyword
+   kind: [ "boolean" ]
 related:
   - vocabulary: meta-data
     keyword: readOnly
@@ -22,18 +28,9 @@ related:
     keyword: deprecated
 ---
 
-Annotations
------------
-
-This keyword produces the annotation value `true` if the keyword is set to `true`, or `false` otherwise.
-
-## Explanation
-
 the `writeOnly` keyword is used to indicate that an instance value should be writable, but it won't be included when the instance is retrieved from the owning authority. It's important to note that this doesn't imply the schema itself is writable; schemas must be treated as immutable. Instead, the keyword specifies instances where read/write operation semantics are use case specific.
 
-* The value of this keyword must be a boolean.
 * `writeOnly` does not affect data validation but serves as an informative annotation.
-* Omitting this keyword has the same behavior as a value of false.
 
 ## Examples
 
