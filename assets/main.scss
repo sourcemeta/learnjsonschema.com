@@ -2,14 +2,17 @@
 @import "../vendor/bootstrap/scss/functions";
 
 // Overrides
-$primary: #0969da;
 $danger: rgba(255, 213, 213, 1);
 $navbar-brand-font-size: 1.1rem;
 $navbar-padding-y: 1px;
 $alert-border-radius: 0;
 
+// Follow browser's preferred theme
+$color-mode-type: media-query;
+
 // Required components
 @import "../vendor/bootstrap/scss/variables";
+@import "../vendor/bootstrap/scss/variables-dark";
 @import "../vendor/bootstrap/scss/maps";
 @import "../vendor/bootstrap/scss/mixins";
 @import "../vendor/bootstrap/scss/root";
@@ -57,7 +60,7 @@ $bootstrap-icons-font-dir: "./";
 // Highlight
 @import "./highlight.scss";
 .highlight {
-  @extend .bg-light;
+  @extend .bg-light-subtle;
   @extend .border;
   @extend .px-2;
   @extend .py-2;
@@ -79,6 +82,15 @@ table tr > th[scope="row"] {
   width: 1px;
 }
 
+.table-highlight {
+  td, th {
+    background-color: $gray-100;
+    @include color-mode(dark) {
+      background-color: $gray-800;
+    }
+  }
+}
+
 a {
   text-decoration: none !important;
 }
@@ -97,37 +109,37 @@ article table {
   }
 }
 
-.code .highlight {
-  @extend .py-3;
-  @extend .m-0;
-  @extend .border-0;
-}
+.code {
+  @extend .bg-opacity-50;
 
-// TODO: Upgrade to later versions of Bootstrap so we don't have
-// to manually specify this class ourselves.
-// See https://getbootstrap.com/docs/5.3/utilities/background/#background-color
-.bg-warning-subtle {
-  background-color: #ffff6a !important;
-}
-.bg-success-subtle {
-  background-color: rgba(213, 255, 230, 1) !important;
-}
+  & > .highlight {
+    @extend .py-3;
+    @extend .m-0;
+    @extend .border-0;
+  }
 
-.code.bg-success-subtle .highlight {
-  @extend .bg-success-subtle;
-}
+  @include media-breakpoint-up(sm) {
+    $code-block-indentation: 25px;
+    &.bg-success, &.bg-danger {
+      margin-left: $code-block-indentation;
+    }
 
-.code.bg-danger .highlight {
-  @extend .bg-danger;
-}
+    &.bg-info {
+      margin-left: $code-block-indentation * 2;
+    }
+  }
 
-.code + .code-instance,
-.code-instance + .code-instance {
-  @extend .border-top-0;
-}
+  &.bg-success > .highlight {
+    @extend .bg-success-subtle;
+  }
 
-.code-instance + .code-schema {
-  @extend .mt-4;
+  &.bg-danger > .highlight {
+    @extend .bg-danger-subtle;
+  }
+
+  &.bg-info > .highlight {
+    @extend .bg-info-subtle;
+  }
 }
 
 details:not([open]) summary i {

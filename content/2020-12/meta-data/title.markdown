@@ -27,8 +27,6 @@ related:
     keyword: deprecated
 ---
 
-## Explanation
-
 The `title` keyword in JSON Schema is used to provide a human-readable label for a schema or its parts. It does not affect data validation but serves as an informative annotation.
 
 ## Examples
@@ -46,12 +44,7 @@ The `title` keyword in JSON Schema is used to provide a human-readable label for
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{
-  "valid": true,
-  "keywordLocation": "/title",
-  "instanceLocation": "",
-  "annotation": "Age of a person"
-}
+{ "keyword": "/title", "instance": "", "value": "Age of a person" }
 {{</instance-annotation>}}
 
 {{<schema `Schema with logical operators`>}}
@@ -92,40 +85,11 @@ The `title` keyword in JSON Schema is used to provide a human-readable label for
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  /// ...
-  {
-    "valid": true,
-    "keywordLocation": "/title",
-    "instanceLocation": "",
-    "annotation": "Personal Info"
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/if/title",
-    "instanceLocation": "",
-    "annotation": "if block"
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/if/properties/age/title",
-    "instanceLocation": "/age",
-    "annotation": "'if' true"
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/then/title",
-    "instanceLocation": "",
-    "annotation": "then block",
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/then/properties/eligible/title",
-    "instanceLocation": "/eligible",
-    "annotation": "then applied"
-  },
-  // ...
-]
+{ "keyword": "/title", "instance": "", "value": "Personal Info" }
+{ "keyword": "/if/title", "instance": "", "value": "if block" }
+{ "keyword": "/if/properties/age/title", "instance": "/age", "value": "'if' true" }
+{ "keyword": "/then/title", "instance": "", "value": "then block", }
+{ "keyword": "/then/properties/eligible/title", "instance": "/eligible", "value": "then applied" }
 {{</instance-annotation>}}
 
 {{<schema `Schema with multiple annotations for the same instance`>}}
@@ -147,20 +111,6 @@ The `title` keyword in JSON Schema is used to provide a human-readable label for
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/title",
-    "instanceLocation": "",
-    "annotation": "Person's name"
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/$ref/title",
-    "instanceLocation": "",
-    "annotation": "Person's name"
-  },
-  // ...
-]
+{ "keyword": "/title", "instance": "", "value": "Person's name" }
+{ "keyword": "/$ref/title", "instance": "", "value": "Person's name" }
 {{</instance-annotation>}}

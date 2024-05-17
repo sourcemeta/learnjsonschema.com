@@ -40,8 +40,6 @@ related:
     keyword: unevaluatedProperties
 ---
 
-## Explanation
-
 The `patternProperties` keyword is a variant of `properties` with regular expression support. It maps regular expressions to schemas. If a property name matches the given regular expression, the property value must validate against the corresponding schema.
 
 ## Examples
@@ -62,16 +60,7 @@ The `patternProperties` keyword is a variant of `properties` with regular expres
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/patternProperties",
-    "instanceLocation": "",
-    "annotation": [ "name", "age" ]
-  },
-  // ...
-]
+{ "keyword": "/patternProperties", "instance": "", "value": [ "name", "age" ] }
 {{</instance-annotation>}}
 
 {{<instance-fail `An object instance with properties matching the regex and not conforming to the corresponding schema is invalid`>}}
@@ -94,16 +83,7 @@ The `patternProperties` keyword is a variant of `properties` with regular expres
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/patternProperties",
-    "instanceLocation": "",
-    "annotation": []
-  },
-  // ...
-]
+{ "keyword": "/patternProperties", "instance": "", "value": [] }
 {{</instance-annotation>}}
 * _**Note:** If `patternProperties` does not match anything, it is still expected to produce an empty array annotation._
 
@@ -116,16 +96,7 @@ The `patternProperties` keyword is a variant of `properties` with regular expres
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/patternProperties",
-    "instanceLocation": "",
-    "annotation": [ "foo" ]
-  },
-  // ...
-]
+{ "keyword": "/patternProperties", "instance": "", "value": [ "foo" ] }
 {{</instance-annotation>}}
 
 {{<schema `Schema with overlap between 'patternProperties' and 'properties'`>}}
@@ -150,22 +121,8 @@ The `patternProperties` keyword is a variant of `properties` with regular expres
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "foo" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/patternProperties",
-    "instanceLocation": "",
-    "annotation": [ "foo" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "foo" ] }
+{ "keyword": "/patternProperties", "instance": "", "value": [ "foo" ] }
 {{</instance-annotation>}}
 
 {{<schema `Schema with 'patternProperties', 'properties' and 'additionalProperties' keyword`>}}
@@ -199,27 +156,8 @@ The `patternProperties` keyword is a variant of `properties` with regular expres
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "name" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/patternProperties",
-    "instanceLocation": "",
-    "annotation": [ "Age" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/additionalProperties",
-    "instanceLocation": "",
-    "annotation": [ "email" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "name" ] }
+{ "keyword": "/patternProperties", "instance": "", "value": [ "Age" ] }
+{ "keyword": "/additionalProperties", "instance": "", "value": [ "email" ] }
 {{</instance-annotation>}}
 * _Instance properties (keys) not present in `properties` or not matching any regex within `patternProperties` are evaluated against `additionalProperties`._
