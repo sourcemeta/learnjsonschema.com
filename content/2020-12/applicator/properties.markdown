@@ -40,8 +40,6 @@ related:
     keyword: unevaluatedProperties
 ---
 
-## Explanation
-
 The `properties` keyword is used to define the properties (keys) that an object instance must or may contain. It allows you to specify the expected value of a property in an object instance. Each property within the `properties` object is defined by its name and a subschema describing the value expected for that property if present.
 
 The annotation result of this keyword is the set of instance property names matched by this keyword. This annotation affects the behavior of `additionalProperties` and `unevaluatedProperties`.

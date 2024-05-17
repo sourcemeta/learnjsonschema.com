@@ -21,8 +21,6 @@ related:
     keyword: contentEncoding
 ---
 
-## Explanation
-
 The `contentMediaType` keyword in JSON Schema specifies the MIME type of the contents of a string. It is used to annotate the type of media contained within a string. It should be noted that:
 
 * This keyword is purely an annotation and does not directly affect validation.

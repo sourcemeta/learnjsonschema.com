@@ -27,9 +27,11 @@ related:
     keyword: unevaluatedItems
 ---
 
+Validation with `unevaluatedProperties` applies only to the child values of instance names that do not appear in the `properties`, `patternProperties`, `additionalProperties`, or `unevaluatedProperties` annotation results that apply to the instance location being validated. For all such properties, validation succeeds if the child instance validates against the `unevaluatedProperties` schema.
+
 ## Evaluation
 
-Before delving into `unevaluatedProperties`, it's crucial to understand what evaluation means in this context.
+It's crucial to understand what evaluation means in this context.
 
 `unevaluatedProperties` considers annotations from `properties`, `patternProperties`, and `additionalProperties`, both as adjacent keywords and in subschemas of adjacent keywords. Additionally, it is also affected by other `unevaluatedProperties` in nested schemas (if present).
 
@@ -37,10 +39,6 @@ Before delving into `unevaluatedProperties`, it's crucial to understand what eva
 - If any of these keywords generate an annotation for a particular property at the same instance location (independently of the schema location), that property is considered as evaluated.
 - By definition, the `unevaluatedProperties` subschema is always applied after `properties`, `patternProperties`, and `additionalProperties` subschemas.
 - As its name implies, `unevaluatedProperties` applies to any object property that has not been previously evaluated.
-
-## Explanation
-
-Validation with `unevaluatedProperties` applies only to the child values of instance names that do not appear in the `properties`, `patternProperties`, `additionalProperties`, or `unevaluatedProperties` annotation results that apply to the instance location being validated. For all such properties, validation succeeds if the child instance validates against the `unevaluatedProperties` schema.
 
 ## Examples
 

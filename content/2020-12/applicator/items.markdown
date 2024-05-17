@@ -38,8 +38,6 @@ related:
     keyword: unevaluatedItems
 ---
 
-## Explanation
-
 The `items` keyword is used to validate arrays of arbitrary length where each item in the array matches the same schema. It applies its subschema to all instance items at indexes greater than the length of the `prefixItems` array in the same schema, or to all instance array elements if `prefixItems` is not present. This means that the subschema specified under `items` will be used to validate every item in the array that isn't covered by `prefixItems`.
 
 If the `items` subschema is applied to any positions within the instance array, it produces an annotation result of boolean *true*, indicating that all remaining array elements have been evaluated against this keyword's subschema. This annotation affects the behavior of `unevaluatedItems` in the *Unevaluated* vocabulary.

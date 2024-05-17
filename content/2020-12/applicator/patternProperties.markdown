@@ -40,8 +40,6 @@ related:
     keyword: unevaluatedProperties
 ---
 
-## Explanation
-
 The `patternProperties` keyword is a variant of `properties` with regular expression support. It maps regular expressions to schemas. If a property name matches the given regular expression, the property value must validate against the corresponding schema.
 
 ## Examples

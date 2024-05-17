@@ -25,9 +25,11 @@ related:
     keyword: unevaluatedProperties
 ---
 
+If no relevant annotations are present, the `unevaluatedItems` subschema must be applied to all locations in the array. If a boolean true value is present from any of the relevant annotations, `unevaluatedItems` is ignored. Otherwise, the subschema must be applied to any index greater than the largest annotation value for `prefixItems`, which does not appear in any annotation value for `contains`.
+
 ## Evaluation
 
-Before delving into `unevaluatedItems`, it's crucial to understand what evaluation means in this context.
+It's crucial to understand what evaluation means in this context.
 
 `unevaluatedItems` considers annotations from `prefixItems`, `items`, and `contains`, both as adjacent keywords and in subschemas of adjacent keywords. Additionally, it is also affected by other `unevaluatedItems` in nested schemas (if present).
 
@@ -35,10 +37,6 @@ Before delving into `unevaluatedItems`, it's crucial to understand what evaluati
 - If any of these keywords generate an annotation for a particular index, that index is considered as evaluated.
 - By definition, the `unevaluatedItems` subschema is always applied after  `prefixItems`, `items`, and `contains` subschemas.
 - As its name implies, `unevaluatedItems` applies to any array index that has not been previously evaluated.
-
-## Explanation
-
-If no relevant annotations are present, the `unevaluatedItems` subschema must be applied to all locations in the array. If a boolean true value is present from any of the relevant annotations, `unevaluatedItems` is ignored. Otherwise, the subschema must be applied to any index greater than the largest annotation value for `prefixItems`, which does not appear in any annotation value for `contains`.
 
 ## Examples
 

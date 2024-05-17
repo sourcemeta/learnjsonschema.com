@@ -28,8 +28,6 @@ related:
     keyword: writeOnly
 ---
 
-## Explanation
-
 The `deprecated` keyword is used to indicate that a particular property should not be used and may be removed in the future. It provides a warning to users or applications that certain parts of the schema or are no longer recommended for use.
 
 * `deprecated` does not affect data validation but serves as an informative annotation.
