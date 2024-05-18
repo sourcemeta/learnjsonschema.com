@@ -5,7 +5,11 @@
     {{ range .Site.Sections }}
       {{ $dialect := .Title }}
       {{ $dialectURL := $dialect | printf "/%s" }}
-      <ul class="nav flex-column text-nowrap mb-4">
+      <div class="form-check form-switch">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Toggle Display</label>
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+      </div>
+      <ul class="nav flex-column text-nowrap mb-4 keyword-list">
         {{ range sort .Sections "Params.index" "asc" }}
         <li class="nav-item">
           {{ $vocabulary := .Title }}
@@ -33,6 +37,27 @@
             </ul>
           </details>
         </li>
+        {{ end }}
+      </ul>
+      <ul class="list-unstyled ms-3 pt-2">
+        {{ range sort $.Site.RegularPages "Params.keyword" "asc" }} 
+          {{ if eq .Section $dialect }} 
+            {{ $vocabulary := .Parent.Title }} 
+            {{ $vocabularyURL := (replace $vocabulary " " "-") | lower | printf "%s/%s" $dialectURL }} 
+            {{ $keywordURL := (replace .Params.keyword "$" "") | printf "%s/%s" $vocabularyURL }}
+            <li>
+              {{ if eq $.Permalink .Permalink }}
+              <a
+                class="text-muted fw-bold text-decoration-none font-monospace active"
+                href="{{ ref $ $keywordURL }}"
+                aria-current="true">{{ .Params.keyword }}</a>
+              {{ else }}
+              <a
+                class="text-black-50 text-decoration-none font-monospace"
+                href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
+              {{ end }}
+            </li>
+          {{ end }} 
         {{ end }}
       </ul>
     {{ end }}

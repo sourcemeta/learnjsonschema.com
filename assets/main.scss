@@ -134,3 +134,11 @@ details:not([open]) summary i {
   @extend .d-inline-block;
   transform: rotate(-90deg); 
 }
+
+.keyword-list {
+  @extend .d-block
+}
+
+.form-check:has(#flexSwitchCheckDefault:checked) ~ .keyword-list{
+  @extend .d-none
+}
