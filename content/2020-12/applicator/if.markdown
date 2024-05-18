@@ -139,21 +139,7 @@ The `if` keyword is used to conditionally apply a subschema based on whether a c
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/if/properties",
-    "instanceLocation": "",
-    "annotation": [ "foo" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/if/properties/foo/title",
-    "instanceLocation": "",
-    "annotation": "This is foo!"
-  },
-  // ...
-]
+{ "keyword": "/if/properties", "instance": "", "value": [ "foo" ] }
+{ "keyword": "/if/properties/foo/title", "instance": "", "value": "This is foo!" }
 {{</instance-annotation>}}
 * _Here, the annotations are collected from `if`’s subschema in the usual way, irrespective of whether `then` and `else` are present or not._

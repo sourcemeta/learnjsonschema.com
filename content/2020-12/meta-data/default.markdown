@@ -47,12 +47,7 @@ _**Note:** While it is recommended that the default value validate against its s
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{
-  "valid": true,
-  "keywordLocation": "/default",
-  "instanceLocation": "",
-  "annotation": "John"
-}
+{ "keyword": "/default", "instance": "", "value": "John" }
 {{</instance-annotation>}}
 
 {{<schema `Schema with logical operators`>}}
@@ -100,28 +95,9 @@ _**Note:** While it is recommended that the default value validate against its s
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  /// ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties/name/default",
-    "instanceLocation": "/name",
-    "annotation": "John"
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/properties/qualification/default",
-    "instanceLocation": "/qualification",
-    "annotation": "diploma"
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/then/properties/degreeCertificate/default",
-    "instanceLocation": "/degreeCertificate",
-    "annotation": "B0B8RKEZ90",
-  },
-  // ...
-]
+{ "keyword": "/properties/name/default", "instance": "/name", "value": "John" }
+{ "keyword": "/properties/qualification/default", "instance": "/qualification", "value": "diploma" }
+{ "keyword": "/then/properties/degreeCertificate/default", "instance": "/degreeCertificate", "value": "B0B8RKEZ90" }
 {{</instance-annotation>}}
 
 {{<schema `Schema with multiple annotations for the same instance`>}}
@@ -143,20 +119,6 @@ _**Note:** While it is recommended that the default value validate against its s
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/default",
-    "instanceLocation": "",
-    "annotation": "John"
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/$ref/default",
-    "instanceLocation": "",
-    "annotation": "John"
-  },
-  // ...
-]
+{ "keyword": "/default", "instance": "", "value": "John" }
+{ "keyword": "/$ref/default", "instance": "", "value": "John" }
 {{</instance-annotation>}}

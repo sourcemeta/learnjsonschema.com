@@ -52,12 +52,7 @@ _**Note:** While it is recommended that the examples validate against the subsch
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{
-  "valid": true,
-  "keywordLocation": "/examples",
-  "instanceLocation": "",
-  "annotation": [ "foo", "bar", "Doe" ]
-}
+{ "keyword": "/examples", "instance": "", "value": [ "foo", "bar", "Doe" ] }
 {{</instance-annotation>}}
 
 {{<schema `Schema with logical operators`>}}
@@ -92,16 +87,7 @@ _**Note:** While it is recommended that the examples validate against the subsch
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  /// ...
-  {
-    "valid": true,
-    "keywordLocation": "/then/properties/bar/examples",
-    "instanceLocation": "/bar",
-    "annotation": [ [ "foo" ], [ "bar", "baz" ] ]
-  },
-  // ...
-]
+{ "keyword": "/then/properties/bar/examples", "instance": "/bar", "value": [ [ "foo" ], [ "bar", "baz" ] ] }
 {{</instance-annotation>}}
 
 {{<instance-pass>}}
@@ -109,16 +95,7 @@ _**Note:** While it is recommended that the examples validate against the subsch
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  /// ...
-  {
-    "valid": true,
-    "keywordLocation": "/else/properties/bar/examples",
-    "instanceLocation": "/bar",
-    "annotation": [ false, true ]
-  },
-  // ...
-]
+{ "keyword": "/else/properties/bar/examples", "instance": "/bar", "value": [ false, true ] }
 {{</instance-annotation>}}
 
 {{<schema `Schema with multiple annotations for the same instance`>}}
@@ -140,20 +117,6 @@ _**Note:** While it is recommended that the examples validate against the subsch
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/examples",
-    "instanceLocation": "",
-    "annotation": [ "John", "Karl" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/$ref/examples",
-    "instanceLocation": "",
-    "annotation": [ "John", "Karl" ]
-  },
-  // ...
-]
+{ "keyword": "/examples", "instance": "", "value": [ "John", "Karl" ] }
+{ "keyword": "/$ref/examples", "instance": "", "value": [ "John", "Karl" ] }
 {{</instance-annotation>}}
