@@ -48,12 +48,7 @@ The `deprecated` keyword is used to indicate that a particular property should n
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{
-  "valid": true,
-  "keywordLocation": "/deprecated",
-  "instanceLocation": "",
-  "annotation": true
-}
+{ "keyword": "/deprecated", "instance": "", "value": true }
 {{</instance-annotation>}}
 
 {{<schema `Schema with logical operators`>}}
@@ -86,16 +81,7 @@ The `deprecated` keyword is used to indicate that a particular property should n
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  /// ...
-  {
-    "valid": true,
-    "keywordLocation": "/else/properties/bar/deprecated",
-    "instanceLocation": "/bar",
-    "annotation": false
-  },
-  // ...
-]
+{ "keyword": "/else/properties/bar/deprecated", "instance": "/bar", "value": false }
 {{</instance-annotation>}}
 
 {{<instance-pass>}}
@@ -103,16 +89,7 @@ The `deprecated` keyword is used to indicate that a particular property should n
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  /// ...
-  {
-    "valid": true,
-    "keywordLocation": "/then/properties/bar/deprecated",
-    "instanceLocation": "/bar",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/then/properties/bar/deprecated", "instance": "/bar", "value": true }
 {{</instance-annotation>}}
 
 {{<schema `Schema with multiple annotations for the same instance`>}}
@@ -134,20 +111,6 @@ The `deprecated` keyword is used to indicate that a particular property should n
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/deprecated",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/$ref/deprecated",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/deprecated", "instance": "", "value": true }
+{ "keyword": "/$ref/deprecated", "instance": "", "value": true }
 {{</instance-annotation>}}

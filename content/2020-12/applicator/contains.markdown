@@ -59,16 +59,7 @@ Similarly, if `maxContains` is present alongside `contains`, the instance will b
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/contains",
-    "instanceLocation": "",
-    "annotation": [ 1, 4 ]
-  },
-  // ...
-]
+{ "keyword": "/contains", "instance": "", "value": [ 1, 4 ] }
 {{</instance-annotation>}}
 
 {{<instance-fail `An array instance containing no string value is invalid`>}}
@@ -88,15 +79,6 @@ Similarly, if `maxContains` is present alongside `contains`, the instance will b
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/contains",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/contains", "instance": "", "value": true }
 {{</instance-annotation>}}
 * _The annotation value is a boolean 'true' if the subschema successfully validates when applied to every index of the instance._

@@ -47,12 +47,7 @@ the `writeOnly` keyword is used to indicate that an instance value should be wri
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{
-  "valid": true,
-  "keywordLocation": "/writeOnly",
-  "instanceLocation": "",
-  "annotation": true
-}
+{ "keyword": "/writeOnly", "instance": "", "value": true }
 {{</instance-annotation>}}
 
 {{<schema `Schema with logical operators`>}}
@@ -77,16 +72,7 @@ the `writeOnly` keyword is used to indicate that an instance value should be wri
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  /// ...
-  {
-    "valid": true,
-    "keywordLocation": "/else/writeOnly",
-    "instanceLocation": "",
-    "annotation": false
-  },
-  // ...
-]
+{ "keyword": "/else/writeOnly", "instance": "", "value": false }
 {{</instance-annotation>}}
 
 {{<instance-pass>}}
@@ -94,16 +80,7 @@ the `writeOnly` keyword is used to indicate that an instance value should be wri
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  /// ...
-  {
-    "valid": true,
-    "keywordLocation": "/then/writeOnly",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/then/writeOnly", "instance": "", "value": true }
 {{</instance-annotation>}}
 
 {{<schema `Schema with multiple annotations for the same instance`>}}
@@ -125,20 +102,6 @@ the `writeOnly` keyword is used to indicate that an instance value should be wri
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/writeOnly",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/$ref/writeOnly",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/writeOnly", "instance": "", "value": true }
+{ "keyword": "/$ref/writeOnly", "instance": "", "value": true }
 {{</instance-annotation>}}

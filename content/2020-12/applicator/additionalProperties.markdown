@@ -62,16 +62,7 @@ The behavior of this keyword depends on the presence and annotation results of `
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "foo" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "foo" ] }
 {{</instance-annotation>}}
 
 {{<instance-fail `An instance with additional properties is invalid`>}}
@@ -96,22 +87,8 @@ The behavior of this keyword depends on the presence and annotation results of `
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "name" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/additionalProperties",
-    "instanceLocation": "",
-    "annotation": [ "age" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "name" ] },
+{ "keyword": "/additionalProperties", "instance": "", "value": [ "age" ] }
 {{</instance-annotation>}}
 
 {{<instance-fail `The value of 'age' must be a number`>}}
@@ -150,28 +127,9 @@ The behavior of this keyword depends on the presence and annotation results of `
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "name" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/patternProperties",
-    "instanceLocation": "",
-    "annotation": [ "Age" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/additionalProperties",
-    "instanceLocation": "",
-    "annotation": [ "email" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "name" ] }
+{ "keyword": "/patternProperties", "instance": "", "value": [ "Age" ] }
+{ "keyword": "/additionalProperties", "instance": "", "value": [ "email" ] }
 {{</instance-annotation>}}
 * _Instance properties (keys) not present in `properties` or not matching any regex within `patternProperties` are evaluated against `additionalProperties`._
 
@@ -213,22 +171,8 @@ The behavior of this keyword depends on the presence and annotation results of `
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "name" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/patternProperties",
-    "instanceLocation": "",
-    "annotation": [ "Age" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "name" ] }
+{ "keyword": "/patternProperties", "instance": "", "value": [ "Age" ] }
 {{</instance-annotation>}}
 
  _**Note:** JSON Schema is a constraint language and if you don't limit keywords like this, then more keywords than what you defined in `properties`, etc would be allowed. If you don't define a property using `properties` or `patternProperties`, but don't disallow it with `additionalProperties`, it would still be valid with any value._

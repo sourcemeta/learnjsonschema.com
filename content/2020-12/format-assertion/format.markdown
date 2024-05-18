@@ -107,14 +107,5 @@ Defined Formats
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/format",
-    "instanceLocation": "",
-    "annotation": "email"
-  },
-  // ...
-]
+{ "keyword": "/format", "instance": "", "value": "email" }
 {{</instance-annotation>}}
