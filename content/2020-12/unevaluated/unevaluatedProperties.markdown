@@ -27,9 +27,11 @@ related:
     keyword: unevaluatedItems
 ---
 
+Validation with `unevaluatedProperties` applies only to the child values of instance names that do not appear in the `properties`, `patternProperties`, `additionalProperties`, or `unevaluatedProperties` annotation results that apply to the instance location being validated. For all such properties, validation succeeds if the child instance validates against the `unevaluatedProperties` schema.
+
 ## Evaluation
 
-Before delving into `unevaluatedProperties`, it's crucial to understand what evaluation means in this context.
+It's crucial to understand what evaluation means in this context.
 
 `unevaluatedProperties` considers annotations from `properties`, `patternProperties`, and `additionalProperties`, both as adjacent keywords and in subschemas of adjacent keywords. Additionally, it is also affected by other `unevaluatedProperties` in nested schemas (if present).
 
@@ -37,10 +39,6 @@ Before delving into `unevaluatedProperties`, it's crucial to understand what eva
 - If any of these keywords generate an annotation for a particular property at the same instance location (independently of the schema location), that property is considered as evaluated.
 - By definition, the `unevaluatedProperties` subschema is always applied after `properties`, `patternProperties`, and `additionalProperties` subschemas.
 - As its name implies, `unevaluatedProperties` applies to any object property that has not been previously evaluated.
-
-## Explanation
-
-Validation with `unevaluatedProperties` applies only to the child values of instance names that do not appear in the `properties`, `patternProperties`, `additionalProperties`, or `unevaluatedProperties` annotation results that apply to the instance location being validated. For all such properties, validation succeeds if the child instance validates against the `unevaluatedProperties` schema.
 
 ## Examples
 
@@ -60,16 +58,7 @@ Validation with `unevaluatedProperties` applies only to the child values of inst
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/unevaluatedProperties",
-    "instanceLocation": "",
-    "annotation": [ "foo", "baz" ]
-  },
-  // ...
-]
+{ "keyword": "/unevaluatedProperties", "instance": "", "value": [ "foo", "baz" ] }
 {{</instance-annotation>}}
 
 * Here, no properties are defined in the above schema. Consequently, all properties in an object instance are considered unevaluated, and the `unevaluatedProperties` subschema applies to them. Since the subschema here is a boolean true, an instance with unevaluated properties, regardless of their value, is considered valid.
@@ -111,22 +100,8 @@ Validation with `unevaluatedProperties` applies only to the child values of inst
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "foo" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/patternProperties",
-    "instanceLocation": "",
-    "annotation": [ "bar" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "foo" ] }
+{ "keyword": "/patternProperties", "instance": "", "value": [ "bar" ] }
 {{</instance-annotation>}}
 
 * For the first instace, the annotation result of `properties` is [ "foo" ], and the annotation result of `patternProperties` is [ "bar" ]. However, the 'fooBar' property remains unevaluated, so the `unevaluatedProperties` subschema applies to it. This subschema fails (as any instance against a false schema is always invalid), leading to the failure of the entire schema.
@@ -150,22 +125,8 @@ Validation with `unevaluatedProperties` applies only to the child values of inst
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "foo" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/patternProperties",
-    "instanceLocation": "",
-    "annotation": [ "bar" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "foo" ] }
+{ "keyword": "/patternProperties", "instance": "", "value": [ "bar" ] }
 {{</instance-annotation>}}
 
 {{<instance-pass `An instance with unevaluated properties that conform to the 'unevaluatedProperties' subschema is valid`>}}
@@ -173,28 +134,9 @@ Validation with `unevaluatedProperties` applies only to the child values of inst
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "foo" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/patternProperties",
-    "instanceLocation": "",
-    "annotation": [ "bar" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/unevaluatedProperties",
-    "instanceLocation": "",
-    "annotation": [ "fooBar" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "foo" ] }
+{ "keyword": "/patternProperties", "instance": "", "value": [ "bar" ] }
+{ "keyword": "/unevaluatedProperties", "instance": "", "value": [ "fooBar" ] }
 {{</instance-annotation>}}
 
 {{<instance-fail `An instance with unevaluated properties that do not conform to the 'unevaluatedProperties' subschema is invalid`>}}
@@ -225,28 +167,9 @@ Validation with `unevaluatedProperties` applies only to the child values of inst
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "foo" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/allOf/0/patternProperties",
-    "instanceLocation": "",
-    "annotation": [ "foo" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/unevaluatedProperties",
-    "instanceLocation": "",
-    "annotation": [ "fooBar" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "foo" ] }
+{ "keyword": "/allOf/0/patternProperties", "instance": "", "value": [ "foo" ] }
+{ "keyword": "/unevaluatedProperties", "instance": "", "value": [ "fooBar" ] }
 {{</instance-annotation>}}
 
 {{<instance-fail `An instance with unevaluated properties that do not conform to the 'unevaluatedProperties' subschema is invalid`>}}
@@ -276,22 +199,8 @@ For the above two instances, the annotation result of `properties` is [ "foo" ],
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "foo" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/allOf/0/additionalProperties",
-    "instanceLocation": "",
-    "annotation": [ "foo" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "foo" ] },
+{ "keyword": "/allOf/0/additionalProperties", "instance": "", "value": [ "foo" ] }
 {{</instance-annotation>}}
 
 {{<instance-pass `An instance with no unevaluated properties is valid`>}}
@@ -299,22 +208,8 @@ For the above two instances, the annotation result of `properties` is [ "foo" ],
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "foo" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/allOf/0/additionalProperties",
-    "instanceLocation": "",
-    "annotation": [ "foo", "bar" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "foo" ] }
+{ "keyword": "/allOf/0/additionalProperties", "instance": "", "value": [ "foo", "bar" ] }
 {{</instance-annotation>}}
 
 * In the first case, there are no unevaluated properties.
@@ -343,22 +238,8 @@ For the above two instances, the annotation result of `properties` is [ "foo" ],
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "foo" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/$ref/properties",
-    "instanceLocation": "",
-    "annotation": [ "bar" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "foo" ] }
+{ "keyword": "/$ref/properties", "instance": "", "value": [ "bar" ] }
 {{</instance-annotation>}}
 
 {{<instance-fail `An instance with unevaluated properties is invalid`>}}
@@ -385,20 +266,6 @@ For the above two instances, the annotation result of `properties` is [ "foo" ],
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "foo" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/allOf/0/unevaluatedProperties",
-    "instanceLocation": "",
-    "annotation": [ "foo", "bar" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "foo" ] }
+{ "keyword": "/allOf/0/unevaluatedProperties", "instance": "", "value": [ "foo", "bar" ] }
 {{</instance-annotation>}}

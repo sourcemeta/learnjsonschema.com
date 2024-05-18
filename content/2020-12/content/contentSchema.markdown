@@ -23,8 +23,6 @@ related:
     keyword: contentEncoding
 ---
 
-## Explanation
-
 The `contentSchema` keyword allows you to specify a schema that describes the structure of the content within a string instance, particularly when used in conjunction with the `contentMediaType` keyword. This is useful when the string instance contains data conforming to the JSON data model.
 
 However, it's important to note that `contentSchema` is merely an annotation and is not directly involved in the validation process. Instead, applications that consume JSON Schemas must use this information as they see fit. `contentSchema` must be a valid JSON Schema, but it is ignored if `contentMediaType` is absent.
@@ -38,13 +36,7 @@ Applications utilizing JSON Schemas are expected to use the provided `contentSch
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "contentMediaType": "application/json",
   "contentEncoding": "base64",
-  "contentSchema": {
-    "type": "object",
-    "properties": {
-      "name": { "type": "string" }
-    },
-    "required": [ "name" ]
-  }
+  "contentSchema": { "type": "object" }
 }
 {{</schema>}}
 
@@ -56,38 +48,12 @@ Applications utilizing JSON Schemas are expected to use the provided `contentSch
 "eyAibmFtZSI6IH0="    // --> { "name": }
 {{</instance-pass>}}
 
-{{<instance-pass `A non-string instance is ignored`>}}
+{{<instance-pass `A non-object instance is ignored`>}}
 true
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/contentMediaType",
-    "instanceLocation": "",
-    "annotation": "application/json"
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/contentEncoding",
-    "instanceLocation": "",
-    "annotation": "base64"
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/contentSchema",
-    "instanceLocation": "",
-    "annotation": {
-      "type": "object",
-      "properties": {
-        "name": { "type": "string" }
-      },
-      "required": [ "name" ]
-    }
-
-  },
-  // ...
-]
+{ "keyword": "/contentMediaType", "instance": "", "value": "application/json" }
+{ "keyword": "/contentEncoding", "instance": "", "value": "base64" }
+{ "keyword": "/contentSchema", "instance": "", "value": { "type": "object" } }
 {{</instance-annotation>}}

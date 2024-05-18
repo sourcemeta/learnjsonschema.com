@@ -30,8 +30,6 @@ related:
     keyword: deprecated
 ---
 
-## Explanation
-
 The `examples` keyword is used to provide a list of example instances associated with a particular schema that should ideally validate against the schema. These examples serve to illustrate the intended structure and constraints defined by the schema. While these examples are not used for validation purposes, they are helpful in providing sample valid instances against the schema they are defined in.
 
 _**Note:** While it is recommended that the examples validate against the subschema they are defined in, this requirement is not strictly enforced._
@@ -54,12 +52,7 @@ _**Note:** While it is recommended that the examples validate against the subsch
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{
-  "valid": true,
-  "keywordLocation": "/examples",
-  "instanceLocation": "",
-  "annotation": [ "foo", "bar", "Doe" ]
-}
+{ "keyword": "/examples", "instance": "", "value": [ "foo", "bar", "Doe" ] }
 {{</instance-annotation>}}
 
 {{<schema `Schema with logical operators`>}}
@@ -94,16 +87,7 @@ _**Note:** While it is recommended that the examples validate against the subsch
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  /// ...
-  {
-    "valid": true,
-    "keywordLocation": "/then/properties/bar/examples",
-    "instanceLocation": "/bar",
-    "annotation": [ [ "foo" ], [ "bar", "baz" ] ]
-  },
-  // ...
-]
+{ "keyword": "/then/properties/bar/examples", "instance": "/bar", "value": [ [ "foo" ], [ "bar", "baz" ] ] }
 {{</instance-annotation>}}
 
 {{<instance-pass>}}
@@ -111,16 +95,7 @@ _**Note:** While it is recommended that the examples validate against the subsch
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  /// ...
-  {
-    "valid": true,
-    "keywordLocation": "/else/properties/bar/examples",
-    "instanceLocation": "/bar",
-    "annotation": [ false, true ]
-  },
-  // ...
-]
+{ "keyword": "/else/properties/bar/examples", "instance": "/bar", "value": [ false, true ] }
 {{</instance-annotation>}}
 
 {{<schema `Schema with multiple annotations for the same instance`>}}
@@ -142,20 +117,6 @@ _**Note:** While it is recommended that the examples validate against the subsch
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/examples",
-    "instanceLocation": "",
-    "annotation": [ "John", "Karl" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/$ref/examples",
-    "instanceLocation": "",
-    "annotation": [ "John", "Karl" ]
-  },
-  // ...
-]
+{ "keyword": "/examples", "instance": "", "value": [ "John", "Karl" ] }
+{ "keyword": "/$ref/examples", "instance": "", "value": [ "John", "Karl" ] }
 {{</instance-annotation>}}

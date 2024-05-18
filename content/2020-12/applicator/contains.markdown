@@ -35,8 +35,6 @@ related:
     keyword: unevaluatedItems
 ---
 
-## Explanation
-
 The `contains` keyword is used to check if at least one element in an array instance validates against a specified sub-schema. It offers flexibility compared to `items`, which requires all elements to adhere to a single schema.
 
 An array instance is valid against `contains` if at least one of its elements is valid against the given schema, except when `minContains` is present and has a value of 0, in which case an array instance must be considered valid against the `contains` keyword, even if none of its elements is valid against the given schema.
@@ -61,16 +59,7 @@ Similarly, if `maxContains` is present alongside `contains`, the instance will b
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/contains",
-    "instanceLocation": "",
-    "annotation": [ 1, 4 ]
-  },
-  // ...
-]
+{ "keyword": "/contains", "instance": "", "value": [ 1, 4 ] }
 {{</instance-annotation>}}
 
 {{<instance-fail `An array instance containing no string value is invalid`>}}
@@ -90,15 +79,6 @@ Similarly, if `maxContains` is present alongside `contains`, the instance will b
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/contains",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/contains", "instance": "", "value": true }
 {{</instance-annotation>}}
 * _The annotation value is a boolean 'true' if the subschema successfully validates when applied to every index of the instance._

@@ -7,7 +7,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
-    <link rel="canonical" href="{{ .Site.BaseURL }}">
+    <link rel="canonical" href="{{ .Permalink }}">
     <meta name="description" content="{{ block "description" . }}{{ .Site.Params.Description }}{{ end }}">
     <meta name="googlebot" content="notranslate">
 
@@ -15,7 +15,7 @@
     <link rel="icon" href="{{ .Site.BaseURL }}/logo.svg" type="image/svg+xml">
     <link rel="manifest" href="{{ .Site.BaseURL }}/manifest.webmanifest">
 
-    {{ $style := resources.Get "main.scss" | toCSS (dict "outputStyle" "compressed") }}
+    {{ $style := resources.Get "main.scss" | toCSS (dict "outputStyle" "compressed") | minify }}
 		<link rel="stylesheet" href="{{ $style.Permalink }}">
 
     <script defer data-domain="learnjsonschema.com" src="https://plausible.io/js/script.outbound-links.js"></script>
@@ -30,7 +30,7 @@
       }
     </script>
   </head>
-  <body class="h-100 bg-light d-flex flex-column">
+  <body class="h-100 d-flex flex-column">
     {{ partial "navigation.html" . }}
 
     {{ block "main" . }}

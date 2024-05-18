@@ -28,8 +28,6 @@ related:
     keyword: deprecated
 ---
 
-## Explanation
-
 The `readOnly` keyword is used to indicate that the value of a particular property is managed exclusively by the owning authority, and attempts by an application to modify the value of this property are expected to be ignored or rejected by that authority. It essentially means that the instance value should not be modified.
 
 It's important to note that this keyword doesn't imply the schema itself is writable; schemas must be treated as immutable. Instead, the keyword specifies instances where read/write operation semantics are use case specific.
@@ -51,12 +49,7 @@ It's important to note that this keyword doesn't imply the schema itself is writ
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{
-  "valid": true,
-  "keywordLocation": "/readOnly",
-  "instanceLocation": "",
-  "annotation": true
-}
+{ "keyword": "/readOnly", "instance": "", "value": true }
 {{</instance-annotation>}}
 
 {{<schema `Schema with logical operators`>}}
@@ -81,16 +74,7 @@ It's important to note that this keyword doesn't imply the schema itself is writ
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  /// ...
-  {
-    "valid": true,
-    "keywordLocation": "/else/readOnly",
-    "instanceLocation": "",
-    "annotation": false
-  },
-  // ...
-]
+{ "keyword": "/else/readOnly", "instance": "", "value": false }
 {{</instance-annotation>}}
 
 {{<instance-pass>}}
@@ -98,16 +82,7 @@ It's important to note that this keyword doesn't imply the schema itself is writ
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  /// ...
-  {
-    "valid": true,
-    "keywordLocation": "/then/readOnly",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/then/readOnly", "instance": "", "value": true }
 {{</instance-annotation>}}
 
 {{<schema `Schema with multiple annotations for the same instance`>}}
@@ -129,20 +104,6 @@ It's important to note that this keyword doesn't imply the schema itself is writ
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/readOnly",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/$ref/readOnly",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/readOnly", "instance": "", "value": true }
+{ "keyword": "/$ref/readOnly", "instance": "", "value": true }
 {{</instance-annotation>}}

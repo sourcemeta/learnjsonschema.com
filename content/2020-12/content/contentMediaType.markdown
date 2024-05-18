@@ -1,7 +1,7 @@
 ---
 keyword: "contentMediaType"
 signature: "String"
-value: This keyword should be set to a valid media type as defined in [RFC2046](https://www.rfc-editor.org/rfc/rfc2046.html), like the registered [IANA](https://www.iana.org/assignments/media-types/media-types.xhtml) media types
+value: This keyword should be set to a valid media type as defined in [RFC 2046](https://www.rfc-editor.org/rfc/rfc2046.html), like the registered [IANA](https://www.iana.org/assignments/media-types/media-types.xhtml) media types
 summary: "This keyword declares the media type of the string instance."
 kind: [ "annotation" ]
 instance: [ "string" ]
@@ -20,8 +20,6 @@ related:
   - vocabulary: content
     keyword: contentEncoding
 ---
-
-## Explanation
 
 The `contentMediaType` keyword in JSON Schema specifies the MIME type of the contents of a string. It is used to annotate the type of media contained within a string. It should be noted that:
 
@@ -52,20 +50,6 @@ true
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/contentEncoding",
-    "instanceLocation": "",
-    "annotation": "base64"
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/contentMediaType",
-    "instanceLocation": "",
-    "annotation": "application/json"
-  },
-  // ...
-]
+{ "keyword": "/contentEncoding", "instance": "", "value": "base64" }
+{ "keyword": "/contentMediaType", "instance": "", "value": "application/json" }
 {{</instance-annotation>}}

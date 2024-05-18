@@ -25,9 +25,11 @@ related:
     keyword: unevaluatedProperties
 ---
 
+If no relevant annotations are present, the `unevaluatedItems` subschema must be applied to all locations in the array. If a boolean true value is present from any of the relevant annotations, `unevaluatedItems` is ignored. Otherwise, the subschema must be applied to any index greater than the largest annotation value for `prefixItems`, which does not appear in any annotation value for `contains`.
+
 ## Evaluation
 
-Before delving into `unevaluatedItems`, it's crucial to understand what evaluation means in this context.
+It's crucial to understand what evaluation means in this context.
 
 `unevaluatedItems` considers annotations from `prefixItems`, `items`, and `contains`, both as adjacent keywords and in subschemas of adjacent keywords. Additionally, it is also affected by other `unevaluatedItems` in nested schemas (if present).
 
@@ -35,10 +37,6 @@ Before delving into `unevaluatedItems`, it's crucial to understand what evaluati
 - If any of these keywords generate an annotation for a particular index, that index is considered as evaluated.
 - By definition, the `unevaluatedItems` subschema is always applied after  `prefixItems`, `items`, and `contains` subschemas.
 - As its name implies, `unevaluatedItems` applies to any array index that has not been previously evaluated.
-
-## Explanation
-
-If no relevant annotations are present, the `unevaluatedItems` subschema must be applied to all locations in the array. If a boolean true value is present from any of the relevant annotations, `unevaluatedItems` is ignored. Otherwise, the subschema must be applied to any index greater than the largest annotation value for `prefixItems`, which does not appear in any annotation value for `contains`.
 
 ## Examples
 
@@ -54,16 +52,7 @@ If no relevant annotations are present, the `unevaluatedItems` subschema must be
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/unevaluatedItems",
-    "instanceLocation": "",
-    "annotation": "true"
-  },
-  // ...
-]
+{ "keyword": "/unevaluatedItems", "instance": "", "value": "true" }
 {{</instance-annotation>}}
 
 {{<instance-pass `'unevaluatedItems' does not have any effect on instances other than an array`>}}
@@ -105,22 +94,8 @@ If no relevant annotations are present, the `unevaluatedItems` subschema must be
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/prefixItems",
-    "instanceLocation": "",
-    "annotation": 0
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/contains",
-    "instanceLocation": "",
-    "annotation": [ 1, 2 ]
-  },
-  // ...
-]
+{ "keyword": "/prefixItems", "instance": "", "value": 0 }
+{ "keyword": "/contains", "instance": "", "value": [ 1, 2 ] }
 {{</instance-annotation>}}
 
 * For the first instance, the annotation result of `prefixItems` is 0, and the annotation result of `contains` is [ 1 ]. However, the item at 2nd index (i.e., `false`) remains unevaluated, so the `unevaluatedItems` subschema applies to it. This subschema fails (as any instance against a false schema is always invalid), leading to validation failure.
@@ -141,22 +116,8 @@ If no relevant annotations are present, the `unevaluatedItems` subschema must be
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/prefixItems",
-    "instanceLocation": "",
-    "annotation": 0
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/contains",
-    "instanceLocation": "",
-    "annotation": [ 1, 2 ]
-  },
-  // ...
-]
+{ "keyword": "/prefixItems", "instance": "", "value": 0 }
+{ "keyword": "/contains", "instance": "", "value": [ 1, 2 ] }
 {{</instance-annotation>}}
 
 {{<instance-pass `An array instance with unevaluated items that conform to the 'unevaluatedItems' subschema is valid`>}}
@@ -164,28 +125,9 @@ If no relevant annotations are present, the `unevaluatedItems` subschema must be
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/prefixItems",
-    "instanceLocation": "",
-    "annotation": 0
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/contains",
-    "instanceLocation": "",
-    "annotation": [ 1 ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/unevaluatedItems",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/prefixItems", "instance": "", "value": 0 }
+{ "keyword": "/contains", "instance": "", "value": [ 1 ] }
+{ "keyword": "/unevaluatedItems", "instance": "", "value": true }
 {{</instance-annotation>}}
 
 {{<instance-fail `An array instance with unevaluated items that do not conform to the 'unevaluatedItems' subschema is invalid`>}}
@@ -217,28 +159,9 @@ If no relevant annotations are present, the `unevaluatedItems` subschema must be
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/prefixItems",
-    "instanceLocation": "",
-    "annotation": 0
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/allOf/0/prefixItems",
-    "instanceLocation": "",
-    "annotation": 1
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/unevaluatedItems",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/prefixItems", "instance": "", "value": 0 }
+{ "keyword": "/allOf/0/prefixItems", "instance": "", "value": 1 }
+{ "keyword": "/unevaluatedItems", "instance": "", "value": true }
 {{</instance-annotation>}}
 
 {{<instance-fail `An array instance with unevaluated items that do not conform to the 'unevaluatedItems' subschema is invalid`>}}
@@ -268,22 +191,8 @@ For the above two instances, the annotation result of top level `prefixItems` is
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/prefixItems",
-    "instanceLocation": "",
-    "annotation": 0
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/allOf/0/items",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/prefixItems", "instance": "", "value": 0 }
+{ "keyword": "/allOf/0/items", "instance": "", "value": true }
 {{</instance-annotation>}}
 
 * Here, the nested `items` evaluated all the unevaluated items. So there's nothing left unevaluated.
@@ -310,22 +219,8 @@ For the above two instances, the annotation result of top level `prefixItems` is
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/prefixItems",
-    "instanceLocation": "",
-    "annotation": 1
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/$ref/contains",
-    "instanceLocation": "",
-    "annotation": [ 2 ]
-  },
-  // ...
-]
+{ "keyword": "/prefixItems", "instance": "", "value": 1 }
+{ "keyword": "/$ref/contains", "instance": "", "value": [ 2 ] }
 {{</instance-annotation>}}
 
 {{<instance-fail `An instance with unevaluated items is invalid`>}}
@@ -350,20 +245,6 @@ For the above two instances, the annotation result of top level `prefixItems` is
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/prefixItems",
-    "instanceLocation": "",
-    "annotation": 0
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/allOf/0/unevaluatedItems",
-    "instanceLocation": "",
-    "annotation": true
-  },
-  // ...
-]
+{ "keyword": "/prefixItems", "instance": "", "value": 0 }
+{ "keyword": "/allOf/0/unevaluatedItems", "instance": "", "value": true }
 {{</instance-annotation>}}

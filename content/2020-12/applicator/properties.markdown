@@ -40,8 +40,6 @@ related:
     keyword: unevaluatedProperties
 ---
 
-## Explanation
-
 The `properties` keyword is used to define the properties (keys) that an object instance must or may contain. It allows you to specify the expected value of a property in an object instance. Each property within the `properties` object is defined by its name and a subschema describing the value expected for that property if present.
 
 The annotation result of this keyword is the set of instance property names matched by this keyword. This annotation affects the behavior of `additionalProperties` and `unevaluatedProperties`.
@@ -64,16 +62,7 @@ The annotation result of this keyword is the set of instance property names matc
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "name", "age" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "name", "age" ] }
 {{</instance-annotation>}}
 
 {{<instance-fail `An object instance with properties not conforming to the schema is invalid`>}}
@@ -96,16 +85,7 @@ The annotation result of this keyword is the set of instance property names matc
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": []
-  },
-// ...
-]
+{ "keyword": "/properties", "instance": "", "value": [] }
 {{</instance-annotation>}}
 
 {{<instance-fail `An instance with 'false' property is invalid`>}}
@@ -117,16 +97,7 @@ The annotation result of this keyword is the set of instance property names matc
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "foo" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "foo" ] }
 {{</instance-annotation>}}
 
 {{<schema `Schema with no 'additionalProperties' defined`>}}
@@ -167,22 +138,8 @@ The annotation result of this keyword is the set of instance property names matc
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "name" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/patternProperties",
-    "instanceLocation": "",
-    "annotation": [ "Age" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "name" ] }
+{ "keyword": "/patternProperties", "instance": "", "value": [ "Age" ] }
 {{</instance-annotation>}}
 
 * _If you don't define a property using `properties` or `patternProperties`, but don't disallow it with `additionalProperties`, it would still be valid with any value._
@@ -218,27 +175,8 @@ The annotation result of this keyword is the set of instance property names matc
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/properties",
-    "instanceLocation": "",
-    "annotation": [ "name" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/patternProperties",
-    "instanceLocation": "",
-    "annotation": [ "Age" ]
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/additionalProperties",
-    "instanceLocation": "",
-    "annotation": [ "email" ]
-  },
-  // ...
-]
+{ "keyword": "/properties", "instance": "", "value": [ "name" ] }
+{ "keyword": "/patternProperties", "instance": "", "value": [ "Age" ] }
+{ "keyword": "/additionalProperties", "instance": "", "value": [ "email" ] }
 {{</instance-annotation>}}
 * _Property names not present in `properties` or `patternProperties` are evaluated against `additionalProperties`._

@@ -27,8 +27,6 @@ related:
     keyword: deprecated
 ---
 
-## Explanation
-
 The `description` keyword in JSON Schema is used to provide a human readable description for the schema. It does not affect data validation but serves as an informative annotation.
 
 ## Examples
@@ -46,12 +44,7 @@ The `description` keyword in JSON Schema is used to provide a human readable des
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{
-  "valid": true,
-  "keywordLocation": "/description",
-  "instanceLocation": "",
-  "annotation": "The age of a person"
-}
+{ "keyword": "/description", "instance": "", "value": "The age of a person" }
 {{</instance-annotation>}}
 
 {{<schema `Schema with logical operators`>}}
@@ -92,40 +85,11 @@ The `description` keyword in JSON Schema is used to provide a human readable des
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  /// ...
-  {
-    "valid": true,
-    "keywordLocation": "/description",
-    "instanceLocation": "",
-    "annotation": "Personal information of a user"
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/if/description",
-    "instanceLocation": "",
-    "annotation": "if block"
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/if/properties/age/description",
-    "instanceLocation": "/age",
-    "annotation": "Age"
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/then/description",
-    "instanceLocation": "",
-    "annotation": "then block",
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/then/properties/eligible/description",
-    "instanceLocation": "/eligible",
-    "annotation": "Eligible"
-  },
-  // ...
-]
+{ "keyword": "/description", "instance": "", "value": "Personal information of a user" }
+{ "keyword": "/if/description", "instance": "", "value": "if block" }
+{ "keyword": "/if/properties/age/description", "instance": "/age", "value": "Age" }
+{ "keyword": "/then/description", "instance": "", "value": "then block", }
+{ "keyword": "/then/properties/eligible/description", "instance": "/eligible", "value": "Eligible" }
 {{</instance-annotation>}}
 
 {{<schema `Schema with multiple annotations for the same instance`>}}
@@ -147,20 +111,6 @@ The `description` keyword in JSON Schema is used to provide a human readable des
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-[
-  // ...
-  {
-    "valid": true,
-    "keywordLocation": "/description",
-    "instanceLocation": "",
-    "annotation": "A person name"
-  },
-  {
-    "valid": true,
-    "keywordLocation": "/$ref/description",
-    "instanceLocation": "",
-    "annotation": "A person name"
-  },
-  // ...
-]
+{ "keyword": "/description", "instance": "", "value": "A person name" }
+{ "keyword": "/$ref/description", "instance": "", "value": "A person name" }
 {{</instance-annotation>}}
