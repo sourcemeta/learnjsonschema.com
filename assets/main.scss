@@ -146,3 +146,13 @@ details:not([open]) summary i {
   @extend .d-inline-block;
   transform: rotate(-90deg); 
 }
+
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
