@@ -73,7 +73,9 @@ The `$vocabulary` keyword is used in meta-schemas to identify the vocabularies a
 }
 {{</schema>}}
 
- * The `$dynamicAnchor: meta` declaration is set by convention to `meta` on the official meta-schemas. This setting serves as a mechanism to enable meta-schema extensibility. By declaring `$dynamicAnchor: meta` here, JSON Schema is configured to validate every subschema of the instance schema against the meta-schema, extending validation beyond just the top level.
+{{<learning-more>}}
+The `$dynamicAnchor: meta` declaration is set by convention to `meta` on the official meta-schemas. This setting serves as a mechanism to enable meta-schema extensibility. By declaring `$dynamicAnchor: meta` here, JSON Schema is configured to validate every subschema of the instance schema against the meta-schema, extending validation beyond just the top level.
+{{</learning-more>}}
 
 {{<schema `Meta-schema with the above vocabulary as required`>}}
 {
@@ -91,7 +93,7 @@ The `$vocabulary` keyword is used in meta-schemas to identify the vocabularies a
 }
 {{</schema>}}
 
-{{<schema `Meta-schema with the above vocabularyas optional`>}}
+{{<schema `Meta-schema with the above vocabulary as optional`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.com/schema-optional",
