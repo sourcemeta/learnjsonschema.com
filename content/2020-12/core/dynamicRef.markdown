@@ -197,3 +197,9 @@ representation](https://www.rfc-editor.org/rfc/rfc6901#section-6).
 {{</instance-fail>}}
 
 * _A `$dynamicRef` that initially resolves to a schema with a matching `$dynamicAnchor` resolves to the first `$dynamicAnchor` in the dynamic scope._
+
+{{<learning-more>}}
+Check out these blog posts to gain a deeper understanding of dynamic references
+* [Understanding JSON Schema Lexical and Dynamic Scopes](https://json-schema.org/blog/posts/understanding-lexical-dynamic-scopes)
+* [Using Dynamic References to Support Generic Types](https://json-schema.org/blog/posts/dynamicref-and-generics)
+{{</learning-more>}}
