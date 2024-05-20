@@ -22,9 +22,49 @@ related:
     keyword: $anchor
 ---
 
-The `$dynamicAnchor` keyword allows the creation of plain name fragments that are not tied to a particular structural location within a schema. This is particularly useful for making subschemas reusable and relocatable without needing to update JSON Pointer references. Unlike `$anchor`, `$dynamicAnchor` indicates an extension point when used with the `$dynamicRef` keyword, facilitating the extension of recursive schemas without imposing specific semantics on that extension.
+The `$dynamicAnchor` keyword allows the creation of plain name fragments that are not tied to a particular structural location within a schema. This is particularly useful for making subschemas reusable and relocatable without needing to update JSON Pointer references. Unlike `$anchor`, `$dynamicAnchor` indicates an extension point when used with the `$dynamicRef` keyword, facilitating the extension of recursive schemas without imposing specific semantics on that extension. Without `$dynamicRef`, `$dynamicAnchor` behaves the same as `$anchor`.
 
 ## Examples
 
-{{<schema ``>}}
+{{<schema `Schema with '$dynamicRef' and '$dynamicAnchor' keywords in the same schema resource`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/1",
+  "required": [ "name", "age", "address" ],
+  "properties": {
+    "name": { "$dynamicRef": "#name" },
+    "age": { "$dynamicRef": "#age" },
+    "address": { "$ref": "#address" },
+    "$defs": {
+      "name": {
+        "$dynamicAnchor": "name",
+        "type": "string",
+        "minLength": 3
+      },
+      "age": {
+        "$anchor": "age",
+        "type": "integer"
+      },
+      "address": {
+        "$dynamicAnchor": "address",
+        "type": "string",
+        "maxLength": 50
+      }
+    }
+  }
+}
 {{</schema>}}
+
+{{<instance-pass `An instance adhering to the above schema is valid`>}}
+{
+  "name": "John",
+  "age": 35,
+  "address": "1234 Elm Street, Springfield, IL 62701, USA"
+}
+{{</instance-pass>}}
+
+{{<instance-fail `Required properties must be present`>}}
+{ "name": "Doe", "age": 61 }
+{{</instance-fail>}}
+
+* _A `$dynamicRef` referencing a `$dynamicAnchor` within the same schema resource functions similarly to a standard `$ref` referencing an `$anchor`. Similarly, a `$dynamicRef` referencing an `$anchor` within the same schema resource behaves like a typical `$ref` referencing an `$anchor`. Likewise, a `$ref` targeting a `$dynamicAnchor` within the same schema resource behaves like a regular `$ref` targeting an `$anchor`._
