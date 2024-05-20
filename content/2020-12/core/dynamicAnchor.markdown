@@ -21,3 +21,10 @@ related:
   - vocabulary: core
     keyword: $anchor
 ---
+
+The `$dynamicAnchor` keyword allows the creation of plain name fragments that are not tied to a particular structural location within a schema. This is particularly useful for making subschemas reusable and relocatable without needing to update JSON Pointer references. Unlike `$anchor`, `$dynamicAnchor` indicates an extension point when used with the `$dynamicRef` keyword, facilitating the extension of recursive schemas without imposing specific semantics on that extension.
+
+## Examples
+
+{{<schema ``>}}
+{{</schema>}}
