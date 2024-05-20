@@ -141,3 +141,8 @@ article table {
     @extend .bg-info-subtle;
   }
 }
+
+details:not([open]) summary i {
+  @extend .d-inline-block;
+  transform: rotate(-90deg); 
+}
