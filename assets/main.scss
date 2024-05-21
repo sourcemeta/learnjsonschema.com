@@ -156,3 +156,12 @@ details:not([open]) summary i {
   background: none;
   cursor: pointer;
 }
+
+.highlight {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+
+  span.line:first-child{
+    display: none;
+  }
+}

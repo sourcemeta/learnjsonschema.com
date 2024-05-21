@@ -7,8 +7,7 @@ for (const element of document.querySelectorAll('[data-bs-toggle="tooltip"]')) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const copyBtns = document.querySelectorAll(".copy-btn");
-  copyBtns.forEach((btn) => {
+  document.querySelectorAll(".copy-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const codeBlock = btn.nextElementSibling;
       if (codeBlock && codeBlock.textContent) {
