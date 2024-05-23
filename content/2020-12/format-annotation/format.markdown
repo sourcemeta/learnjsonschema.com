@@ -10,6 +10,11 @@ metaschema: "https://json-schema.org/draft/2020-12/meta/format-annotation"
 tests:
   - draft2020-12/format.json
 introduced_in: draft1
+changed_in:
+  - draft3
+  - draft4
+  - 2019-09
+  - 2020-12
 annotation:
    description: The format name set by this keyword
    kind: [ "string" ]

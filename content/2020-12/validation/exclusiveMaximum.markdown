@@ -11,6 +11,8 @@ tests:
   - draft2020-12/exclusiveMaximum.json
 index: -999
 introduced_in: draft3
+changed_in:
+  - draft6
 related:
   - vocabulary: validation
     keyword: exclusiveMinimum

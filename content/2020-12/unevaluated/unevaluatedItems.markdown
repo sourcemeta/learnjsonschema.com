@@ -12,6 +12,8 @@ default:
 tests:
   - draft2020-12/unevaluatedItems.json
 introduced_in: 2019-09
+changed_in:
+  - 2020-12
 annotation:
    description: A boolean true if it applied to any item of the instance
    kind: [ "boolean" ]
