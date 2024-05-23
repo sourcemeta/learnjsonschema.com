@@ -13,6 +13,4 @@ jsonschema = 'https://json-schema.org'
   [markup.highlight]
     lineNos = false
     noClasses = false
-
-[outputs]
-    home = ["HTML", "RSS", "JSON"]
+    

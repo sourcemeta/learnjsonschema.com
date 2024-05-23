@@ -5,13 +5,13 @@
         height="42" width="42" class="me-1">
       <span class="align-middle">JSON Schema Docs</span>
     </a>
-    
-    <form action="/search" method="GET">
-      <input type="search" name="q" id="search-query" placeholder="Search....">
-      <button type="submit">Search</button>
+
+    <form class="d-flex justify-self-end" id="search-form">
+      <input class="form-control me-2" type="search" name="q" id="search-query" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
-  
-    <div class="navbar-nav">
+
+    <div class="navbar-nav d-flex ">
       <a class="btn btn-sm btn-primary" target="_blank" href="{{ .Site.Params.GitHub }}" aria-label="View this project on GitHub">
         <i class="align-middle bi bi-github fs-6"></i>
         <small class="align-middle ms-1">Star on GitHub</small>
@@ -19,3 +19,4 @@
     </div>
   </div>
 </nav>
+<div id="search-results"></div>

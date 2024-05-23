@@ -34,11 +34,19 @@
     {{ partial "navigation.html" . }}
 
     {{ block "main" . }}
+
+    <div id="search-results"></div>
+    <div class="search-loading">Loading...</div>
+    
     {{ end }}
-
+    
     {{ partial "footer.html" . }}
-
+    
     {{ $js := resources.Get "main.js" | js.Build (dict "minify" true "target" "es2015") }}
     <script async src="{{ $js.Permalink }}"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.6.2/fuse.min.js" integrity="sha512-Nqw1tH3mpavka9cQCc5zWWEZNfIPdOYyQFjlV1NvflEtQ0/XI6ZQ+H/D3YgJdqSUJlMLAPRj/oXlaHCFbFCjoQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </body>
 </html>
