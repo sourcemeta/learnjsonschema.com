@@ -5,6 +5,12 @@
         height="42" width="42" class="me-1">
       <span class="align-middle">JSON Schema Docs</span>
     </a>
+    
+    <form action="/search" method="GET">
+      <input type="search" name="q" id="search-query" placeholder="Search....">
+      <button type="submit">Search</button>
+    </form>
+  
     <div class="navbar-nav">
       <a class="btn btn-sm btn-primary" target="_blank" href="{{ .Site.Params.GitHub }}" aria-label="View this project on GitHub">
         <i class="align-middle bi bi-github fs-6"></i>
