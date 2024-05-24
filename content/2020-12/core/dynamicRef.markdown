@@ -97,18 +97,18 @@ null
   - **Dynamic Scope:** `https://example.com/root`
 
 - Upon encountering the `if` applicator, a new schema resource (`https://example.com/firstScope`) is declared and added to the stack, expanding the dynamic scope.
-  - **Dynamic Scope:** `https://example.com/root` → `https://example.com/firstScope`
+  - **Dynamic Scope:** `https://example.com/root` --> `https://example.com/firstScope`
 
 - Since `https://example.com/firstScope` doesn't reference any other schema resource, the evaluation of the `if` schema completes, and the stack unwinds, returning to the root schema resource.
   - **Dynamic Scope:** `https://example.com/root`
 
 - The successful validation by the `if` subschema triggers entry into the `then` applicator, introducing another schema resource (`https://example.com/secondScope`), thus extending the dynamic scope.
-  - **Dynamic Scope:** `https://example.com/root` → `https://example.com/secondScope`
+  - **Dynamic Scope:** `https://example.com/root` --> `https://example.com/secondScope`
 
 - Within the `then` subschema, a reference to another schema resource (`https://example.com/start`) further enriches the dynamic scope.
-  - **Dynamic Scope:** `https://example.com/root` → `https://example.com/secondScope` → `https://example.com/start`
+  - **Dynamic Scope:** `https://example.com/root` --> `https://example.com/secondScope` --> `https://example.com/start`
 
-- Additionally, within the `then` subschema, a dynamic reference is made to another schema resource (`https://example.com/innerScope#thingy`). While the initial part of the URI is resolved statically to `/$defs/thingy`, the inclusion of `#thingy` fragment alters the resolution to `/then/$defs/thingy` because the first dynamic anchor encountered in the current dynamic scope is at `/then/$defs/thingy`. So, only a null value is valid in this case.
+- Additionally, within the `then` subschema, a dynamic reference is made to another schema resource (`https://example.com/innerScope#thingy`). While the initial part of the URI is resolved statically to `/$defs/thingy`, the inclusion of `#thingy` fragment reults in the final resolution to `/then/$defs/thingy` because the first dynamic anchor encountered in the current dynamic scope is at `/then/$defs/thingy`. So, only a null value is valid in this case.
 
 **Note:** _The non-fragment part is always statically resolved, while the fragment may be dynamically resolved._
 
@@ -187,84 +187,4 @@ null
 [ 11, 22 ]
 {{</instance-fail>}}
 
-{{<schema `An '$anchor' with the same name as a '$dynamicAnchor' is not used for dynamic scope resolution`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/root-schema",
-  "$ref": "list",
-  "$defs": {
-    "foo": {
-      "$anchor": "items",
-      "type": "string"
-    },
-    "list": {
-      "$id": "list",
-      "items": { "$dynamicRef": "#items" },
-      "$defs": {
-        "items": {
-          "$comment": "This is only needed to satisfy the bookending requirement",
-          "$dynamicAnchor": "items",
-          "type": "integer"
-        }
-      }
-    }
-  }
-}
-{{</schema>}}
-
-{{<instance-pass `An instance adhering to the above schema is valid`>}}
-[ 11, 22 ]
-{{</instance-pass>}}
-
-{{<instance-fail `A non-integer array is invalid`>}}
-[ "foo", "bar" ]
-{{</instance-fail>}}
-
-* _A `$dynamicRef` resolves to the first `$dynamicAnchor` still in scope that is encountered when the schema is evaluated. Refer to the above two examples for clarification._
-
-<!-- {{<schema `Schema with '$dynamicRef' set to 'extended#meta'`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/top-level",
-  "$dynamicAnchor": "meta",
-  "properties": {
-    "foo": { "const": "pass" }
-  },
-  "$ref": "extended",
-  "$defs": {
-    "extended": {
-      "$id": "extended",
-      "$dynamicAnchor": "meta",
-      "properties": {
-        "bar": { "$ref": "bar" }
-      }
-    },
-    "bar": {
-      "$id": "bar",
-      "properties": {
-        "baz": { "$dynamicRef": "extended#meta" }
-      }
-    }
-  }
-}
-{{</schema>}}
-
-{{<instance-pass `An instance adhering to the above schema is valid`>}}
-{
-  "foo": "pass",
-  "bar": {
-    "baz": { "foo": "pass" }
-  }
-}
-{{</instance-pass>}}
-
-{{<instance-fail `The value of 'foo' property must be 'pass'`>}}
-{
-  "foo": "pass",
-  "bar": {
-    "baz": { "foo": "fail" }
-  }
-}
-{{</instance-fail>}}
-
-* _A `$dynamicRef` that initially resolves to a schema with a matching `$dynamicAnchor` resolves to the first `$dynamicAnchor` in the dynamic scope._ -->
+* _A `$dynamicRef` resolves to the first `$dynamicAnchor` still in scope that is encountered when the schema is evaluated._
