@@ -40,10 +40,10 @@ You may also find these blog posts helpful for gaining a deeper understanding of
 
 ## Examples
 
-{{<schema `after leaving a dynamic scope, '$dynamicAnchor' is not used by a '$dynamicRef'`>}}
+{{<schema `After leaving a dynamic scope, '$dynamicAnchor' is not used by a '$dynamicRef'`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/dynamic-ref-leaving-dynamic-scope",
+  "$id": "https://example.com/root",
   "if": {
     "$id": "firstScope",
     "$defs": {
@@ -94,19 +94,19 @@ null
 {{</instance-pass>}}
 
 - The evaluation begins with the top-level schema, where the dynamic scope is the root schema resource.
-  - **Dynamic Scope:** `https://example.com/dynamic-ref-leaving-dynamic-scope`
+  - **Dynamic Scope:** `https://example.com/root`
 
 - Upon encountering the `if` applicator, a new schema resource (`https://example.com/firstScope`) is declared and added to the stack, expanding the dynamic scope.
-  - **Dynamic Scope:** `https://example.com/dynamic-ref-leaving-dynamic-scope` → `https://example.com/firstScope`
+  - **Dynamic Scope:** `https://example.com/root` → `https://example.com/firstScope`
 
 - Since `https://example.com/firstScope` doesn't reference any other schema resource, the evaluation of the `if` schema completes, and the stack unwinds, returning to the root schema resource.
-  - **Dynamic Scope:** `https://example.com/dynamic-ref-leaving-dynamic-scope`
+  - **Dynamic Scope:** `https://example.com/root`
 
 - The successful validation by the `if` subschema triggers entry into the `then` applicator, introducing another schema resource (`https://example.com/secondScope`), thus extending the dynamic scope.
-  - **Dynamic Scope:** `https://example.com/dynamic-ref-leaving-dynamic-scope` → `https://example.com/secondScope`
+  - **Dynamic Scope:** `https://example.com/root` → `https://example.com/secondScope`
 
 - Within the `then` subschema, a reference to another schema resource (`https://example.com/start`) further enriches the dynamic scope.
-  - **Dynamic Scope:** `https://example.com/dynamic-ref-leaving-dynamic-scope` → `https://example.com/secondScope` → `https://example.com/start`
+  - **Dynamic Scope:** `https://example.com/root` → `https://example.com/secondScope` → `https://example.com/start`
 
 - Additionally, within the `then` subschema, a dynamic reference is made to another schema resource (`https://example.com/innerScope#thingy`). While the initial part of the URI is resolved statically to `/$defs/thingy`, the inclusion of `#thingy` fragment alters the resolution to `/then/$defs/thingy` because the first dynamic anchor encountered in the current dynamic scope is at `/then/$defs/thingy`. So, only a null value is valid in this case.
 
