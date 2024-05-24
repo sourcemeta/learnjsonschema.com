@@ -33,11 +33,9 @@ anchors. More specifically, we recommend carefully studying [URI
 resolution](https://datatracker.ietf.org/doc/html/rfc3986#section-5), URLs vs
 URNs, and the difference between a URI and a URI Reference.
 
-Additionally, a JSON Schema reference URI may contain a JSON Pointer. For this
-reason, we recommend reading the JSON Pointer
-[RFC 6901](https://www.rfc-editor.org/rfc/rfc6901) specification, primarily its
-proposed [URI fragment identifier
-representation](https://www.rfc-editor.org/rfc/rfc6901#section-6).
+You may also find these blog posts helpful for gaining a deeper understanding of dynamic references.
+* [Understanding JSON Schema Lexical and Dynamic Scopes](https://json-schema.org/blog/posts/understanding-lexical-dynamic-scopes)
+* [Using Dynamic References to Support Generic Types](https://json-schema.org/blog/posts/dynamicref-and-generics)
 {{</learning-more>}}
 
 ## Examples
@@ -45,27 +43,26 @@ representation](https://www.rfc-editor.org/rfc/rfc6901#section-6).
 {{<schema `Schema with '$dynamicRef' and '$dynamicAnchor' keywords in the same schema resource`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/1",
   "required": [ "name", "age", "address" ],
   "properties": {
     "name": { "$dynamicRef": "#name" },
     "age": { "$dynamicRef": "#age" },
-    "address": { "$ref": "#address" },
-    "$defs": {
-      "name": {
-        "$dynamicAnchor": "name",
-        "type": "string",
-        "minLength": 3
-      },
-      "age": {
-        "$anchor": "age",
-        "type": "integer"
-      },
-      "address": {
-        "$dynamicAnchor": "address",
-        "type": "string",
-        "maxLength": 50
-      }
+    "address": { "$ref": "#address" }
+  },
+  "$defs": {
+    "name": {
+      "$dynamicAnchor": "name",
+      "type": "string",
+      "minLength": 3
+    },
+    "age": {
+      "$anchor": "age",
+      "type": "integer"
+    },
+    "address": {
+      "$dynamicAnchor": "address",
+      "type": "string",
+      "maxLength": 50
     }
   }
 }
@@ -88,7 +85,7 @@ representation](https://www.rfc-editor.org/rfc/rfc6901#section-6).
 {{<schema `Schema with multiple '$dynamicAnchor' set to same value`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/2",
+  "$id": "https://example.com/root",
   "$ref": "list",
   "$defs": {
     "foo": {
@@ -120,7 +117,7 @@ representation](https://www.rfc-editor.org/rfc/rfc6901#section-6).
 {{<schema `Schema with '$anchor' and '$dynamicAnchor' set to same value`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/3",
+  "$id": "https://example.com/root",
   "$ref": "list",
   "$defs": {
     "foo": {
@@ -197,9 +194,3 @@ representation](https://www.rfc-editor.org/rfc/rfc6901#section-6).
 {{</instance-fail>}}
 
 * _A `$dynamicRef` that initially resolves to a schema with a matching `$dynamicAnchor` resolves to the first `$dynamicAnchor` in the dynamic scope._
-
-{{<learning-more>}}
-Check out these blog posts to gain a deeper understanding of dynamic references
-* [Understanding JSON Schema Lexical and Dynamic Scopes](https://json-schema.org/blog/posts/understanding-lexical-dynamic-scopes)
-* [Using Dynamic References to Support Generic Types](https://json-schema.org/blog/posts/dynamicref-and-generics)
-{{</learning-more>}}
