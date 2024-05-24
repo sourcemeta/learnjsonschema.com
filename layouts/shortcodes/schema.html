@@ -9,5 +9,10 @@
       Schema</span>
   </div>
   {{ $code := trim .Inner "\n" }}
-  {{ transform.Highlight ($code) "json" }}
+  <div class="position-relative">
+    <button class="btn btn-sm btn-outline-secondary copy-btn">
+      <i class="bi bi-files"></i> Copy
+    </button>
+    {{ transform.Highlight ($code) "json" }}
+  </div>
 </div>
