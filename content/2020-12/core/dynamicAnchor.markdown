@@ -26,45 +26,39 @@ The `$dynamicAnchor` keyword allows the creation of plain name fragments that ar
 
 ## Examples
 
-{{<schema `Schema with '$dynamicRef' and '$dynamicAnchor' keywords in the same schema resource`>}}
+{{<schema `A '$dynamicRef' resolves to the first '$dynamicAnchor' still in scope that is encountered when the schema is evaluated`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/1",
-  "required": [ "name", "age", "address" ],
-  "properties": {
-    "name": { "$dynamicRef": "#name" },
-    "age": { "$dynamicRef": "#age" },
-    "address": { "$ref": "#address" },
-    "$defs": {
-      "name": {
-        "$dynamicAnchor": "name",
-        "type": "string",
-        "minLength": 3
+  "$id": "https://example.com/root",
+  "$ref": "list",
+  "$defs": {
+    "foo": {
+      "$dynamicAnchor": "items",
+      "type": "string"
+    },
+    "list": {
+      "$id": "list",
+      "type": "array",
+      "items": {
+        "$dynamicRef": "#items"
       },
-      "age": {
-        "$anchor": "age",
-        "type": "integer"
-      },
-      "address": {
-        "$dynamicAnchor": "address",
-        "type": "string",
-        "maxLength": 50
+      "$defs": {
+        "items": {
+          "$comment": "This is only needed to satisfy the bookending requirement",
+          "$dynamicAnchor": "items"
+        }
       }
     }
   }
 }
 {{</schema>}}
 
-{{<instance-pass `An instance adhering to the above schema is valid`>}}
-{
-  "name": "John",
-  "age": 35,
-  "address": "1234 Elm Street, Springfield, IL 62701, USA"
-}
+{{<instance-pass `An array of strings is valid`>}}
+[ "foo", "bar" ]
 {{</instance-pass>}}
 
-{{<instance-fail `Required properties must be present`>}}
-{ "name": "Doe", "age": 61 }
+{{<instance-fail `An array containing non-strings is invalid`>}}
+[ "foo", 42 ]
 {{</instance-fail>}}
 
 * _A `$dynamicRef` referencing a `$dynamicAnchor` within the same schema resource functions similarly to a standard `$ref` referencing an `$anchor`. Similarly, a `$dynamicRef` referencing an `$anchor` within the same schema resource behaves like a typical `$ref` referencing an `$anchor`. Likewise, a `$ref` targeting a `$dynamicAnchor` within the same schema resource behaves like a regular `$ref` targeting an `$anchor`._
