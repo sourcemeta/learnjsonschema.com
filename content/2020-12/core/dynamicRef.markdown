@@ -35,7 +35,7 @@ You may also find these blog posts helpful for gaining a deeper understanding of
 {{</learning-more>}}
 
 {{<common-pitfall>}}
-The bookending requirement means that when you use a `$dynamicRef`, the JSON Schema processor needs to find a matching `$dynamicAnchor` within the same schema scope to resolve the reference correctly. This ensures that the reference doesn't end up being unresolvable due to scope issues.
+**Bookending:** The bookending requirement means that when you use a `$dynamicRef`, the JSON Schema processor needs to find a matching `$dynamicAnchor` within the same schema scope to resolve the reference correctly. This ensures that the reference doesn't end up being unresolvable due to scope issues.
 {{</common-pitfall>}}
 
 ## Examples
