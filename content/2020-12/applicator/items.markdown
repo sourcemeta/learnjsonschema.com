@@ -2,7 +2,7 @@
 keyword: "items"
 signature: "Schema"
 value: This keyword must be set to a valid JSON Schema
-summary: "Validation succeeds if each element of the instance not covered by [`prefixItems`](/2020-12/applicator/prefixItems) validates against this schema."
+summary: "Validation succeeds if each element of the instance not covered by [`prefixItems`](/2020-12/applicator/prefixitems) validates against this schema."
 kind: [ "applicator", "annotation" ]
 instance: [ "array" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-10.3.1.2"
