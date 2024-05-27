@@ -24,7 +24,10 @@ related:
     keyword: $defs
 ---
 
-The `$dynamicRef` keyword is a dynamic applicator that allows for runtime resolution of schema references. Unlike the static `$ref`, which resolves the referenced schema at schema load time, `$dynamicRef` defers full resolution until the instance is evaluated. It attempts to resolve the given fragment based on the dynamic scope at that given point in time. This keyword is particularly useful for handling recursive schemas where the schema references itself or where the structure of the schema may change at runtime. Notably, official meta-schemas use this mechanism themselves for defining vocabularies!
+The `$dynamicRef` keyword is a dynamic applicator that allows for runtime resolution of schema references. Unlike the static `$ref`, which resolves the referenced schema at schema load time, `$dynamicRef` defers full resolution until the instance is evaluated. It attempts to resolve the given fragment based on the dynamic scope at that given point in time.
+- This keyword is particularly useful for handling recursive schemas where the schema references itself or where the structure of the schema may change at runtime.
+- If the `$dynamicRef` includes more than just a fragment, the URI except for the fragment is statically resolved first, and then only the fragment is dynamically resolved.
+- Notably, official meta-schemas use this mechanism themselves for defining vocabularies!
 
 {{<learning-more>}} URIs play a central role in JSON Schema. Going through the URI [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986) specification is a must for gaining a deeper understanding of references, identifiers, and
 anchors. More specifically, we recommend carefully studying [URI resolution](https://datatracker.ietf.org/doc/html/rfc3986#section-5), URLs vs URNs, and the difference between a URI and a URI Reference.
@@ -35,7 +38,7 @@ You may also find these blog posts helpful for gaining a deeper understanding of
 {{</learning-more>}}
 
 {{<common-pitfall>}}
-**Bookending:** The bookending requirement means that when you use a `$dynamicRef`, the JSON Schema processor needs to find a matching `$dynamicAnchor` within the same schema scope to resolve the reference correctly. This ensures that the reference doesn't end up being unresolvable due to scope issues.
+**Bookending:** The bookending requirement means that when you use a `$dynamicRef`, the JSON Schema processor needs to find a matching `$dynamicAnchor` within the target schema resource, even if the target is different from the destination schema. This ensures that the reference resolves correctly by matching the actual anchor defined in the target schema resource, preventing unresolvable references due to scope issues.
 {{</common-pitfall>}}
 
 ## Examples
@@ -169,7 +172,6 @@ null
       "items": { "$dynamicRef": "#items" },
       "$defs": {
         "items": {
-          "$comment": "This is only needed to satisfy the bookending requirement",
           "$dynamicAnchor": "items",
           "type": "integer"
         }
