@@ -10,8 +10,6 @@ metaschema: "https://json-schema.org/draft/2020-12/meta/core"
 tests:
   - draft2020-12/anchor.json
 introduced_in: 2019-09
-changed_in:
-  - 2020-12
 affects:
   - vocabulary: core
     keyword: $ref
