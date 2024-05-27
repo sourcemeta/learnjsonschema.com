@@ -44,8 +44,8 @@ The `$dynamicAnchor` keyword allows the creation of plain name fragments that ar
       },
       "$defs": {
         "items": {
-          "$comment": "This is only needed to satisfy the bookending requirement",
-          "$dynamicAnchor": "items"
+          "$dynamicAnchor": "items",
+          "type": "number"
         }
       }
     }
