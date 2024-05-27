@@ -146,16 +146,3 @@ details:not([open]) summary i {
   @extend .d-inline-block;
   transform: rotate(-90deg); 
 }
-
-/* Customizing the search button color */
-.btn-outline-success {
-  color: #0d6efd !important; /* Text color */
-  border-color: #0d6efd !important; /* Border color */
-}
-
-.btn-outline-success:hover {
-  background-color: #0d6efd !important; /* Background color on hover */
-  border-color: #0d6efd !important; /* Border color on hover */
-  color: white !important; /* Text color on hover */
-}
-

@@ -19,23 +19,27 @@ var fuseOptions = {
   ]
 };
 
-// Get references to the form and input box
-const searchForm = document.getElementById('search-form');
-const inputBox = document.getElementById('search-query');
+const searchInput = document.getElementById('search-query');
+const box = document.getElementById('listBox');
 
-// Add event listener to the form
-if (searchForm) {
-  searchForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-    const searchQuery = inputBox.value.trim();
-    if (searchQuery) {
-      executeSearch(searchQuery);
-    } else {
-      alert('Please enter a valid search query.');
-    }
-  });
-}
+searchInput.addEventListener('input', function() {
+  const query = searchInput.value;
+  console.log('Search query:', query);
 
+  if (query) {
+    executeSearch(query);
+    box.style.display = 'block';
+  } else {
+    box.style.display = 'none';
+  }
+});
+
+document.addEventListener('click', function(event) {
+  if (!searchInput.contains(event.target) && !box.contains(event.target)) {
+    box.style.display = 'none';
+    searchInput.value = ''; // Clear the search input
+  }
+});
 
 function executeSearch(searchQuery) {
 
@@ -46,21 +50,31 @@ function executeSearch(searchQuery) {
           console.log('Looks like there was a problem. Status Code: ' + response.status);
           return;
       }
-      // Examine the text in the response
-      response.json().then(function (pages) {
-          var fuse = new Fuse(pages, fuseOptions);
-          var result = fuse.search(searchQuery);
-          if (result.length > 0) {
-              window.location.replace(result[0].item.permalink);
-          } else {
-            alert('No matches found.');
-          }
-          // hide(document.querySelector('.search-loading'));
-      })
-      .catch(function (err) {
-          console.log('Fetch Error :-S', err);
+      response.json().then(function(pages) {
+        var fuse = new Fuse(pages, fuseOptions);
+        var result = fuse.search(searchQuery);
+        updateDropdown(result.slice(0, 10));
+      }).catch(function(err) {
+        console.log('Fetch Error :-S', err);
       });
   });
+}
+
+function updateDropdown(results) {
+  // Clear previous results
+  box.innerHTML = '';
+
+  if (results.length > 0) {
+    results.forEach(function(result) {
+      const item = document.createElement('li');
+      item.innerHTML = `<a class="dropdown-item" href="${result.item.permalink}">${result.item.title}</a>`;
+      box.appendChild(item);
+    });
+  } else {
+    const item = document.createElement('li');
+    item.innerHTML = '<a class="dropdown-item disabled" href="#">No matches found</a>';
+    box.appendChild(item);
+  }
 }
 
 // Helper Functions

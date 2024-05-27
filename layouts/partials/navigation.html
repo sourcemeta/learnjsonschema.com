@@ -6,10 +6,10 @@
       <span class="align-middle">JSON Schema Docs</span>
     </a>
 
-    <form class="d-flex justify-self-end" id="search-form">
-      <input class="form-control me-2" type="search" name="q" id="search-query" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
+    <div class="??">
+      <input class="form-control me-2" type="search" id="search-query" placeholder="Search" aria-label="Search" autocomplete="off">
+      <ul id="listBox" class="dropdown-menu" aria-labelledby="dropdownMenuLink"></ul>
+    </div>
 
     <div class="navbar-nav d-flex ">
       <a class="btn btn-sm btn-primary" target="_blank" href="{{ .Site.Params.GitHub }}" aria-label="View this project on GitHub">
