@@ -14,3 +14,5 @@ jsonschema = 'https://json-schema.org'
     lineNos = false
     noClasses = false
     
+[outputs]
+  home = ["html", "json"]
