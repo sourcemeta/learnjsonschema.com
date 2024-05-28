@@ -12,6 +12,8 @@ default:
 tests:
   - draft2020-12/items.json
 introduced_in: draft1
+changed_in:
+  - draft6
 annotation:
    description: A boolean true if it applied to any item of the instance
    kind: [ "boolean" ]

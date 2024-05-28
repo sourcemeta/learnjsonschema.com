@@ -84,3 +84,30 @@ function updateDropdown(results) {
 // function hide(elem) {
 //   elem.style.display = 'none';
 // }
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".copy-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const codeBlock = btn.nextElementSibling;
+      if (codeBlock && codeBlock.textContent) {
+        copyToClipboard(codeBlock.textContent, btn);
+      }
+    });
+  });
+});
+
+function copyToClipboard(text, button) {
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      const originalIcon = button.innerHTML;
+      button.innerHTML = '<i class="bi bi-check-lg"></i> Copied!';
+      setTimeout(() => {
+        button.innerHTML = originalIcon;
+      }, 1500);
+    })
+    .catch((err) => {
+      console.error("Failed to copy text: ", err);
+    });
+}
+

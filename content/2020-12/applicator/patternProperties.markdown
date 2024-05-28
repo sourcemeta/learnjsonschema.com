@@ -13,6 +13,8 @@ tests:
   - draft2020-12/patternProperties.json
 index: -998
 introduced_in: draft3
+changed_in:
+  - draft4
 annotation:
    description: The set of instance property names validated by this keyword's subschema
    kind: [ "array" ]
