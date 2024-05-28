@@ -15,6 +15,8 @@ tests:
   - draft2020-12/optional/non-bmp-regex.json
 index: -9999
 introduced_in: draft1
+changed_in:
+ - draft4
 related:
   - vocabulary: format-annotation
     keyword: format

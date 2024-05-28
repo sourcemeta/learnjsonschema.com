@@ -57,6 +57,12 @@ $bootstrap-icons-font: bootstrap-icons;
 $bootstrap-icons-font-dir: "./";
 @import "../vendor/bootstrap-icons/font/bootstrap-icons.scss";
 
+// Hide ugly details markers in Safari
+// See https://stackoverflow.com/a/6202729
+details summary::-webkit-details-marker {
+  display: none;
+}
+
 // Highlight
 @import "./highlight.scss";
 .highlight {
@@ -144,5 +150,20 @@ article table {
 
 details:not([open]) summary i {
   @extend .d-inline-block;
-  transform: rotate(-90deg); 
+  transform: rotate(-90deg);
+}
+
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.highlight {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }

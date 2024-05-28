@@ -30,6 +30,12 @@ tests:
   - draft2020-12/optional/format/uri.json
   - draft2020-12/optional/format/uuid.json
 introduced_in: draft1
+changed_in:
+  - draft3
+  - draft4
+  - draft6
+  - draft7
+  - 2019-09
 annotation:
    description: The format name set by this keyword
    kind: [ "string" ]
