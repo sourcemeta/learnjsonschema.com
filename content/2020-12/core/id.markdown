@@ -11,6 +11,8 @@ tests:
   - draft2020-12/optional/id.json
 index: -999
 introduced_in: draft6
+changed_in:
+  - 2019-09
 affects:
   - vocabulary: core
     keyword: $ref
