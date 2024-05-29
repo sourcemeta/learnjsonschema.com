@@ -76,6 +76,9 @@
               <td class="text-break">
                 {{ if isset .Params "changed_in" }}
                   {{ range (.Params.changed_in) }}
+                    {{ if eq $dialect (.) }}
+                      {{ errorf "A dialect cannot change itself!" }}
+                    {{ end }}
                     {{ partial "dialect-badge.html" (dict "name" (.)) }}
                   {{ end }}
                 {{ else }}
