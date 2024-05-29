@@ -15,6 +15,9 @@ tests:
   - draft2020-12/optional/cross-draft.json
 index: -99
 introduced_in: draft3
+changed_in:
+  - draft6
+  - 2019-09
 interdependencies:
   - vocabulary: core
     keyword: $id

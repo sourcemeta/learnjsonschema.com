@@ -13,6 +13,8 @@ tests:
   - draft2020-12/required.json
 index: -99
 introduced_in: draft3
+changed_in:
+  - draft4
 related:
   - vocabulary: validation
     keyword: dependentRequired

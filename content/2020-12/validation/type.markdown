@@ -12,6 +12,8 @@ default:
 tests:
   - draft2020-12/type.json
 introduced_in: draft1
+changed_in:
+  - draft4
 index: -99999
 ---
 
