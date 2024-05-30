@@ -20,7 +20,7 @@ related:
     keyword: dependentRequired
 ---
 
-The `dependentSchemas` keyword allows you to define dependencies between properties based on the presence of other properties within an instance. It extends the functionality of the `dependentRequired` keyword by allowing you to pass in a full schema. The instance will be considered valid only if the dependent properties adhere to the `dependentSchemas` schema.
+The  {{<keyword-link name="dependentSchemas" >}} keyword allows you to define dependencies between properties based on the presence of other properties within an instance. It extends the functionality of the  {{<keyword-link name="dependentRequired" >}} keyword by allowing you to pass in a full schema. The instance will be considered valid only if the dependent properties adhere to the  {{<keyword-link name="dependentSchemas" >}} schema.
 
 * Each key in the object represents a property name.
 * Instance is valid if the associated property is present and conforms to the subschema.
