@@ -39,6 +39,6 @@
     {{ partial "footer.html" . }}
 
     {{ $js := resources.Get "main.js" | js.Build (dict "minify" true "target" "es2015") }}
-    <script async src="{{ $js.Permalink }}"></script>
+    <script defer src="{{ $js.Permalink }}"></script>
   </body>
 </html>
