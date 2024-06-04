@@ -1,5 +1,6 @@
 import './vendor/bootstrap/js/src/dropdown.js';
 import Tooltip from './vendor/bootstrap/js/src/tooltip.js';
+import Fuse from 'fuse.js';
 
 // Initialize tooltips
 for (const element of document.querySelectorAll('[data-bs-toggle="tooltip"]')) {
@@ -42,7 +43,7 @@ document.addEventListener('click', function(event) {
 });
 
 function executeSearch(searchQuery) {
-
+  // TODO
   // show(document.querySelector('.search-loading'));
 
   fetch('/index.json').then(function (response) {
@@ -67,23 +68,19 @@ function updateDropdown(results) {
   if (results.length > 0) {
     results.forEach(function(result) {
       const item = document.createElement('li');
-      item.innerHTML = `<a class="dropdown-item" href="${result.item.permalink}">${result.item.title}</a>`;
+      item.innerHTML = `<a class="dropdown-item" href="${result.item.permalink}">
+        ${result.item.title}
+        <span style="font-size: 0.8em; color: #888;">(${result.item.dialect})</span>
+        <span style="font-size: 0.9em; color: #007bff;">${result.item.vocabulary}</span>
+      </a>`;
       box.appendChild(item);
     });
   } else {
     const item = document.createElement('li');
     item.innerHTML = '<a class="dropdown-item disabled" href="#">No matches found</a>';
     box.appendChild(item);
-  }
+  }  
 }
-
-// Helper Functions
-// function show(elem) {
-//   elem.style.display = 'block';
-// }
-// function hide(elem) {
-//   elem.style.display = 'none';
-// }
 
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".copy-btn").forEach((btn) => {
@@ -110,4 +107,3 @@ function copyToClipboard(text, button) {
       console.error("Failed to copy text: ", err);
     });
 }
-
