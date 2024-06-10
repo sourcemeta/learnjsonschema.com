@@ -53,7 +53,7 @@ The `maxLength` keyword is used to specify the maximum length of a string instan
 {{</schema>}}
 
 {{<instance-pass `An instance with a string length less than or equal to 20 is valid`>}}
-"This is a valid string"
+"This is valid"
 {{</instance-pass>}}
 
 {{<instance-fail `An instance with a string length greater than 20 is invalid`>}}
