@@ -117,6 +117,18 @@
             </tr>
           {{ end }}
 
+          {{ if isset .Params "release_notes" }}
+            <tr>
+              <th scope="row">Release Notes</th>
+              <td class="text-break">
+                <a target="_blank" href="{{ .Params.release_notes }}">
+                  {{ .Params.release_notes }}
+                  <i class="bi bi-box-arrow-up-right ms-1"></i>
+                </a>
+              </td>
+            </tr>
+          {{ end }}
+
           {{ if ne .Page.Section .Title }}
             {{ if isset .Params "related" }}
               <tr>
