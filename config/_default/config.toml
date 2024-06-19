@@ -16,3 +16,4 @@ jsonschema = 'https://json-schema.org'
     
 [outputs]
   home = ["html", "json"]
+  

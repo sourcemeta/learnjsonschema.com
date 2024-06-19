@@ -117,6 +117,18 @@
             </tr>
           {{ end }}
 
+          {{ if isset .Params "release_notes" }}
+            <tr>
+              <th scope="row">Release Notes</th>
+              <td class="text-break">
+                <a target="_blank" href="{{ .Params.release_notes }}">
+                  {{ .Params.release_notes }}
+                  <i class="bi bi-box-arrow-up-right ms-1"></i>
+                </a>
+              </td>
+            </tr>
+          {{ end }}
+
           {{ if ne .Page.Section .Title }}
             {{ if isset .Params "related" }}
               <tr>
@@ -148,6 +160,8 @@
         {{ $usingDialect := .Params.metaschema | printf "{\n  \"$schema\": \"%s\" \n}" }}
         {{ transform.Highlight $usingDialect "json" }}
 
+        <br>
+
         <h2>Citing this dialect</h2>
 
         <ul class="nav nav-tabs mt-3" id="citations" role="tablist">
@@ -156,7 +170,7 @@
               type="button" role="tab" aria-expanded="true" aria-current="page">BibTex</button>
           </li>
         </ul>
-        <div class="tab-content pt-3">
+        <div class="tab-content py-3">
           <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
             <p>The recommended way to cite the JSON Schema {{ .Params.title }} dialect using <a target="_blank" href="http://www.bibtex.org">BibTex</a> is as follows:</p>
             <div class="highlight">

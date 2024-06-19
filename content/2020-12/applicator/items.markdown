@@ -13,6 +13,7 @@ tests:
   - draft2020-12/items.json
 introduced_in: draft1
 changed_in:
+  - 2019-09
   - draft6
 annotation:
    description: A boolean true if it applied to any item of the instance

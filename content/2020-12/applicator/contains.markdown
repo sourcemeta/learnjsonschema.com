@@ -12,6 +12,8 @@ tests:
 default:
   value: "{}"
 introduced_in: draft6
+changed_in:
+  - 2019-09
 annotation:
    description: A potentially empty array of the indexes to which this keyword's subschema validated successfully to (in ascending order), or a boolean true if it applied to every item of the instance
    kind: [ "array", "boolean" ]

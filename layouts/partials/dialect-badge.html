@@ -3,8 +3,9 @@
     <span class="badge text-bg-info">{{ .name }}</span>
   </a>
 {{ else if eq (.name) "2019-09" }}
-  <span class="badge text-bg-secondary"
-    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)">{{ .name }}</span>
+  <a href="{{ .Site.BaseURL }}/{{ .name }}">
+    <span class="badge text-bg-info">{{ .name }}</span>
+  </a>
 {{ else if eq (.name) "draft7" }}
   <span class="badge text-bg-secondary"
     data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)">Draft 7</span>

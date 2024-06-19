@@ -20,4 +20,5 @@ authors:
 metaschema: "https://json-schema.org/draft/2020-12/schema"
 year: 2020
 bowtie: "https://bowtie.report/#/dialects/draft2020-12"
+release_notes: "https://json-schema.org/draft/2020-12/release-notes"
 ---
