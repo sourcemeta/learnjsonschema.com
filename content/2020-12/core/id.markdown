@@ -44,7 +44,7 @@ _Relationships_:
 * A _schema resource_ has one or more schema objects.
 * A _schema object_ has one or more keywords.
 
-_**Note**: A schema resource does not include its children schema resources, as they are conceptually distinct entities, despite being nested.  However, all of them are part of the same schema. Refer to the last example for clarification._
+_**Note**: A schema resource does not include its children schema resources, as they are conceptually distinct entities (just like html iframes in a web page), despite being nested.  However, all of them are part of the same schema. Refer to the last example for clarification._
 {{</learning-more>}}
 
 The `$id` keyword declares the URI for a schema, usually set at the top level. However, any subschema has the flexibility to declare its own `$id` to distinguish itself with a distinct URI. Each subschema with an `$id` in a compound schema is called a _schema resource_.
