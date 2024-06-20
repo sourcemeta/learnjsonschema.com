@@ -1,11 +1,22 @@
 <aside id="sidebar" class="border-end position-relative d-none d-xl-block">
-
   <div class="px-4 py-2">
+    <ul class="nav nav-tabs nav-fill mt-1" id="sidebar-nav-pills">
+      <li class="nav-item">
+        <a class="nav-link active" id="sidebar-grouping-vocabulary" data-bs-toggle="pill" href="#">
+          By Vocabulary
+        </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" id="sidebar-grouping-alphabetic" data-bs-toggle="pill" href="#">
+         Alphabetically
+       </a>
+      </li>
+    </ul>
     {{ $selected_dialect := index (split .RelPermalink "/") 1 }}
     {{ range .Site.Sections }}
       {{ $dialect := .Title }}
-      {{ if eq $selected_dialect $dialect }}
-        {{ $dialectURL := $dialect | printf "/%s" }}
+      {{ $dialectURL := $dialect | printf "/%s" }}
+      <div class="tab-pane fade d-none show active" id="vocabulary">
         <ul class="nav flex-column text-nowrap mb-4">
           {{ range sort .Sections "Params.index" "asc" }}
             <li class="nav-item">
@@ -23,9 +34,9 @@
                         {{ $keywordURL := (replace .Params.keyword "$" "") | printf "%s/%s" $vocabularyURL }}
                         <li>
                           {{ if eq $.Permalink .Permalink }}
-                            <a class="fw-bold text-decoration-none font-monospace active" href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
+                            <a class="text-muted fw-bold text-decoration-none font-monospace active" href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
                           {{ else }}
-                            <a class="text-muted text-decoration-none font-monospace" href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
+                            <a class="text-black-50 text-decoration-none font-monospace" href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
                           {{ end }}
                         </li>
                       {{ end }}
@@ -36,7 +47,25 @@
             </li>
           {{ end }}
         </ul>
-      {{ end }}
+      </div>
+      <div class="tab-pane d-none fade" id="alphabetic">
+        <ul class="list-unstyled ms-3 pt-2">
+          {{ range sort $.Site.RegularPages "Params.keyword" "asc" }}
+            {{ if eq .Section $dialect }}
+              {{ $vocabulary := .Parent.Title }}
+              {{ $vocabularyURL := (replace $vocabulary " " "-") | lower | printf "%s/%s" $dialectURL }}
+              {{ $keywordURL := (replace .Params.keyword "$" "") | printf "%s/%s" $vocabularyURL }}
+              <li>
+                {{ if eq $.Permalink .Permalink }}
+                  <a class="text-muted fw-bold text-decoration-none font-monospace active" href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
+                {{ else }}
+                  <a class="text-black-50 text-decoration-none font-monospace" href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
+                {{ end }}
+              </li>
+            {{ end }}
+          {{ end }}
+        </ul>
+      </div>
     {{ end }}
   </div>
 </aside>
