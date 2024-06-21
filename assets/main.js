@@ -67,14 +67,3 @@ alphabeticTab.addEventListener('click', function () {
   localStorage.setItem('sidebarGrouping', 'alphabetic');
   setSidebarGrouping('alphabetic');
 });
-
-document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll(".copy-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const codeBlock = btn.nextElementSibling;
-      if (codeBlock && codeBlock.textContent) {
-        copyToClipboard(codeBlock.textContent, btn);
-      }
-    });
-  });
-});

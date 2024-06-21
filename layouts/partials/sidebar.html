@@ -15,57 +15,59 @@
     {{ $selected_dialect := index (split .RelPermalink "/") 1 }}
     {{ range .Site.Sections }}
       {{ $dialect := .Title }}
-      {{ $dialectURL := $dialect | printf "/%s" }}
-      <div class="tab-pane fade d-none show active" id="vocabulary">
-        <ul class="nav flex-column text-nowrap mb-4">
-          {{ range sort .Sections "Params.index" "asc" }}
-            <li class="nav-item">
-              {{ $vocabulary := .Title }}
-              {{ $vocabularyURL := (replace $vocabulary " " "-") | lower | printf "%s/%s" $dialectURL }}
-              <details open>
-                <summary class="ps-0 nav-link text-body">
-                  <i class="bi bi-chevron-down"></i>
-                  <a class="text-body fw-bold" href="{{ ref $ $vocabularyURL }}">{{ $vocabulary }}</a>
-                </summary>
-                <ul class="list-unstyled ms-3">
-                  {{ range sort $.Site.RegularPages "Params.index" "asc" }}
-                    {{ if eq .Section $dialect }}
-                      {{ if eq .Parent.Title $vocabulary }}
-                        {{ $keywordURL := (replace .Params.keyword "$" "") | printf "%s/%s" $vocabularyURL }}
-                        <li>
-                          {{ if eq $.Permalink .Permalink }}
-                            <a class="text-muted fw-bold text-decoration-none font-monospace active" href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
-                          {{ else }}
-                            <a class="text-black-50 text-decoration-none font-monospace" href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
-                          {{ end }}
-                        </li>
+      {{ if eq $selected_dialect $dialect }}
+        {{ $dialectURL := $dialect | printf "/%s" }}
+        <div class="tab-pane fade d-none show active" id="vocabulary">
+          <ul class="nav flex-column text-nowrap mb-4">
+            {{ range sort .Sections "Params.index" "asc" }}
+              <li class="nav-item">
+                {{ $vocabulary := .Title }}
+                {{ $vocabularyURL := (replace $vocabulary " " "-") | lower | printf "%s/%s" $dialectURL }}
+                <details open>
+                  <summary class="ps-0 nav-link text-body">
+                    <i class="bi bi-chevron-down"></i>
+                    <a class="text-body fw-bold" href="{{ ref $ $vocabularyURL }}">{{ $vocabulary }}</a>
+                  </summary>
+                  <ul class="list-unstyled ms-3">
+                    {{ range sort $.Site.RegularPages "Params.index" "asc" }}
+                      {{ if eq .Section $dialect }}
+                        {{ if eq .Parent.Title $vocabulary }}
+                          {{ $keywordURL := (replace .Params.keyword "$" "") | printf "%s/%s" $vocabularyURL }}
+                          <li>
+                            {{ if eq $.Permalink .Permalink }}
+                              <a class="text-muted fw-bold text-decoration-none font-monospace active" href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
+                            {{ else }}
+                              <a class="text-black-50 text-decoration-none font-monospace" href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
+                            {{ end }}
+                          </li>
+                        {{ end }}
                       {{ end }}
                     {{ end }}
-                  {{ end }}
-                </ul>
-              </details>
-            </li>
-          {{ end }}
-        </ul>
-      </div>
-      <div class="tab-pane d-none fade" id="alphabetic">
-        <ul class="list-unstyled ms-3 pt-2">
-          {{ range sort $.Site.RegularPages "Params.keyword" "asc" }}
-            {{ if eq .Section $dialect }}
-              {{ $vocabulary := .Parent.Title }}
-              {{ $vocabularyURL := (replace $vocabulary " " "-") | lower | printf "%s/%s" $dialectURL }}
-              {{ $keywordURL := (replace .Params.keyword "$" "") | printf "%s/%s" $vocabularyURL }}
-              <li>
-                {{ if eq $.Permalink .Permalink }}
-                  <a class="text-muted fw-bold text-decoration-none font-monospace active" href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
-                {{ else }}
-                  <a class="text-black-50 text-decoration-none font-monospace" href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
-                {{ end }}
+                  </ul>
+                </details>
               </li>
             {{ end }}
-          {{ end }}
-        </ul>
-      </div>
+          </ul>
+        </div>
+        <div class="tab-pane d-none fade" id="alphabetic">
+          <ul class="list-unstyled ms-3 pt-2">
+            {{ range sort $.Site.RegularPages "Params.keyword" "asc" }}
+              {{ if eq .Section $dialect }}
+                {{ $vocabulary := .Parent.Title }}
+                {{ $vocabularyURL := (replace $vocabulary " " "-") | lower | printf "%s/%s" $dialectURL }}
+                {{ $keywordURL := (replace .Params.keyword "$" "") | printf "%s/%s" $vocabularyURL }}
+                <li>
+                  {{ if eq $.Permalink .Permalink }}
+                    <a class="text-muted fw-bold text-decoration-none font-monospace active" href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
+                  {{ else }}
+                    <a class="text-black-50 text-decoration-none font-monospace" href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
+                  {{ end }}
+                </li>
+              {{ end }}
+            {{ end }}
+          </ul>
+        </div>
+      {{ end }}
     {{ end }}
   </div>
 </aside>
