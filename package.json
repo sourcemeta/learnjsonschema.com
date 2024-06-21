@@ -5,7 +5,6 @@
   "main": "assets/main.js",
   "dependencies": {
     "@popperjs/core": "^2.11.6",
-    "fuse.js": "^7.0.0",
-    "mark.js": "^8.11.1"
+    "fuse.js": "^7.0.0"
   }
 }

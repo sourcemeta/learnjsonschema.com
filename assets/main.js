@@ -7,9 +7,8 @@ for (const element of document.querySelectorAll('[data-bs-toggle="tooltip"]')) {
   new Tooltip(element);
 }
 
-
 // Fuse search options
-var fuseOptions = {
+const fuseOptions = {
   shouldSort: true,
   includeMatches: true,
   includeScore: true,
@@ -24,9 +23,8 @@ var fuseOptions = {
 const searchInput = document.getElementById('search-query');
 const box = document.getElementById('listBox');
 
-searchInput.addEventListener('input', function() {
+searchInput.addEventListener('input', () => {
   const query = searchInput.value;
-  console.log('Search query:', query);
 
   if (query) {
     executeSearch(query);
@@ -36,43 +34,42 @@ searchInput.addEventListener('input', function() {
   }
 });
 
-document.addEventListener('click', function(event) {
+document.addEventListener('click', (event) => {
   if (!searchInput.contains(event.target) && !box.contains(event.target)) {
     box.style.display = 'none';
     searchInput.value = ''; // Clear the search input
   }
 });
 
-function executeSearch(searchQuery) {
-  // TODO
-  // show(document.querySelector('.search-loading'));
+const executeSearch = (searchQuery) => {
+  // TODO - loading screen
 
-  fetch('/index.json').then(function (response) {
+  fetch('/index.json').then((response) => {
       if (response.status !== 200) {
           console.log('Looks like there was a problem. Status Code: ' + response.status);
           return;
       }
-      response.json().then(function(pages) {
+      response.json().then((pages) => {
         var fuse = new Fuse(pages, fuseOptions);
         var result = fuse.search(searchQuery);
         updateDropdown(result.slice(0, 10));
-      }).catch(function(err) {
-        console.log('Fetch Error :-S', err);
+      }).catch((err) => {
+        console.error('Fetch Index Fetch Error :-S', err);
       });
   });
 }
 
-function updateDropdown(results) {
+const updateDropdown = (results) => {
   // Clear previous results
   box.innerHTML = '';
 
   if (results.length > 0) {
-    results.forEach(function(result) {
+    results.forEach((result) => {
       const item = document.createElement('li');
       item.innerHTML = `<a class="dropdown-item" href="${result.item.permalink}">
         ${result.item.title}
-        <span style="font-size: 0.8em; color: #888;">(${result.item.dialect})</span>
-        <span style="font-size: 0.9em; color: #007bff;">${result.item.vocabulary}</span>
+        <span class="text-white-50" style="font-size: 0.8em;">(${result.item.dialect})</span>
+        <span class="text-white" style="font-size: 0.9em;">${result.item.vocabulary}</span>
       </a>`;
       box.appendChild(item);
     });
@@ -83,7 +80,7 @@ function updateDropdown(results) {
   }  
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".copy-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const codeBlock = btn.nextElementSibling;
@@ -94,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-function copyToClipboard(text, button) {
+const copyToClipboard = (text, button) => {
   navigator.clipboard
     .writeText(text)
     .then(() => {
