@@ -35,9 +35,9 @@
                           {{ $keywordURL := (replace .Params.keyword "$" "") | printf "%s/%s" $vocabularyURL }}
                           <li>
                             {{ if eq $.Permalink .Permalink }}
-                              <a class="text-muted fw-bold text-decoration-none font-monospace active" href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
+                              <a class="fw-bold text-decoration-none font-monospace active" href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
                             {{ else }}
-                              <a class="text-black-50 text-decoration-none font-monospace" href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
+                              <a class="text-muted text-decoration-none font-monospace" href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
                             {{ end }}
                           </li>
                         {{ end }}
@@ -58,9 +58,9 @@
                 {{ $keywordURL := (replace .Params.keyword "$" "") | printf "%s/%s" $vocabularyURL }}
                 <li>
                   {{ if eq $.Permalink .Permalink }}
-                    <a class="text-muted fw-bold text-decoration-none font-monospace active" href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
+                    <a class="fw-bold text-decoration-none font-monospace active" href="{{ ref $ $keywordURL }}" aria-current="true">{{ .Params.keyword }}</a>
                   {{ else }}
-                    <a class="text-black-50 text-decoration-none font-monospace" href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
+                    <a class="text-muted text-decoration-none font-monospace" href="{{ ref $ $keywordURL }}">{{ .Params.keyword }}</a>
                   {{ end }}
                 </li>
               {{ end }}
