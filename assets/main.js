@@ -2,44 +2,6 @@ import './vendor/bootstrap/js/src/dropdown.js';
 import Tooltip from './vendor/bootstrap/js/src/tooltip.js';
 import Fuse from 'fuse.js';
 
-// Initialize tooltips
-for (const element of document.querySelectorAll('[data-bs-toggle="tooltip"]')) {
-  new Tooltip(element);
-}
-
-// Fuse search options
-const fuseOptions = {
-  shouldSort: true,
-  includeMatches: true,
-  includeScore: true,
-  keys: [
-    { name: "title", weight: 0.45 },
-    { name: "contents", weight: 0.4 },
-    { name: "tags", weight: 0.1 },
-    { name: "categories", weight: 0.05 }
-  ]
-};
-
-const searchInput = document.getElementById('search-query');
-const box = document.getElementById('listBox');
-
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value;
-
-  if (query) {
-    executeSearch(query);
-    box.style.display = 'block';
-  } else {
-    box.style.display = 'none';
-  }
-});
-
-document.addEventListener('click', (event) => {
-  if (!searchInput.contains(event.target) && !box.contains(event.target)) {
-    box.style.display = 'none';
-    searchInput.value = ''; // Clear the search input
-  }
-});
 
 const executeSearch = (searchQuery) => {
   // TODO - loading screen
@@ -61,35 +23,24 @@ const executeSearch = (searchQuery) => {
 
 const updateDropdown = (results) => {
   // Clear previous results
-  box.innerHTML = '';
+  searchResultBox.innerHTML = '';
 
   if (results.length > 0) {
     results.forEach((result) => {
       const item = document.createElement('li');
       item.innerHTML = `<a class="dropdown-item" href="${result.item.permalink}">
         ${result.item.title}
-        <span class="text-white-50" style="font-size: 0.8em;">(${result.item.dialect})</span>
-        <span class="text-white" style="font-size: 0.9em;">${result.item.vocabulary}</span>
+        <span class="text-light-50" style="font-size: 0.8em;">(${result.item.dialect})</span>
+        <span class="fw-bold" style="font-size: 0.9em;">${result.item.vocabulary}</span>
       </a>`;
-      box.appendChild(item);
+      searchResultBox.appendChild(item);
     });
   } else {
     const item = document.createElement('li');
     item.innerHTML = '<a class="dropdown-item disabled" href="#">No matches found</a>';
-    box.appendChild(item);
+    searchResultBox.appendChild(item);
   }  
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".copy-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const codeBlock = btn.nextElementSibling;
-      if (codeBlock && codeBlock.textContent) {
-        copyToClipboard(codeBlock.textContent, btn);
-      }
-    });
-  });
-});
 
 const copyToClipboard = (text, button) => {
   navigator.clipboard
@@ -105,3 +56,53 @@ const copyToClipboard = (text, button) => {
       console.error("Failed to copy text: ", err);
     });
 }
+
+// Initialize tooltips
+for (const element of document.querySelectorAll('[data-bs-toggle="tooltip"]')) {
+  new Tooltip(element);
+}
+
+// Fuse search options
+const fuseOptions = {
+  shouldSort: true,
+  includeMatches: true,
+  includeScore: true,
+  keys: [
+    { name: "title", weight: 0.45 },
+    { name: "contents", weight: 0.4 },
+    { name: "tags", weight: 0.1 },
+    { name: "categories", weight: 0.05 }
+  ]
+};
+
+const searchInputContent = document.getElementById('search-content');
+const searchResultBox = document.getElementById('search-result-list');
+
+searchInputContent.addEventListener('input', () => {
+  const query = searchInputContent.value;
+
+  if (query) {
+    executeSearch(query);
+    searchResultBox.style.display = 'block';
+  } else {
+    searchResultBox.style.display = 'none';
+  }
+});
+
+document.addEventListener('click', (event) => {
+  if (!searchInputContent.contains(event.target) && !searchResultBox.contains(event.target)) {
+    searchResultBox.style.display = 'none';
+    searchInputContent.value = ''; // Clear the search input
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".copy-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const codeBlock = btn.nextElementSibling;
+      if (codeBlock && codeBlock.textContent) {
+        copyToClipboard(codeBlock.textContent, btn);
+      }
+    });
+  });
+});

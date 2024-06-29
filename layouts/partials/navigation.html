@@ -1,29 +1,29 @@
-  <nav class="navbar navbar-expand border-bottom bg-body ">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="{{ .Site.BaseURL }}">
-        <img src="{{ .Site.BaseURL }}/logo.svg" alt="Learn JSON Schema Logo"
-          height="42" width="42" class="me-1">
-        <span class="align-middle">JSON Schema Docs</span>
-      </a>
-      <div class="position-relative me-3 flex-grow-1">
-        <div class="input-group">
-          <span class="input-group-text" id="basic-addon1">
-            <i class="bi bi-search"></i>
-          </span>
-          <input class="form-control" type="search" id="search-query" placeholder="Search" aria-label="Search" autocomplete="off">
-        </div>
-        <ul id="listBox" class="dropdown-menu w-100 position-absolute" style="top: 100%;"></ul>
-      </div>    
-      <div class="navbar-nav">
-        <a class="btn btn-sm btn-light-dark me-2 d-none d-md-block" target="_blank" href="https://github.com/Intelligence-AI/jsonschema" aria-label="Get the Intelligence.AI JSON Schema CLI">
-          <i class="align-middle bi bi-terminal fs-6"></i>
-          <small class="align-middle ms-1">Get the JSON Schema CLI</small>
-        </a>
-
-        <a class="btn btn-sm btn-primary" target="_blank" href="{{ .Site.Params.GitHub }}" aria-label="View this project on GitHub">
-          <i class="align-middle bi bi-github fs-6"></i>
-          <small class="align-middle ms-1">Star on GitHub</small>
-        </a>
+<nav class="navbar navbar-expand border-bottom bg-body ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ .Site.BaseURL }}">
+      <img src="{{ .Site.BaseURL }}/logo.svg" alt="Learn JSON Schema Logo"
+        height="42" width="42" class="me-1">
+      <span class="align-middle">JSON Schema Docs</span>
+    </a>
+    <div class="position-relative me-3 flex-grow-1 d-none d-lg-block">
+      <div class="input-group">
+        <span class="input-group-text" id="basic-addon1">
+          <i class="bi bi-search"></i>
+        </span>
+        <input class="form-control" type="search" id="search-content" placeholder="Search" aria-label="Search" autocomplete="off">
       </div>
+      <ul id="search-result-list" class="dropdown-menu w-100 position-absolute" style="top: 100%;"></ul>
+    </div>    
+    <div class="navbar-nav">
+      <a class="btn btn-sm btn-light-dark me-2 d-none d-md-block" target="_blank" href="https://github.com/Intelligence-AI/jsonschema" aria-label="Get the Intelligence.AI JSON Schema CLI">
+        <i class="align-middle bi bi-terminal fs-6"></i>
+        <small class="align-middle ms-1">Get the JSON Schema CLI</small>
+      </a>
+
+      <a class="btn btn-sm btn-primary" target="_blank" href="{{ .Site.Params.GitHub }}" aria-label="View this project on GitHub">
+        <i class="align-middle bi bi-github fs-6"></i>
+        <small class="align-middle ms-1">Star on GitHub</small>
+      </a>
     </div>
-  </nav>
+  </div>
+</nav>
