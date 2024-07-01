@@ -105,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+});
 
 const vocabularyTab = document.getElementById('sidebar-grouping-vocabulary');
 const alphabeticTab = document.getElementById('sidebar-grouping-alphabetic');
