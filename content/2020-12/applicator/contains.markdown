@@ -22,6 +22,9 @@ interdependencies:
     keyword: minContains
   - vocabulary: validation
     keyword: maxContains
+affects:
+  - vocabulary: unevaluated
+    keyword: unevaluatedItems
 related:
   - vocabulary: applicator
     keyword: prefixItems
@@ -33,8 +36,6 @@ related:
     keyword: maxItems
   - vocabulary: validation
     keyword: uniqueItems
-  - vocabulary: unevaluated
-    keyword: unevaluatedItems
 ---
 
 The `contains` keyword is used to check if at least one element in an array instance validates against a specified sub-schema. It offers flexibility compared to `items`, which requires all elements to adhere to a single schema.
