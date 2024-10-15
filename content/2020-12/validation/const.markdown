@@ -18,7 +18,7 @@ related:
     keyword: type
 ---
 
-The `const` keyword in restricts an instance to a specific value. Its usage is functionally similar to an `enum` with a single value. Instances validate successfully only if their property value deeply matches the specified constant.
+The `const` keyword restricts an instance to a specific value. Its usage is functionally similar to an `enum` with a single value. Instances validate successfully only if their property value deeply matches the specified constant.
 
 * Applies to various JSON data types, including numbers, strings, booleans, objects, and arrays.
 * Takes precedence over other validation keywords like `type` and `enum`.
