@@ -133,7 +133,7 @@ The `oneOf` keyword allows you to specify that exactly one of the provided subsc
 {{<instance-pass `An instance not conforming to the second subschema of 'oneOf' is valid`>}}
 { "foo": true }
 {{</instance-pass>}}
-* _Remember, if any subschema within the `oneOf` keyword passes validation or has a boolean `true` value, the all the other subschemas within `oneOf` must fail the validation for the overall validation of the `oneOf` keyword to be true._
+* _Remember, if any subschema within the `oneOf` keyword passes validation or has a boolean `true` value, all the other subschemas within `oneOf` must fail the validation for the overall validation of the `oneOf` keyword to be true._
 
 {{<schema `Schema with nested 'oneOf'`>}}
 {
