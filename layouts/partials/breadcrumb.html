@@ -6,7 +6,7 @@
       Other dialects
     </button>
     <ul class="dropdown-menu">
-      {{ range .siteSections }}
+      {{ range sort .siteSections "Params.index" "asc" }}
         {{ if ne $selected_dialect .Title }}
           <li><a class="dropdown-item" href="{{ ref . .RelPermalink }}">{{ .Title }}</a></li>
         {{ end }}

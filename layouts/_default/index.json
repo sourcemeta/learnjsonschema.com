@@ -1,8 +1,8 @@
 {{- $.Scratch.Add "index" slice -}}
 {{- range .Site.RegularPages -}}
-    {{ $parts := split  .Permalink  "/" }}
-    {{ $dialect := index $parts 3 }}
-    {{ $vocabulary := index $parts 4 }}
-    {{- $.Scratch.Add "index" (dict "dialect" $dialect "vocabulary" $vocabulary "title" .Params.keyword "tags" .Params.kind "contents" .Plain "permalink" .Permalink) -}}
+  {{ $parts := split  .Permalink  "/" }}
+  {{ $dialect := index $parts 3 }}
+  {{ $vocabulary := index $parts 4 }}
+  {{- $.Scratch.Add "index" (dict "dialect" $dialect "vocabulary" $vocabulary "title" .Params.keyword "tags" .Params.kind "contents" .Plain "permalink" .Permalink) -}}
 {{- end -}}
 {{- $.Scratch.Get "index" | jsonify -}}
