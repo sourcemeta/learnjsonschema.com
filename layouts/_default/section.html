@@ -176,7 +176,7 @@
           <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
             <p>The recommended way to cite the JSON Schema {{ .Params.title }} dialect using <a target="_blank" href="http://www.bibtex.org">BibTex</a> is as follows:</p>
             <div class="highlight">
-              <pre tabindex="0"><code class="language-json" data-lang="tex">@techreport{json-schema-{{ .Params.title }},
+              <pre tabindex="0"><code class="language-json" data-lang="tex">@techreport{json-schema-{{ $dialect }},
   title = { {{ .Params.description }} },
   author = { {{ range first 1 .Params.authors }}{{ .last }}, {{ .first }}{{ end }}{{ range after 1 .Params.authors }} and {{ .last }}, {{ .first }}{{ end }} },
   organization = { {{ .Params.organization }} },
