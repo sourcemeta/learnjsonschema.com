@@ -13,6 +13,7 @@ tests:
   - draft2019-09/type.json
 introduced_in: draft1
 changed_in:
+  - draft6
   - draft4
 index: -99999
 ---
