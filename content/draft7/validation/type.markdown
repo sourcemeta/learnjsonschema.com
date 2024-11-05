@@ -14,5 +14,6 @@ tests:
 index: -99999
 introduced_in: draft1
 changed_in:
+  - draft6
   - draft4
 ---
