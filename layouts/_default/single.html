@@ -1,4 +1,4 @@
-{{ define "title" }}{{ .Params.keyword }} ({{ .Page.Section }}){{ end }}
+{{ define "title" }}{{ .Params.keyword }} ({{ ($.Site.GetPage (printf "/%s" .Page.Section)).Title }}){{ end }}
 {{ define "description" }}{{ .Summary }}{{ end }}
 
 {{ define "main" }}
