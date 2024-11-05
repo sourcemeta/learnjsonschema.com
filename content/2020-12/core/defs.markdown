@@ -2,7 +2,7 @@
 keyword: "$defs"
 signature: "Object<String, Schema>"
 value: This keyword must be set to an object where each value is a valid JSON Schema
-summary: "This keyword is used in meta-schemas to identify the required and optional vocabularies available for use in schemas described by that meta-schema."
+summary: "This keyword reserves a location for schema authors to inline re-usable JSON Schemas into a more general schema."
 kind: [ "location" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-8.2.4"

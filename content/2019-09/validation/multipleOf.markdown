@@ -1,7 +1,7 @@
 ---
 keyword: "multipleOf"
 signature: "Number"
-value: This keyword must be set to a number that is not equal to zero
+value: This keyword must be set to a number that is greater than zero
 summary: "A numeric instance is valid only if division by this keyword's value results in an integer."
 kind: [ "assertion" ]
 instance: [ "number" ]

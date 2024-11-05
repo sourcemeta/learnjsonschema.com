@@ -15,8 +15,6 @@ index: -997
 introduced_in: draft6
 related:
   - vocabulary: applicator
-    keyword: propertyNames
-  - vocabulary: applicator
     keyword: patternProperties
   - vocabulary: applicator
     keyword: additionalProperties
