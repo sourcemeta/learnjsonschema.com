@@ -14,7 +14,7 @@
     </ul>
     {{ $selected_dialect := index (split .RelPermalink "/") 1 }}
     {{ range .Site.Sections }}
-      {{ $dialect := .Title }}
+      {{ $dialect := (replace (lower .Title) " " "") }}
       {{ if eq $selected_dialect $dialect }}
         {{ $dialectURL := $dialect | printf "/%s" }}
         <div class="tab-pane fade d-none show active" id="vocabulary">

@@ -10,7 +10,7 @@
 
 {{ $siteSections := .Site.Sections }}
 {{ partial "breadcrumb.html" (dict
-  "dialect" $dialect
+  "dialect" ($.Site.GetPage (printf "/%s" .Page.Section)).Title
   "dialectURL" (ref . $dialectURL)
   "vocabulary" $vocabulary
   "vocabularyURL" (ref . (replace $vocabularyURL " " "-"))
