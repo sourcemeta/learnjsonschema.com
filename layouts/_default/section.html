@@ -201,7 +201,7 @@
         {{ if .Params.mandatory }}
           <p>This vocabulary is mandatory on this dialect. It is available by default and cannot be removed.</p>
         {{ else }}
-          {{ if in (slice "/draft4" "/draft6" "/draft7") $dialectURL }}
+          {{ if in (slice "/draft3" "/draft4" "/draft6" "/draft7") $dialectURL }}
           {{ else }}
             {{ if .Params.default }}
               <div class="alert alert-info" role="alert">
