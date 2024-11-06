@@ -2,7 +2,7 @@
 keyword: "exclusiveMinimum"
 signature: "Boolean"
 value: This keyword must be set to a boolean value
-summary: "When [`minimum`](/draft4/validation/minimum) is present and this keyword is set to true, the numeric instance must be less than the value in [`minimum`](/draft4/validation/maximum)."
+summary: "When [`minimum`](/draft4/validation/minimum) is present and this keyword is set to true, the numeric instance must be greater than the value in [`minimum`](/draft4/validation/minimum)."
 kind: [ "assertion" ]
 instance: [ "number" ]
 specification: "https://json-schema.org/draft-04/draft-fge-json-schema-validation-00#rfc.section.5.1.3"

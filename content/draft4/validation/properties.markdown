@@ -1,6 +1,6 @@
 ---
 keyword: "properties"
-signature: "Object<String, Schema>"
+signature: "Object<String, Schema> | Boolean"
 value: This keyword must be set to an object where each value is a valid JSON Schema
 summary: "Validation succeeds if, for each name that appears in both the instance and as a name within this keyword's value, the child instance for that name successfully validates against the corresponding schema."
 kind: [ "applicator" ]
