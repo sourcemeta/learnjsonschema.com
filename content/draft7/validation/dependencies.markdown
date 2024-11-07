@@ -12,7 +12,7 @@ default:
 index: -3
 tests:
   - draft7/dependencies.json
-introduced_in: 2019-09
+introduced_in: draft3
 related:
   - vocabulary: validation
     keyword: required
