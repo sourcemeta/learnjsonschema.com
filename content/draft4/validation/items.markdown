@@ -1,6 +1,6 @@
 ---
 keyword: "items"
-signature: "Schema | Array<Schema>"
+signature: "Schema | Array<Schema> | Boolean"
 value: This keyword must be set to a valid JSON Schema or to a *non-empty* array, where each item is a valid JSON Schema
 summary: "If set to a schema, validation succeeds if each element of the instance validates against it, otherwise validation succeeds if each element of the instance validates against the schema at the same position, if any"
 kind: [ "applicator" ]
