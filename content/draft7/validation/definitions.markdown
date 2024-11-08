@@ -13,6 +13,8 @@ index: 999
 tests:
   - draft7/definitions.json
 introduced_in: draft4
+changed_in:
+  - 2019-09
 related:
   - vocabulary: core
     keyword: $ref
