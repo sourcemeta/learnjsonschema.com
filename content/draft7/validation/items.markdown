@@ -14,7 +14,7 @@ tests:
 introduced_in: draft1
 index: -99
 changed_in:
-  - draft6
+  - 2020-12
 interdependencies:
   - vocabulary: validation
     keyword: minItems
