@@ -12,7 +12,9 @@ default:
 index: -3
 tests:
   - draft4/dependencies.json
-introduced_in: 2019-09
+introduced_in: draft3
+changed_in:
+  - 2019-09
 related:
   - vocabulary: validation
     keyword: required
