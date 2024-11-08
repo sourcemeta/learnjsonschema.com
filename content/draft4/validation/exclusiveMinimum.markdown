@@ -12,6 +12,8 @@ default:
 tests:
   - draft4/minimum.json
 introduced_in: draft3
+changed_in:
+  - draft6
 index: -9995
 affects:
   - vocabulary: validation

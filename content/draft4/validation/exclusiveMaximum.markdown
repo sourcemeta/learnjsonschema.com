@@ -13,6 +13,8 @@ default:
 tests:
   - draft4/maximum.json
 introduced_in: draft3
+changed_in:
+  - draft6
 index: -9997
 affects:
   - vocabulary: validation

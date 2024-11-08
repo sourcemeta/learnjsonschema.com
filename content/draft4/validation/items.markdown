@@ -12,6 +12,8 @@ default:
 tests:
   - draft4/items.json
 introduced_in: draft1
+changed_in:
+  - 2020-12
 index: -99
 interdependencies:
   - vocabulary: validation
