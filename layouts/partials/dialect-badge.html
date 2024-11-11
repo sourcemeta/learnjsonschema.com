@@ -19,8 +19,9 @@
     <span class="badge text-bg-info">Draft 4</span>
   </a>
 {{ else if eq (.name) "draft3" }}
-  <span class="badge text-bg-secondary"
-    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)">Draft 3</span>
+  <a href="{{ .Site.BaseURL }}/{{ .name }}">
+    <span class="badge text-bg-info">Draft 3</span>
+  </a>
 {{ else if eq (.name) "draft2" }}
   <span class="badge text-bg-secondary"
     data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)">Draft 2</span>
