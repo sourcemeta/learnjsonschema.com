@@ -28,7 +28,7 @@ related:
     keyword: not
 ---
 
-The `allOf` keyword is used to specify that a given instance must validate against all of the subschemas provided within an array. It's essentially a logical "AND" operation where all conditions must be met for validation to pass.
+The  {{<keyword-link name="allOf" >}} keyword is used to specify that a given instance must validate against all of the subschemas provided within an array. It's essentially a logical "AND" operation where all conditions must be met for validation to pass.
 
 ## Examples
 
@@ -129,7 +129,7 @@ The `allOf` keyword is used to specify that a given instance must validate again
 {{<instance-fail `An instance conforming to the second subschema of 'allOf' is also invalid`>}}
 { "foo": "foo" }
 {{</instance-fail>}}
-* _Remember, if any subschema within the `allOf` keyword fails validation or has a boolean `false` value, the entire validation will always fail._
+* _Remember, if any subschema within the  {{<keyword-link name="allOf" >}} keyword fails validation or has a boolean `false` value, the entire validation will always fail._
 
 {{<schema `Schema with nested 'allOf'`>}}
 {
