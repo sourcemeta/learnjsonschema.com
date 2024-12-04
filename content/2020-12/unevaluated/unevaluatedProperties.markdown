@@ -104,8 +104,8 @@ It's crucial to understand what evaluation means in this context.
 { "keyword": "/patternProperties", "instance": "", "value": [ "bar" ] }
 {{</instance-annotation>}}
 
-* For the first instace, the annotation result of `properties` is [ "foo" ], and the annotation result of `patternProperties` is [ "bar" ]. However, the 'fooBar' property remains unevaluated, so the `unevaluatedProperties` subschema applies to it. This subschema fails (as any instance against a false schema is always invalid), leading to the failure of the entire schema.
-* For the second instace, the annotation result of `properties` is [ "foo" ], and the annotation result of `patternProperties` is [ "bar" ]. No properties remain unevaluated; hence, the instance is considered valid.
+* For the first instance, the annotation result of `properties` is [ "foo" ], and the annotation result of `patternProperties` is [ "bar" ]. However, the 'fooBar' property remains unevaluated, so the `unevaluatedProperties` subschema applies to it. This subschema fails (as any instance against a false schema is always invalid), leading to the failure of the entire schema.
+* For the second instance, the annotation result of `properties` is [ "foo" ], and the annotation result of `patternProperties` is [ "bar" ]. No properties remain unevaluated; hence, the instance is considered valid.
 
 {{<schema `Schema with 'unevaluatedProperties', 'properties', and 'patternProperties', with unevaluatedProperties set to an object subschema`>}}
 {
