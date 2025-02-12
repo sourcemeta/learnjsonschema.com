@@ -1,0 +1,15 @@
+{{- $keyword := .Get "name" -}}
+{{- $keywordMap := dict -}}
+{{- range $.Site.RegularPages -}}
+  {{- $dialect := .Section -}}
+  {{- $vocabulary := .Parent.Title -}}
+  {{- $keywordParam := .Params.keyword -}}
+  {{- $url := .Permalink -}}
+  {{- $keywordMap = $keywordMap | merge (dict $keywordParam $url) -}}
+{{- end -}}
+{{- $url := index $keywordMap $keyword -}}
+{{- if $url -}}
+  <a href="{{ $url }}">{{ $keyword }}</a>
+{{- else -}}
+  {{ $keyword }}
+{{- end -}}
