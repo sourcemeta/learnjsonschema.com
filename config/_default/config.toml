@@ -2,6 +2,7 @@ languageCode = 'en-us'
 title = 'Reference documentation for JSON Schema'
 staticDir = [ './vendor/bootstrap-icons/font/fonts', './static' ]
 
+paginate = 100000000
 [pagination]
 pagerSize = 100000000
 
