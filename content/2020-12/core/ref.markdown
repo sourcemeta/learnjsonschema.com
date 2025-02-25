@@ -87,7 +87,7 @@ representation](https://www.rfc-editor.org/rfc/rfc6901#section-6).
 }
 {{</instance-pass>}}
 
-{{<instance-fail `An object instance with name proeprty not set to string is invalid` >}}
+{{<instance-fail `An object instance with name property not set to string is invalid` >}}
 {
   "productId": 217,
   "name": 999
