@@ -25,14 +25,19 @@ the JSON Schema dialect that defines it, where the dialect is the identifier of
 a meta-schema that defines the vocabularies in use and imposes syntactic
 constraints on its schema instances. If the `$schema` keyword is not declared,
 the schema inherits its context-specific or implementation-specific default
-dialect. For example, [OpenAPI](https://www.openapis.org) describes a default
-dialect URI in the specification, which in the case of [OpenAPI
-v3.1.1](https://spec.openapis.org/oas/latest.html#schema-object), is
-https://spec.openapis.org/oas/3.1/dialect/base. Strictly-compliant JSON Schema
-implementations will refuse to process a schema whose dialect cannot be
-unambiguously determined.
+dialect.
 
-{{<best-practice>}} To avoid undefined behavior, it is highly recommended to
+{{<learning-more>}} It is common to not make use of the `$schema` keyword when
+working with [OpenAPI](https://www.openapis.org). This is possible because the
+OpenAPI specification clearly documents what the default JSON Schema dialect is
+for every version. For example, [OpenAPI
+v3.1.1](https://spec.openapis.org/oas/latest.html#schema-object) defines the default dialect as
+`https://spec.openapis.org/oas/3.1/dialect/base`.  {{</learning-more>}}
+
+Strictly-compliant JSON Schema implementations will refuse to process a schema
+whose dialect cannot be unambiguously determined.
+
+{{<best-practice>}} To avoid undefined behavior, it is generally recommended to
 always explicitly set the dialect of a schema using the `$schema` keyword. This
 ensures that less strict implementations unambiguously know how to process the
 schema and don't attempt to guess.{{</best-practice>}}
