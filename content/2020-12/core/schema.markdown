@@ -31,8 +31,9 @@ dialect.
 working with [OpenAPI](https://www.openapis.org). This is possible because the
 OpenAPI specification clearly documents what the default JSON Schema dialect is
 for every version. For example, [OpenAPI
-v3.1.1](https://spec.openapis.org/oas/latest.html#schema-object) defines the default dialect as
-`https://spec.openapis.org/oas/3.1/dialect/base`.  {{</learning-more>}}
+v3.1.1](https://spec.openapis.org/oas/latest.html#json-schema-keywords) defines
+the default dialect as `https://spec.openapis.org/oas/3.1/dialect/base`.
+{{</learning-more>}}
 
 Strictly-compliant JSON Schema implementations will refuse to process a schema
 whose dialect cannot be unambiguously determined.
