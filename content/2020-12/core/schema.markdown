@@ -27,10 +27,10 @@ constraints on its schema instances. If the `$schema` keyword is not declared,
 the schema inherits its context-specific or implementation-specific default
 dialect.
 
-{{<learning-more>}} It is common to not make use of the `$schema` keyword when
-working with [OpenAPI](https://www.openapis.org). This is possible because the
-OpenAPI specification clearly documents what the default JSON Schema dialect is
-for every version. For example, [OpenAPI
+{{<learning-more>}} It is common to avoid the `$schema` keyword when working
+with [OpenAPI](https://www.openapis.org). This is possible because the OpenAPI
+specification clearly documents what the default JSON Schema dialect is for
+every version. For example, [OpenAPI
 v3.1.1](https://spec.openapis.org/oas/latest.html#json-schema-keywords) defines
 the default dialect as `https://spec.openapis.org/oas/3.1/dialect/base`.
 {{</learning-more>}}
