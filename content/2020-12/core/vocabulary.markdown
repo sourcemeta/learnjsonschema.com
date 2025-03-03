@@ -2,7 +2,7 @@
 keyword: "$vocabulary"
 signature: "Object<URI, Boolean>"
 value: This keyword must be set to an object where each key is a JSON Schema vocabulary URI and each value is a boolean that represents whether the corresponding vocabulary is considered optional (false) or required (true)
-summary: "This keyword is used in meta-schemas to identify the required and optional vocabularies available for use in schemas described by that meta-schema."
+summary: "This keyword is used in dialect meta-schemas to identify the required and optional vocabularies available for use in schemas described by that dialect."
 kind: [ "identifier" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-8.1.2"
@@ -19,22 +19,37 @@ related:
     keyword: $schema
 ---
 
-The `$vocabulary` keyword is used in meta-schemas to identify the vocabularies available for use in schemas described by that meta-schema. It is also used to indicate whether each vocabulary is required or optional, in the sense that an implementation must understand the required vocabularies in order to successfully process the schema.
+The `$vocabulary` keyword is a _mandatory_ component of a dialect meta-schema
+to list the required and optional vocabularies available for use by the schema
+instances of such dialect. The vocabularies declared by a dialect meta-schema
+are not inherited by meta-schemas that derive from it. Each dialect meta-schema
+must explicitly state the vocabularies it imports using the `$vocabulary`
+keyword.
 
-* **Required and optional vocabularies:** If a vocabulary is required and an implementation does not recognize it, it must refuse to process any schemas that declare this meta-schema. If a vocabulary is optional, implementations that do not recognize it should proceed with processing such schemas.
+{{<common-pitfall>}}Declaring the `$vocabulary` keyword in a schema does not
+grant that same schema access to such vocabularies. Instead, the `$vocabulary`
+keyword must be set in the dialect meta-schema that describes the desired
+schema.{{</common-pitfall>}}
 
-* **Mandatory:** The Core vocabulary MUST always be included and set as required.
+If a vocabulary is marked as required, JSON Schema implementations that do not
+recognise the given vocabulary must refuse to process schemas described by such
+dialect. As a notable exception, every dialect must list the [Core](..)
+vocabulary as required, as it is the foundational vocabulary that implements
+the vocabulary system itself.
 
-* **Non-inheritability:** Vocabularies defined in one meta-schema do not automatically apply to another meta-schema that references it. Each meta-schema must declare its vocabularies independently.
-
-* **Recommendation:** Meta-schemas should always declare this keyword to clearly specify the vocabularies in use and avoid ambiguities.
+{{<learning-more>}} By convention, every official JSON Schema dialect defines a
+dynamic anchor called `meta`. This serves as an extensibility point for
+arbitrary vocabularies to register syntactic constraints that are automatically
+applied to every JSON Schema subschema apart from the top-level one.
+{{</learning-more>}}
 
 ## Examples
 
-{{<schema `'$vocabulary' for default official-2020-12 meta-schema`>}}
+{{<schema `The seven required vocabularies declared by the JSON Schema 2020-12 official dialect`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://json-schema.org/draft/2020-12/schema",
+  "$dynamicAnchor": "meta",
   "$vocabulary": {
     "https://json-schema.org/draft/2020-12/vocab/core": true,
     "https://json-schema.org/draft/2020-12/vocab/applicator": true,
@@ -44,75 +59,48 @@ The `$vocabulary` keyword is used in meta-schemas to identify the vocabularies a
     "https://json-schema.org/draft/2020-12/vocab/format-annotation": true,
     "https://json-schema.org/draft/2020-12/vocab/content": true
   },
-  "allOf" : [
-    { "$ref": "meta/core" },
-    { "$ref": "meta/applicator" },
-    { "$ref": "meta/unevaluated" },
-    { "$ref": "meta/validation" },
-    { "$ref": "meta/meta-data" },
-    { "$ref": "meta/format-annotation" },
-    { "$ref": "meta/content" }
-  ],
   // ...
 }
 {{</schema>}}
 
-{{<schema `Vocabulary meta-schema`>}}
+{{<schema `An example dialect meta-schema that opts-in to the JSON Schema 2020-12 format assertion vocabulary`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/meta/example-vocab",
-  "$dynamicAnchor": "meta",
-  "type": [ "object", "boolean" ],
-  "properties": {
-    "minDate": {
-      "type": "string",
-      "pattern": "\\d\\d\\d\\d-\\d\\d-\\d\\d",
-      "format": "date"
-    }
-  }
-}
-{{</schema>}}
-
-{{<learning-more>}}
-The `$dynamicAnchor: meta` declaration is set by convention to `meta` on the official meta-schemas. This setting serves as a mechanism to enable meta-schema extensibility. By declaring `$dynamicAnchor: meta` here, JSON Schema is configured to validate every subschema of the instance schema against the meta-schema, extending validation beyond just the top level.
-{{</learning-more>}}
-
-{{<schema `Meta-schema with the above vocabulary as required`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/schema-required",
+  "$id": "https://example.com/2020-12-with-format-assertion",
   "$dynamicAnchor": "meta",
   "$vocabulary": {
     "https://json-schema.org/draft/2020-12/vocab/core": true,
-    "https://example.com/vocab/example-vocab": "true"
+    "https://json-schema.org/draft/2020-12/vocab/applicator": true,
+    "https://json-schema.org/draft/2020-12/vocab/unevaluated": true,
+    "https://json-schema.org/draft/2020-12/vocab/validation": true,
+    "https://json-schema.org/draft/2020-12/vocab/meta-data": true,
+    "https://json-schema.org/draft/2020-12/vocab/format-assertion": true,
+    "https://json-schema.org/draft/2020-12/vocab/content": true
   },
   "allOf": [
     { "$ref": "https://json-schema.org/draft/2020-12/meta/core" },
-    { "$ref": "https://example.com/meta/example-vocab" }
+    { "$ref": "https://json-schema.org/draft/2020-12/meta/applicator" },
+    { "$ref": "https://json-schema.org/draft/2020-12/meta/unevaluated" },
+    { "$ref": "https://json-schema.org/draft/2020-12/meta/validation" },
+    { "$ref": "https://json-schema.org/draft/2020-12/meta/meta-data" },
+    { "$ref": "https://json-schema.org/draft/2020-12/meta/format-assertion" },
+    { "$ref": "https://json-schema.org/draft/2020-12/meta/content" }
   ]
 }
 {{</schema>}}
 
-{{<schema `Meta-schema with the above vocabulary as optional`>}}
+{{<schema `An example dialect meta-schema that imports the Core vocabulary as required and the Validation vocabulary as optional`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/schema-optional",
+  "$id": "https://example.com/simple-2020-12",
   "$dynamicAnchor": "meta",
   "$vocabulary": {
     "https://json-schema.org/draft/2020-12/vocab/core": true,
-    "https://example.com/vocab/example-vocab": "false"
+    "https://json-schema.org/draft/2020-12/vocab/validation": false
   },
   "allOf": [
     { "$ref": "https://json-schema.org/draft/2020-12/meta/core" },
-    { "$ref": "https://example.com/meta/example-vocab" }
+    { "$ref": "https://json-schema.org/draft/2020-12/meta/validation" }
   ]
-}
-{{</schema>}}
-
-{{<schema `Schema that uses the above meta-schema`>}}
-{
-  "$schema": "https://example.com/schema-required",
-  "$id": "https://my-schema.com",
-  "minDate": "2024-05-17"
 }
 {{</schema>}}
