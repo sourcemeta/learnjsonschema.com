@@ -32,7 +32,7 @@
         <h1>{{ .Title }}
           {{ if $isDialect }}
           <span class="badge bg-secondary fs-6 align-middle"
-            data-bs-toggle="tooltip" data-bs-title="A dialect is a version of JSON Schema">Dialect</span>
+            data-bs-toggle="tooltip" data-bs-title="A base dialect is a version of JSON Schema">Base Dialect</span>
           {{ else }}
           <span class="badge bg-secondary fs-6 align-middle"
             data-bs-toggle="tooltip" data-bs-title="A vocabulary is a bundle of well-defined JSON Schema keywords">Vocabulary</span>
@@ -49,8 +49,8 @@
             <tr>
               <th scope="row">
                 {{ partial "term.html" (dict
-                  "term" "Dialect"
-                  "tooltip" "A dialect is a version of JSON Schema"
+                  "term" "Base Dialect"
+                  "tooltip" "A base dialect is a version of JSON Schema"
                   "glossary" "draft" ) }}
               </th>
               <td>{{ partial "dialect-badge.html" (dict "name" $dialect) }}</td>
@@ -207,7 +207,7 @@
               <div class="alert alert-info" role="alert">
                 <h3 class="alert-heading h5">
                   <i class="bi bi-info-circle me-1"></i> Your metaschema is likely already declaring this vocabulary</h3>
-                <p class="mb-0">This vocabulary is included by default when using the official metaschema of this dialect:
+                <p class="mb-0">This vocabulary is included by default when using the official metaschema of this base dialect:
                 <a href="{{ .Page.Parent.Params.metaschema }}">{{ .Page.Parent.Params.metaschema }}</a>. Unless you are using a custom metaschema, there is nothing else you need to do.</p>
               </div>
             {{ end }}

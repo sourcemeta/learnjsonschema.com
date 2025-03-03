@@ -3,7 +3,7 @@
   {{ $selected_dialect := .dialect }}
   <div class="dropdown pe-3">
     <button class="btn btn-outline-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      Other dialects
+      Other base dialects
     </button>
     <ul class="dropdown-menu">
       {{ range sort .siteSections "Params.index" "asc" }}
@@ -18,7 +18,7 @@
   <ol class="breadcrumb mb-0 flex-grow-1 justify-content-center justify-content-md-start">
     {{ if isset . "keyword" }}
       <li class="breadcrumb-item">
-        <small>Dialect:</small> <a href="{{ .dialectURL }}">{{ .dialect }}</a>
+        <small>Base Dialect:</small> <a href="{{ .dialectURL }}">{{ .dialect }}</a>
       </li>
       <li class="breadcrumb-item">
         <small>Vocabulary:</small> <a href="{{ .vocabularyURL }}">{{ .vocabulary }}</a>
@@ -28,14 +28,14 @@
       </li>
     {{ else if isset . "vocabulary" }}
       <li class="breadcrumb-item">
-        <small>Dialect:</small> <a href="{{ .dialectURL }}">{{ .dialect }}</a>
+        <small>Base Dialect:</small> <a href="{{ .dialectURL }}">{{ .dialect }}</a>
       </li>
       <li class="breadcrumb-item active" aria-current="page">
         <small>Vocabulary:</small> {{ .vocabulary }}
       </li>
     {{ else if isset . "dialect" }}
       <li class="breadcrumb-item active" aria-current="page">
-        <small>Dialect:</small> {{ .dialect }}
+        <small>Base Dialect:</small> {{ .dialect }}
       </li>
     {{ else }}
       {{ errorf "Invalid breadcrumb instantiation" }}
