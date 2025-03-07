@@ -45,11 +45,7 @@ Applications to work with regular expressions, like [Regex
 Forge](https://regexforge.com), typically provide convenient functionality to
 copy a regular expression for use in JSON.  {{</common-pitfall>}}
 
-Remember that JSON Schema is a [constraint-driven
-language](https://modern-json-schema.com/json-schema-is-a-constraint-system).
-Therefore, non-string instances successfully validate against this keyword. If
-needed, make use of the [`type`](../type) keyword to constraint the accepted
-type accordingly.
+{{<constraint-warning `string`>}}
 
 ## Examples
 
