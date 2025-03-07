@@ -18,62 +18,50 @@ related:
     keyword: type
 ---
 
-The `const` keyword restricts an instance to a specific value. Its usage is functionally similar to an `enum` with a single value. Instances validate successfully only if their property value deeply matches the specified constant.
+The `const` keyword (short for "constant") restricts instances to a single
+specific JSON value of any type.
 
-* Applies to various JSON data types, including numbers, strings, booleans, objects, and arrays.
-* Takes precedence over other validation keywords like `type` and `enum`.
-
-{{<best-practice>}}
-It is best practice to avoid using the `type` keyword or any other validation keyword with `const`, as `const` takes precedence over them. Therefore, it is better not to use them together.
-{{</best-practice>}}
+{{<best-practice>}} Constraining instances to a constant value by definition
+implies the given JSON type. Therefore, combining this keyword with the
+[`type`](../type) keyword is redundant, and considered an
+anti-pattern.{{</best-practice>}}
 
 ## Examples
 
-{{<schema `Schema with a specific string value`>}}
+{{<schema `A schema that constrains instances to a string constant value`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "const": "hello"
+  "const": "Hello"
 }
 {{</schema>}}
 
-{{<instance-pass `An instance matching the const value is valid`>}}
-"hello"
+{{<instance-pass `The desired string value is valid`>}}
+"Hello"
 {{</instance-pass>}}
 
-{{<instance-fail `An instance not matching the const value is invalid.`>}}
-"world"
+{{<instance-fail `Any other string value is invalid`>}}
+"World"
 {{</instance-fail>}}
 
-{{<schema `Schema with a specific number value`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "const": 3.14159
-}
-{{</schema>}}
-
-{{<instance-pass `An instance matching the const value is valid`>}}
-3.14159
-{{</instance-pass>}}
-
-{{<instance-fail `An instance not matching the const value is invalid.`>}}
-"pi"
+{{<instance-fail `Any other non-string value is invalid`>}}
+1234
 {{</instance-fail>}}
 
-{{<schema `Schema with a fixed object structure`>}}
+{{<schema `A schema that constrains instances to a complex object value`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "const": { "name": "John Doe", "age": 30 }
 }
 {{</schema>}}
 
-{{<instance-fail `An empty object is invalid`>}}
-{}
-{{</instance-fail>}}
-
-{{<instance-pass `An instance matching the exact object structure is valid`>}}
- { "name": "John Doe", "age": 30 }
+{{<instance-pass `The object instance that equals the desired value is valid`>}}
+{ "name": "John Doe", "age": 30 }
 {{</instance-pass>}}
 
-{{<instance-fail `An instance not matching the exact object structure is invalid`>}}
- { "name": "Robert", "age": 30 }
+{{<instance-fail `Any other object value is invalid`>}}
+{ "name": "Robert", "age": 30 }
+{{</instance-fail>}}
+
+{{<instance-fail `Any other non-object value is invalid`>}}
+30
 {{</instance-fail>}}
