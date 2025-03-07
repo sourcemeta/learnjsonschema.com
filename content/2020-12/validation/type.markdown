@@ -18,20 +18,47 @@ changed_in:
 index: -99999
 ---
 
-The supported types are as follows:
+The supported types are the following. Note that while the [ECMA
+404](https://ecma-international.org/publications-and-standards/standards/ecma-404/)
+JSON standard defines the JSON grammar without mention of encodings, the [IETF
+RFC 8259](https://www.rfc-editor.org/rfc/rfc8259) JSON standard provides
+specific guidance for JSON numbers and JSON strings which are documented in the
+*Interoperable Encoding* column. Other encodings will likely not be accepted by
+JSON parsers.
 
-| Type        | Description                              |
-|-------------|------------------------------------------|
-| `"null"`    | The JSON null constant                   |
-| `"boolean"` | The JSON true or false constants         |
-| `"object"`  | A JSON object                            |
-| `"array"`   | A JSON array                             |
-| `"number"`  | A JSON number                            |
-| `"integer"` | A JSON number that represents an integer |
-| `"string"`  | A JSON string                            |
+| Type        | Description                              | Interoperable Encoding                                                                                   |
+|-------------|------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| `"null"`    | The JSON null constant                   | N/A                                                                                                      |
+| `"boolean"` | The JSON true or false constants         | N/A                                                                                                      |
+| `"object"`  | A JSON object                            | N/A                                                                                                      |
+| `"array"`   | A JSON array                             | N/A                                                                                                      |
+| `"number"`  | A JSON number                            | [IEEE 764](https://ieeexplore.ieee.org/document/8766229) 64-bit double-precision floating point encoding |
+| `"integer"` | A JSON number that represents an integer | 64-bit signed integer encoding (from `-(2^53)+1` to `(2^53)-1`)                                          |
+| `"string"`  | A JSON string                            | [UTF-8](https://en.wikipedia.org/wiki/UTF-8) Unicode encoding                                            |
 
-Note that the JSON grammar does not distinguish between integer and real
-numbers. Still, JSON Schema provides the `integer` logical type.
+Note that while the JSON grammar does not distinguish between integer and real
+numbers, JSON Schema provides the `integer` logical type that matches either
+integers (such as `2`), or real numbers where the fractional part is zero (such
+as `2.0`).
+
+{{<best-practice>}} To avoid interoperability issues, do not produce JSON
+documents with numbers that exceed the [IETF RFC
+8259](https://www.rfc-editor.org/rfc/rfc8259) limits described in the
+*Interoperable Encodings* column of the table above.
+
+If more numeric precision is required, consider representing numbers as JSON
+strings or as multiple numbers. For example, fixed-precision real numbers can
+be represented as an array of two integers for the integral and fractional
+components.{{</best-practice>}}
+
+{{<common-pitfall>}} The JavaScript programming language (and by extension
+languages such as TypeScript) represent all numbers, including integers, using
+the [IEEE 764](https://ieeexplore.ieee.org/document/8766229) floating-point
+encoding. As a result, parsing JSON documents is prone to numeric precision
+problems. Read [How numbers are encoded in
+JavaScript](https://2ality.com/2012/04/number-encoding.html) by Dr. Axel
+Rauschmayer for a more detailed overview of JavaScript's numeric
+limitations.{{</common-pitfall>}}
 
 ## Examples
 
@@ -72,3 +99,22 @@ true
 {{< instance-pass "An arbitrary array is valid" >}}
 [ 1, 2, 3 ]
 {{< /instance-pass >}}
+
+{{< schema "A schema that describes integer instances" >}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "integer"
+}
+{{< /schema >}}
+
+{{< instance-pass "An integer is valid" >}}
+42
+{{< /instance-pass >}}
+
+{{< instance-pass "A real number with a zero fractional part is valid" >}}
+3.0
+{{< /instance-pass >}}
+
+{{< instance-fail "A real number with a non-zero fractional part is invalid" >}}
+3.14
+{{< /instance-fail >}}
