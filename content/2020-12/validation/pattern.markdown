@@ -22,102 +22,52 @@ related:
     keyword: format
   - vocabulary: applicator
     keyword: patternProperties
+  - vocabulary: validation
+    keyword: type
 ---
 
-The `pattern` keyword in JSON Schema is designed to define a regular expression pattern that a string value within an instance must adhere to. This regular expression is specified as a string for the `pattern` keyword. It functions as follows:
+The `pattern` keyword restricts string instances to match the given
+[ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/)
+regular expression. Making use of different regular expression flavours like
+PCRE or POSIX (Basic or Extended) will likely introduce interoperability issues
+and/or undefined behavior. Note that regular expressions set as values of this
+keyword are not implicitly
+[anchored](https://www.regular-expressions.info/anchors.html) and are always
+treated as case-sensitive.
 
-*  A string value is considered valid only if it successfully matches the specified pattern.
-* The regular expressions used with `pattern` are not implicitly anchored, requiring a complete match for validation. Partial matches are not accepted.
+{{<common-pitfall>}} Regular expressions often make use of characters that need
+to be escaped when making use of them as part of JSON strings. For example, the
+*reverse solidus* character (more commonly known as the backslash character)
+and the *double quote* character need to be escaped. Failure to do so will
+result in an invalid JSON document.
+
+Applications to work with regular expressions, like [Regex
+Forge](https://regexforge.com), typically provide convenient functionality to
+copy a regular expression for use in JSON.  {{</common-pitfall>}}
+
+Remember that JSON Schema is a [constraint-driven
+language](https://modern-json-schema.com/json-schema-is-a-constraint-system).
+Therefore, non-string instances successfully validate against this keyword. If
+needed, make use of the [`type`](../type) keyword to constraint the accepted
+type accordingly.
 
 ## Examples
 
-{{<schema `Schema with regular expression for email validation`>}}
+{{<schema `A schema that constrains string instances look like e-mail addresses`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "string",
   "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
 }
 {{</schema>}}
 
-{{<instance-pass `An instance adhering to the regular expression is valid`>}}
+{{<instance-pass `A string value that matches the regular expression is valid`>}}
 "john.doe@example.com"
 {{</instance-pass>}}
 
-{{<instance-fail `An instance not adhering to the regular expression is invalid`>}}
-"invalid@yahoo"
+{{<instance-fail `A string value that does not match the regular expression is invalid`>}}
+"foo"
 {{</instance-fail>}}
 
-{{<schema `Schema with regular expression for password rules`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "string",
-  "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"
-}
-{{</schema>}}
-
-{{<instance-pass `An instance adhering to the regular expression is valid`>}}
-"MyStrongPass89"
+{{<instance-pass `A non-string value is valid`>}}
+1234
 {{</instance-pass>}}
-
-{{<instance-fail `An instance not adhering to the regular expression is invalid`>}}
-"password"
-{{</instance-fail>}}
-
-{{<schema `Schema with regular expression for usernames, including length restrictions`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "string",
-  "pattern": "^[a-zA-Z0-9_]+$",
-  "minLength": 5,
-  "maxLength": 15
-}
-{{</schema>}}
-
-{{<instance-pass `An instance with alphanumeric and underscore values, with a length between 5 and 15, is valid`>}}
-"foo_bar123"
-{{</instance-pass>}}
-
-{{<instance-fail `An instance with special character in invalid`>}}
-"invalid#username"
-{{</instance-fail>}}
-
-{{<instance-fail `An instance that matches the regex but goes out of bounds is invalid`>}}
-"username_toolong123"
-{{</instance-fail>}}
-- _This keyword can be combined with other string-related keywords, such as `maxLength` and `minLength`, for comprehensive validation._
-
-{{<schema `Schema with regular expression for some specific pattern`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "string",
-  "pattern": "apple"
-}
-{{</schema>}}
-
-{{<instance-pass `An instance matching the pattern is valid`>}}
-"apple"
-{{</instance-pass>}}
-
-{{<instance-pass `An instance is also valid if the pattern matches anywhere within the string`>}}
-"I love apples!"
-{{</instance-pass>}}
-
-- _When defining regular expressions, it's crucial to note that a string is considered valid if the expression matches anywhere within it, as demonstrated in the above example._
-
-- _To avoid this and ensure that the entire string exactly matches the `pattern`, you would surround the regular expression with `^` and `$`. See the example below._
-
-{{<schema `Schema with a regular expression enforcing an exact pattern match`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "string",
-  "pattern": "^apple$"
-}
-{{</schema>}}
-
-{{<instance-pass `An instance matching the pattern is valid`>}}
-"apple"
-{{</instance-pass>}}
-
-{{<instance-fail `An instance containing characters other than "apple" is invalid`>}}
-"I love apples!"
-{{</instance-fail>}}
