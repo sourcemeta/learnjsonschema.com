@@ -44,14 +44,24 @@ related:
     keyword: format
 ---
 
-## Explanation
+The `format` keyword restricts string instances to the given logical type and
+produces an annotation value.
 
-The `format` keyword of the "format-assertion" vocabulary allows for basic semantic identification of certain kinds of string values that are commonly used. It provides a way to specify logical formats for string types, such as dates, email addresses, URIs, etc. However, it's important to note that this vocabulary is not used by default in the official 2020-12 dialect of JSON Schema. If you want to utilize it, you would need to define your own custom dialect that includes this vocabulary.
+However, this vocabulary is not used by default in the JSON Schema 2020-12
+dialect. To use it, a custom dialect that includes this vocabulary is required.
+As a consequence, not many JSON Schema implementations support it. In most
+cases, it is advised to stick to the
+[`Format-Annotation`](../../format-annotation/format) variant of this keyword.
 
-While the `format` keyword theoretically provides interoperable logical string type validation, many existing implementations may not support this vocabulary. Therefore, it's recommended to use the `format` keyword from the Format Annotation vocabulary (which is available out of the box) alongside any custom validation within the schema.
+{{<best-practice>}} While [technically
+allowed](https://json-schema.org/draft/2020-12/json-schema-validation#section-7.2.3)
+by the JSON Schema specification, extending this keyword with custom formats is
+considered to be an anti-pattern that can introduce interoperability issues and
+undefined behavior. As a best practice, stick to standardised formats. If
+needed, introduce a new keyword for custom string logical
+types.{{</best-practice>}}
 
-Defined Formats
----------------
+The supported formats are the following:
 
 | Format                    | Category             | Specification |
 |---------------------------|----------------------|---------------|
@@ -75,12 +85,15 @@ Defined Formats
 | `"relative-json-pointer"` | JSON Pointer         | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.7 |
 | `"regex"`                 | Regular Expressions  | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.8 |
 
+{{<constraint-warning `string`>}}
+
 ## Examples
 
-{{<schema `Custom meta-schema including the 'Format Assertion' vocabulary`>}}
+{{<schema `A custom dialect meta-schema that opts-in to the Format Assertion vocabulary`>}}
 {
-  "$schema": "https://example.com/custom-meta-schema",
-  "$id": "https://example.com/custom-meta-schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/my-dialect",
+  "$dynamicAnchor": "meta",
   "$vocabulary": {
     "https://json-schema.org/draft/2020-12/vocab/core": true,
     "https://json-schema.org/draft/2020-12/vocab/format-assertion": true
@@ -92,26 +105,25 @@ Defined Formats
 }
 {{</schema>}}
 
-{{<schema `Schema with '$schema' set to custom meta-schema`>}}
+{{<schema `A schema that validates string instances as e-mail addresses`>}}
 {
   "$schema": "https://example.com/custom-meta-schema",
-  "$id": "https://example.com/schema",
   "format": "email"
 }
 {{</schema>}}
 
-{{<instance-pass `A string instance with correct email format is valid`>}}
+{{<instance-pass `A string value that represents a valid e-mail address is valid`>}}
 "john.doe@example.com"
-{{</instance-pass>}}
-
-{{<instance-fail `A string instance with incorrect email format is also valid`>}}
-"foo_bar"
-{{</instance-fail>}}
-
-{{<instance-pass `'format' keyword is irrelevant for instances with values other than strings`>}}
-45
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
 { "keyword": "/format", "instance": "", "value": "email" }
 {{</instance-annotation>}}
+
+{{<instance-fail `A string value that represents an invalid e-mail address is invalid`>}}
+"foo-bar"
+{{</instance-fail>}}
+
+{{<instance-pass `Any non-string value is valid but no annotation is produced`>}}
+45
+{{</instance-pass>}}
