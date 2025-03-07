@@ -59,7 +59,7 @@ anti-pattern.{{</best-practice>}}
 {{</instance-pass>}}
 
 {{<instance-fail `Any other object value is invalid`>}}
-{ "name": "Robert", "age": 30 }
+{ "name": "Jane Doe", "age": 30 }
 {{</instance-fail>}}
 
 {{<instance-fail `Any other non-object value is invalid`>}}
