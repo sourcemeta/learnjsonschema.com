@@ -41,9 +41,9 @@ related:
     keyword: unevaluatedProperties
 ---
 
-The `additionalProperties` keyword is used to control the handling of properties whose names are not listed in the `properties` keyword or match any of the regular expressions in the `patternProperties` keyword. By default any additional properties are allowed.
+The  {{<keyword-link name="additionalProperties" >}} keyword is used to control the handling of properties whose names are not listed in the  {{<keyword-link name="properties" >}} keyword or match any of the regular expressions in the  {{<keyword-link name="patternProperties" >}} keyword. By default any additional properties are allowed.
 
-The behavior of this keyword depends on the presence and annotation results of `properties` and `patternProperties` within the same schema object. Validation with `additionalProperties` applies only to the child values of instance names that do not appear in the annotation results of either `properties` or `patternProperties`.
+The behavior of this keyword depends on the presence and annotation results of  {{<keyword-link name="properties" >}} and  {{<keyword-link name="patternProperties" >}} within the same schema object. Validation with  {{<keyword-link name="additionalProperties" >}} applies only to the child values of instance names that do not appear in the annotation results of either  {{<keyword-link name="properties" >}} or  {{<keyword-link name="patternProperties" >}}.
 
 ## Examples
 
@@ -68,7 +68,7 @@ The behavior of this keyword depends on the presence and annotation results of `
 {{<instance-fail `An instance with additional properties is invalid`>}}
 { "foo": "foo", "bar": "bar" }
 {{</instance-fail>}}
-* _When `additionalProperties` is set to false, all the instance properties must either be present in the `properties` or match any regex within `patternProperties`; otherwise, the validaion will fail._
+* _When  {{<keyword-link name="additionalProperties" >}} is set to false, all the instance properties must either be present in the  {{<keyword-link name="properties" >}} or match any regex within  {{<keyword-link name="patternProperties" >}}; otherwise, the validaion will fail._
 
 {{<schema `Schema with 'additionalProperties' set to an object schema`>}}
 {
@@ -94,7 +94,7 @@ The behavior of this keyword depends on the presence and annotation results of `
 {{<instance-fail `The value of 'age' must be a number`>}}
 { "name": "John Doe", "age": "21" }
 {{</instance-fail>}}
-* _The value of `additionalProperties` can either be a boolean schema or an object schema._
+* _The value of  {{<keyword-link name="additionalProperties" >}} can either be a boolean schema or an object schema._
 
 {{<schema `Schema with 'patternProperties', 'properties' and 'additionalProperties' keyword`>}}
 {
@@ -131,7 +131,7 @@ The behavior of this keyword depends on the presence and annotation results of `
 { "keyword": "/patternProperties", "instance": "", "value": [ "Age" ] }
 { "keyword": "/additionalProperties", "instance": "", "value": [ "email" ] }
 {{</instance-annotation>}}
-* _Instance properties (keys) not present in `properties` or not matching any regex within `patternProperties` are evaluated against `additionalProperties`._
+* _Instance properties (keys) not present in  {{<keyword-link name="properties" >}} or not matching any regex within  {{<keyword-link name="patternProperties" >}} are evaluated against  {{<keyword-link name="additionalProperties" >}}._
 
 {{<schema `Schema with no 'additionalProperties' defined`>}}
 {
@@ -175,4 +175,4 @@ The behavior of this keyword depends on the presence and annotation results of `
 { "keyword": "/patternProperties", "instance": "", "value": [ "Age" ] }
 {{</instance-annotation>}}
 
- _**Note:** JSON Schema is a constraint language and if you don't limit keywords like this, then more keywords than what you defined in `properties`, etc would be allowed. If you don't define a property using `properties` or `patternProperties`, but don't disallow it with `additionalProperties`, it would still be valid with any value._
+ _**Note:** JSON Schema is a constraint language and if you don't limit keywords like this, then more keywords than what you defined in  {{<keyword-link name="properties" >}}, etc would be allowed. If you don't define a property using  {{<keyword-link name="properties" >}} or  {{<keyword-link name="patternProperties" >}}, but don't disallow it with  {{<keyword-link name="additionalProperties" >}}, it would still be valid with any value._
