@@ -27,6 +27,8 @@ related:
 The `exclusiveMinimum` keyword restricts number instances to be strictly
 greater than the given number.
 
+{{<constraint-warning `number`>}}
+
 ## Examples
 
 {{<schema `A schema that constrains number instances to be greater than the positive integer 10`>}}
