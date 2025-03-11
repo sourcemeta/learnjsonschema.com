@@ -1,7 +1,7 @@
 ---
 keyword: "pattern"
 signature: "String"
-value: This keyword must be set to a valid [ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) regular expression
+value: This keyword must be set to a regular expression, preferrably using the [ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) flavour
 summary: "A string instance is considered valid if the regular expression matches the instance successfully."
 kind: [ "assertion" ]
 instance: [ "string" ]
@@ -26,14 +26,25 @@ related:
     keyword: type
 ---
 
-The `pattern` keyword restricts string instances to match the given
+The `pattern` keyword restricts string instances to match the given regular
+expression.
+
+While the specification suggests the use of
 [ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/)
-regular expression. Making use of different regular expression flavours like
-PCRE or POSIX (Basic or Extended) will likely introduce interoperability issues
-and/or undefined behavior. Note that regular expressions set as values of this
-keyword are not implicitly
+regular expressions for interoperability purposes, the use of different
+flavours like PCRE or POSIX (Basic or Extended) is permitted. Also, the
+specification does not impose the use of any particular regular expression
+flag. By convention (and somewhat enforced by the official JSON Schema test
+suite), regular expressions are not implicitly
 [anchored](https://www.regular-expressions.info/anchors.html) and are always
-treated as case-sensitive.
+treated as case-sensitive. It is also common for the
+[`DOTALL`](https://tc39.es/ecma262/multipage/text-processing.html#sec-get-regexp.prototype.dotAll)
+flag to be enabled, permitting the dot character class to match new lines.
+
+{{<best-practice>}} Regular expressions in JSON Schema are notably
+underspecified. To avoid interoperability issues, stick to
+[ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/),
+and don't assume the use of any regular expression flag.{{</best-practice>}}
 
 {{<common-pitfall>}} Regular expressions often make use of characters that need
 to be escaped when making use of them as part of JSON strings. For example, the
