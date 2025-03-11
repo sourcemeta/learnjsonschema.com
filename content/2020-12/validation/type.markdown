@@ -32,14 +32,16 @@ JSON parsers.
 | `"boolean"` | The JSON true or false constants         | N/A                                                                                                      |
 | `"object"`  | A JSON object                            | N/A                                                                                                      |
 | `"array"`   | A JSON array                             | N/A                                                                                                      |
-| `"number"`  | A JSON number                            | [IEEE 764](https://ieeexplore.ieee.org/document/8766229) 64-bit double-precision floating point encoding |
+| `"number"`  | A JSON number                            | [IEEE 764](https://ieeexplore.ieee.org/document/8766229) 64-bit double-precision floating point encoding (except `NaN`, `Infinity`, and `+0`) |
 | `"integer"` | A JSON number that represents an integer | 64-bit signed integer encoding (from `-(2^53)+1` to `(2^53)-1`)                                          |
 | `"string"`  | A JSON string                            | [UTF-8](https://en.wikipedia.org/wiki/UTF-8) Unicode encoding                                            |
 
 Note that while the JSON grammar does not distinguish between integer and real
 numbers, JSON Schema provides the `integer` logical type that matches either
 integers (such as `2`), or real numbers where the fractional part is zero (such
-as `2.0`).
+as `2.0`). Additionally, numeric constructs inherent to floating point
+encodings (like `NaN` and `Infinity`) are not permitted in JSON. However, the
+negative zero (`-0`) is permitted.
 
 {{<best-practice>}} To avoid interoperability issues, do not produce JSON
 documents with numbers that exceed the [IETF RFC
