@@ -62,6 +62,16 @@ JavaScript](https://2ality.com/2012/04/number-encoding.html) by Dr. Axel
 Rauschmayer for a more detailed overview of JavaScript's numeric
 limitations.{{</common-pitfall>}}
 
+{{<learning-more>}}JSON allows numbers to be represented in [scientific
+expontential
+notation](https://en.wikipedia.org/wiki/Scientific_notation#E_notation). For
+example, numbers like `1.0e+28` (equivalent to 10000000000000000000000000000.0)
+are valid according to the JSON grammar. This notation is convenient for
+expressing long numbers. However, be careful with not accidentally exceeding
+the interoperable limits described by the [IETF RFC
+8259](https://www.rfc-editor.org/rfc/rfc8259) JSON
+standard.{{</learning-more>}}
+
 ## Examples
 
 {{< schema "A schema that describes numeric instances" >}}
@@ -77,6 +87,10 @@ limitations.{{</common-pitfall>}}
 
 {{< instance-pass "A real number is valid" >}}
 3.14
+{{< /instance-pass >}}
+
+{{< instance-pass "A number in scientific expontential notation is valid" >}}
+1.0e+28
 {{< /instance-pass >}}
 
 {{< instance-fail "A string is not valid" >}}
