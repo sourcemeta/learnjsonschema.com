@@ -27,8 +27,9 @@ which may be of different types.
 
 {{<best-practice>}} Constraining instances to a set of possible values by
 definition implies the given JSON types. Therefore, combining this keyword with
-the [`type`](../type) keyword is redundant (or even invalid if types don't
-agree), and considered an anti-pattern.{{</best-practice>}}
+the [`type`]({{< ref "2020-12/validation/type" >}}) keyword is redundant (or
+even invalid if types don't agree), and considered an
+anti-pattern.{{</best-practice>}}
 
 ## Examples
 

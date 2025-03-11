@@ -33,9 +33,9 @@ schema.{{</common-pitfall>}}
 
 If a vocabulary is marked as required, JSON Schema implementations that do not
 recognise the given vocabulary must refuse to process schemas described by such
-dialect. As a notable exception, every dialect must list the [Core](..)
-vocabulary as required, as it is the foundational vocabulary that implements
-the vocabulary system itself.
+dialect. As a notable exception, every dialect must list the [Core]({{< ref
+"2020-12/core" >}}) vocabulary as required, as it is the foundational
+vocabulary that implements the vocabulary system itself.
 
 {{<learning-more>}} By convention, every official JSON Schema dialect defines a
 dynamic anchor called `meta`. This serves as an extensibility point for

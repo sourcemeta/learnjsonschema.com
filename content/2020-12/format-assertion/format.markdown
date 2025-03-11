@@ -50,8 +50,8 @@ produces an annotation value.
 However, this vocabulary is not used by default in the JSON Schema 2020-12
 dialect. To use it, a custom dialect that includes this vocabulary is required.
 As a consequence, not many JSON Schema implementations support it. In most
-cases, it is advised to stick to the
-[`Format-Annotation`](../../format-annotation/format) variant of this keyword.
+cases, it is advised to stick to the [`Format-Annotation`]({{< ref
+"2020-12/format-annotation/format" >}}) variant of this keyword.
 
 {{<best-practice>}} While [technically
 allowed](https://json-schema.org/draft/2020-12/json-schema-validation#section-7.2.3)

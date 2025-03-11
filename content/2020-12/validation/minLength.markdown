@@ -30,9 +30,8 @@ string.
 {{<learning-more>}} While the [IETF RFC
 8259](https://www.rfc-editor.org/rfc/rfc8259) JSON standard recommends the use
 of [UTF-8](https://en.wikipedia.org/wiki/UTF-8), other Unicode encodings are
-permitted. Therefore a JSON string may be represented in up to 4x the number of
-bytes as its number of code-points (assuming
-[UTF-32](https://en.wikipedia.org/wiki/UTF-32) as the upper bound).
+permitted. Therefore a JSON string may be represented in more bytes than its
+number of code-points.
 
 JSON Schema does not provide a mechanism to assert on the byte size of a JSON
 string, as this is an implementation-dependent property of the JSON parser in

@@ -39,8 +39,8 @@ use.  {{</learning-more>}}
 {{<common-pitfall>}} Be careful when making use of this keyword to
 inadvertently assert on the byte length of JSON strings before inserting them
 into byte-sensitive destinations like fixed-size buffers. Always assume that
-the byte length of a JSON string can be up to 4x the number of logical
-characters.{{</common-pitfall>}}
+the byte length of a JSON string can arbitrary larger that the number of
+logical characters.{{</common-pitfall>}}
 
 {{<constraint-warning `string`>}}
 

@@ -29,11 +29,11 @@ logical type by producing an annotation value.
 
 {{<common-pitfall>}} By default, this keyword does not perform validation. If
 validation is desired, the best practice is to combine this keyword with the
-[`pattern`](../../validation/pattern) keyword. This guarantees interoperable
-and unambiguous behavior across JSON Schema implementations.
+[`pattern`]({{< ref "2020-12/validation/pattern" >}}) keyword. This guarantees
+interoperable and unambiguous behavior across JSON Schema implementations.
 
 Another option is to produce a custom dialect that opts-in to the [Format
-Assertion](../../format-assertion) vocabulary. However, this vocabulary is
+Assertion]({{< ref "2020-12/format-assertion" >}}) vocabulary. However, this vocabulary is
 considered optional by the official JSON Schema Test Suite. As a consequence,
 not many implementations support it.{{</common-pitfall>}}
 
@@ -63,8 +63,8 @@ that is disabled by default.
 
 To avoid the gray areas of this keyword, we recommend only treating it as an
 annotation, never enabling validation support at the implementation level (even
-if supported), and performing validation using the
-[`pattern`](../../validation/pattern) keyword.  {{</learning-more>}}
+if supported), and performing validation using the [`pattern`]({{< ref
+"2020-12/validation/pattern" >}}) keyword.  {{</learning-more>}}
 
 The supported formats are the following:
 

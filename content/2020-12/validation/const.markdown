@@ -23,8 +23,9 @@ specific JSON value of any type.
 
 {{<best-practice>}} Constraining instances to a constant value by definition
 implies the given JSON type. Therefore, combining this keyword with the
-[`type`](../type) keyword is redundant (or even invalid if types don't agree),
-and considered an anti-pattern.{{</best-practice>}}
+[`type`]({{< ref "2020-12/validation/type" >}}) keyword is redundant (or even
+invalid if types don't agree), and considered an
+anti-pattern.{{</best-practice>}}
 
 ## Examples
 
