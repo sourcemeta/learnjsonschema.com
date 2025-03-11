@@ -1,7 +1,7 @@
 ---
 keyword: "pattern"
 signature: "String"
-value: This keyword must be set to a valid [ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) regular expression
+value: This keyword must be set to a regular expression, preferrably using the [ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) flavour
 summary: "A string instance is considered valid if the regular expression matches the instance successfully."
 kind: [ "assertion" ]
 instance: [ "string" ]
