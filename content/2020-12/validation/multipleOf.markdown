@@ -25,7 +25,11 @@ related:
 ---
 
 The `multipleOf` keyword restricts number instances to be multiples of the
-given number. 
+given number. Note that the number `0` is a multiple of every number, as for
+every number `k`, the mutiplication `0 * k` yield an integer value (in this
+case always 0). This case is not to be confused with [division by
+zero](https://en.wikipedia.org/wiki/Division_by_zero), which is not a permitted
+operation in most computer systems.
 
 {{<learning-more>}}Setting this keyword to negative powers of 10, such as
 `0.01` (10^-2), `0.001` (10^-3), and `0.0001` (10^-4), is a common mechanism to
