@@ -56,8 +56,8 @@ components.{{</best-practice>}}
 {{<common-pitfall>}} The JavaScript programming language (and by extension
 languages such as TypeScript) represent all numbers, including integers, using
 the [IEEE 764](https://ieeexplore.ieee.org/document/8766229) floating-point
-encoding. As a result, parsing JSON documents is prone to numeric precision
-problems. Read [How numbers are encoded in
+encoding. As a result, parsing JSON documents with integers beyond the 53-bit
+range is prone to precision problems. Read [How numbers are encoded in
 JavaScript](https://2ality.com/2012/04/number-encoding.html) by Dr. Axel
 Rauschmayer for a more detailed overview of JavaScript's numeric
 limitations.{{</common-pitfall>}}
