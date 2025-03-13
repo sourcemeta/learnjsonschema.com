@@ -27,25 +27,36 @@ implies the given JSON type. Therefore, combining this keyword with the
 invalid if types don't agree), and considered an
 anti-pattern.{{</best-practice>}}
 
+{{<common-pitfall>}} There are programming languages, such as JavaScript, that
+[cannot distinguish between integers and real
+numbers](https://2ality.com/2012/04/number-encoding.html). To accomodate for
+those cases, JSON Schema considers a real number with a zero fractional part to
+be equal to the corresponding integer. For example, in JSON Schema, `1` is
+considered to be equal to `1.0`.{{</common-pitfall>}}
+
 ## Examples
 
-{{<schema `A schema that constrains instances to a string constant value`>}}
+{{<schema `A schema that constrains instances to an integer constant value`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "const": "Hello"
+  "const": 5
 }
 {{</schema>}}
 
-{{<instance-pass `The desired string value is valid`>}}
-"Hello"
+{{<instance-pass `The desired integer value is valid`>}}
+5
 {{</instance-pass>}}
 
-{{<instance-fail `Any other string value is invalid`>}}
-"World"
+{{<instance-pass `The real value representation of the desired integer value is valid`>}}
+5.0
+{{</instance-pass>}}
+
+{{<instance-fail `Any other number value is invalid`>}}
+1234
 {{</instance-fail>}}
 
-{{<instance-fail `Any other non-string value is invalid`>}}
-1234
+{{<instance-fail `Any other non-number value is invalid`>}}
+"Hello"
 {{</instance-fail>}}
 
 {{<schema `A schema that constrains instances to a complex object value`>}}
