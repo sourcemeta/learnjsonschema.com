@@ -24,65 +24,36 @@ related:
     keyword: contains
 ---
 
-The `minItems` keyword specifies the minimum number of items that must be present in an array. It can be used to define constraints on the size of an array, ensuring that it contains at least a certain number of elements.
-* An array is valid if it has at least the specified number of elements.
+The `minItems` keyword restricts array instances to consists of an inclusive
+minimum numbers of items. 
+
+{{<common-pitfall>}} The presence of this keyword does not depend on the
+presence of the [`items`]({{< ref "2020-12/applicator/items" >}}) keyword.
+{{</common-pitfall>}}
+
+{{<constraint-warning `array`>}}
 
 ## Examples
 
-{{<schema `Schema with 'minItems' keyword`>}}
+{{<schema `A schema that constrains array instances to contain at least 3 items`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
   "minItems": 3
 }
 {{</schema>}}
 
-{{<instance-pass `An array instance with 3 or more elements is valid`>}}
+{{<instance-pass `An array value with 4 items is valid`>}}
+[ 1, 2, 3, 4 ]
+{{</instance-pass>}}
+
+{{<instance-pass `An array value with 3 items is valid`>}}
 [ 1, true, "hello" ]
 {{</instance-pass>}}
 
-{{<instance-fail `An array instance with less than 3 elements is invalid`>}}
-[ 1, "apple" ]
+{{<instance-fail `An array value with less than 3 items is invalid`>}}
+[ false, "foo" ]
 {{</instance-fail>}}
 
-{{<schema `Schema with the 'minItems' and 'items' keywords`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
-  "items": { "type": "boolean" },
-  "minItems": 2
-}
-{{</schema>}}
-
-{{<instance-pass `An array instance containing 2 or more items, which conform to the 'items' subschema, is valid`>}}
-[ false, false, true ]
+{{<instance-pass `A non-array value is valid`>}}
+"Hello World"
 {{</instance-pass>}}
-
-{{<instance-fail `An array instance with less than 2 elements is invalid`>}}
-[ false ]
-{{</instance-fail>}}
-
-{{<schema `Schema with the 'minItems', 'prefixItems' and 'contains' keywords`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
-  "prefixItems": [
-    { "type": "number" },
-    { "type": "string" }
-  ],
-  "contains": { "type": "boolean" },
-  "minItems": 3
-}
-{{</schema>}}
-
-{{<instance-pass `An array instance containing 3 or more items, which successfully validates against 'prefixItems' and 'contains', is valid`>}}
-[ 1, "John", false ]
-{{</instance-pass>}}
-
-{{<instance-fail `An array instance with less than 3 elements is invalid`>}}
-[ 1, "John" ]
-{{</instance-fail>}}
-
-{{<instance-fail `First and second items should be number and string respectively`>}}
-[ "John", 1, false ]
-{{</instance-fail>}}
