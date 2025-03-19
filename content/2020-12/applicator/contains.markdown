@@ -89,6 +89,14 @@ indexes.{{</common-pitfall>}}
 { "keyword": "/contains", "instance": "", "value": [ 1, 4, 7 ] }
 {{</instance-annotation>}}
 
+{{<instance-pass `An array value that solely consists of even numbers is valid`>}}
+[ 2, 4, 6, 8, 10, 12 ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/contains", "instance": "", "value": true }
+{{</instance-annotation>}}
+
 {{<instance-fail `An array value without any even number is invalid`>}}
 [ "foo", true ]
 {{</instance-fail>}}
