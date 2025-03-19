@@ -38,50 +38,65 @@ related:
     keyword: uniqueItems
 ---
 
-The `contains` keyword is used to check if at least one element in an array instance validates against a specified sub-schema. It offers flexibility compared to `items`, which requires all elements to adhere to a single schema.
+The `contains` keyword restricts array instances to include one or more items
+(at any location of the array) that validate against the given subschema. The
+lower and upper bounds that are allowed to validate against the given subschema
+can be controlled using the [`minContains`]({{< ref
+"2020-12/validation/mincontains" >}}) and [`maxContains`]({{< ref
+"2020-12/validation/maxcontains" >}}) keywords. Information about the items
+that were successfully validated against the given subschema are reported using
+annotations.
 
-An array instance is valid against `contains` if at least one of its elements is valid against the given schema, except when `minContains` is present and has a value of 0, in which case an array instance must be considered valid against the `contains` keyword, even if none of its elements is valid against the given schema.
+{{<common-pitfall>}}Keep in mind that when collecting annotations, the
+evaluator might need to exhaustively check every item in the array past the
+containment lower bound instead of short-circuiting validation, potentially
+introducing additional computational overhead.
 
-Similarly, if `maxContains` is present alongside `contains`, the instance will be considered valid as long as the number of elements successfully validating against the `contains` subschema does not exceed the specified limit defined by `maxContains`.
+For example, consider an array of 10 items where 5 of its items validate
+against the `contains` subschema (and neither `minContains` nor `maxContains`
+are declared, for simplicity). When not collecting annotations, validation will
+stop after encountering the first match. However, when collecting annotations,
+validation will have to proceed past the first match to report the 5 matching
+indexes.{{</common-pitfall>}}
 
-* For data validation,  `items` validates all array elements against a single schema, `prefixItems` validates a fixed-length sequence at the array's beginning, and `contains` checks for at least one element matching a schema anywhere in the array.
-* The subschema must be applied to every array element, even after the first match has been found, to collect annotations for use by other keywords.
+{{<constraint-warning `array`>}}
 
 ## Examples
 
-{{<schema `Schema with 'contains' keyword`>}}
+{{<schema `A schema that constrains array instances to contain at least one even number`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
-  "contains": { "type": "number" }
+  "contains": {
+    "type": "number",
+    "multipleOf": 2
+  }
 }
 {{</schema>}}
 
-{{<instance-pass `An array instance with at least one item as a numeric value is valid`>}}
-[ "foo", 3, false, [ "bar" ], -5 ]
+{{<instance-pass `An array value with one even number is valid`>}}
+[ "foo", 2, false, [ "bar" ], -5 ]
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/contains", "instance": "", "value": [ 1, 4 ] }
+{ "keyword": "/contains", "instance": "", "value": [ 1 ] }
 {{</instance-annotation>}}
 
-{{<instance-fail `An array instance containing no string value is invalid`>}}
+{{<instance-pass `An array value with multiple even numbers is valid`>}}
+[ "foo", 2, false, 3, 4, [ "bar" ], -5, -3.0 ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/contains", "instance": "", "value": [ 1, 4, 7 ] }
+{{</instance-annotation>}}
+
+{{<instance-fail `An array value without any even number is invalid`>}}
 [ "foo", true ]
 {{</instance-fail>}}
 
-{{<schema `Schema with 'contains' keyword`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
-  "contains": { "type": "string" }
-}
-{{</schema>}}
+{{<instance-fail `An empty array value is invalid`>}}
+[]
+{{</instance-fail>}}
 
-{{<instance-pass `An array instance with all items as string values is valid`>}}
-[ "foo", "bar", "baz" ]
+{{<instance-pass `A non-array value is valid`>}}
+"Hello World"
 {{</instance-pass>}}
-
-{{<instance-annotation>}}
-{ "keyword": "/contains", "instance": "", "value": true }
-{{</instance-annotation>}}
-* _The annotation value is a boolean 'true' if the subschema successfully validates when applied to every index of the instance._
