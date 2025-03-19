@@ -44,7 +44,7 @@ at the given index in the `prefixItems` array, if any.  Information about the
 number of subschemas that were evaluated against the array instance is reported
 using annotations.
 
-Array items outside the range described by the `prefixItems` keyword will be
+Array items outside the range described by the `prefixItems` keyword is
 evaluated against the [`items`]({{< ref "2020-12/applicator/items" >}})
 keyword, if present.
 
@@ -59,7 +59,7 @@ array.{{</common-pitfall>}}
 
 ## Examples
 
-{{<schema `A schema that constrains array instances to start with a boolean value followed by a number value`>}}
+{{<schema `A schema that constrains array instances to start with a boolean item followed by a number item`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "prefixItems": [ { "type": "boolean" }, { "type": "number" } ]
@@ -74,7 +74,7 @@ array.{{</common-pitfall>}}
 { "keyword": "/prefixItems", "instance": "", "value": 0 }
 {{</instance-annotation>}}
 
-{{<instance-pass `An array value that consists of a boolean value is valid`>}}
+{{<instance-pass `An array value that consists of a boolean item is valid`>}}
 [ false ]
 {{</instance-pass>}}
 
@@ -82,7 +82,7 @@ array.{{</common-pitfall>}}
 { "keyword": "/prefixItems", "instance": "", "value": 1 }
 {{</instance-annotation>}}
 
-{{<instance-pass `An array value that consists of a boolean value followed by a number value is valid`>}}
+{{<instance-pass `An array value that consists of a boolean item followed by a number item is valid`>}}
 [ false, 35 ]
 {{</instance-pass>}}
 
@@ -90,7 +90,7 @@ array.{{</common-pitfall>}}
 { "keyword": "/prefixItems", "instance": "", "value": true }
 {{</instance-annotation>}}
 
-{{<instance-pass `An array value that consists of a boolean value followed by a number value and other items is valid`>}}
+{{<instance-pass `An array value that consists of a boolean item followed by a number item and other items is valid`>}}
 [ false, 35, "something", "else" ]
 {{</instance-pass>}}
 
@@ -98,7 +98,7 @@ array.{{</common-pitfall>}}
 { "keyword": "/prefixItems", "instance": "", "value": 2 }
 {{</instance-annotation>}}
 
-{{<instance-fail `An array value that does not consist of a boolean value followed by a number value is invalid`>}}
+{{<instance-fail `An array value that does not consist of a boolean item followed by a number item is invalid`>}}
 [ true, false ]
 {{</instance-fail>}}
 
@@ -106,7 +106,7 @@ array.{{</common-pitfall>}}
 "Hello World"
 {{</instance-pass>}}
 
-{{<schema `A schema that constrains array instances to start with a boolean value followed by a number value followed by strings`>}}
+{{<schema `A schema that constrains array instances to start with a boolean item followed by a number item followed by strings`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "prefixItems": [ { "type": "boolean" }, { "type": "number" } ],
@@ -122,7 +122,7 @@ array.{{</common-pitfall>}}
 { "keyword": "/prefixItems", "instance": "", "value": 0 }
 {{</instance-annotation>}}
 
-{{<instance-pass `An array value that consists of a boolean value is valid`>}}
+{{<instance-pass `An array value that consists of a boolean item is valid`>}}
 [ false ]
 {{</instance-pass>}}
 
@@ -130,7 +130,7 @@ array.{{</common-pitfall>}}
 { "keyword": "/prefixItems", "instance": "", "value": 1 }
 {{</instance-annotation>}}
 
-{{<instance-pass `An array value that consists of a boolean value followed by a number value is valid`>}}
+{{<instance-pass `An array value that consists of a boolean item followed by a number item is valid`>}}
 [ false, 35 ]
 {{</instance-pass>}}
 
@@ -138,7 +138,7 @@ array.{{</common-pitfall>}}
 { "keyword": "/prefixItems", "instance": "", "value": true }
 {{</instance-annotation>}}
 
-{{<instance-pass `An array value that consists of a boolean value followed by a number value and other string items is valid`>}}
+{{<instance-pass `An array value that consists of a boolean item followed by a number item and other string items is valid`>}}
 [ false, 35, "foo", "bar" ]
 {{</instance-pass>}}
 
@@ -150,7 +150,7 @@ array.{{</common-pitfall>}}
 { "keyword": "/items", "instance": "", "value": true }
 {{</instance-annotation>}}
 
-{{<instance-fail `An array value that consists of a boolean value followed by a number value and other non-string items is invalid`>}}
+{{<instance-fail `An array value that consists of a boolean item followed by a number item and other non-string items is invalid`>}}
 [ false, 35, { "foo": "bar" } ]
 {{</instance-fail>}}
 

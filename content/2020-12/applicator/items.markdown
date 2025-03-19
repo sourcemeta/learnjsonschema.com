@@ -41,78 +41,82 @@ related:
     keyword: unevaluatedItems
 ---
 
-The `items` keyword is used to validate arrays of arbitrary length where each item in the array matches the same schema. It applies its subschema to all instance items at indexes greater than the length of the `prefixItems` array in the same schema, or to all instance array elements if `prefixItems` is not present. This means that the subschema specified under `items` will be used to validate every item in the array that isn't covered by `prefixItems`.
+The `items` keyword restricts array instance items not described by the
+[`prefixItems`]({{< ref "2020-12/applicator/prefixitems" >}}) keyword (if any),
+to validate against the given subschema. Whether this keyword was evaluated
+against any item of the array instance is reported using annotations.
 
-If the `items` subschema is applied to any positions within the instance array, it produces an annotation result of boolean *true*, indicating that all remaining array elements have been evaluated against this keyword's subschema. This annotation affects the behavior of `unevaluatedItems` in the *Unevaluated* vocabulary.
+{{<common-pitfall>}}This keyword does not prevent an array instance from being
+empty. If needed, use the [`minItems`]({{< ref "2020-12/validation/minitems"
+>}}) to assert on the minimum bounds of the array.{{</common-pitfall>}}
 
-* `prefixItems` allows defining a fixed-length sequence of schemas for an array's initial items.
-* `items` applies its sub-schema to all elements after the `prefixItems` sequence (if present).
-* Analogous to `additionalProperties` for objects, `items` specifies a schema that each item in the array must adhere to. If an array has additional items beyond what's defined in `prefixItems`, they must conform to the schema specified under `items`.
+{{<constraint-warning `array`>}}
 
 ## Examples
 
-{{<schema `Schema with 'items' keyword`>}}
+{{<schema `A schema that constrains array instances to consist of number items`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
   "items": { "type": "number" }
 }
 {{</schema>}}
 
-{{<instance-pass `An array instance with all items as numeric values is valid`>}}
-[ 2, 3, 44, -5 ]
+{{<instance-pass `An array value that only consists of number items is valid`>}}
+[ 1, -3.4, 54 ]
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
 { "keyword": "/items", "instance": "", "value": true }
 {{</instance-annotation>}}
 
-{{<instance-fail `An array instance containing a string value is invalid`>}}
-[ 2, 3, "44", -5 ]
+{{<instance-pass `An empty array value is valid`>}}
+[]
+{{</instance-pass>}}
+
+{{<instance-fail `An array value that includes a non-number item is invalid`>}}
+[ 1, -3.4, 54, "foo" ]
 {{</instance-fail>}}
 
-{{<schema `Schema with 'items' set to boolean true`>}}
+{{<instance-pass `A non-array value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
+
+{{<schema `A schema that constrains array instances to start with a boolean item followed by a number item followed by strings`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
-  "items": true
+  "prefixItems": [ { "type": "boolean" }, { "type": "number" } ],
+  "items": { "type": "string" }
 }
 {{</schema>}}
 
-{{<instance-pass `An array instance with all items as numeric values is valid`>}}
-[ 2, 3, 44, -5 ]
+{{<instance-pass `An array value that consists of a boolean item followed by a number item is valid`>}}
+[ false, 35 ]
 {{</instance-pass>}}
 
-{{<instance-pass `An array instance containing a string value is also valid`>}}
-[ 2, 3, "44", -5 ]
+{{<instance-annotation>}}
+{ "keyword": "/prefixItems", "instance": "", "value": true }
+{{</instance-annotation>}}
+
+{{<instance-pass `An array value that consists of a boolean item followed by a number item and other string items is valid`>}}
+[ false, 35, "foo", "bar" ]
 {{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/prefixItems", "instance": "", "value": 2 }
+{{</instance-annotation>}}
 
 {{<instance-annotation>}}
 { "keyword": "/items", "instance": "", "value": true }
 {{</instance-annotation>}}
-* _Similarly, if the `items` is set to false, all the array instances will fail validation._
 
-{{<schema `Schema with 'items' and 'prefixItems' keyword`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
-  "prefixItems": [
-    { "type": "boolean" },
-    { "type": "string" }
-  ],
-  "items": { "type": "number" }
-}
-{{</schema>}}
-
-{{<instance-pass `An array instance adhering to the schema is valid`>}}
-[ false, "44", -5 ]
-{{</instance-pass>}}
-
-{{<instance-annotation>}}
-{ "keyword": "/prefixItems", "instance": "", "value": 1 }
-{ "keyword": "/items", "instance": "", "value": true }
-{{</instance-annotation>}}
-
-{{<instance-fail `The prefix items of the array instance must adhere to the subschemas in 'prefixItems' at their respective indexes`>}}
-[ 2, 3, "44", -5 ]
+{{<instance-fail `An array value that consists of a boolean item followed by a number item and other non-string items is invalid`>}}
+[ false, 35, { "foo": "bar" } ]
 {{</instance-fail>}}
+
+{{<instance-pass `An empty array value is valid`>}}
+[]
+{{</instance-pass>}}
+
+{{<instance-pass `A non-array value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
