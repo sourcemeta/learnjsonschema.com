@@ -24,65 +24,83 @@ related:
     keyword: items
 ---
 
-The `minContains` keyword is used in conjunction with the `contains` keyword to specify the minimum number of items in an array instance that must validate against the `contains` subschema.
-* This keyword applies only to arrays.
-* The value of this keyword must be a non-negative integer.
-* If `contains` is not present within the same schema object, then this keyword has no effect.
+The `minContains` keyword modifies the [`contains`]({{< ref
+"2020-12/applicator/contains" >}}) keyword to constrain array instances to the
+given minimum number of containment matches. This keyword has no effect if the
+[`contains`]({{< ref "2020-12/applicator/contains" >}}) keyword is not declared.
+
+{{<common-pitfall>}}Keep in mind that when collecting annotations, the
+evaluator might need to exhaustively check every item in the array past the
+containment lower bound instead of short-circuiting validation, potentially
+introducing additional computational overhead.
+
+For example, consider an array of 10 items where 5 of its items validate
+against the `contains` subschema and `minContains` is set to to 2. When not
+collecting annotations, validation will stop after encountering the second
+match. However, when collecting annotations, validation will have to proceed
+past the second match to report the 5 matching indexes.{{</common-pitfall>}}
+{{<constraint-warning `array`>}}
 
 ## Examples
 
-{{<schema `Schema with the 'minContains' and 'contains' keyword`>}}
+{{<schema `A schema that constrains array instances to contain at least two even numbers`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
-  "contains": { "type": "string" },
+  "minContains": 2,
+  "contains": {
+    "type": "number",
+    "multipleOf": 2
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `An array value with two even numbers is valid`>}}
+[ "foo", 2, false, 3, 4, [ "bar" ], -5 ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/contains", "instance": "", "value": [ 1, 4 ] }
+{{</instance-annotation>}}
+
+{{<instance-pass `An array value with more than two even numbers is valid`>}}
+[ "foo", 2, false, 3, 4, [ "bar" ], -5, -3.0 ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/contains", "instance": "", "value": [ 1, 4, 7 ] }
+{{</instance-annotation>}}
+
+{{<instance-fail `An array value with one even number is invalid`>}}
+[ "foo", 2, false, [ "bar" ], -5 ]
+{{</instance-fail>}}
+
+{{<instance-fail `An array value without any even number is invalid`>}}
+[ "foo", true ]
+{{</instance-fail>}}
+
+{{<instance-fail `An empty array value is invalid`>}}
+[]
+{{</instance-fail>}}
+
+{{<instance-pass `A non-array value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
+
+{{<schema `A schema that incorrectly constrains minimum containment without constrainining containment`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "minContains": 2
 }
 {{</schema>}}
 
-{{<instance-pass `An array instance with 2 or more items successfully validating against the 'contains' subschema is valid`>}}
-[ "Car", "Bus", 1, 2, "Bike" ]
-{{</instance-pass>}}
-
-{{<instance-fail `An array instance with less than 2 items successfully validating against the 'contains' subschema is invalid`>}}
-[ "Car", 1 ]
-{{</instance-fail>}}
-
-{{<instance-fail `An empty array is invalid`>}}
-[]
-{{</instance-fail>}}
-
-{{<schema `Schema with the 'minContains' keyword`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
-  "minContains": 2
-}
-// If contains is not present, 'minContains' has no effect on validation.
-{{</schema>}}
-
-{{<instance-pass `An array instance with any items is valid`>}}
+{{<instance-pass `An array value with arbitrary items is valid`>}}
 [ "John", false, 29, { "foo": "bar" }, [ 5, 7 ] ]
 {{</instance-pass>}}
 
-{{<instance-pass `An empty array is also valid`>}}
+{{<instance-pass `An empty array is valid`>}}
 []
 {{</instance-pass>}}
 
-{{<schema `Schema with the 'minContains' and 'contains' keyword`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
-  "contains": { "type": "string" },
-  "minContains": 0
-}
-{{</schema>}}
-
-{{<instance-pass `An array instance with any items is valid`>}}
-[ "John", false, 29, { "foo": "bar" }, [ 5, 7 ] ]
+{{<instance-pass `A non-array value is valid`>}}
+"Hello World"
 {{</instance-pass>}}
-
-{{<instance-pass `An empty array is also valid`>}}
-[]
-{{</instance-pass>}}
-* _It is important to note that the `contains` keyword requires at least one item of the array instance to validate against its subschema. However, when `minContains` is set to 0, the schema would behave as if it does not have the `contains` keyword, as shown in the above example._
