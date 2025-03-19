@@ -44,7 +44,7 @@ lower and upper bounds that are allowed to validate against the given subschema
 can be controlled using the [`minContains`]({{< ref
 "2020-12/validation/mincontains" >}}) and [`maxContains`]({{< ref
 "2020-12/validation/maxcontains" >}}) keywords. Information about the items
-that were successfully validated against the given subschema are reported using
+that were successfully validated against the given subschema is reported using
 annotations.
 
 {{<common-pitfall>}}Keep in mind that when collecting annotations, the
