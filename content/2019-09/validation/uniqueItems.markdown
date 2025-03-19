@@ -2,7 +2,7 @@
 keyword: "uniqueItems"
 signature: "Boolean"
 value: This keyword must be set to a boolean value
-summary: "If this keyword is set to the boolean value true, the instance validates successfully if all of its elements are unique."
+summary: "If this keyword is set to the boolean value `true`, the instance validates successfully if all of its elements are unique."
 kind: [ "assertion" ]
 instance: [ "array" ]
 specification: "https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.6.4.3"

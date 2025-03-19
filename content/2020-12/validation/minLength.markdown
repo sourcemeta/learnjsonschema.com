@@ -46,7 +46,6 @@ use.  {{</learning-more>}}
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "minLength": 3
 }
-
 {{</schema>}}
 
 {{<instance-pass `A string value that consists of 3 code-points is valid`>}}
