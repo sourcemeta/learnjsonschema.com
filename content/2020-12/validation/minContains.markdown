@@ -39,6 +39,7 @@ against the `contains` subschema and `minContains` is set to to 2. When not
 collecting annotations, validation will stop after encountering the second
 match. However, when collecting annotations, validation will have to proceed
 past the second match to report the 5 matching indexes.{{</common-pitfall>}}
+
 {{<constraint-warning `array`>}}
 
 ## Examples
