@@ -1,4 +1,4 @@
-{{ define "title" }}{{ .Params.keyword }} ({{ .Page.Section }}){{ end }}
+{{ define "title" }}{{ .Params.keyword }} ({{ ($.Site.GetPage (printf "/%s" .Page.Section)).Title }}){{ end }}
 {{ define "description" }}{{ .Summary }}{{ end }}
 
 {{ define "main" }}
@@ -10,7 +10,7 @@
 
 {{ $siteSections := .Site.Sections }}
 {{ partial "breadcrumb.html" (dict
-  "dialect" $dialect
+  "dialect" ($.Site.GetPage (printf "/%s" .Page.Section)).Title
   "dialectURL" (ref . $dialectURL)
   "vocabulary" $vocabulary
   "vocabularyURL" (ref . (replace $vocabularyURL " " "-"))
@@ -61,8 +61,8 @@
             <tr>
               <th scope="row">
                 {{ partial "term.html" (dict
-                  "term" "Dialect"
-                  "tooltip" "A dialect is a version of JSON Schema"
+                  "term" "Base Dialect"
+                  "tooltip" "A base dialect is a version of JSON Schema"
                   "glossary" "draft" ) }}
               </th>
               <td class="text-break">

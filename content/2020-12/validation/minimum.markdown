@@ -22,48 +22,75 @@ related:
     keyword: multipleOf
 ---
 
-The `minimum` keyword is used to set the lower limit on numeric instances. It specifies that the numeric value being validated must be greater than or equal to the provided minimum value.
+The `minimum` keyword restricts number instances to be greater than or equal to
+the given number.
 
-* Validation succeeds if the number is greater than or equal to the specified `minimum`.
+{{<constraint-warning `number`>}}
 
 ## Examples
 
-{{<schema `Schema defining the lower limit of 6 on numeric values`>}}
+{{<schema `A schema that constrains number instances to be greater than or equal to the positive integer 10`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "number",
-  "minimum": 6
+  "minimum": 10
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with a numeric value greater than 6 is valid`>}}
-8.1
+{{<instance-pass `A number value greater than 10 is valid`>}}
+10.1
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with a numeric value less than 6 is invalid`>}}
-4
+{{<instance-pass `An integer value greater than 10 is valid`>}}
+11
+{{</instance-pass>}}
+
+{{<instance-fail `A number value less than 10 is invalid`>}}
+9.9
 {{</instance-fail>}}
 
-{{<instance-pass `An instance with a numeric value equal to 6 is valid`>}}
-6
+{{<instance-fail `An integer value less than 10 is invalid`>}}
+9
+{{</instance-fail>}}
+
+{{<instance-pass `The real representation of the integer value 10 is valid`>}}
+10.0
 {{</instance-pass>}}
 
-{{<schema ` Schema allowing either a null value or a numeric value with a lower limit of 10.99`>}}
+{{<instance-pass `The integer value 10 is valid`>}}
+10
+{{</instance-pass>}}
+
+{{<instance-pass `A non-number value is valid`>}}
+"100000"
+{{</instance-pass>}}
+
+{{<schema `A schema that constrains number instances to be greater than or equal to the negative real number -2.1`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": [ "null", "number" ],
-  "minimum": 10.99
+  "minimum": -2.1
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with a numeric value greater than or equal to 10.99 is valid`>}}
-15
+{{<instance-pass `A number value greater than -2.1 is valid`>}}
+-2.09
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with a string datatype is invalid`>}}
-"Hello World!"
+{{<instance-pass `An integer value greater than -2.1 is valid`>}}
+-2
+{{</instance-pass>}}
+
+{{<instance-fail `A number value less than -2.1 is invalid`>}}
+-2.11
 {{</instance-fail>}}
 
-{{<instance-pass `An instance with a null value is valid`>}}
-null
+{{<instance-fail `An integer value less than -2.1 is invalid`>}}
+-3
+{{</instance-fail>}}
+
+{{<instance-pass `The real number value -2.1 is valid`>}}
+-2.1
+{{</instance-pass>}}
+
+{{<instance-pass `A non-number value is valid`>}}
+"100000"
 {{</instance-pass>}}

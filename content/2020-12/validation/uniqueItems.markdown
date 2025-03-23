@@ -2,7 +2,7 @@
 keyword: "uniqueItems"
 signature: "Boolean"
 value: This keyword must be set to a boolean value
-summary: "If this keyword is set to the boolean value true, the instance validates successfully if all of its elements are unique."
+summary: "If this keyword is set to the boolean value `true`, the instance validates successfully if all of its elements are unique."
 kind: [ "assertion" ]
 instance: [ "array" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-validation.html#section-6.4.3"
@@ -21,81 +21,73 @@ related:
     keyword: contains
 ---
 
-The `uniqueItems` keyword is used to ensure that all the items in an array are unique. This keyword is particularly useful when you need to enforce that an array contains no duplicate elements.
-* This keyword, when set to true, specifies that all elements in an array must be unique.
+When set to `true`, the `uniqueItems` keyword restricts array instances to
+items that only occur once in the array. Note that empty arrays and arrays that
+consist of a single item satisfy uniqueness by definition.
+
+{{<common-pitfall>}} Keep in mind that depending on the size and complexity of
+arrays, this keyword may introduce significant validation overhead. The paper
+[JSON: data model, query languages and schema
+specification](https://arxiv.org/abs/1701.02221) also noted how the presence of
+this keyword can negatively impact satisfiability analysis of
+schemas.{{</common-pitfall>}}
+
+{{<learning-more>}} While the official vocabularies do not offer a way to
+ensure uniqueness of array items based a given key, the
+[json-everything](https://json-everything.net) project defines a third-party
+[Extended Validation of
+Arrays](https://docs.json-everything.net/schema/vocabs/array-ext/) vocabulary
+that introduces a
+[`uniqueKeys`](https://docs.json-everything.net/schema/vocabs/array-ext/#uniquekeys)
+keyword for this purpose. However, keep in mind that third-party vocabularies
+are often not widely supported by implementations.{{</learning-more>}}
+
+{{<constraint-warning `array`>}}
 
 ## Examples
 
-{{<schema `Schema with 'uniqueItems' property set to true`>}}
+{{<schema `A schema that constrains array instances to not contain duplicate items`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
   "uniqueItems": true
 }
 {{</schema>}}
 
-{{<instance-pass `An array instance with unique elements is valid`>}}
-[ 1, "hello", true ]
+{{<instance-pass `An array value without duplicate items is valid`>}}
+[ 1, "hello", true, { "name": "John" } ]
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with duplicate elements is invalid`>}}
-[ false, "world", 2, 2 ]
+{{<instance-fail `An array value with duplicate elements is invalid`>}}
+[ { "name": "John" }, 1, "hello", true, { "name": "John" } ]
 {{</instance-fail>}}
 
-{{<instance-fail `An instance with duplicate complex structures (objects) is invalid`>}}
-[ { "name": "John" }, false, "world", 2, { "name": "John" } ]
-{{</instance-fail>}}
-* Element uniqueness also deeply applies for complex structures like objects.
+{{<instance-pass `An empty array value is valid`>}}
+[]
+{{</instance-pass>}}
 
-{{<schema `Schema without the 'uniqueItems' property or with 'uniqueItems' property set to false`>}}
+{{<instance-pass `A non-array value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
+
+{{<schema `A schema that allows array instances to contain duplicate items`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array"
-}
-  // or
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
   "uniqueItems": false
 }
 {{</schema>}}
 
-{{<instance-pass `An array instance with unique elements is valid`>}}
-[ 1, "hello", true ]
+{{<instance-pass `An array value without duplicate items is valid`>}}
+[ 1, "hello", true, { "name": "John" } ]
 {{</instance-pass>}}
 
-{{<instance-pass `An array instance with duplicate elements is also valid`>}}
-[ false, "world", 2, 2 ]
+{{<instance-pass `An array value with duplicate elements is valid`>}}
+[ { "name": "John" }, 1, "hello", true, { "name": "John" } ]
 {{</instance-pass>}}
 
-* _`uniqueItems` can be used with other array keywords like `items` and `prefixItems` to add more constraints to the instance. See the example below._
-
-{{<schema `Schema with 'uniqueItems' and 'items' keyword`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
-  "items": {
-    "type": "object",
-    "properties": {
-      "id": { "type": "integer" },
-      "name": { "type": "string" }
-    },
-    "required": [ "id", "name" ]
-  },
-  "uniqueItems": true
-}
-{{</schema>}}
-
-{{<instance-pass `An array instance with unique objects is valid`>}}
-[
-  { "id": 1, "name": "John" },
-  { "id": 2, "name": "Doe" }
-]
+{{<instance-pass `An empty array value is valid`>}}
+[]
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with duplicate objects is invalid`>}}
-[
-  { "id": 1, "name": "Jane" },
-  { "id": 1, "name": "Jane" }
-]
-{{</instance-fail>}}
+{{<instance-pass `A non-array value is valid`>}}
+"Hello World"
+{{</instance-pass>}}

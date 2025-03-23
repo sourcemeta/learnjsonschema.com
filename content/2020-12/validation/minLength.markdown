@@ -22,46 +22,44 @@ related:
     keyword: format
 ---
 
-The `minLength` keyword is used to specify the minimum length of a string instance. It defines the minimum number of characters that a valid string must have to satisfy the schema.
+The `minLength` keyword restricts string instances to consists of an inclusive
+minimum number of [Unicode](https://unicode.org) code-points (logical
+characters), which is not necessarily the same as the number of bytes in the
+string.
 
-* String length is counted in characters, not bytes.
-* Validation succeeds if the string length is greater than or equal to the specified `minLength`.
+{{<learning-more>}} While the [IETF RFC
+8259](https://www.rfc-editor.org/rfc/rfc8259) JSON standard recommends the use
+of [UTF-8](https://en.wikipedia.org/wiki/UTF-8), other Unicode encodings are
+permitted. Therefore a JSON string may be represented in more bytes than its
+number of code-points.
+
+JSON Schema does not provide a mechanism to assert on the byte size of a JSON
+string, as this is an implementation-dependent property of the JSON parser in
+use.  {{</learning-more>}}
+
+{{<constraint-warning `string`>}}
 
 ## Examples
 
-{{<schema `Schema requiring minimum string length of 5`>}}
+{{<schema `A schema that constrains string instances to contain at least 3 code points`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "string",
-  "minLength": 5
-}
-{{</schema>}}
-
-{{<instance-pass `An instance with a string length greater than or equal to 5 is valid`>}}
-"This is a valid string"
-{{</instance-pass>}}
-
-{{<instance-fail `An instance with a string length less than 5 is invalid`>}}
-"foo"
-{{</instance-fail>}}
-
-{{<schema `Schema which allows either a string with at least 3 characters or a numeric value`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": [ "string", "number" ],
   "minLength": 3
 }
-
 {{</schema>}}
 
-{{<instance-pass `An instance with a string length greater than or equal to 3 is valid`>}}
+{{<instance-pass `A string value that consists of 3 code-points is valid`>}}
 "foo"
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with a string length less than 3 is valid`>}}
+{{<instance-pass `A string value that consists of more than 3 code-points is valid`>}}
+"こんにちは"
+{{</instance-pass>}}
+
+{{<instance-fail `A string value that consists of less than 3 code-points is invalid`>}}
 "hi"
 {{</instance-fail>}}
 
-{{<instance-pass `An instance with a numeric value is valid`>}}
+{{<instance-pass `A non-string value is valid`>}}
 55
 {{</instance-pass>}}

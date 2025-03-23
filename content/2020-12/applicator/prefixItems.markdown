@@ -37,74 +37,123 @@ related:
     keyword: unevaluatedItems
 ---
 
-The `prefixItems` keyword is used to validate arrays by applying a schema to each corresponding index of the array. It differs from the `items` keyword in that it validates only a prefix of the array, up to the length of the `prefixItems` array. Each schema specified in `prefixItems` corresponds to an index in the input array.
+The `prefixItems` keyword restricts a number of items from the start of an
+array instance to validate against the given sequence of subschemas, where the
+item at a given index in the array instance is evaluated against the subschema
+at the given index in the `prefixItems` array, if any.  Information about the
+number of subschemas that were evaluated against the array instance is reported
+using annotations.
 
-* The annotation produced by this keyword affects the behavior of `items` and `unevaluatedItems`.
-* `items` is used to validate all items in an array that are not covered by `prefixItems`, while `prefixItems` validates only a prefix of the array.
-* `prefixItems` keyword does not constrain the length of the array. If the array is longer than this keyword's value, this keyword validates only the prefix of matching length.
+Array items outside the range described by the `prefixItems` keyword is
+evaluated against the [`items`]({{< ref "2020-12/applicator/items" >}})
+keyword, if present.
+
+{{<common-pitfall>}}This keyword does not restrict the size of the array. If
+the array instance has fewer number of items that the given subschemas, only
+such items will be validated. If needed, use the [`minItems`]({{< ref
+"2020-12/validation/minitems" >}}) and the [`maxItems`]({{< ref
+"2020-12/validation/maxitems" >}}) keywords to assert on the bounds of the
+array.{{</common-pitfall>}}
+
+{{<constraint-warning `array`>}}
 
 ## Examples
 
-{{<schema `Schema with 'prefixItems' keyword`>}}
+{{<schema `A schema that constrains array instances to start with a boolean item followed by a number item`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
-  "prefixItems": [ { "type": "number" } ]
+  "prefixItems": [ { "type": "boolean" }, { "type": "number" } ]
 }
 {{</schema>}}
 
-{{<instance-pass `An array instance with first item as numeric values is valid`>}}
-[ 2, false ]
+{{<instance-pass `An empty array value is valid`>}}
+[]
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
 { "keyword": "/prefixItems", "instance": "", "value": 0 }
 {{</instance-annotation>}}
 
-{{<instance-fail `An array instance containing a string value is invalid`>}}
-[ "2", 3 ]
-{{</instance-fail>}}
-
-{{<schema `Schema with 'prefixItems' keyword`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
-  "prefixItems": [
-    { "type": "boolean" },
-    { "type": "number" }
-  ]
-}
-{{</schema>}}
-
-{{<instance-pass `Items of the array instance adhering to the corresponding subschema in 'prefixItems' is valid`>}}
-[ false, 35, [ "foo" ] ]
+{{<instance-pass `An array value that consists of a boolean item is valid`>}}
+[ false ]
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
 { "keyword": "/prefixItems", "instance": "", "value": 1 }
 {{</instance-annotation>}}
 
-{{<schema `Schema with 'prefixItems' and 'items' keyword`>}}
+{{<instance-pass `An array value that consists of a boolean item followed by a number item is valid`>}}
+[ false, 35 ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/prefixItems", "instance": "", "value": true }
+{{</instance-annotation>}}
+
+{{<instance-pass `An array value that consists of a boolean item followed by a number item and other items is valid`>}}
+[ false, 35, "something", "else" ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/prefixItems", "instance": "", "value": 2 }
+{{</instance-annotation>}}
+
+{{<instance-fail `An array value that does not consist of a boolean item followed by a number item is invalid`>}}
+[ true, false ]
+{{</instance-fail>}}
+
+{{<instance-pass `A non-array value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
+
+{{<schema `A schema that constrains array instances to start with a boolean item followed by a number item followed by strings`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
-  "prefixItems": [
-    { "type": "boolean" },
-    { "type": "string" }
-  ],
-  "items": { "type": "number" }
+  "prefixItems": [ { "type": "boolean" }, { "type": "number" } ],
+  "items": { "type": "string" }
 }
 {{</schema>}}
 
-{{<instance-pass `An array instance adhering to the schema is valid`>}}
-[ false, "44", -5 ]
+{{<instance-pass `An empty array value is valid`>}}
+[]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/prefixItems", "instance": "", "value": 0 }
+{{</instance-annotation>}}
+
+{{<instance-pass `An array value that consists of a boolean item is valid`>}}
+[ false ]
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
 { "keyword": "/prefixItems", "instance": "", "value": 1 }
+{{</instance-annotation>}}
+
+{{<instance-pass `An array value that consists of a boolean item followed by a number item is valid`>}}
+[ false, 35 ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/prefixItems", "instance": "", "value": true }
+{{</instance-annotation>}}
+
+{{<instance-pass `An array value that consists of a boolean item followed by a number item and other string items is valid`>}}
+[ false, 35, "foo", "bar" ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/prefixItems", "instance": "", "value": 2 }
+{{</instance-annotation>}}
+
+{{<instance-annotation>}}
 { "keyword": "/items", "instance": "", "value": true }
 {{</instance-annotation>}}
 
-{{<instance-fail `The prefix items of the array instance not adhering to the corresponding subschema in 'prefixItems' is invalid`>}}
-[ 2, 3, "44", -5 ]
+{{<instance-fail `An array value that consists of a boolean item followed by a number item and other non-string items is invalid`>}}
+[ false, 35, { "foo": "bar" } ]
 {{</instance-fail>}}
+
+{{<instance-pass `A non-array value is valid`>}}
+"Hello World"
+{{</instance-pass>}}

@@ -14,6 +14,13 @@ the top-level of the project:
 make
 ```
 
+Contributors
+------------
+
+<a href="https://github.com/sourcemeta/learnjsonschema.com/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=sourcemeta/learnjsonschema.com" />
+</a>
+
 License
 -------
 

@@ -24,19 +24,49 @@ related:
     keyword: format
 ---
 
-## Explanation
+The `format` keyword communicates that string instances are of the given
+logical type by producing an annotation value.
 
-The `format` keyword in JSON Schema's Format Annotation vocabulary serves to provide basic semantic identification of certain types of string values. Compared to older JSON Schema versions, the `format` keyword in the official 2020-12 dialect is purely an annotation meant to be informative and to carry semantics rather than to perform any validation.
+{{<common-pitfall>}} By default, this keyword does not perform validation. If
+validation is desired, the best practice is to combine this keyword with the
+[`pattern`]({{< ref "2020-12/validation/pattern" >}}) keyword. This guarantees
+interoperable and unambiguous behavior across JSON Schema implementations.
 
-When using `format` from Format Annotation, it's recommended that you provide your validation rules alongside the `format`. The implementation may choose to treat `format` as an assertion and attempt to validate the value's conformance to the specified semantics. However, this behavior must be explicitly enabled and is typically disabled by default. Implementations should document their level of support for such validation.
+Another option is to produce a custom dialect that opts-in to the [Format
+Assertion]({{< ref "2020-12/format-assertion" >}}) vocabulary. However, this vocabulary is
+considered optional by the official JSON Schema Test Suite. As a consequence,
+not many implementations support it.{{</common-pitfall>}}
 
-* `It allows for the semantic identification of certain kinds of string values. For instance, it can indicate that a string value should be interpreted as a date, email, URI, etc.
-* `format` is solely an annotation and does not enforce any validation. It's meant to provide information about the expected format of the string.
-* Implementations may choose to enable format as an assertion, meaning that validation fails if the value doesn't conform to the specified format semantics. However, this is not mandatory and must be explicitly enabled.
-* While users can define and use their own custom `formats` (e.g., "format": "foobar"), it's recommended to refrain from overloading the format keyword for future compatibility reasons. Instead, define custom keywords for specific validation requirements. For example in the event that you define your own "foobar" and JSON Schema subsequently chooses to define "foobar," you may encounter difficulties.
+{{<best-practice>}} While [technically
+allowed](https://json-schema.org/draft/2020-12/json-schema-validation#section-7.2.3)
+by the JSON Schema specification, extending this keyword with custom formats is
+considered to be an anti-pattern that can introduce interoperability issues and
+undefined behavior. As a best practice, stick to standardised formats. If
+needed, introduce a new keyword for custom string logical
+types.{{</best-practice>}}
 
-Defined Formats
----------------
+{{<learning-more>}} This keyword and its validation guarantees are a common
+source of confusion of the JSON Schema specification across versions.
+
+Since the introduction of this keyword, the JSON Schema specifications
+clarified that validation was not mandatory. However, the majority of older
+Schema implementations did support validation, leading schema-writers to rely
+on it. At the same time, a second problem emerged: implementations often didn't
+agree on the strictness of validation, mainly on complex logical types like
+e-mail addresses, leading to various interoperability issues.
+
+In JSON Schema 2020-12, the specification introduces two mutually incompatible
+vocabularies to clarify whether the keyword acts as an annotation or as an
+assertion. Confusingly enough, it also allows implementations to perform
+validation even when the annotation variant is in use, but only as a setting
+that is disabled by default.
+
+To avoid the gray areas of this keyword, we recommend only treating it as an
+annotation, never enabling validation support at the implementation level (even
+if supported), and performing validation using the [`pattern`]({{< ref
+"2020-12/validation/pattern" >}}) keyword.  {{</learning-more>}}
+
+The supported formats are the following:
 
 | Format                    | Category             | Specification |
 |---------------------------|----------------------|---------------|
@@ -62,49 +92,29 @@ Defined Formats
 
 ## Examples
 
-{{<schema `Schema with 'format' keyowrd with no validation rules for email`>}}
+{{<schema `A schema that describes string instances as e-mail addresses`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "format": "email"
 }
 {{</schema>}}
 
-{{<instance-pass `A string instance with correct email format is valid`>}}
+{{<instance-pass `A string value that represents a valid e-mail address is valid`>}}
 "john.doe@example.com"
 {{</instance-pass>}}
 
-{{<instance-pass `A string instance with incorrect email format is also valid`>}}
-"foo_bar"
+{{<instance-annotation>}}
+{ "keyword": "/format", "instance": "", "value": "email" }
+{{</instance-annotation>}}
+
+{{<instance-pass `A string value that represents an invalid e-mail address is valid`>}}
+"foo-bar"
 {{</instance-pass>}}
 
-{{<instance-pass `'format' keyword is irrelevant for instances with values other than strings`>}}
+{{<instance-annotation>}}
+{ "keyword": "/format", "instance": "", "value": "email" }
+{{</instance-annotation>}}
+
+{{<instance-pass `Any non-string value is valid but no annotation is produced`>}}
 45
 {{</instance-pass>}}
-
-{{<instance-annotation>}}
-{ "keyword": "/format", "instance": "", "value": "email" }
-{{</instance-annotation>}}
-
-{{<schema `Schema with the 'format' keyword having validation rules for email`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "format": "email",
-  "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
-}
-{{</schema>}}
-
-{{<instance-pass `A string instance with correct email format is valid`>}}
-"john.doe@example.com"
-{{</instance-pass>}}
-
-{{<instance-fail `A string instance with incorrect email format is invalid`>}}
-"foo_bar"
-{{</instance-fail>}}
-
-{{<instance-pass `'format' keyword is irrelevant for instances with values other than strings`>}}
-true
-{{</instance-pass>}}
-
-{{<instance-annotation>}}
-{ "keyword": "/format", "instance": "", "value": "email" }
-{{</instance-annotation>}}

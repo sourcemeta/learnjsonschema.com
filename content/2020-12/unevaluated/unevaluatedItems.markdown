@@ -20,6 +20,8 @@ interdependencies:
     keyword: prefixItems
   - vocabulary: applicator
     keyword: items
+  - vocabulary: applicator
+    keyword: contains
 related:
   - vocabulary: unevaluated
     keyword: unevaluatedProperties

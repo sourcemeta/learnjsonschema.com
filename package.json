@@ -4,6 +4,7 @@
   "private": true,
   "main": "assets/main.js",
   "dependencies": {
-    "@popperjs/core": "^2.11.6"
+    "@popperjs/core": "^2.11.6",
+    "fuse.js": "^7.0.0"
   }
 }

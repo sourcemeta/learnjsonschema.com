@@ -1,11 +1,14 @@
 languageCode = 'en-us'
 title = 'Reference documentation for JSON Schema'
 staticDir = [ './vendor/bootstrap-icons/font/fonts', './static' ]
+
 paginate = 100000000
+[pagination]
+pagerSize = 100000000
 
 [Params]
 description = 'Reference documentation for JSON Schema'
-github = 'https://github.com/intelligence-ai/learnjsonschema.com'
+github = 'https://github.com/sourcemeta/learnjsonschema.com'
 slack = 'https://json-schema.org/slack'
 jsonschema = 'https://json-schema.org'
 
@@ -13,3 +16,6 @@ jsonschema = 'https://json-schema.org'
   [markup.highlight]
     lineNos = false
     noClasses = false
+
+[outputs]
+  home = ["html", "json"]

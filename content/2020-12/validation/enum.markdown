@@ -22,58 +22,81 @@ related:
     keyword: oneOf
 ---
 
-The `enum` keyword specifies a validation constraint for an instance, defining a set of permissible values. The validation succeeds if the value of the instance matches one of the elements in the `enum` array.
+The `enum` keyword restricts instances to a finite set of possible values,
+which may be of different types.
 
-_**Note:** Using the `type` keyword along the `enum` keyword is considered an anti-pattern, as `enum` constraints instances tighter than `type`._
+{{<best-practice>}} Constraining instances to a set of possible values by
+definition implies the given JSON types. Therefore, combining this keyword with
+the [`type`]({{< ref "2020-12/validation/type" >}}) keyword is redundant (or
+even invalid if types don't agree), and considered an
+anti-pattern.{{</best-practice>}}
+
+{{<common-pitfall>}} There are programming languages, such as JavaScript, that
+[cannot distinguish between integers and real
+numbers](https://2ality.com/2012/04/number-encoding.html). To accomodate for
+those cases, JSON Schema considers a real number with a zero fractional part to
+be equal to the corresponding integer. For example, in JSON Schema, `1` is
+considered to be equal to `1.0`.{{</common-pitfall>}}
 
 ## Examples
 
-{{<schema `Schema with string enum`>}}
+{{<schema `A schema that constrains instances to an homogeneous string enumeration`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "enum": [ "red", "green", "blue" ]
 }
 {{</schema>}}
 
-{{<instance-pass `Instance with value present in the enum is valid`>}}
+{{<instance-pass `A string value that equals a value in the enumeration is valid`>}}
 "green"
 {{</instance-pass>}}
 
-{{<instance-fail `Instance with value not present in the enum is invalid`>}}
+{{<instance-fail `A string value that does not equal a value in the enumeration is invalid`>}}
 "black"
 {{</instance-fail>}}
 
-{{<schema `Schema with number enum`>}}
+{{<instance-fail `Any other value is invalid`>}}
+2
+{{</instance-fail>}}
+
+{{<schema `A schema that constrains instances to an homogeneous numeric enumeration`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "enum": [ 2, 45, 100 ]
+  "enum": [ 1, 2.0, 3 ]
 }
 {{</schema>}}
 
-{{<instance-pass `Instance with value present in the enum is valid`>}}
-45
+{{<instance-pass `An integer value that equals a value in the enumeration is valid`>}}
+1
 {{</instance-pass>}}
 
-{{<instance-fail `Instance with value not present in the enum is invalid`>}}
-70
+{{<instance-pass `An integer representation of a real value that equals a value in the enumeration is valid`>}}
+2
+{{</instance-pass>}}
+
+{{<instance-fail `Any other number value is invalid`>}}
+5
 {{</instance-fail>}}
 
-{{<instance-fail `Instance with value having different datatype is invalid`>}}
-"2"
+{{<instance-fail `Any other non-number value is invalid`>}}
+"Hello"
 {{</instance-fail>}}
 
-{{<schema `Schema with mixed-type enum`>}}
+{{<schema `A schema that constrains instances to an heterogeneous enumeration`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "enum": [ "red", 123, true, { "foo": "bar" }, [ 1, 2 ], null ]
 }
 {{</schema>}}
 
-{{<instance-pass `Instance with value present in the enum is valid`>}}
+{{<instance-pass `A boolean value that equals a value in the enumeration is valid`>}}
 true
 {{</instance-pass>}}
 
-{{<instance-fail `Instance with value not present in the enum is invalid`>}}
+{{<instance-pass `An object value that equals a value in the enumeration is valid`>}}
+{ "foo": "bar" }
+{{</instance-pass>}}
+
+{{<instance-fail `An object value that does not equal a value in the enumeration is invalid`>}}
 { "foo": "baz" }
 {{</instance-fail>}}
--  _Without specifying a type, you can utilize enum to accept values of various types._

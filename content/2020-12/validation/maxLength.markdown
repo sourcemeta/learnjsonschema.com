@@ -20,62 +20,51 @@ related:
     keyword: format
 ---
 
-The `maxLength` keyword is used to specify the maximum length of a string instance. It is used to enforce a constraint on the maximum number of characters allowed for a string instance.
+The `maxLength` keyword restricts string instances to consists of an inclusive
+maximum number of [Unicode](https://unicode.org) code-points (logical
+characters), which is not necessarily the same as the number of bytes in the
+string.
 
-* String length is counted in characters, not bytes.
-* Validation succeeds if the string length is less than or equal to the specified `maxLength`.
+{{<learning-more>}} While the [IETF RFC
+8259](https://www.rfc-editor.org/rfc/rfc8259) JSON standard recommends the use
+of [UTF-8](https://en.wikipedia.org/wiki/UTF-8), other Unicode encodings are
+permitted. Therefore a JSON string may be represented in up to 4x the number of
+bytes as its number of code-points (assuming
+[UTF-32](https://en.wikipedia.org/wiki/UTF-32) as the upper bound).
+
+JSON Schema does not provide a mechanism to assert on the byte size of a JSON
+string, as this is an implementation-dependent property of the JSON parser in
+use.  {{</learning-more>}}
+
+{{<common-pitfall>}} Be careful when making use of this keyword to
+inadvertently assert on the byte length of JSON strings before inserting them
+into byte-sensitive destinations like fixed-size buffers. Always assume that
+the byte length of a JSON string can arbitrary larger that the number of
+logical characters.{{</common-pitfall>}}
+
+{{<constraint-warning `string`>}}
 
 ## Examples
 
-{{<schema `Schema restricting string length to a maximum of 10 characters`>}}
+{{<schema `A schema that constrains string instances to contain at most 3 code points`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "string",
-  "maxLength": 10
-}
-{{</schema>}}
-
-{{<instance-pass `An instance with a string length less than or equal to 10 is valid`>}}
-"foo"
-{{</instance-pass>}}
-
-{{<instance-fail `An instance with a string length greater than 10 is invalid`>}}
-"This is an invalid string"
-{{</instance-fail>}}
-
-{{<schema `Schema allowing either a string with a maximum of 20 characters or a numeric value`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": [ "string", "number" ],
-  "maxLength": 20
-}
-
-{{</schema>}}
-
-{{<instance-pass `An instance with a string length less than or equal to 20 is valid`>}}
-"This is a valid string"
-{{</instance-pass>}}
-
-{{<instance-fail `An instance with a string length greater than 20 is invalid`>}}
-"This description is too long"
-{{</instance-fail>}}
-
-{{<instance-pass `An instance with a numeric value is valid`>}}
-55
-{{</instance-pass>}}
-
-{{<schema `Schema for maximum string length validation with Unicode characters`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "string",
   "maxLength": 3
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with 3 or less characters is valid`>}}
-"\u0066\u006F\u006F" // --> "foo"
+{{<instance-pass `A string value that consists of 3 code-points is valid`>}}
+"foo"
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with more than 3 characters is invalid`>}}
-"\u0048\u0065\u006C\u006C\u006F" // --> "Hello"
+{{<instance-fail `A string value that consists of more than 3 code-points is invalid`>}}
+"こんにちは"
 {{</instance-fail>}}
+
+{{<instance-pass `A string value that consists of less than 3 code-points is valid`>}}
+"hi"
+{{</instance-pass>}}
+
+{{<instance-pass `A non-string value is valid`>}}
+55
+{{</instance-pass>}}

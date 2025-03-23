@@ -6,6 +6,7 @@ $danger: rgba(255, 213, 213, 1);
 $navbar-brand-font-size: 1.1rem;
 $navbar-padding-y: 1px;
 $alert-border-radius: 0;
+$nav-link-padding-y: 0.5rem;
 
 // Follow browser's preferred theme
 $color-mode-type: media-query;
@@ -83,9 +84,21 @@ details summary::-webkit-details-marker {
   min-width: 260px;
 }
 
+#sidebar-nav-pills {
+  font-size: $font-size-sm * 0.75;
+}
+
 // Tables with vertical headers collapse the headers by default
 table tr > th[scope="row"] {
   width: 1px;
+}
+
+.btn-light-dark {
+  @extend .btn-light;
+  @include color-mode(dark) {
+    background-color: $gray-500;
+    border-color: $gray-800;
+  }
 }
 
 .table-highlight {
@@ -163,7 +176,7 @@ details:not([open]) summary i {
   cursor: pointer;
 }
 
-.highlight {
+.code .highlight {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }

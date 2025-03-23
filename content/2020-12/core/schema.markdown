@@ -8,7 +8,7 @@ instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-8.1.1"
 metaschema: "https://json-schema.org/draft/2020-12/meta/core"
 default:
-  description: Implementation dependent
+  description: Implementation or context dependent
 index: -999
 introduced_in: draft3
 related:
@@ -20,52 +20,65 @@ related:
     keyword: $defs
 ---
 
-The `$schema` keyword is a fundamental element in JSON Schema. It serves the two crucial purposes:
-1. **Dialect Identification:** It specifies the specific dialect of JSON Schema the schema adheres to. This ensures implementations (tools and libraries) interpret the schema correctly based on the intended dialect's rules and imported vocabularies.
+The `$schema` keyword serves to explicitly associate a schema or subschema with
+the JSON Schema dialect that defines it, where the dialect is the identifier of
+a meta-schema that defines the vocabularies in use and imposes syntactic
+constraints on its schema instances. If the `$schema` keyword is not declared,
+the schema inherits its context-specific or implementation-specific default
+dialect.
 
-2. **Meta-Schema Validation:** The value of `$schema` is a URI pointing to a "meta-schema", which defines the structure and validation rules for JSON Schemas. A schema that describes another schema is called a "meta-schema". The schema is expected to be valid against its own meta-schema.
+{{<learning-more>}} It is common to avoid the `$schema` keyword when working
+with [OpenAPI](https://www.openapis.org). This is possible because the OpenAPI
+specification clearly documents what the default JSON Schema dialect is for
+every version. For example, [OpenAPI
+v3.1.1](https://spec.openapis.org/oas/latest.html#json-schema-keywords) defines
+the default dialect as `https://spec.openapis.org/oas/3.1/dialect/base`.
+{{</learning-more>}}
 
-* The current schema must be valid against the meta-schema identified by this URI.
-* The `$schema` keyword should be used in the document root schema object, and may be used in the root schema objects of embedded schema resources.
-* If this keyword is absent from the document root schema, the resulting behavior is implementation-defined.
+Strictly-compliant JSON Schema implementations will refuse to process a schema
+whose dialect cannot be unambiguously determined.
 
-{{<best-practice>}}
-* Declaring `$schema` is highly recommended for several reasons. It ensures clarity by explicitly stating the version of JSON Schema the schema follows. This helps JSON Schema implementations (tools and libraries) understand how to interpret and validate the schema accurately.
-* JSON Schema versions may introduce new keywords or modify existing ones. By specifying the `$schema`, you establish the specific vocabulary  that applies to your schema, preventing ambiguity, especially if you're using custom keywords.
-* The schema is expected to successfully validate against its own meta-schema, ensuring its correctness and adherence to the JSON Schema standard.
-* In scenarios where schemas are bundled together, you might encounter nested `$schema` keywords within the same resource. Each nested schema should still have its own `$schema` property to indicate its specific dialect.
-{{</best-practice>}}
+{{<best-practice>}} To avoid undefined behavior, it is generally recommended to
+always explicitly set the dialect of a schema using the `$schema` keyword. This
+ensures that less strict implementations unambiguously know how to process the
+schema and don't attempt to guess.{{</best-practice>}}
+
+Note that the `$schema` keyword can occur multiple times in the same schema,
+and not only at the top-level. This is often the case when performing [JSON
+Schema
+Bundling](https://github.com/sourcemeta/jsonschema/blob/main/docs/bundle.markdown)
+to inline externally referenced schemas that might be based on different
+dialects of JSON Schema.
+
+A schema is considered syntactic valid if it successfully validates against its
+dialect meta-schema. You can validate a schema against its meta-schema using
+the [`jsonschema
+metaschema`](https://github.com/sourcemeta/jsonschema/blob/main/docs/metaschema.markdown).
+For example:
+
+```sh
+$ jsonschema metaschema my-schema.json
+```
 
 ## Examples
 
-{{<schema `This declaration indicates that the schema is described by the JSON Schema 2020-12 dialect`>}}
+{{<schema `A schema described by the JSON Schema 2020-12 official dialect`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "string"
 }
 {{</schema>}}
 
-{{<schema `Schema not adhering to its meta-schema is invalid`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "properties": [ { "type": "number" } ]
-}
-{{</schema>}}
-* _The `properties` keyword can only be set to a single valid JSON Schema. Therefore, setting the `properties` keyword to an array of JSON Schemas makes the schema invalid according to the 2020-12 specification._
-
-{{<schema `Schema with no dialect specified`>}}
+{{<schema `A valid schema without an explicitly declared dialect, prone to undefined behavior`>}}
 {
   "items": [ { "type": "number" } ]
 }
 {{</schema>}}
-* _The above schema doesn't specify the dialect of JSON Schema it adheres to. Therefore, the implementation might determine the dialect independently, which could lead to unexpected results. For instance, if the implementation assumes the 2019-09 dialect, the schema would be considered valid. However, if it assumes the 2020-12 dialect, the schema would be invalid._
 
-{{<schema `Schema with nested '$schema' keyword`>}}
+{{<schema `A valid schema that mixes the 2020-12 and 2019-09 official dialects`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "description": "Product schema",
   "properties": {
-    "name": { "type": "string" },
     "price": { "type": "number" },
     "discount": {
       "$ref": "#/$defs/discount"
@@ -79,4 +92,3 @@ The `$schema` keyword is a fundamental element in JSON Schema. It serves the two
   }
 }
 {{</schema>}}
-* _Embedded schemas within a bundled JSON document can have their own `$schema` declarations. This allows different parts of your schema to use the most suitable dialect for their specific needs, ensuring accurate validation and flexibility. Check out [this](https://json-schema.org/blog/posts/bundling-json-schema-compound-documents) blog to learn more about schema bundling._

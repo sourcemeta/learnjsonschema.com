@@ -67,7 +67,7 @@ The `if` keyword is used to conditionally apply a subschema based on whether a c
 { "professor_Id": 2899, "HOD_Id": 2844 }
 {{</instance-pass>}}
 
-{{<instance-fail `the value of 'HOD_Id' must be a string`>}}
+{{<instance-fail `the value of 'HOD_Id' must be a integer`>}}
 { "name": "John Doe", "role": "HOD", "HOD_Id": "2844" }
 {{</instance-fail>}}
 

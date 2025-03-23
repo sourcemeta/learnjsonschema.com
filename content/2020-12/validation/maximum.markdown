@@ -22,49 +22,75 @@ related:
     keyword: multipleOf
 ---
 
-The `maximum` keyword is used to set the upper limit on numeric instances. It specifies that the numeric value being validated must be less than or equal to the provided maximum value.
+The `maximum` keyword restricts number instances to be less than or equal to
+the given number.
 
-* Applies only to number data types (integers and floats).
-* Validation succeeds if the number is less than or equal to the specified `maximum`.
+{{<constraint-warning `number`>}}
 
 ## Examples
 
-{{<schema `Schema defining the upper limit of 10 on numeric values`>}}
+{{<schema `A schema that constrains number instances to be less than or equal to the positive integer 10`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "number",
   "maximum": 10
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with a numeric value less than 10 is valid`>}}
-9.5
+{{<instance-pass `A number value less than 10 is valid`>}}
+9.9
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with a numeric value greater than 10 is invalid`>}}
-15
+{{<instance-pass `An integer value less than 10 is valid`>}}
+9
+{{</instance-pass>}}
+
+{{<instance-fail `A number value greater than 10 is invalid`>}}
+10.001
 {{</instance-fail>}}
 
-{{<instance-pass `An instance with a numeric value equal to 10 is valid`>}}
+{{<instance-fail `An integer value greater than 10 is invalid`>}}
+11
+{{</instance-fail>}}
+
+{{<instance-pass `The real representation of the integer value 10 is valid`>}}
+10.0
+{{</instance-pass>}}
+
+{{<instance-pass `The integer value 10 is valid`>}}
 10
 {{</instance-pass>}}
 
-{{<schema ` Schema allowing either a boolean value or a numeric value with an upper limit of 20.99`>}}
+{{<instance-pass `A non-number value is valid`>}}
+"100000"
+{{</instance-pass>}}
+
+{{<schema `A schema that constrains number instances to be less than or equal to the negative real number -2.1`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": [ "boolean", "number" ],
-  "maximum": 20.99
+  "maximum": -2.1
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with a numeric value less than 20.99 is valid`>}}
-15
+{{<instance-pass `A number value less than -2.1 is valid`>}}
+-2.2
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with a string datatype is invalid`>}}
-"Hello World!"
+{{<instance-pass `An integer value less than -2.1 is valid`>}}
+-3
+{{</instance-pass>}}
+
+{{<instance-fail `A number value greater than -2.1 is invalid`>}}
+-2.01
 {{</instance-fail>}}
 
-{{<instance-pass `An instance with a boolean value is valid`>}}
-true
+{{<instance-fail `An integer value greater than -2.1 is invalid`>}}
+-2
+{{</instance-fail>}}
+
+{{<instance-pass `The real number value -2.1 is valid`>}}
+-2.1
+{{</instance-pass>}}
+
+{{<instance-pass `A non-number value is valid`>}}
+"100000"
 {{</instance-pass>}}
