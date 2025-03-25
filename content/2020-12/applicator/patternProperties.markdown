@@ -44,8 +44,8 @@ related:
 
 The `patternProperties` keyword restricts properties of an object instance that
 match certain regular expressions to match their corresponding subschemas
-definitions. Information about the properties from the object instance that
-were evaluated is reported using annotations.
+definitions. Information about the properties that this keyword was evaluated
+for is reported using annotations.
 
 {{<common-pitfall>}} This keyword is evaluated independently of the
 [`properties`]({{< ref "2020-12/applicator/properties" >}}) keyword. If an

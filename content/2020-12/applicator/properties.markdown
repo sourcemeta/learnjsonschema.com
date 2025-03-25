@@ -41,9 +41,9 @@ related:
 ---
 
 The `properties` keyword restricts properties of an object instance, when
-present, to match their corresponding subschemas definitions.  Information
-about the properties from the object instance that were evaluated is reported
-using annotations.
+present, to match their corresponding subschemas definitions. Information about
+the properties that this keyword was evaluated for is reported using
+annotations.
 
 {{<common-pitfall>}}The use of this keyword **does not prevent the presence of
 other properties** in the object instance and **does not enforce the presence
@@ -54,10 +54,10 @@ enable highly-expressive constraint-driven schemas.
 
 If you want to restrict instances to only contain the properties you declared,
 you must set the [`additionalProperties`]({{< ref
-"2020-12/applicator/additionalproperties" >}}) keyword to `false`, and if you
-want to enforce the presence of certain properties, you must use the
-[`required`]({{< ref "2020-12/validation/required" >}}) keyword accordingly.
-{{</common-pitfall>}}
+"2020-12/applicator/additionalproperties" >}}) keyword to the boolean schema
+`false`, and if you want to enforce the presence of certain properties, you
+must use the [`required`]({{< ref "2020-12/validation/required" >}}) keyword
+accordingly.  {{</common-pitfall>}}
 
 {{<learning-more>}}Setting properties defined by this keyword to the boolean
 schema `false` is an common trick to express that such properties are

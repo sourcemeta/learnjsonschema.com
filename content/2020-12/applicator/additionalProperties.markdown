@@ -41,9 +41,37 @@ related:
     keyword: unevaluatedProperties
 ---
 
-The `additionalProperties` keyword is used to control the handling of properties whose names are not listed in the `properties` keyword or match any of the regular expressions in the `patternProperties` keyword. By default any additional properties are allowed.
+The `additionalProperties` keyword restricts object instance properties not
+described by the [`properties`]({{< ref "2020-12/applicator/properties" >}})
+and [`patternProperties`]({{< ref "2020-12/applicator/patternproperties" >}})
+keywords (if any), to validate against the given subschema. Information about
+the properties that this keyword was evaluated for is reported using
+annotations.
 
-The behavior of this keyword depends on the presence and annotation results of `properties` and `patternProperties` within the same schema object. Validation with `additionalProperties` applies only to the child values of instance names that do not appear in the annotation results of either `properties` or `patternProperties`.
+{{<common-pitfall>}}The use of the [`properties`]({{< ref
+"2020-12/applicator/properties" >}}) keyword **does not prevent the presence of
+other properties** in the object instance and **does not enforce the presence
+of the declared properties**. In other words, additional data that is not
+explicitly prohibited is permitted by default. This is intended behaviour to
+ease schema evolution (open schemas are backwards compatible by default) and to
+enable highly-expressive constraint-driven schemas.
+
+If you want to restrict instances to only contain the properties you declared,
+you must set this keyword to the boolean schema `false`, and if you want to
+enforce the presence of certain properties, you must use the [`required`]({{<
+ref "2020-12/validation/required" >}}) keyword accordingly.
+{{</common-pitfall>}}
+
+{{<learning-more>}}While the most common use of this keyword is setting it to
+the boolean schema `false` to prevent additional properties, it is possible to
+set it to a satisfiable schema. Doing this, while omitting the
+[`properties`]({{< ref "2020-12/applicator/properties" >}}) and
+[`patternProperties`]({{< ref "2020-12/applicator/patternproperties" >}})
+keywords, is an elegant way of describing how the value of every property in
+the object instance must look like independently of its
+name.{{</learning-more>}}
+
+{{<constraint-warning `object`>}}
 
 ## Examples
 
