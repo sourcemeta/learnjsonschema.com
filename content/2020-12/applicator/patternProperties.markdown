@@ -42,124 +42,156 @@ related:
     keyword: unevaluatedProperties
 ---
 
-The `patternProperties` keyword is a variant of `properties` with regular expression support. It maps regular expressions to schemas. If a property name matches the given regular expression, the property value must validate against the corresponding schema.
+The `patternProperties` keyword restricts properties of an object instance that
+match certain regular expressions to match their corresponding schemas
+definitions. Information about the properties from the object instance that
+were evaluated is reported using annotations.
+
+{{<common-pitfall>}} This keyword is evaluated independently of the
+[`properties`]({{< ref "2020-12/applicator/properties" >}}) keyword. If an
+object property is described by both keywords, then both schemas must
+successfully validate against the given property for validation to succeed.
+Furthermore, an instance property may match more than one regular expression
+set with this keyword, in which case the property is expected to validate
+against all matching schemas.{{</common-pitfall>}}
+
+{{<learning-more>}} While the specification suggests the use of
+[ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/)
+regular expressions for interoperability purposes, the use of different
+flavours like PCRE or POSIX (Basic or Extended) is permitted. Also, the
+specification does not impose the use of any particular regular expression
+flag. By convention (and somewhat enforced by the official JSON Schema test
+suite), regular expressions are not implicitly
+[anchored](https://www.regular-expressions.info/anchors.html) and are always
+treated as case-sensitive. It is also common for the
+[`DOTALL`](https://tc39.es/ecma262/multipage/text-processing.html#sec-get-regexp.prototype.dotAll)
+flag to be enabled, permitting the dot character class to match new lines.
+
+To avoid interoperability issues, stick to
+[ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/),
+and don't assume the use of any regular expression flag.  {{</learning-more>}}
+
+{{<common-pitfall>}} Regular expressions often make use of characters that need
+to be escaped when making use of them as part of JSON strings. For example, the
+*reverse solidus* character (more commonly known as the backslash character)
+and the *double quote* character need to be escaped. Failure to do so will
+result in an invalid JSON document. Applications to work with regular
+expressions, like [Regex Forge](https://regexforge.com), typically provide
+convenient functionality to copy a regular expression for use in JSON.
+{{</common-pitfall>}}
+
+{{<constraint-warning `object`>}}
 
 ## Examples
 
-{{<schema `Schema with 'patternProperties' keyword`>}}
+{{<schema `A schema that constrains object instances to enforce that lowercase properties are integers`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
   "patternProperties": {
-    "^[Nn]ame$": { "type": "string" },
-    "^[Aa]ge$": { "type": "number" }
+    "^[a-z]+$": { "type": "integer" }
   }
 }
 {{</schema>}}
 
-{{<instance-pass `An object instance with properties matching the regex and conforming to the corresponding schema is valid`>}}
-{ "name": "John Doe", "age": 21 }
+{{<instance-pass `An object value that defines only lowercase integer properties is valid`>}}
+{ "foo": 1, "bar": 2, "baz": 3 }
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/patternProperties", "instance": "", "value": [ "name", "age" ] }
+{ "keyword": "/patternProperties", "instance": "", "value": [ "foo", "bar", "baz" ] }
 {{</instance-annotation>}}
 
-{{<instance-fail `An object instance with properties matching the regex and not conforming to the corresponding schema is invalid`>}}
-{ "name": "John Doe", "age": "21" }
-{{</instance-fail>}}
-* _Annotations are not produced when validation fails._
+{{<instance-pass `An object value that defines non-lowercase properties is valid`>}}
+{ "CamelCase": true, "alphanumeric123": "anything is valid" }
+{{</instance-pass>}}
 
-{{<schema `Schema with patternProperties with boolean schemas`>}}
+{{<instance-pass `An empty object value is valid`>}}
+{}
+{{</instance-pass>}}
+
+{{<instance-fail `An object value that defines a lowercase non-integer properties is invalid`>}}
+{ "foo": "should have been an integer" }
+{{</instance-fail>}}
+
+{{<instance-pass `A non-object value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
+
+{{<schema `A schema that constrains object instances with two potentially overlapping regular expressions`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "patternProperties": {
-    "^f.*": true,
-    "^b.*": false
+    "^f": { "type": "string" },
+    "o$": { "minLength": 3 }
   }
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with properties not matching any regex is valid`>}}
-{ "zbaz": "zbaz" }
-{{</instance-pass>}}
-
-{{<instance-annotation>}}
-{ "keyword": "/patternProperties", "instance": "", "value": [] }
-{{</instance-annotation>}}
-* _**Note:** If `patternProperties` does not match anything, it is still expected to produce an empty array annotation._
-
-{{<instance-fail `An instance with properties matching the regex with a 'false' schema is invalid`>}}
-{ "foo": "foo", "bar": "bar" }
-{{</instance-fail>}}
-
-{{<instance-pass `An instance with properties matching the regex with a 'true' schema, or/and with additional properties is valid`>}}
-{ "foo": "foo" }
+{{<instance-pass `An object value that defines a property that matches both regular expressions and schemas is valid`>}}
+{ "foo": "long string" }
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
 { "keyword": "/patternProperties", "instance": "", "value": [ "foo" ] }
 {{</instance-annotation>}}
 
-{{<schema `Schema with overlap between 'patternProperties' and 'properties'`>}}
+{{<instance-pass `An object value that defines a property that matches one regular expression and its corresponding schema is valid`>}}
+{ "boo": 1 }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/patternProperties", "instance": "", "value": [ "boo" ] }
+{{</instance-annotation>}}
+
+{{<instance-fail `An object value that defines a property that matches both regular expressions but does not match one of the schemas is invalid`>}}
+{ "foo": "xx" }
+{{</instance-fail>}}
+
+{{<instance-fail `An object value that defines a property that matches one regular expression but does not match its schema is invalid`>}}
+{ "boo": "xx" }
+{{</instance-fail>}}
+
+{{<instance-pass `A non-object value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
+
+{{<schema `A schema that constrains object instances with overlapping static and regular expression definitions`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
+  "patternProperties": {
+    "^f": { "minLength": 3 }
+  },
   "properties": {
     "foo": { "type": "string" }
-  },
-  "patternProperties": {
-    "^f": { "type": "string" }
   }
 }
 {{</schema>}}
 
-{{<instance-fail `The value of 'foo' property must be a string`>}}
-{ "foo": [ "bar" ] }
-{{</instance-fail>}}
-
-{{<instance-pass `An object instance with properties conforming to the schema is valid`>}}
-{ "foo": "bar" }
+{{<instance-pass `An object value that defines a property that matches both definitions and schemas is valid`>}}
+{ "foo": "long string" }
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/properties", "instance": "", "value": [ "foo" ] }
 { "keyword": "/patternProperties", "instance": "", "value": [ "foo" ] }
+{ "keyword": "/properties", "instance": "", "value": [ "foo" ] }
 {{</instance-annotation>}}
 
-{{<schema `Schema with 'patternProperties', 'properties' and 'additionalProperties' keyword`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "name": { "type": "string" }
-  },
-  "patternProperties": {
-    "[Aa]ge$": { "type": "number" }
-  },
-  "additionalProperties": true
-}
-{{</schema>}}
-
-{{<instance-fail `The value of the 'name' property must be a string`>}}
-{
-  "name": [ "John", "Doe" ],
-  "Age": 21,
-  "email": "foo@bar.com"
-}
-{{</instance-fail>}}
-
-{{<instance-pass `An object instance with properties conforming to the schema is valid`>}}
-{
-  "name": "John Doe",
-  "Age": 21,
-  "email": "foo@bar.com"
-}
+{{<instance-pass `An object value that defines a property that matches only the regular expression definition and its schema is valid`>}}
+{ "football": 3 }
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/properties", "instance": "", "value": [ "name" ] }
-{ "keyword": "/patternProperties", "instance": "", "value": [ "Age" ] }
-{ "keyword": "/additionalProperties", "instance": "", "value": [ "email" ] }
+{ "keyword": "/patternProperties", "instance": "", "value": [ "football" ] }
 {{</instance-annotation>}}
-* _Instance properties (keys) not present in `properties` or not matching any regex within `patternProperties` are evaluated against `additionalProperties`._
+
+{{<instance-fail `An object value that defines a property that matches both definitions but only matches one schema is invalid`>}}
+{ "foo": "xx" }
+{{</instance-fail>}}
+
+{{<instance-pass `An empty object value is valid`>}}
+{}
+{{</instance-pass>}}
+
+{{<instance-pass `A non-object value is valid`>}}
+"Hello World"
+{{</instance-pass>}}

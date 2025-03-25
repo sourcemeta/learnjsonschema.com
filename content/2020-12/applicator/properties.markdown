@@ -78,7 +78,7 @@ succeed.  {{</common-pitfall>}}
 
 ## Examples
 
-{{<schema `A schema that constrains object instances to a string and integer property when defined`>}}
+{{<schema `A schema that constrains object instances to a string and integer property`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "properties": {
@@ -107,10 +107,6 @@ succeed.  {{</common-pitfall>}}
 {{<instance-pass `An empty object value is valid as properties are optional by default`>}}
 {}
 {{</instance-pass>}}
-
-{{<instance-annotation>}}
-{ "keyword": "/properties", "instance": "", "value": [] }
-{{</instance-annotation>}}
 
 {{<instance-fail `An object value that defines both declared properties but does not match one of the corresponding schemas is invalid`>}}
 { "name": "John Doe", "age": "this should have been an integer" }

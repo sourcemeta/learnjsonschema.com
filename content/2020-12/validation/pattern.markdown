@@ -49,11 +49,10 @@ and don't assume the use of any regular expression flag.  {{</learning-more>}}
 to be escaped when making use of them as part of JSON strings. For example, the
 *reverse solidus* character (more commonly known as the backslash character)
 and the *double quote* character need to be escaped. Failure to do so will
-result in an invalid JSON document.
-
-Applications to work with regular expressions, like [Regex
-Forge](https://regexforge.com), typically provide convenient functionality to
-copy a regular expression for use in JSON.  {{</common-pitfall>}}
+result in an invalid JSON document. Applications to work with regular
+expressions, like [Regex Forge](https://regexforge.com), typically provide
+convenient functionality to copy a regular expression for use in JSON.
+{{</common-pitfall>}}
 
 {{<constraint-warning `string`>}}
 
