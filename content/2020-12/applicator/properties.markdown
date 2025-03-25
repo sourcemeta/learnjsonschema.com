@@ -40,143 +40,111 @@ related:
     keyword: unevaluatedProperties
 ---
 
-The `properties` keyword is used to define the properties (keys) that an object instance must or may contain. It allows you to specify the expected value of a property in an object instance. Each property within the `properties` object is defined by its name and a subschema describing the value expected for that property if present.
+The `properties` keyword restricts properties of an object instance, when
+present, to match their corresponding schemas definitions.  Information about
+the schemas that were evaluated against the object instance is reported using
+annotations.
 
-The annotation result of this keyword is the set of instance property names matched by this keyword. This annotation affects the behavior of `additionalProperties` and `unevaluatedProperties`.
+{{<common-pitfall>}}The use of this keyword **does not prevent the presence of
+other properties** in the object instance and **does not enforce the presence
+of the declared properties**. In other words, additional data that is not
+explicitly prohibited is permitted by default. This is intended behaviour to
+ease schema evolution (open schemas are backwards compatible by default) and to
+enable highly-expressive constraint-driven schemas.
 
-* Each key within `properties` represents a property name in the object instance.
+If you want to restrict instances to only contain the properties you declared,
+you must set the [`additionalProperties`]({{< ref
+"2020-12/applicator/additionalproperties" >}}) keyword to `false`, and if you
+want to enforce the presence of certain properties, you must use the
+[`required`]({{< ref "2020-12/validation/required" >}}) keyword accordingly.
+{{</common-pitfall>}}
 
-{{<schema `Schema with 'properties' keyword`>}}
+{{<learning-more>}}Setting properties defined by this keyword to the boolean
+schema `false` is an common trick to express that such properties are
+forbidden. This is considered more elegant (and usually more performant) than
+using the [`not`]({{< ref "2020-12/applicator/not" >}}) applicator to negate
+the [`required`]({{< ref "2020-12/validation/required"
+>}}) keyword.
+{{</learning-more>}}
+
+{{<constraint-warning `object`>}}
+
+{{<schema `A schema that constrains object instances to a string and integer property when defined`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
   "properties": {
     "name": { "type": "string" },
-    "age": { "type": "number" }
+    "age": { "type": "integer" }
   }
 }
 {{</schema>}}
 
-{{<instance-pass `An object instance with properties conforming to the schema is valid`>}}
-{ "name": "John Doe", "age": 21 }
+{{<instance-pass `An object value that defines both declared properties and matches the corresponding schemas is valid`>}}
+{ "name": "John Doe", "age": 50 }
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
 { "keyword": "/properties", "instance": "", "value": [ "name", "age" ] }
 {{</instance-annotation>}}
 
-{{<instance-fail `An object instance with properties not conforming to the schema is invalid`>}}
-{ "name": "John Doe", "age": "21" }
-{{</instance-fail>}}
-* _Annotations are not produced when validation fails._
+{{<instance-pass `An object value that defines one of the declared properties and matches the corresponding schema is valid`>}}
+{ "name": "John Doe" }
+{{</instance-pass>}}
 
-{{<schema `Schema with properties (keys) set to boolean values`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "properties": {
-    "foo": true,
-    "bar": false
-  }
-}
-{{</schema>}}
+{{<instance-annotation>}}
+{ "keyword": "/properties", "instance": "", "value": [ "name" ] }
+{{</instance-annotation>}}
 
-{{<instance-pass `An instance with no defined property is valid`>}}
-{ "baz": "baz" }
+{{<instance-pass `An empty object value is valid as properties are optional by default`>}}
+{}
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
 { "keyword": "/properties", "instance": "", "value": [] }
 {{</instance-annotation>}}
 
-{{<instance-fail `An instance with 'false' property is invalid`>}}
-{ "foo": "foo", "bar": "bar" }
+{{<instance-fail `An object value that defines both declared properties but does not match one of the corresponding schemas is invalid`>}}
+{ "name": "John Doe", "age": "this should have been an integer" }
 {{</instance-fail>}}
 
-{{<instance-pass `An instance with 'true' property and additional properties is valid`>}}
-{ "foo": "foo", "baz": "baz" }
+{{<instance-fail `An object value that defines one of the declared properties but does not match its corresponding schema is invalid`>}}
+{ "name": 999 }
+{{</instance-fail>}}
+
+{{<instance-pass `A non-object value is valid`>}}
+"Hello World"
 {{</instance-pass>}}
 
-{{<instance-annotation>}}
-{ "keyword": "/properties", "instance": "", "value": [ "foo" ] }
-{{</instance-annotation>}}
-
-{{<schema `Schema with no 'additionalProperties' defined`>}}
+{{<schema `A schema that constrains object instances to forbid a specific property`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
   "properties": {
-    "name": { "type": "string" }
-  },
-  "patternProperties": {
-    "[Aa]ge$": { "type": "number" }
+    "forbidden": false,
+    "permitted": true
   }
 }
 {{</schema>}}
 
-{{<instance-pass `An object instance with properties conforming to the schema is valid`>}}
-{
-  "name": "John Doe",
-  "Age": 21,
-  "email": "foo@bar.com"
-}
-{{</instance-pass>}}
-
-{{<instance-fail `The value of 'Age' must be a number`>}}
-{
-  "name": "John Doe",
-  "Age": "21",
-  "email": "foo@bar.com"
-}
-{{</instance-fail>}}
-
-{{<instance-pass `An object instance with properties conforming to the schema is valid`>}}
-{
-  "name": "John Doe",
-  "Age": 21,
-  "email": [ "foo", "@", "bar", "com" ]
-}
+{{<instance-pass `An object value that only defines the permitted property is valid`>}}
+{ "permitted": "anything is valid" }
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/properties", "instance": "", "value": [ "name" ] }
-{ "keyword": "/patternProperties", "instance": "", "value": [ "Age" ] }
+{ "keyword": "/properties", "instance": "", "value": [ "foo", "permitted" ] }
 {{</instance-annotation>}}
 
-* _If you don't define a property using `properties` or `patternProperties`, but don't disallow it with `additionalProperties`, it would still be valid with any value._
-
-{{<schema `Schema with 'properties', 'patternProperties' and 'additionalProperties' keyword`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "name": { "type": "string" }
-  },
-  "patternProperties": {
-    "[Aa]ge$": { "type": "number" }
-  },
-  "additionalProperties": true
-}
-{{</schema>}}
-
-{{<instance-fail `The value of the 'name' property must be a string`>}}
-{
-  "name": [ "John", "Doe" ],
-  "Age": 21,
-  "email": "foo@bar.com"
-}
-{{</instance-fail>}}
-
-{{<instance-pass `An object instance with properties conforming to the schema is valid`>}}
-{
-  "name": "John Doe",
-  "Age": 21,
-  "email": "foo@bar.com"
-}
+{{<instance-pass `An object value that defines any additional property is valid as additional properties are permitted by default`>}}
+{ "foo": "bar", "baz": 2 }
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/properties", "instance": "", "value": [ "name" ] }
-{ "keyword": "/patternProperties", "instance": "", "value": [ "Age" ] }
-{ "keyword": "/additionalProperties", "instance": "", "value": [ "email" ] }
+{ "keyword": "/properties", "instance": "", "value": [ "foo", "baz" ] }
 {{</instance-annotation>}}
-* _Property names not present in `properties` or `patternProperties` are evaluated against `additionalProperties`._
+
+{{<instance-fail `An object value that only defines the forbidden property is invalid`>}}
+{ "forbidden": 1 }
+{{</instance-fail>}}
+
+{{<instance-fail `An object value that defines the forbidden property alongside other properties is invalid`>}}
+{ "forbidden": 1, "permitted": 2 }
+{{</instance-fail>}}
