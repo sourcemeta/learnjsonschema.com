@@ -115,14 +115,14 @@ the object by setting the [`additionalProperties`]({{< ref
 }
 {{</schema>}}
 
-{{<instance-fail `An object value with a defined property that does not match every name constraints is invalid`>}}
+{{<instance-fail `An object value with a defined property that does not match every name constraint is invalid`>}}
 { "foo": 1 }
 {{</instance-fail>}}
 
-{{<instance-fail `An object value with a property that matches every name constraints but does not match its declaration is invalid`>}}
+{{<instance-fail `An object value with a property that matches every name constraint but does not match its declaration is invalid`>}}
 { "bar": "should have been an integer" }
 {{</instance-fail>}}
 
-{{<instance-pass `An object value with a non-defined property that matches every name constraints is valid`>}}
+{{<instance-pass `An object value with a non-defined property that matches every name constraint is valid`>}}
 { "baz": "qux" }
 {{</instance-pass>}}
