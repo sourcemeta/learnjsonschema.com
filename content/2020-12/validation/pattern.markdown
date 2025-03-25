@@ -29,7 +29,7 @@ related:
 The `pattern` keyword restricts string instances to match the given regular
 expression.
 
-While the specification suggests the use of
+{{<learning-more>}} While the specification suggests the use of
 [ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/)
 regular expressions for interoperability purposes, the use of different
 flavours like PCRE or POSIX (Basic or Extended) is permitted. Also, the
@@ -41,10 +41,9 @@ treated as case-sensitive. It is also common for the
 [`DOTALL`](https://tc39.es/ecma262/multipage/text-processing.html#sec-get-regexp.prototype.dotAll)
 flag to be enabled, permitting the dot character class to match new lines.
 
-{{<best-practice>}} Regular expressions in JSON Schema are notably
-underspecified. To avoid interoperability issues, stick to
+To avoid interoperability issues, stick to
 [ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/),
-and don't assume the use of any regular expression flag.{{</best-practice>}}
+and don't assume the use of any regular expression flag.  {{</learning-more>}}
 
 {{<common-pitfall>}} Regular expressions often make use of characters that need
 to be escaped when making use of them as part of JSON strings. For example, the
