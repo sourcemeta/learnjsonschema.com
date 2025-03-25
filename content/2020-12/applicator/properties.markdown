@@ -41,9 +41,9 @@ related:
 ---
 
 The `properties` keyword restricts properties of an object instance, when
-present, to match their corresponding schemas definitions.  Information about
-the properties from the object instance that were evaluated is reported using
-annotations.
+present, to match their corresponding subschemas definitions.  Information
+about the properties from the object instance that were evaluated is reported
+using annotations.
 
 {{<common-pitfall>}}The use of this keyword **does not prevent the presence of
 other properties** in the object instance and **does not enforce the presence

@@ -43,17 +43,17 @@ related:
 ---
 
 The `patternProperties` keyword restricts properties of an object instance that
-match certain regular expressions to match their corresponding schemas
+match certain regular expressions to match their corresponding subschemas
 definitions. Information about the properties from the object instance that
 were evaluated is reported using annotations.
 
 {{<common-pitfall>}} This keyword is evaluated independently of the
 [`properties`]({{< ref "2020-12/applicator/properties" >}}) keyword. If an
-object property is described by both keywords, then both schemas must
+object property is described by both keywords, then both subschemas must
 successfully validate against the given property for validation to succeed.
 Furthermore, an instance property may match more than one regular expression
 set with this keyword, in which case the property is expected to validate
-against all matching schemas.{{</common-pitfall>}}
+against all matching subschemas.{{</common-pitfall>}}
 
 {{<learning-more>}} While the specification suggests the use of
 [ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/)
