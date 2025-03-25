@@ -37,6 +37,11 @@ property `C` as required if the property `B` is present, defining the property
 `A` transitively requires _both_ the `B` and `C` properties to be present in
 the object instance.  {{</common-pitfall>}}
 
+{{<learning-more>}}The [`dependentSchemas`]({{< ref
+"2020-12/applicator/dependentschemas" >}}) keyword is a generalisation of this
+keyword to describe object dependencies beyond property
+requirement.{{</learning-more>}}
+
 {{<constraint-warning `object`>}}
 
 ## Examples
@@ -66,7 +71,7 @@ the object instance.  {{</common-pitfall>}}
 { "qux": 4 }
 {{</instance-pass>}}
 
-{{<instance-pass `An empty object value is valid`>}}
+{{<instance-pass `An empty object value is valid as no dependencies apply`>}}
 {}
 {{</instance-pass>}}
 
@@ -96,7 +101,7 @@ the object instance.  {{</common-pitfall>}}
 { "bar": 2, "baz": 3 }
 {{</instance-pass>}}
 
-{{<instance-pass `An empty object value is valid`>}}
+{{<instance-pass `An empty object value is valid as no dependencies apply`>}}
 {}
 {{</instance-pass>}}
 

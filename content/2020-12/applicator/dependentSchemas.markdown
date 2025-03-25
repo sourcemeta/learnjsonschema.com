@@ -20,122 +20,83 @@ related:
     keyword: dependentRequired
 ---
 
-The `dependentSchemas` keyword allows you to define dependencies between properties based on the presence of other properties within an instance. It extends the functionality of the `dependentRequired` keyword by allowing you to pass in a full schema. The instance will be considered valid only if the dependent properties adhere to the `dependentSchemas` schema.
+The `dependentSchemas` keyword restricts object instances to validate against
+one or more of the given schemas if the corresponding properties are defined.
+Note that the given schemas are evaluated against the object that defines the
+property dependency.
 
-* Each key in the object represents a property name.
-* Instance is valid if the associated property is present and conforms to the subschema.
+{{<learning-more>}}The [`dependentRequired`]({{< ref
+"2020-12/validation/dependentrequired" >}}) keyword is a specialisation of this
+keyword to describe object dependencies that only consist in property
+requirement.{{</learning-more>}}
+
+{{<constraint-warning `object`>}}
 
 ## Examples
 
-{{<schema `Schema with the 'dependentSchemas' keyword`>}}
+{{<schema `A schema that constrains object instances with a single property schema dependency`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "name": { "type": "string" },
-    "license": { "type": "string" }
-  },
   "dependentSchemas": {
-    "license": {
-      "properties": {
-        "age": { "type": "number" }
-      },
-      "required": [ "age" ]
-    }
+    "foo": { "maxProperties": 2 }
   }
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with both 'age' and 'license' properties is valid`>}}
-{
-  "name": "John",
-  "age": 25,
-  "license": "XYZ123"
-}
+{{<instance-pass `An object value that defines the property dependency and matches the dependent schema is valid`>}}
+{ "foo": 1, "bar": 2 }
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with the 'age' property not conforming to the subschema is invalid`>}}
-{
-  "name": "John",
-  "age": "25",
-  "license": "XYZ123"
-}
+{{<instance-fail `An object value that defines the property dependency but does not match the dependent schema is invalid`>}}
+{ "foo": 1, "bar": 2, "baz": 3 }
 {{</instance-fail>}}
 
-{{<instance-pass `When the 'license' property is missing, the 'age' property will not affect the validation`>}}
-{
-  "name": "John",
-  "age": "25"
-}
+{{<instance-pass `An object value that does not define the property dependency is valid`>}}
+{ "firstName": "John", "lastName": "Doe", "age": 50 }
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with missing 'age' property when 'license' property is present is invalid`>}}
-{
-  "name": "John",
-  "license": "XYZ123"
-}
-{{</instance-fail>}}
+{{<instance-pass `An empty object value is valid as no dependencies apply`>}}
+{}
+{{</instance-pass>}}
 
-{{<schema `Complex schema with the 'dependentSchemas' keyword`>}}
+{{<instance-pass `A non-object value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
+
+{{<schema `A schema that constrains object instances with multiple property schema dependencies`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "name": { "type": "string" }
-  },
   "dependentSchemas": {
-    "name": {
-      "properties": {
-        "age": { "type": "number" }
-      },
-      "dependentSchemas": {
-        "age": {
-          "properties": {
-            "eligible": { "type": "boolean" }
-          },
-          "required": [ "eligible" ]
-        }
-      },
-      "required": [ "age" ]
-    }
+    "foo": { "maxProperties": 2 },
+    "bar": { "minProperties": 2 }
   }
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with all the required properties is valid`>}}
-{
-  "name": "John",
-  "age": 15,
-  "eligible": false
-}
+{{<instance-pass `An object value that defines both property dependencies and has exactly 2 properties is valid`>}}
+{ "foo": 1, "bar": 2 }
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with 'age' property not conforming to the schema is invalid`>}}
-{
-  "name": "manager",
-  "age": "25",
-  "eligible": true
-}
+{{<instance-fail `An object value that defines both property dependencies but has more than 2 properties is invalid`>}}
+{ "foo": 1, "bar": 2, "extra": true }
 {{</instance-fail>}}
 
-{{<instance-pass `'age' and 'eligible' properties do not affect the validation when the 'name' property is missing`>}}
-{
-  "age": "25",
-  "eligible": true
-}
+{{<instance-pass `An object value that defines the first property dependency and has less than 2 properties is valid`>}}
+{ "foo": 1 }
 {{</instance-pass>}}
 
-{{<instance-pass `'age' and 'eligible' properties do not affect the validation when the 'name' property is missing`>}}
-{
-  "age": "25",
-  "eligible": true
-}
-{{</instance-pass>}}
-
-{{<instance-fail `An instance with missing 'eligible' property when 'age' property is present is invalid`>}}
-{
-  "name": "manager",
-  "age": "25"
-}
-
+{{<instance-fail `An object value that defines the first property dependency and has more than 2 properties is invalid`>}}
+{ "foo": 1, "name": "John Doe", "age": 50 }
 {{</instance-fail>}}
+
+{{<instance-fail `An object value that defines the second property dependency and has less than 2 properties is invalid`>}}
+{ "bar": 2 }
+{{</instance-fail>}}
+
+{{<instance-pass `An empty object value is valid as no dependencies apply`>}}
+{}
+{{</instance-pass>}}
+
+{{<instance-pass `A non-object value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
