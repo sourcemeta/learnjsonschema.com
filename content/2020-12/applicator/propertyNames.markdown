@@ -32,57 +32,97 @@ related:
     keyword: unevaluatedProperties
 ---
 
-The `propertyNames` keyword in is used to define constraints on the property names within an object instance. It allows you to specify a schema that all the property names in an object instance must adhere to.
+The `propertyNames` keyword restricts object instances to only define
+properties whose names match the given schema. This keyword is evaluated
+against _every_ property of the object instance, independently of keywords that
+indirectly introduce property names such as [`properties`]({{< ref
+"2020-12/applicator/properties" >}}) and [`patternProperties`]({{< ref
+"2020-12/applicator/patternproperties" >}}).
 
-{{<common-pitfall>}}
-_**Note:** Note that the property names in any object instance will always be strings. Therefore, this schema only makes sense when applied to strings. Passing a schema here that matches something other than a string would be invalid._
+{{<common-pitfall>}} As per the JSON grammar, the name of an object property
+must be a string. Therefore, setting this keyword to a schema that makes use of
+keywords that only apply to types other than strings (such as the
+[`properties`]({{< ref "2020-12/applicator/properties" >}}) keyword) is either
+meaningless or leads to unsatisfiable schemas. Conversely, explicitly setting
+the [`type`]({{< ref "2020-12/validation/type"
+>}}) keyword to `string` is redundant.
 {{</common-pitfall>}}
+
+{{<best-practice>}} This keyword is useful when describing JSON objects whose
+properties cannot be known in advance. For example, allowing extensions that
+must adhere to a certain name convention. If that's not the case, prefer
+explicitly listing every permitted property using the [`properties`]({{< ref
+"2020-12/applicator/properties" >}}) or [`patternProperties`]({{< ref
+"2020-12/applicator/patternproperties" >}}) keywords, and potentially closing
+the object by setting the [`additionalProperties`]({{< ref
+"2020-12/applicator/additionalproperties"
+>}}) keyword to `false`.  {{</best-practice>}}
+
+{{<constraint-warning `object`>}}
 
 ## Examples
 
-{{<schema `Schema with 'propertyNames' keyword`>}}
+{{<schema `A schema that constrains object instances to define lowercase properties`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "propertyNames": { "maxLength": 3 }
+  "propertyNames": { "pattern": "^[a-z]*$" }
 }
 {{</schema>}}
 
-{{<instance-pass `An object instance with the length of property names less than or equal to 3 is valid`>}}
-{ "foo": "foo", "bar": 33 }
-{{</instance-pass>}}
-
-{{<instance-fail `The length of any property name must not be greater than 3`>}}
-{ "name": "John Doe", "age": 21 }
-{{</instance-fail>}}
-
-{{<schema `Schema with 'propertyNames' set to true`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "propertyNames": true
-}
-{{</schema>}}
-
-{{<instance-pass `An object instance with any property name is valid`>}}
+{{<instance-pass `An object value with lowercase properties is valid`>}}
 { "foo": "bar" }
 {{</instance-pass>}}
 
-{{<instance-pass `An instance with an array is valid`>}}
-[ "no", "effect" ]
+{{<instance-pass `An empty object value is valid`>}}
+{}
 {{</instance-pass>}}
-* _`propertyNames` has no effect on instances other than objects._
 
-{{<schema>}}
+{{<instance-fail `An object value with uppercase or alphanumeric properties is invalid`>}}
+{ "CamelCase": true, "alphanumeric123": false }
+{{</instance-fail>}}
+
+{{<instance-pass `A non-object value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
+
+{{<schema `A schema that incorrecly constrains object property names to an impossible type`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "propertyNames": { "type": "number" }
+  "propertyNames": { "type": "array" }
 }
 {{</schema>}}
 
-{{<instance-fail `An object instance with any property is invalid`>}}
-{ "foo": 22 }
+{{<instance-fail `Any non-empty object value is invalid`>}}
+{ "foo": "bar" }
 {{</instance-fail>}}
 
-{{<instance-pass `An empty object is valid`>}}
+{{<instance-pass `An empty object value is valid`>}}
 {}
 {{</instance-pass>}}
-* _The property names in any object instance cannot be a number. Therefore, any object instance will fail against the above schema, except for an empty object._
+
+{{<instance-pass `A non-object value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
+
+{{<schema `A schema with a property name unsatisfiable collision between keywords`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "propertyNames": { "pattern": "^b" },
+  "properties": {
+    "foo": { "type": "integer" },
+    "bar": { "type": "integer" }
+  }
+}
+{{</schema>}}
+
+{{<instance-fail `An object value with a defined property that does not match every name constraints is invalid`>}}
+{ "foo": 1 }
+{{</instance-fail>}}
+
+{{<instance-fail `An object value with a property that matches every name constraints but does not match its declaration is invalid`>}}
+{ "bar": "should have been an integer" }
+{{</instance-fail>}}
+
+{{<instance-pass `An object value with a non-defined property that matches every name constraints is valid`>}}
+{ "baz": "qux" }
+{{</instance-pass>}}
