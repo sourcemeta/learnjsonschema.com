@@ -68,6 +68,12 @@ the [`required`]({{< ref "2020-12/validation/required"
 boolean `true` is considered to be redundant and an anti-pattern, as additional
 properties are permitted by default.  {{</learning-more>}}
 
+{{<common-pitfall>}} This keyword is evaluated independently of the
+[`patternProperties`]({{< ref "2020-12/applicator/patternproperties" >}})
+keyword. If an object property is described by both keywords, then both schemas
+must successfully validate against the given property for validation to
+succeed.  {{</common-pitfall>}}
+
 {{<constraint-warning `object`>}}
 
 {{<schema `A schema that constrains object instances to a string and integer property when defined`>}}
