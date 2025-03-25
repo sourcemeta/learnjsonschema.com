@@ -26,93 +26,80 @@ related:
     keyword: else
 ---
 
-The `dependentRequired` keyword specifies a conditional dependency between properties within an instance. It ensures that if a certain property is present in an instance, then another specified set of properties must also be present. In short, if property A exists in an instance, then properties B, C, and D must also be present.
+The `dependentRequired` keyword restricts object instances to define certain
+properties if other properties are also defined.
+
+{{<common-pitfall>}} Note that multiple potentially interrelated dependencies
+can be declared at once, in which case every dependency must be transitively
+fulfilled for the object instance to be valid. For example, if a schema marks
+the property `B` as required if the property `A` is present and also marks the
+property `C` as required if the property `B` is present, defining the property
+`A` transitively requires _both_ the `B` and `C` properties to be present in
+the object instance.  {{</common-pitfall>}}
+
+{{<constraint-warning `object`>}}
 
 ## Examples
 
-{{<schema `Schema with the 'dependentRequired' keyword`>}}
+{{<schema `A schema that constrains object instances with a single property dependency`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "name": { "type": "string" },
-    "age": { "type": "integer" },
-    "license": { "type": "string" }
-  },
   "dependentRequired": {
-    "license": [ "age" ]
+    "foo": [ "bar", "baz" ]
   }
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with both 'age' and 'license' properties is valid`>}}
-{
-  "name": "John",
-  "age": 25,
-  "license": "XYZ123"
-}
+{{<instance-pass `An object value that defines the dependency and all of the dependents is valid`>}}
+{ "foo": 1, "bar": 2, "baz": 3 }
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with missing 'age' property when 'license' property is present is invalid`>}}
-{
-  "name": "John",
-  "license": "XYZ123"
-}
+{{<instance-fail `An object value that defines the dependency and some of the dependents is invalid`>}}
+{ "foo": 1, "bar": 2 }
 {{</instance-fail>}}
 
-{{<instance-pass `An instance without 'license' property is valid`>}}
-{
-  "name": "John",
-  "age": 25
-}
+{{<instance-fail `An object value that defines the dependency and none of the dependents is invalid`>}}
+{ "foo": 1 }
+{{</instance-fail>}}
+
+{{<instance-pass `An object value that does not define the dependency is valid`>}}
+{ "qux": 4 }
 {{</instance-pass>}}
 
-{{<instance-pass `An empty object is also valid`>}}
+{{<instance-pass `An empty object value is valid`>}}
 {}
 {{</instance-pass>}}
 
-{{<schema `Complex schema with the 'dependentRequired' keyword `>}}
+{{<instance-pass `A non-object value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
+
+{{<schema `A schema that constrains object instances with a transitive property dependencies`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "productName": { "type": "string" },
-    "productPriceUSD": { "type": "number" },
-    "units": { "type": "number" }
-  },
   "dependentRequired": {
-    "productPriceUSD": [ "productName" ],
-    "totalCost" : [ "productPriceUSD", "units" ],
-    "trackingId": [ "outForDelivery" ]
+    "foo": [ "bar" ],
+    "bar": [ "baz" ]
   }
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with all the dependent properties is valid`>}}
-{
-  "productName": "Iphone",
-  "productPriceUSD": 399.99,
-  "units": 5,
-  "totalCost": 1599.99,
-  "trackingId" : 1414326241,
-  "outForDelivery": "yes"
-}
+{{<instance-pass `An object value that satisfies the transitive dependency is valid`>}}
+{ "foo": 1, "bar": 2, "baz": 3 }
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with missing 'productPriceUSD' property when 'totalCost' property is present is invalid`>}}
-{
-  "productName": "Iphone",
-  "units": 5,
-  "totalCost": 1599.99,
-  "trackingId" : 1414326241,
-  "outForDelivery": "yes"
-}
+{{<instance-fail `An object value that only satisfies the first part of the transitive dependency is invalid`>}}
+{ "foo": 1, "bar": 2 }
 {{</instance-fail>}}
 
-{{<instance-pass `An instance with 'productName' and 'productPriceUSD' is valid`>}}
-{
-  "productName": "Iphone",
-  "productPriceUSD": 399.99
-}
-// The 'totalCost' property is not present in this instance, so it will be valid regardless of the presence of 'units' or 'productPriceUSD' property.
+{{<instance-pass `An object value that only satisfies the second part of the transitive dependency is valid`>}}
+{ "bar": 2, "baz": 3 }
+{{</instance-pass>}}
+
+{{<instance-pass `An empty object value is valid`>}}
+{}
+{{</instance-pass>}}
+
+{{<instance-pass `A non-object value is valid`>}}
+"Hello World"
 {{</instance-pass>}}
