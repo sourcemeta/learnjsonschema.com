@@ -64,8 +64,9 @@ schema `false` is an common trick to express that such properties are
 forbidden. This is considered more elegant (and usually more performant) than
 using the [`not`]({{< ref "2020-12/applicator/not" >}}) applicator to negate
 the [`required`]({{< ref "2020-12/validation/required"
->}}) keyword.
-{{</learning-more>}}
+>}}) keyword. However, setting properties defined by this keyword to the
+boolean `true` is considered to be redundant and an anti-pattern, as additional
+properties are permitted by default.  {{</learning-more>}}
 
 {{<constraint-warning `object`>}}
 
