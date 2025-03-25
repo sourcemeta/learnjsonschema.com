@@ -158,7 +158,7 @@
         {{ $coreVocabularyURL := "core" | printf "%s/%s" $dialectURL }}
         {{ $schemaKeywordURL := "schema" | printf "%s/%s" $coreVocabularyURL }}
 
-        <p>To make use of this dialect, declare your schemas to have the dialect metaschema using the <a href="{{ ref . $schemaKeywordURL }}">$schema</a> keyword. For example:</p>
+        <p>To make use of this dialect, declare your schemas to have the dialect metaschema using the <a href="{{ ref . $schemaKeywordURL }}"><code>$schema</code></a> keyword. For example:</p>
         {{ $usingDialect := .Params.metaschema | printf "{\n  \"$schema\": \"%s\" \n}" }}
         {{ transform.Highlight $usingDialect "json" }}
 
@@ -214,7 +214,7 @@
 
             {{ $coreVocabularyURL := "core" | printf "%s/%s" $dialectURL }}
             {{ $vocabularyKeywordURL := "vocabulary" | printf "%s/%s" $coreVocabularyURL }}
-            <p>To make use of this vocabulary, modify your metaschema to declare the use of this vocabulary using the <a href="{{ ref . $vocabularyKeywordURL }}">$vocabulary</a> keyword and evaluate its metaschema. If the vocabulary must be present for an implementation to proceed:</p>
+            <p>To make use of this vocabulary, modify your metaschema to declare the use of this vocabulary using the <a href="{{ ref . $vocabularyKeywordURL }}"><code>$vocabulary</code></a> keyword and evaluate its metaschema. If the vocabulary must be present for an implementation to proceed:</p>
 
             {{ $usingVocabularyRequired := .Params.metaschema | printf "{\n  ...\n  \"$vocabulary\": {\n    ...\n    \"%s\": true\n  },\n  \"allOf\": [\n    { \"$ref\": \"%s\" }\n  ]\n}" .Params.uri }}
             {{ transform.Highlight $usingVocabularyRequired "json" }}
