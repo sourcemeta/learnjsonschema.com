@@ -42,7 +42,7 @@ related:
 
 The `properties` keyword restricts properties of an object instance, when
 present, to match their corresponding schemas definitions.  Information about
-the schemas that were evaluated against the object instance is reported using
+the properties from the object instance that were evaluated is reported using
 annotations.
 
 {{<common-pitfall>}}The use of this keyword **does not prevent the presence of
@@ -75,6 +75,8 @@ must successfully validate against the given property for validation to
 succeed.  {{</common-pitfall>}}
 
 {{<constraint-warning `object`>}}
+
+## Examples
 
 {{<schema `A schema that constrains object instances to a string and integer property when defined`>}}
 {
