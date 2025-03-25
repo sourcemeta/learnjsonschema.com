@@ -42,6 +42,10 @@ into byte-sensitive destinations like fixed-size buffers. Always assume that
 the byte length of a JSON string can arbitrary larger that the number of
 logical characters.{{</common-pitfall>}}
 
+{{<best-practice>}}To restrict string instances to the empty string, prefer
+using the [`const`]({{< ref "2020-12/validation/const" >}}) keyword instead of
+setting this keyword to `0`. {{</best-practice>}}
+
 {{<constraint-warning `string`>}}
 
 ## Examples

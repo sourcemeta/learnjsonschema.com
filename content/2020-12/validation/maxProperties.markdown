@@ -22,12 +22,16 @@ related:
     keyword: additionalProperties
 ---
 
-The `maxItems` keyword restricts object instances to consists of an inclusive
-maximum numbers of properties.
+The `maxProperties` keyword restricts object instances to consists of an
+inclusive maximum numbers of properties.
 
 {{<common-pitfall>}} The presence of this keyword does not depend on the
 presence of the [`properties`]({{< ref "2020-12/applicator/properties" >}})
 keyword.  {{</common-pitfall>}}
+
+{{<best-practice>}}To restrict object instances to the empty object, prefer
+using the [`const`]({{< ref "2020-12/validation/const" >}}) keyword instead of
+setting this keyword to `0`. {{</best-practice>}}
 
 {{<constraint-warning `object`>}}
 
