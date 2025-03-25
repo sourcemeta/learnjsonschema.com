@@ -40,7 +40,7 @@ presence of the [`items`]({{< ref "2020-12/applicator/items" >}}) keyword.
 }
 {{</schema>}}
 
-{{<instance-fail `An array value with 4 items is invalid`>}}
+{{<instance-fail `An array value with more than 3 items is invalid`>}}
 [ 1, 2, 3, 4 ]
 {{</instance-fail>}}
 
