@@ -139,3 +139,40 @@ name.{{</learning-more>}}
 {{<instance-pass `A non-object value is valid`>}}
 "Hello World"
 {{</instance-pass>}}
+
+{{<schema `A schema that constrains object instances to define boolean additional properties`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "foo": { "type": "string" }
+  },
+  "patternProperties": {
+    "^x-": { "type": "integer" }
+  },
+  "additionalProperties": {
+    "type": "boolean"
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `An object value that defines valid properties and boolean additional properties is valid`>}}
+{ "foo": "bar", "x-test": 2, "extra": true }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/properties", "instance": "", "value": [ "foo" ] }
+{ "keyword": "/patternProperties", "instance": "", "value": [ "x-test" ] }
+{ "keyword": "/additionalProperties", "instance": "", "value": [ "extra" ] }
+{{</instance-annotation>}}
+
+{{<instance-fail `An object value that defines valid properties and also defines non-boolean additional properties is invalid`>}}
+{ "foo": "bar", "x-test": 2, "extra": "should be a boolean" }
+{{</instance-fail>}}
+
+{{<instance-pass `An empty object value is valid`>}}
+{}
+{{</instance-pass>}}
+
+{{<instance-pass `A non-object value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
