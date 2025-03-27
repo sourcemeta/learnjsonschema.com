@@ -1,17 +1,13 @@
-{{- $keyword := .Get "keyword" | lower -}}
-{{- $vocabulary := .Get "vocabulary" | lower -}}
-{{- $dialect := .Get "dialect" | default .Page.Section | lower -}}
+{{- $dialect := .Get "dialect" | default .Page.Section -}}
+{{- $vocabulary := .Get "vocabulary" | default .Page.Parent.Params.title -}}
+{{- $keyword := .Get "keyword" -}}
 
-{{- if or (not $keyword) (not $vocabulary) -}}
-  {{- errorf "keyword and vocabulary parameters are required for this shortcode." -}}
+{{- if (not $keyword) -}}
+{{- errorf "keyword parameter is required for this shortcode." -}}
 {{- end -}}
 
-{{- $url := "" -}}
+{{ $vocabularyURL := $vocabulary | lower | printf "%s/%s" $dialect }}
+{{ $keywordURL := (replace $keyword "$" "") | lower | printf "/%s/%s" $vocabularyURL }}
 
-{{- if and $keyword $vocabulary -}}
-  {{- $url = printf "%s/%s/%s/%s/" $.Site.BaseURL $dialect $vocabulary $keyword -}}
-{{- else -}}
-  {{- $url = .Page.Permalink -}}
-{{- end -}}
-
-<a href="{{ $url }}">{{ $keyword -}}</a>
+<a class="font-monospace" href="{{ ref $ $keywordURL }}">{{ $keyword }}</a>
+<small class="font-monospace">(Vocabulary: <a href="{{ ref $ $vocabularyURL }}">{{ title $vocabulary }}</a>)</small>
