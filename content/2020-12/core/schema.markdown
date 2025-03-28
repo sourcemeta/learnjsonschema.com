@@ -53,8 +53,8 @@ dialects of JSON Schema.
 A schema is considered syntactic valid if it successfully validates against its
 dialect meta-schema. You can validate a schema against its meta-schema using
 the [`jsonschema
-metaschema`](https://github.com/sourcemeta/jsonschema/blob/main/docs/metaschema.markdown).
-For example:
+metaschema`](https://github.com/sourcemeta/jsonschema/blob/main/docs/metaschema.markdown)
+command.  For example:
 
 ```sh
 $ jsonschema metaschema my-schema.json
