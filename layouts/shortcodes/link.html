@@ -1,0 +1,12 @@
+{{- $dialect := .Get "dialect" | default .Page.Section -}}
+{{- $vocabulary := .Get "vocabulary" | default .Page.Parent.Params.title -}}
+{{- $keyword := .Get "keyword" -}}
+
+{{- if (not $keyword) -}}
+{{- errorf "keyword parameter is required for this shortcode." -}}
+{{- end -}}
+
+{{ $vocabularyURL := $vocabulary | lower | printf "%s/%s" $dialect }}
+{{ $keywordURL := (replace $keyword "$" "") | lower | printf "/%s/%s" $vocabularyURL }}
+
+<a class="font-monospace" href="{{ ref $ $keywordURL }}" data-bs-toggle="tooltip" data-bs-title="Vocabulary: {{ title $vocabulary }}">{{ $keyword }}</a>
