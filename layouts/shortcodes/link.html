@@ -9,5 +9,4 @@
 {{ $vocabularyURL := $vocabulary | lower | printf "%s/%s" $dialect }}
 {{ $keywordURL := (replace $keyword "$" "") | lower | printf "/%s/%s" $vocabularyURL }}
 
-<a class="font-monospace" href="{{ ref $ $keywordURL }}">{{ $keyword }}</a>
-<small class="font-monospace">(Vocabulary: <a href="{{ ref $ $vocabularyURL }}">{{ title $vocabulary }}</a>)</small>
+<a class="font-monospace" href="{{ ref $ $keywordURL }}" data-bs-toggle="tooltip" data-bs-title="Vocabulary: {{ title $vocabulary }}">{{ $keyword }}</a>
