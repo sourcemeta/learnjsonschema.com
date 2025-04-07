@@ -28,7 +28,27 @@ related:
     keyword: not
 ---
 
-The {{<link keyword="allOf" vocabulary="applicator">}} keyword is used to specify that a given instance must validate against all of the subschemas provided within an array. It's essentially a logical "AND" operation where all conditions must be met for validation to pass.
+The {{<link keyword="allOf" vocabulary="applicator">}} keyword restricts
+instances to validate against _every_ given subschema. This keyword can be
+thought of as a [logical
+conjunction](https://en.wikipedia.org/wiki/Logical_conjunction) (AND)
+operation, as instances are valid if they satisfy every constraint of every
+subschema (the intersection of the operands).
+
+{{<common-pitfall>}} Wrapping a single instance of the `$ref` keyword in an
+`allOf` operator is an anti-pattern.
+
+This practice has historical roots. In JSON Schema [Draft 7](/draft7) and
+earlier versions, any subschema declaring the `$ref` keyword was considered to
+be a _reference object_ and any other sibling keyword was silently ignored. As
+a consequence, subschemas with references that made use of other keywords had
+to artificially wrap the reference into its own subschema.
+{{</common-pitfall>}}
+
+{{<best-practice>}}This keyword typically has a single use case: _combining
+multiple schemas through the use of (internal or external) references_. If this
+is not the case, prefer elevating the keywords of every subschema to the outer
+schema and avoid using this keyword.  {{</best-practice>}}
 
 ## Examples
 
