@@ -16,6 +16,9 @@ jsonschema = 'https://json-schema.org'
   [markup.highlight]
     lineNos = false
     noClasses = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
 
 [outputs]
   home = ["html", "json"]

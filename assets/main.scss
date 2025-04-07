@@ -116,6 +116,11 @@ a {
 
 article table {
   @extend .table;
+  @extend .table-bordered;
+}
+
+.table-danger > td {
+  background-color: #FFEAEA;
 }
 
 .alert:not(.border) {

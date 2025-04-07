@@ -33,7 +33,7 @@ instances to validate against _every_ given subschema. This keyword can be
 thought of as a [logical
 conjunction](https://en.wikipedia.org/wiki/Logical_conjunction) (AND)
 operation, as instances are valid if they satisfy every constraint of every
-subschema (the intersection of the operands).
+subschema (the intersection of the constraints).
 
 {{<common-pitfall>}} Wrapping a single instance of the [`$ref`](../../core/ref)
 or [`$dynamicRef`](../../core/dynamicref) keyword in an `allOf` operator is an
@@ -50,6 +50,71 @@ to artificially wrap the reference into its own subschema.
 _multiple_ schemas through the use of (internal or external) references. If
 this is not the case, prefer elevating the keywords of every subschema to the
 outer schema and avoid using this keyword.  {{</best-practice>}}
+
+As a reference, the following boolean [truth
+table](https://en.wikipedia.org/wiki/Truth_table) considers the evaluation
+result of this keyword given 3 subschemas: A, B, and C.
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><code>allOf</code></th>
+      <th>Subschema A</th>
+      <th>Subschema B</th>
+      <th>Subschema C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-danger">
+      <td class="fw-bold"><i class="bi bi-x-circle-fill me-1"></i> Invalid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+    </tr>
+    <tr class="table-danger">
+      <td class="fw-bold"><i class="bi bi-x-circle-fill me-1"></i> Invalid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+    </tr>
+    <tr class="table-danger">
+      <td class="fw-bold"><i class="bi bi-x-circle-fill me-1"></i> Invalid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+    </tr>
+    <tr class="table-danger">
+      <td class="fw-bold"><i class="bi bi-x-circle-fill me-1"></i> Invalid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+    </tr>
+    <tr class="table-danger">
+      <td class="fw-bold"><i class="bi bi-x-circle-fill me-1"></i> Invalid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+    </tr>
+    <tr class="table-danger">
+      <td class="fw-bold"><i class="bi bi-x-circle-fill me-1"></i> Invalid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+    </tr>
+    <tr class="table-danger">
+      <td class="fw-bold"><i class="bi bi-x-circle-fill me-1"></i> Invalid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+    </tr>
+    <tr class="table-success">
+      <td class="fw-bold"><i class="bi bi-check-circle-fill me-1"></i> Valid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Examples
 
