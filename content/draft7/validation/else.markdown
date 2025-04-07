@@ -2,7 +2,7 @@
 keyword: "else"
 signature: "Schema"
 value: This keyword must be set to a valid JSON Schema
-summary: "When [`if`](/draft7/validation/if) is present, and the instance fails to validate against its subschema, then validation succeeds against this keyword if the instance successfully validates against this keyword's subschema."
+summary: "When [`if`](/draft7/validation/if) is present, and the instance fails to validate against its subschema, then validation succeeds if the instance successfully validates against this keyword's subschema."
 kind: [ "applicator" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft-07/draft-handrews-json-schema-validation-01#rfc.section.6.6.3"
