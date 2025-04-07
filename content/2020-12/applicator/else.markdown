@@ -29,62 +29,66 @@ related:
     keyword: not
 ---
 
-The `else` keyword is used in conjunction with `if` to define a schema to be applied when a condition specified in the `if` keyword is false. It allows you to define alternative validation rules for instances that do not satisfy the conditions specified in the `if` keyword.
+The {{<link keyword="else" vocabulary="applicator">}} keyword restricts
+instances to validate against the given subschema if the {{<link keyword="if"
+vocabulary="applicator">}} sibling keyword failed to validate against the
+instance.
 
-* This keyword has no effect when `if` is absent.
-* This keyword has no effect when the instance passes validation against the `if` subschema.
+{{<common-pitfall>}} This keyword has no effect if the [`if`]({{< ref "if" >}})
+keyword is not declared within the same subschema.  {{</common-pitfall>}}
+
+{{<learning-more>}} The [`if`]({{< ref "if" >}}), [`then`]({{< ref "then" >}}),
+and [`else`]({{< ref "else" >}}) keywords can be thought of as imperative
+variants of the [`anyOf`]({{< ref "anyOf" >}}) keyword, and both approaches are
+equally capable of describing arbitrary conditions. Choose the one that more
+elegantly describes your desired constraints.{{</learning-more>}}
 
 ## Examples
 
-{{<schema `Schema with 'if', 'then' and 'else' keyword`>}}
+{{<schema `A schema that constrains numeric instances to be positive when they are odd numbers`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "if": {
-    "properties":
-      { "foo": { "const": "foo" }
-    }
-  },
-  "then": { "required": [ "bar" ] },
-  "else": { "required": [ "baz" ] }
+  "if": { "multipleOf": 2 },
+  "else": { "minimum": 0 }
 }
 {{</schema>}}
 
-{{<instance-pass `An object instance that conforms to both the 'if' and 'then' subschemas is valid`>}}
-{ "foo": "foo", "bar": "bar" }
+{{<instance-pass `An even number value that is positive is valid`>}}
+10
 {{</instance-pass>}}
 
-{{<instance-fail `An object instance conforming to the 'if' subschema and not conforming to the 'then' subschema is invalid`>}}
-{ "foo": "foo" }
-{{</instance-fail>}}
-
-{{<instance-pass `An object instance not conforming to the 'if' subschema but conforming to the 'else' subschema is valid`>}}
-{ "foo": "not foo", "baz": "baz" }
+{{<instance-pass `An even number value that is negative is valid`>}}
+-2
 {{</instance-pass>}}
 
-{{<instance-fail `An object instance that does not conform to both the 'if' and 'else' subschemas is invalid`>}}
-{ "foo": "not foo" }
+{{<instance-pass `An odd number value that is positive is valid`>}}
+7
+{{</instance-pass>}}
+
+{{<instance-fail `An odd number value that is negative is invalid`>}}
+-3
 {{</instance-fail>}}
 
-{{<schema `Schema with 'if' and 'else' without 'then'`>}}
+{{<instance-pass `A non-number value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
+
+{{<schema `A schema that emits a simple annotation when a numeric value is odd`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "if": {
-    "properties":
-      { "foo": { "const": "foo" }
-    }
-  },
-  "else": { "required": [ "baz" ] }
+  "if": { "multipleOf": 2 },
+  "else": { "title": "The value is an odd number" }
 }
 {{</schema>}}
 
-{{<instance-pass `An object instance that does not conform to the 'if' subschema but conforms to the 'else' subschemas is valid`>}}
-{ "foo": "not foo", "baz": "baz" }
+{{<instance-pass `An odd number value is valid and emits an annotation`>}}
+7
 {{</instance-pass>}}
 
-{{<instance-fail `If an instance does not conform to the 'if' subschema, then it must conform to the 'else' subschema`>}}
-{ "foo": "not foo" }
-{{</instance-fail>}}
+{{<instance-annotation>}}
+{ "keyword": "/else/title", "instance": "", "value": [ "The value is an odd number" ] }
+{{</instance-annotation>}}
 
-{{<instance-pass `An object instance conforming to the 'if' subschemas is always valid`>}}
-{ "foo": "foo", "baz": "baz" }
+{{<instance-pass `An even number value is valid but does not emit an annotation`>}}
+6
 {{</instance-pass>}}
