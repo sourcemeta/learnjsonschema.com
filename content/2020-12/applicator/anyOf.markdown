@@ -118,7 +118,7 @@ result of this keyword given 3 subschemas: A, B, and C.
 
 ## Examples
 
-{{<schema `A schema that constrains instances to require at least one of the given properties`>}}
+{{<schema `A schema that constrains object instances to require at least one of the given properties`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "anyOf": [
