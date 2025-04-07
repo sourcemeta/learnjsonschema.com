@@ -7,8 +7,6 @@ kind: [ "applicator" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft-07/draft-handrews-json-schema-validation-01#rfc.section.6.7.2"
 metaschema: "http://json-schema.org/draft-07/schema#"
-default:
-  logical_value: "[]"
 tests:
   - draft7/anyOf.json
 index: 7

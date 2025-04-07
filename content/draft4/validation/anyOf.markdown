@@ -7,8 +7,6 @@ kind: [ "applicator" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft-04/draft-fge-json-schema-validation-00#rfc.section.5.5.4"
 metaschema: "http://json-schema.org/draft-04/schema#"
-default:
-  logical_value: "[]"
 tests:
   - draft4/anyOf.json
 index: 7

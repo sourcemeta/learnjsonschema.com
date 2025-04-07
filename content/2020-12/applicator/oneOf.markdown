@@ -7,8 +7,6 @@ kind: [ "applicator" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2020-12/json-schema-core.html#section-10.2.1.3"
 metaschema: "https://json-schema.org/draft/2020-12/meta/applicator"
-default:
-  logical_value: "[]"
 tests:
   - draft2020-12/oneOf.json
 index: -99999
