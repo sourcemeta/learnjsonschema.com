@@ -55,9 +55,9 @@ As a reference, the following boolean [truth
 table](https://en.wikipedia.org/wiki/Truth_table) considers the evaluation
 result of this keyword given 3 subschemas: A, B, and C.
 
-<table class="table">
+<table class="table table-bordered">
   <thead>
-    <tr>
+    <tr class="table-light">
       <th><code>allOf</code></th>
       <th>Subschema A</th>
       <th>Subschema B</th>
