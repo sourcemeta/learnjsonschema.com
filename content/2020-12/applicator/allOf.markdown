@@ -35,8 +35,9 @@ conjunction](https://en.wikipedia.org/wiki/Logical_conjunction) (AND)
 operation, as instances are valid if they satisfy every constraint of every
 subschema (the intersection of the operands).
 
-{{<common-pitfall>}} Wrapping a single instance of the `$ref` keyword in an
-`allOf` operator is an anti-pattern.
+{{<common-pitfall>}} Wrapping a single instance of the [`$ref`](../../core/ref)
+or [`$dynamicRef`](../../core/dynamicref) keyword in an `allOf` operator is an
+anti-pattern.
 
 This practice has historical roots. In JSON Schema [Draft 7](/draft7) and
 earlier versions, any subschema declaring the `$ref` keyword was considered to
