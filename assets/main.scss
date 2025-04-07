@@ -118,8 +118,28 @@ article table {
   @extend .table;
 }
 
+.table-light > th {
+  @include color-mode(dark) {
+    color: $gray-300;
+    background-color: $black;
+  }
+}
+
 .table-danger > td {
-  background-color: #FFEAEA;
+  background-color: $red-100;
+  color: $red-800;
+  @include color-mode(dark) {
+    color: $danger;
+    background-color: $danger-bg-subtle-dark;
+  }
+}
+
+.table-success > td {
+  color: $green-800;
+  @include color-mode(dark) {
+    color: $green-300;
+    background-color: $success-bg-subtle-dark;
+  }
 }
 
 .alert:not(.border) {
