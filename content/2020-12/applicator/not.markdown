@@ -28,42 +28,67 @@ related:
     keyword: else
 ---
 
-The `not` keyword is used to declare that an instance only validates if it doesn't validate against the given subschema. It is essentially a way to define a rule that an instance should not match.
+The {{<link keyword="not" vocabulary="applicator">}} keyword restricts
+instances to fail validation against the given subschema. This keyword
+represents a [logical negation](https://en.wikipedia.org/wiki/Negation) (NOT)
+operation. In other words, the instance successfully validates against the
+schema only if it does not match the given subschema.
 
-* The boolean `false` schema, can be thought as an alias to `{ not: {} }`.
+{{<learning-more>}} After evaluating this keyword, any annotation emitted by
+its subschema is discarded, independently of whether the subschema was
+successful or not, as annotations are always discarded on failure. While this
+might seem counter-intuitive, consider the following cases:
 
-Annotations are dropped when an instance fails. Therefore, in the case of `not`, annotations are always dropped because:
+- If the subschema successfully validates against the instance, then the
+  negation keyword itself fails and annotations are discarded
+- If the subschema fails to validate against the instance, then annotations are
+  discarded before bubbling up to the outer negation keyword
+{{</learning-more>}}
 
-1. If the subschema of `not` passes (producing annotations), then not itself fails, resulting in the annotations being dropped.
-2. If the subschema of `not` fails, no annotations are produced, and there is nothing for not to pass on.
+{{<best-practice>}} Avoid the use of this keyword (usually negating the
+[`required`]({{< ref "/2020-12/validation/required" >}}) keyword) to prohibit
+specific object properties from being defined. Instead, use the
+[`properties`]({{< ref "properties" >}}) keyword and set the disallowed object
+properties to the `false` boolean schema.{{</best-practice>}}
+
+This keyword is equivalent to the `!` operator found in most programming
+languages. For example:
+
+```c
+bool valid = !not_schema;
+```
 
 ## Examples
 
-{{<schema `Schema with 'not' keyword`>}}
+{{<schema `A schema that constrains instances to not be a specific value`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "not": {
-    "type": "string"
+    "title": "I will never be emitted as an annotation",
+    "const": "Prohibited"
   }
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with values other than string is valid`>}}
-77
+{{<instance-pass `A value that does not equal the prohibited value is valid and no annotation is emitted`>}}
+"Hello World"
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with a string value is invalid`>}}
-"foo"
+{{<instance-fail `A value that equals the prohibited value is invalid`>}}
+"Prohibited"
 {{</instance-fail>}}
 
-{{<schema `Schema with 'not' set to false`>}}
+{{<schema `A schema that negates an unsatisfiable schema matches every possible instance`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "not": false
+  "not": {
+    "type": "string",
+    "minLength": 10,
+    "maxLength": 9
+  }
 }
 {{</schema>}}
 
-{{<instance-pass `Any instance is valid against the above schema`>}}
-{ "foo": "bar" }
+{{<instance-pass `Any value is valid`>}}
+"Hello World"
 {{</instance-pass>}}
-* _Since the boolean `false` schema is equivalent to `{ "not": {} }`, the overall schema translates to `{ "not": { "not": {} } }`, which is equivalent to an empty object schema (`{}`). Therefore, every instance passes against the above schema._

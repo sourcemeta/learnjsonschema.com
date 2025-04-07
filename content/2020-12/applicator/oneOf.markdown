@@ -28,12 +28,11 @@ related:
 
 The {{<link keyword="oneOf" vocabulary="applicator">}} keyword restricts
 instances to validate against _exactly one_ (and only one) of the given
-subschemas and fail on the rest. This keyword can be thought of as a [logical
-exclusive disjunction](https://en.wikipedia.org/wiki/Exclusive_or) (XOR)
-operation. In practice, the vast majority of schemas don't require exclusive
-disjunction semantics but a simple disjunction. If you are not sure, the
-{{<link keyword="anyOf" vocabulary="applicator">}} keyword is probably a better
-fit.
+subschemas and fail on the rest. This keyword represents a [logical exclusive
+disjunction](https://en.wikipedia.org/wiki/Exclusive_or) (XOR) operation. In
+practice, the vast majority of schemas don't require exclusive disjunction
+semantics but a simple disjunction. If you are not sure, the {{<link
+keyword="anyOf" vocabulary="applicator">}} keyword is probably a better fit.
 
 {{<common-pitfall>}}
 

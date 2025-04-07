@@ -28,7 +28,7 @@ related:
 
 The {{<link keyword="anyOf" vocabulary="applicator">}} keyword restricts
 instances to validate against _at least one_ (but potentially multiple) of the
-given subschemas. This keyword can be thought of as a [logical
+given subschemas. This keyword represents a [logical
 disjunction](https://en.wikipedia.org/wiki/Logical_disjunction) (OR) operation,
 as instances are valid if they satisfy the constraints of one or more
 subschemas (the union of the constraints).
