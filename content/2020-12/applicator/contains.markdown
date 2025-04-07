@@ -47,7 +47,7 @@ can be controlled using the [`minContains`]({{< ref
 that were successfully validated against the given subschema is reported using
 annotations.
 
-{{<common-pitfall>}}Keep in mind that when collecting annotations, the
+{{<learning-more>}}Keep in mind that when collecting annotations, the
 evaluator might need to exhaustively check every item in the array past the
 containment lower bound instead of short-circuiting validation, potentially
 introducing additional computational overhead.
@@ -57,7 +57,7 @@ against the `contains` subschema (and neither `minContains` nor `maxContains`
 are declared, for simplicity). When not collecting annotations, validation will
 stop after encountering the first match. However, when collecting annotations,
 validation will have to proceed past the first match to report the 5 matching
-indexes.{{</common-pitfall>}}
+indexes.{{</learning-more>}}
 
 {{<constraint-warning `array`>}}
 

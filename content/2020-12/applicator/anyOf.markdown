@@ -33,7 +33,7 @@ disjunction](https://en.wikipedia.org/wiki/Logical_disjunction) (OR) operation,
 as instances are valid if they satisfy the constraints of one or more
 subschemas (the union of the constraints).
 
-{{<common-pitfall>}}Keep in mind that when collecting annotations, the
+{{<learning-more>}}Keep in mind that when collecting annotations, the
 evaluator will need to exhaustively evaluate every subschema past the first
 match instead of short-circuiting validation, potentially introducing
 additional computational overhead.
@@ -42,7 +42,14 @@ For example, consider 3 subschemas where the instance validates against the
 first. When not collecting annotations, validation will stop after evaluating
 the first subschema. However, when collecting annotations, evaluation will have
 to proceed past the first subschema in case the others emit
-annotations.{{</common-pitfall>}}
+annotations.{{</learning-more>}}
+
+This keyword is equivalent to the `||` operator found in most programming
+languages. For example:
+
+```js
+const result = A || B || C;
+```
 
 As a reference, the following boolean [truth
 table](https://en.wikipedia.org/wiki/Truth_table) considers the evaluation

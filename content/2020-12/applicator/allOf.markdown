@@ -51,6 +51,13 @@ _multiple_ schemas through the use of (internal or external) references. If
 this is not the case, prefer elevating the keywords of every subschema to the
 outer schema and avoid using this keyword.  {{</best-practice>}}
 
+This keyword is equivalent to the `&&` operator found in most programming
+languages. For example:
+
+```js
+const result = A && B && C;
+```
+
 As a reference, the following boolean [truth
 table](https://en.wikipedia.org/wiki/Truth_table) considers the evaluation
 result of this keyword given 3 subschemas: A, B, and C.
