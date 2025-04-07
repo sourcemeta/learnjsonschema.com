@@ -58,7 +58,7 @@ convenient functionality to copy a regular expression for use in JSON.
 
 ## Examples
 
-{{<schema `A schema that constrains string instances look like e-mail addresses`>}}
+{{<schema `A schema that constrains string instances to look like e-mail addresses`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
