@@ -28,147 +28,145 @@ related:
     keyword: not
 ---
 
-The `anyOf` keyword in JSON Schema is used to specify that an instance must validate against at least one of the schemas provided in an array. It allows you to define multiple schemas, and if the data validates against any one of them, the validation passes.
+The {{<link keyword="anyOf" vocabulary="applicator">}} keyword restricts
+instances to validate against _at least one_ (but potentially multiple) of the
+given subschemas. This keyword can be thought of as a [logical
+disjunction](https://en.wikipedia.org/wiki/Logical_disjunction) (OR) operation,
+as instances are valid if they satisfy the constraints of one or more
+subschemas (the union of the constraints).
+
+{{<common-pitfall>}}Keep in mind that when collecting annotations, the
+evaluator will need to exhaustively evaluate every subschema past the first
+match instead of short-circuiting validation, potentially introducing
+additional computational overhead.
+
+For example, consider 3 subschemas where the instance validates against the
+first. When not collecting annotations, validation will stop after evaluating
+the first subschema. However, when collecting annotations, evaluation will have
+to proceed past the first subschema in case the others emit
+annotations.{{</common-pitfall>}}
+
+As a reference, the following boolean [truth
+table](https://en.wikipedia.org/wiki/Truth_table) considers the evaluation
+result of this keyword given 3 subschemas: A, B, and C.
+
+<table class="table table-borderless border">
+  <thead>
+    <tr class="table-light">
+      <th><code>anyOf</code></th>
+      <th>Subschema A</th>
+      <th>Subschema B</th>
+      <th>Subschema C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-danger">
+      <td class="fw-bold"><i class="bi bi-x-circle-fill me-1"></i> Invalid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+    </tr>
+    <tr class="table-success">
+      <td class="fw-bold"><i class="bi bi-check-circle-fill me-1"></i> Valid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+    </tr>
+    <tr class="table-success">
+      <td class="fw-bold"><i class="bi bi-check-circle-fill me-1"></i> Valid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+    </tr>
+    <tr class="table-success">
+      <td class="fw-bold"><i class="bi bi-check-circle-fill me-1"></i> Valid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+    </tr>
+    <tr class="table-success">
+      <td class="fw-bold"><i class="bi bi-check-circle-fill me-1"></i> Valid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+    </tr>
+    <tr class="table-success">
+      <td class="fw-bold"><i class="bi bi-check-circle-fill me-1"></i> Valid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+    </tr>
+    <tr class="table-success">
+      <td class="fw-bold"><i class="bi bi-check-circle-fill me-1"></i> Valid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+      <td><i class="bi bi-x-circle"></i> Invalid</td>
+    </tr>
+    <tr class="table-success">
+      <td class="fw-bold"><i class="bi bi-check-circle-fill me-1"></i> Valid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+      <td><i class="bi bi-check-circle"></i> Valid</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Examples
 
-{{<schema `Schema with 'anyOf' keyword containing only one subschema`>}}
+{{<schema `A schema that constrains instances to require at least one of the given properties`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
   "anyOf": [
-    {
-      "properties": {
-        "foo": { "type": "string" }
-      },
-      "required": [ "foo" ]
-    }
+    { "required": [ "foo" ] },
+    { "required": [ "bar" ] }
   ]
 }
 {{</schema>}}
 
-{{<instance-pass `An instance conforming to at least one subschemas of 'anyOf' is valid`>}}
-{ "foo": "foo" }
+{{<instance-pass `A value that only matches the first subschema is valid`>}}
+{ "foo": 1 }
 {{</instance-pass>}}
 
-{{<instance-fail `The value of 'foo' must be a string`>}}
-{ "foo": [ "foo" ] }
+{{<instance-pass `A value that only matches the second subschema is valid`>}}
+{ "bar": 2 }
+{{</instance-pass>}}
+
+{{<instance-pass `A value that matches every subschema is valid`>}}
+{ "foo": 1, "bar": 2 }
+{{</instance-pass>}}
+
+{{<instance-fail `A value that does not match any of the subschemas is invalid`>}}
+{ "extra": 4 }
 {{</instance-fail>}}
 
-{{<schema `Schema with 'anyOf' keyword containing multiple subschemas`>}}
+{{<schema `A schema that constrains instances with logical disjunctions that emit annotations`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
   "anyOf": [
-    {
-      "properties": {
-        "foo": { "type": "string" }
-      },
-      "required": [ "foo" ]
-    },
-    {
-      "properties": {
-        "bar": { "type": "number" }
-      },
-      "required": [ "bar" ]
-    }
+    { "title": "Branch #1", "type": "number" },
+    { "title": "Branch #2", "type": "string" },
+    { "title": "Branch #3", "type": "integer" }
   ]
 }
 {{</schema>}}
 
-{{<instance-pass `An instance conforming to at least one of the subschemas of 'anyOf' is valid`>}}
-{ "foo": "foo" }
+{{<instance-pass `A value that only matches the first subschema receives the first annotation`>}}
+3.14
 {{</instance-pass>}}
 
-{{<instance-fail `An instance that does not conform to any of the subschemas of 'anyOf' is invalid`>}}
-{ "foo": 33, "bar": "bar" }
+{{<instance-annotation>}}
+{ "keyword": "/anyOf/0/title", "instance": "", "value": [ "Branch #1" ] }
+{{</instance-annotation>}}
+
+{{<instance-pass `A value that matches two subschemas receives both annotations`>}}
+12345
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/anyOf/0/title", "instance": "", "value": [ "Branch #1" ] }
+{ "keyword": "/anyOf/2/title", "instance": "", "value": [ "Branch #3" ] }
+{{</instance-annotation>}}
+
+{{<instance-fail `A value that does not match any of the subschemas is invalid and receives no annotations`>}}
+{ "foo": 1 }
 {{</instance-fail>}}
-
-{{<instance-pass `An instance conforming to all the subschemas of 'anyOf' is also valid`>}}
-{ "foo": "foo", "bar": 33 }
-{{</instance-pass>}}
-
-{{<schema `Schema with 'anyOf' keyword containing some boolean subschemas`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "anyOf": [
-    false,
-    {
-      "properties": {
-        "foo": { "type": "string" }
-      },
-      "required": [ "foo" ]
-    }
-  ]
-}
-{{</schema>}}
-
-{{<instance-pass `An instance conforming to the second subschema of 'anyOf' is valid`>}}
-{ "foo": "foo" }
-{{</instance-pass>}}
-
-{{<instance-fail `An instance not conforming to the second subschema of 'anyOf' is invalid`>}}
-{ "foo": false }
-{{</instance-fail>}}
-
-{{<schema `Schema with 'anyOf' keyword containing some boolean subschemas`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "anyOf": [
-    true,
-    {
-      "properties": {
-        "foo": { "type": "string" }
-      },
-      "required": [ "foo" ]
-    }
-  ]
-}
-{{</schema>}}
-
-{{<instance-pass `An instance conforming to all the subschemas of 'anyOf' is valid`>}}
-{ "foo": "foo" }
-{{</instance-pass>}}
-
-{{<instance-pass `An instance not conforming to the second subschema of 'anyOf' is also valid`>}}
-{ "foo": true }
-{{</instance-pass>}}
-* _Remember, if any subschema within the `anyOf` keyword passes validation or has a boolean `true` value, the overall result of `anyOf` is considered valid._
-
-{{<schema `Schema with nested 'anyOf'`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "anyOf": [
-    {
-      "anyOf": [
-        { "type": "number" }
-      ]
-    },
-    {
-      "anyOf": [
-        { "minimum": 18 }
-      ]
-    }
-  ]
-}
-{{</schema>}}
-
-{{<instance-pass `An instance conforming to all the subschemas including the nested 'anyOf' is valid`>}}
-25
-{{</instance-pass>}}
-
-{{<instance-pass `An instance not conforming to the second subschema of top-level 'anyOf' is also valid`>}}
-10
-{{</instance-pass>}}
-* _For the first instance above, validation passes against the first subschema within `anyOf`, thereby making the `anyOf` keyword valid, regardless of the validation result against the second subschema._
-
-* _Similarly, for the second instance above, validation passes against the first subschema within `anyOf`. Even though the instance does not conform to the second subschema, validation does not proceed to validate against it, as it has already been successfully validated against the first subschema. Thus, the validation stops at that point, rendering the `anyOf` valid, despite the instance not conforming to the second subschema within the `anyOf`._
-
-{{<common-pitfall>}}
-Important note on performance and annotations:
-
-* When running validation only, a JSON Schema implementation may stop validating `anyOf` when it encounters a successful one. However, when collecting annotations, it must evaluate all of them.
-* The process of collecting annotations can impact runtime performance. For instance, if you collect annotations on a JSON Schema utilizing the `anyOf` applicator, the implementation is forced to evaluate the instance against every disjunction in the `anyOf` applicator. Conversely, if annotations are not collected, implementations may stop evaluation as soon as one `anyOf` subschema successfully validates against the instance.
-* In the interest of runtime efficiency, we recommend collecting annotations only if your specific use case demands it.
-
-{{</common-pitfall>}}
