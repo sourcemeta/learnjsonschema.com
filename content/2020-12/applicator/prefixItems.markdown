@@ -144,9 +144,6 @@ array.{{</common-pitfall>}}
 
 {{<instance-annotation>}}
 { "keyword": "/prefixItems", "instance": "", "value": 2 }
-{{</instance-annotation>}}
-
-{{<instance-annotation>}}
 { "keyword": "/items", "instance": "", "value": true }
 {{</instance-annotation>}}
 

@@ -27,119 +27,143 @@ related:
     keyword: not
 ---
 
-The `if` keyword is used to conditionally apply a subschema based on whether a certain condition is met. It allows you to define different validation rules depending on whether an instance satisfies a condition or not. The validation outcome of this keyword's subschema has no direct effect on the overall validation result. Rather, it controls which of the `then` or `else` keywords are evaluated.
+The {{<link keyword="if" vocabulary="applicator">}} keyword introduces a
+subschema whose evaluation result restricts instances to validate against the
+{{<link keyword="then" vocabulary="applicator">}} or {{<link keyword="else"
+vocabulary="applicator">}} sibling subschemas (if present). Note that the
+evaluation outcome of this subschema controls which other subschema to apply
+(if any) but has no direct effect on the overall validation result.
 
-* If an instance passes the validation against the `if` subschema, then it must also be validated against the `then` subschema, if present.
-* If an instance fails the validation against the `if` subschema, then it must also be validated against the `else` subschema, if present.
-* This keyword is meaningless without `then` and `else`.
-* The annotations are collected from this keyword's subschema in the usual way, irrespective of whether `then` and `else` are present or not.
+{{<best-practice>}} The [`if`]({{< ref "if" >}}), [`then`]({{< ref "then" >}}),
+and [`else`]({{< ref "else" >}}) keywords can be thought of as imperative
+variants of the [`anyOf`]({{< ref "anyOf" >}}) keyword, and both approaches are
+equally capable of describing arbitrary conditions. Choose the one that more
+elegantly describes your desired constraints.{{</best-practice>}}
+
+{{<learning-more>}} This keyword has no effect if neither the [`then`]({{< ref
+"then" >}}) nor [`else`]({{< ref "else" >}}) keywords are declared within the
+same subschema. However, when collecting annotations, the JSON Schema
+implementation will still need to evaluate the [`if`]({{< ref "if" >}}) keyword
+in case its subschema emits annotations.{{</learning-more>}}
+
+The {{<link keyword="if" vocabulary="applicator">}}, {{<link keyword="then"
+vocabulary="applicator">}}, and {{<link keyword="else"
+vocabulary="applicator">}} keywords are equivalent to the `?` and `:` ternary
+conditional operators found in most programming languages. For example:
+
+```c
+bool valid = if_schema ? then_schema : else_schema;
+```
+
+JSON Schema is a [constraint-driven
+language](https://modern-json-schema.com/json-schema-is-a-constraint-system).
+Therefore, omitting either the {{<link keyword="then"
+vocabulary="applicator">}} or the {{<link keyword="else"
+vocabulary="applicator">}} keywords is equivalent to setting the corresponding
+part of the ternary conditional operation to the boolean true. In other words,
+undefined consequent or alternative paths lead to success.  For example:
+
+```c
+// If `then` is missing
+bool valid = if_schema ? true : else_schema;
+// If `else` is missing
+bool valid = if_schema ? then_schema : true;
+```
 
 ## Examples
 
-{{<schema `Schema with 'if', 'then' and 'else' keyword`>}}
+{{<schema `A schema that constrains numeric instances to be positive when they are even numbers and negative otherwise`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "role": { "enum": [ "HOD", "professor" ] },
-    "HOD_Id": { "type": "integer" },
-    "professor_Id": { "type": "integer" }
-  },
-  "if": {
-    "properties":
-      { "role": { "const": "HOD" }
-    }
-  },
-  "then": { "required": [ "HOD_Id" ] },
-  "else": { "required": [ "professor_Id" ] }
+  "if": { "multipleOf": 2 },
+  "then": { "minimum": 0 },
+  "else": { "exclusiveMaximum": 0 }
 }
 {{</schema>}}
 
-{{<instance-pass `An instance adhering to the schema is valid`>}}
-{ "name": "John Doe", "role": "HOD", "HOD_Id": 2844 }
+{{<instance-pass `An even number value that is positive is valid`>}}
+10
 {{</instance-pass>}}
 
-{{<instance-fail `'professor_Id' is required when the value of role is 'professor'`>}}
-{ "role": "professor" }
+{{<instance-fail `An even number value that is negative is invalid`>}}
+-2
 {{</instance-fail>}}
 
-{{<instance-pass `Any object instance without the 'role' property is valid`>}}
-{ "professor_Id": 2899, "HOD_Id": 2844 }
+{{<instance-fail `An odd number value that is positive is invalid`>}}
+7
+{{</instance-fail>}}
+
+{{<instance-pass `An odd number value that is negative is valid`>}}
+-3
 {{</instance-pass>}}
 
-{{<instance-fail `the value of 'HOD_Id' must be a integer`>}}
-{ "name": "John Doe", "role": "HOD", "HOD_Id": "2844" }
-{{</instance-fail>}}
+{{<instance-pass `A non-number value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
 
-{{<schema `Schema with 'if' and 'then' without 'else'`>}}
+{{<schema `A schema that constrains numeric instances to be positive when they are even numbers`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "if": {
-    "properties":
-      { "foo": { "const": "foo" }
-    }
-  },
-  "then": { "required": [ "bar" ] }
+  "if": { "multipleOf": 2 },
+  "then": { "minimum": 0 }
 }
 {{</schema>}}
 
-{{<instance-pass `An object instance conforming to the 'if' and 'then' subschemas is valid`>}}
-{ "foo": "foo", "bar": "bar" }
+{{<instance-pass `An even number value that is positive is valid`>}}
+10
 {{</instance-pass>}}
 
-{{<instance-fail `If an instance conforms to the 'if' subschema, then it must also conform to the 'then' subschema`>}}
-{ "foo": "foo" }
+{{<instance-fail `An even number value that is negative is invalid`>}}
+-2
 {{</instance-fail>}}
 
-{{<instance-pass `An object instance not conforming to the 'if' subschemas is always valid`>}}
-{ "foo": "not foo", "baz": "baz" }
+{{<instance-pass `An odd number value that is positive is valid`>}}
+7
 {{</instance-pass>}}
 
-{{<schema `Schema with 'if' and 'else' without 'then'`>}}
+{{<instance-pass `An odd number value that is negative is valid`>}}
+-3
+{{</instance-pass>}}
+
+{{<schema `A schema that constrains numeric instances to be positive when they are odd numbers`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "if": {
-    "properties":
-      { "foo": { "const": "foo" }
-    }
-  },
-  "else": { "required": [ "baz" ] }
+  "if": { "multipleOf": 2 },
+  "else": { "minimum": 0 }
 }
 {{</schema>}}
 
-{{<instance-pass `An object instance that does not conform to the 'if' subschema but conforms to the 'else' subschemas is valid`>}}
-{ "foo": "not foo", "baz": "baz" }
+{{<instance-pass `An even number value that is positive is valid`>}}
+10
 {{</instance-pass>}}
 
-{{<instance-fail `If an instance does not conform to the 'if' subschema, then it must conform to the 'else' subschema`>}}
-{ "foo": "not foo" }
+{{<instance-pass `An even number value that is negative is valid`>}}
+-2
+{{</instance-pass>}}
+
+{{<instance-pass `An odd number value that is positive is valid`>}}
+7
+{{</instance-pass>}}
+
+{{<instance-fail `An odd number value that is negative is invalid`>}}
+-3
 {{</instance-fail>}}
 
-{{<instance-pass `An object instance conforming to the 'if' subschemas is always valid`>}}
-{ "foo": "foo", "baz": "baz" }
-{{</instance-pass>}}
-- _**Note:** If an instance passes the `if` subschema and the `then` subschema is not present, then the `then` subschema behaves as a boolean __true__ schema. Similarly, if an instance fails the `if` subschema and the `else` subschema is not present, then the `else` subschema behaves as a boolean __true__ schema._
-
-{{<schema `Schema with 'if' without 'then' and 'else'`>}}
+{{<schema `A conditional schema that emits an annotation without a consequent or alternative`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "if": {
-    "properties": {
-      "foo": {
-        "title": "This is foo!",
-        "const": "foo"
-      }
-    }
-  }
+  "if": { "items": { "type": "string" } }
 }
 {{</schema>}}
 
-{{<instance-pass>}}
-{ "foo": "foo" }
+{{<instance-pass `A value that matches the conditional subschema is valid and receives the annotation`>}}
+[ "foo", "bar", "baz" ]
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/if/properties", "instance": "", "value": [ "foo" ] }
-{ "keyword": "/if/properties/foo/title", "instance": "", "value": "This is foo!" }
+{ "keyword": "/if/items", "instance": "", "value": true }
 {{</instance-annotation>}}
-* _Here, the annotations are collected from `if`’s subschema in the usual way, irrespective of whether `then` and `else` are present or not._
+
+{{<instance-pass `A value that does not match the conditional subschema is still valid but receives no annotation`>}}
+[ 1, 2, 3 ]
+{{</instance-pass>}}

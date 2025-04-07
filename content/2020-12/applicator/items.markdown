@@ -103,9 +103,6 @@ empty. If needed, use the [`minItems`]({{< ref "2020-12/validation/minitems"
 
 {{<instance-annotation>}}
 { "keyword": "/prefixItems", "instance": "", "value": 2 }
-{{</instance-annotation>}}
-
-{{<instance-annotation>}}
 { "keyword": "/items", "instance": "", "value": true }
 {{</instance-annotation>}}
 

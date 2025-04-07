@@ -37,11 +37,11 @@ instance.
 {{<common-pitfall>}} This keyword has no effect if the [`if`]({{< ref "if" >}})
 keyword is not declared within the same subschema.  {{</common-pitfall>}}
 
-{{<learning-more>}} The [`if`]({{< ref "if" >}}), [`then`]({{< ref "then" >}}),
+{{<best-practice>}} The [`if`]({{< ref "if" >}}), [`then`]({{< ref "then" >}}),
 and [`else`]({{< ref "else" >}}) keywords can be thought of as imperative
 variants of the [`anyOf`]({{< ref "anyOf" >}}) keyword, and both approaches are
 equally capable of describing arbitrary conditions. Choose the one that more
-elegantly describes your desired constraints.{{</learning-more>}}
+elegantly describes your desired constraints.{{</best-practice>}}
 
 ## Examples
 

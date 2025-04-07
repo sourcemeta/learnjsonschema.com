@@ -54,8 +54,8 @@ outer schema and avoid using this keyword.  {{</best-practice>}}
 This keyword is equivalent to the `&&` operator found in most programming
 languages. For example:
 
-```js
-const result = A && B && C;
+```c
+bool valid = A && B && C;
 ```
 
 As a reference, the following boolean [truth

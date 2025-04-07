@@ -49,8 +49,8 @@ fails, potentially introducing unnecessary computational overhead.
 This keyword is equivalent to the following complex boolean construct that
 combines the `||`, `&&`, and `!` operators found in most programming languages:
 
-```js
-const result = (A && !B && !C) || (!A && B && !C) || (!A && !B && C);
+```c
+bool valid = (A && !B && !C) || (!A && B && !C) || (!A && !B && C);
 ```
 
 As a reference, the following boolean [truth

@@ -33,9 +33,9 @@ disjunction](https://en.wikipedia.org/wiki/Logical_disjunction) (OR) operation,
 as instances are valid if they satisfy the constraints of one or more
 subschemas (the union of the constraints).
 
-{{<learning-more>}}Keep in mind that when collecting annotations, the
-evaluator will need to exhaustively evaluate every subschema past the first
-match instead of short-circuiting validation, potentially introducing
+{{<learning-more>}}Keep in mind that when collecting annotations, the JSON
+Schema implementation will need to exhaustively evaluate every subschema past
+the first match instead of short-circuiting validation, potentially introducing
 additional computational overhead.
 
 For example, consider 3 subschemas where the instance validates against the
@@ -47,8 +47,8 @@ annotations.{{</learning-more>}}
 This keyword is equivalent to the `||` operator found in most programming
 languages. For example:
 
-```js
-const result = A || B || C;
+```c
+bool valid = A || B || C;
 ```
 
 As a reference, the following boolean [truth
