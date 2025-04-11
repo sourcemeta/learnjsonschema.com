@@ -20,7 +20,7 @@ related:
     keyword: $defs
 ---
 
-The `$schema` keyword serves to explicitly associate a schema or subschema with
+The `$schema` keyword serves to explicitly associate a _schema resource_ with
 the JSON Schema dialect that defines it, where the dialect is the identifier of
 a meta-schema that defines the vocabularies in use and imposes syntactic
 constraints on its schema instances. If the `$schema` keyword is not declared,
@@ -49,6 +49,12 @@ Schema
 Bundling](https://github.com/sourcemeta/jsonschema/blob/main/docs/bundle.markdown)
 to inline externally referenced schemas that might be based on different
 dialects of JSON Schema.
+
+{{<common-pitfall>}}JSON Schema prohibits the use of the this keyword on
+arbitrary subschemas that do not represent schema resources. It can only be
+present at the root of the schema (an implicit schema resource) or as a sibling
+of the [`$id`]({{< ref "2020-12/core/id" >}}) keyword (an explicit schema
+resource).{{</common-pitfall>}}
 
 A schema is considered syntactic valid if it successfully validates against its
 dialect meta-schema. You can validate a schema against its meta-schema using
