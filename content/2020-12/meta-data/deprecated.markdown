@@ -29,9 +29,9 @@ related:
 ---
 
 The `deprecated` keyword, when set to `true`, signifies that an instance value
-(such as a specific property) should not be used and may be removed in the
-future. This keyword does not affect validation, but the evaluator will collect
-its value as an annotation.
+(such as a specific object property) should not be used and may be removed or
+rejected in the future. This keyword does not affect validation, but the
+evaluator will collect its value as an annotation.
 
 {{<best-practice>}}
 
