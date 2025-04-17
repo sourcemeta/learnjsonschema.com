@@ -30,93 +30,69 @@ related:
     keyword: deprecated
 ---
 
-The `examples` keyword is used to provide a list of example instances associated with a particular schema that should ideally validate against the schema. These examples serve to illustrate the intended structure and constraints defined by the schema. While these examples are not used for validation purposes, they are helpful in providing sample valid instances against the schema they are defined in.
 
-_**Note:** While it is recommended that the examples validate against the subschema they are defined in, this requirement is not strictly enforced._
+The `examples` keyword declares a set of example instances for a schema or any
+of its subschemas, typically for documentation purposes. This keyword does not
+affect validation, but the evaluator will collect its set of values as an
+annotation.
 
-* Used to demonstrate how data should conform to the schema.
-* `examples` does not affect data validation but serves as an informative annotation.
+{{<common-pitfall>}}
+
+Meta-schema validation will not check that the examples you declare are
+actually valid against their respective schemas, as JSON Schema does not offer
+a mechanism for meta-schemas to declare that instances validate against parts
+of the same instance being evaluated. As a consequence, it is not rare for
+schemas to declare invalid examples that go undetected for a long time.
+
+It is recommended to use the [`jsonschema
+lint`](https://github.com/sourcemeta/jsonschema/blob/main/docs/lint.markdown)
+command, as this linter performs further checks to detect many corner cases,
+including this one.
+
+{{</common-pitfall>}}
+
+{{<metaschema-check-type `array`>}}
 
 ## Examples
 
-{{<schema `Schema with 'examples' keyword`>}}
+{{<schema `A schema that describes name and age properties and declares top level and nested valid examples`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "examples": [ "foo", "bar", "Doe" ],
-  "type": "string"
-}
-{{</schema>}}
-
-{{<instance-pass `An instance with a string value is valid`>}}
-"John"
-{{</instance-pass>}}
-
-{{<instance-annotation>}}
-{ "keyword": "/examples", "instance": "", "value": [ "foo", "bar", "Doe" ] }
-{{</instance-annotation>}}
-
-{{<schema `Schema with logical operators`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "if": {
-    "properties": {
-      "foo": { "const": "foo" }
-    }
-  },
-  "then": {
-    "properties": {
-      "bar": {
-        "type": "array",
-        "examples": [ [ "foo" ], [ "bar", "baz" ] ]
-      }
-    }
-  },
-  "else": {
-    "properties": {
-      "bar": {
-        "type": "boolean",
-        "examples": [ false, true ]
-      }
-    }
-  }
-}
-{{</schema>}}
-
-{{<instance-pass>}}
-{ "foo": "foo", "bar": [ "bar" ] }
-{{</instance-pass>}}
-
-{{<instance-annotation>}}
-{ "keyword": "/then/properties/bar/examples", "instance": "/bar", "value": [ [ "foo" ], [ "bar", "baz" ] ] }
-{{</instance-annotation>}}
-
-{{<instance-pass>}}
-{ "foo": "not foo", "bar": true }
-{{</instance-pass>}}
-
-{{<instance-annotation>}}
-{ "keyword": "/else/properties/bar/examples", "instance": "/bar", "value": [ false, true ] }
-{{</instance-annotation>}}
-
-{{<schema `Schema with multiple annotations for the same instance`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "examples": [ "John", "Karl" ],
-  "$ref": "#/$defs/name",
-  "$defs": {
+  "examples": [
+    { "name": "John Doe", "age": 23 }
+  ],
+  "properties": {
     "name": {
-      "examples": [ "John", "Karl" ],
-      "type": "string"
+      "type": "string",
+      "examples": [ "John Doe", "Jane Doe" ]
+    },
+    "age": {
+      "type": "integer",
+      "examples": [ 1, 18, 55 ]
     }
   }
 }
 {{</schema>}}
 
-{{<instance-pass>}}
-"John Doe"
+{{<instance-pass `An object value that defines name and age is valid and the corresponding annotations are emitted`>}}
+{ "name": "Juan Cruz Viotti", "age": 30 }
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/examples", "instance": "", "value": [ "John", "Karl" ] }
-{ "keyword": "/$ref/examples", "instance": "", "value": [ "John", "Karl" ] }
+{ "keyword": "/examples", "instance": "", "value": [ { "name": "John Doe", "age": 23 } ] }
+{ "keyword": "/properties/name/examples", "instance": "/name", "value": [ "John Doe", "Jane Doe" ] }
+{ "keyword": "/properties/age/examples", "instance": "/age", "value": [ 1, 18, 55 ] }
 {{</instance-annotation>}}
+
+{{<instance-pass `An object value that omits some properties is valid and only the corresponding annotations are emitted`>}}
+{ "age": 50 }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/examples", "instance": "", "value": [ { "name": "John Doe", "age": 23 } ] }
+{ "keyword": "/properties/age/examples", "instance": "/age", "value": [ 1, 18, 55 ] }
+{{</instance-annotation>}}
+
+{{<instance-fail `A value that does not match the schema is invalid and no annotations are emitted`>}}
+{ "name": 1, "age": true }
+{{</instance-fail>}}
