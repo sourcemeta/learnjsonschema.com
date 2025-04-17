@@ -28,8 +28,9 @@ related:
 ---
 
 The `title` keyword is a placeholder for a concise human-readable string
-description of a schema or any of its subschemas. This keyword does not affect
-validation, but the evaluator will collect its value as an annotation.
+summary of what a schema or any of its subschemas are about. This keyword does
+not affect validation, but the evaluator will collect its value as an
+annotation.
 
 {{<best-practice>}}
 

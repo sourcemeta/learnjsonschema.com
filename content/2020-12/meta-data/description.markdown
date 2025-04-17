@@ -27,90 +27,89 @@ related:
     keyword: deprecated
 ---
 
-The `description` keyword in JSON Schema is used to provide a human readable description for the schema. It does not affect data validation but serves as an informative annotation.
+The `description` keyword is a placeholder for a longer human-readable string
+summary of what a schema or any of its subschemas are about. This keyword does
+not affect validation, but the evaluator will collect its value as an
+annotation.
+
+{{<best-practice>}}
+
+We heavily recommend to declare this keyword at the top level of every schema,
+as a human-readable longer description of what the schema is about.
+Note that this keyword is meant to be to be used in conjunction with the
+[`title`]({{< ref "2020-12/meta-data/title" >}}) keyword. The idea is to
+augment the short summary with a longer description, and not to avoid the
+concise summary altogether.
+
+{{</best-practice>}}
+
+{{<common-pitfall>}}
+
+Tooling makers must be careful when statically traversing schemas in search of
+occurences of this keyword. It is possible for schemas to make use of this
+keyword behind conditional operators, references, or any other type of keyword
+that makes it hard or even impossible to correctly locate these values without
+fully evaluating the schema against an instance. The only bullet proof method
+is through annotation collection.
+
+{{</common-pitfall>}}
+
+{{<metaschema-check-type `string`>}}
 
 ## Examples
 
-{{<schema `Schema with 'description' keyword`>}}
+{{<schema `A schema that declares a top level description alongside a short title`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "description": "The age of a person",
-  "type": "number"
+  "title": "Even Number",
+  "description": "This schema describes an even number",
+  "type": "number",
+  "multiple": 2
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with a numeric value is valid`>}}
-45
+{{<instance-pass `An even number value is valid and annotations are emitted`>}}
+10
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/description", "instance": "", "value": "The age of a person" }
+{ "keyword": "/title", "instance": "", "value": "Even number" }
+{ "keyword": "/description", "instance": "", "value": "This schema describes an even number" }
 {{</instance-annotation>}}
 
-{{<schema `Schema with logical operators`>}}
+{{<instance-fail `An odd number value is invalid no annotations are emitted`>}}
+7
+{{</instance-fail>}}
+
+{{<schema `A schema that declares conditional descriptions alongside a top level title`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "description": "Personal information of a user",
-  "properties": {
-    "name": { "type": "string" },
-    "age": { "type": "number" }
-  },
-  "if": {
-    "description": "if block",
-    "properties": {
-      "age": { "description": "Age", "minimum": 18 }
-    }
-  },
-  "then": {
-    "description": "then block",
-    "properties": {
-      "eligible": { "description": "Eligible", "const": true }
-    }
-  },
-  "else": {
-    "description": "else block",
-    "properties": {
-      "eligible": { "description": "Not eligible", "const": false }
-    }
-  }
+  "title": "Number",
+  "type": "number",
+  "if": { "multipleOf": 2 },
+  "then": { "description": "This is an even number" },
+  "else": { "description": "This is an odd number" }
 }
 {{</schema>}}
 
-{{<instance-pass>}}
-{
-  "name": "John Doe",
-  "age": 25,
-  "eligible": true
-}
+{{<instance-pass `An even number value is valid and the corresponding description annotation is emitted`>}}
+10
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/description", "instance": "", "value": "Personal information of a user" }
-{ "keyword": "/if/description", "instance": "", "value": "if block" }
-{ "keyword": "/if/properties/age/description", "instance": "/age", "value": "Age" }
-{ "keyword": "/then/description", "instance": "", "value": "then block", }
-{ "keyword": "/then/properties/eligible/description", "instance": "/eligible", "value": "Eligible" }
+{ "keyword": "/title", "instance": "", "value": "Number" }
+{ "keyword": "/then/description", "instance": "", "value": "This is an even number" }
 {{</instance-annotation>}}
 
-{{<schema `Schema with multiple annotations for the same instance`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "description": "A person name",
-  "$ref": "#/$defs/name",
-  "$defs": {
-    "name": {
-      "description": "A person name",
-      "type": "string"
-    }
-  }
-}
-{{</schema>}}
-
-{{<instance-pass>}}
-"John Doe"
+{{<instance-pass `An odd number value is valid and the corresponding description annotation is emitted`>}}
+7
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/description", "instance": "", "value": "A person name" }
-{ "keyword": "/$ref/description", "instance": "", "value": "A person name" }
+{ "keyword": "/title", "instance": "", "value": "Number" }
+{ "keyword": "/else/description", "instance": "", "value": "This is an odd number" }
 {{</instance-annotation>}}
+
+{{<instance-fail `A non-number value is invalid no annotations are emitted`>}}
+"Hello World"
+{{</instance-fail>}}
