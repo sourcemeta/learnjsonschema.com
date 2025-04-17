@@ -14,7 +14,10 @@ index: -9
 The `$comment` keyword is a standardised placeholder for explanatory string
 schema comments. This keyword is completely ignored by the evaluation process
 and it is possible to strip instances of this keyword when distributing your
-schemas for the purpose of space-efficiency.
+schemas for the purpose of space-efficiency. This keyword is commonly used to
+declare [TODO
+comments](https://en.wikipedia.org/wiki/Comment_%28computer_programming%29#Tags)
+in various parts of a schema.
 
 {{<common-pitfall>}} 
 
@@ -41,19 +44,7 @@ schemas and over the wire.
 
 {{</learning-more>}}
 
-This keyword is commonly used to declare [TODO
-comments](https://en.wikipedia.org/wiki/Comment_%28computer_programming%29#Tags)
-in various parts of a schema.
-
-Setting this keyword to a value that is not a string results in a schema that
-is not considered valid. You can catch these mistakes by validating a schema
-against its meta-schema using the [`jsonschema
-metaschema`](https://github.com/sourcemeta/jsonschema/blob/main/docs/metaschema.markdown)
-command.  For example:
-
-```sh
-$ jsonschema metaschema my-schema.json
-```
+{{<metaschema-check-type `string`>}}
 
 ## Examples
 

@@ -1,0 +1,7 @@
+<p>Setting this keyword to a value that is not a {{ .Get 0 }} results in a schema that
+is not considered valid. You can catch these mistakes by validating a schema
+against its meta-schema using the <a href="https://github.com/sourcemeta/jsonschema/blob/main/docs/metaschema.markdown"><code>jsonschema metaschema</code></a> command.  For example:</p>
+
+<pre class="highlight">
+$ jsonschema metaschema my-schema.json
+</pre>
