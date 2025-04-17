@@ -67,7 +67,7 @@ is through annotation collection.
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Even Number",
   "type": "number",
-  "multiple": 2
+  "multipleOf": 2
 }
 {{</schema>}}
 

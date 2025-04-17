@@ -64,7 +64,7 @@ is through annotation collection.
   "title": "Even Number",
   "description": "This schema describes an even number",
   "type": "number",
-  "multiple": 2
+  "multipleOf": 2
 }
 {{</schema>}}
 
