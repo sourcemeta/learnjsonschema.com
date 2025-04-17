@@ -77,7 +77,7 @@ is through annotation collection.
 { "keyword": "/description", "instance": "", "value": "This schema describes an even number" }
 {{</instance-annotation>}}
 
-{{<instance-fail `An odd number value is invalid no annotations are emitted`>}}
+{{<instance-fail `An odd number value is invalid and no annotations are emitted`>}}
 7
 {{</instance-fail>}}
 
@@ -110,6 +110,6 @@ is through annotation collection.
 { "keyword": "/else/description", "instance": "", "value": "This is an odd number" }
 {{</instance-annotation>}}
 
-{{<instance-fail `A non-number value is invalid no annotations are emitted`>}}
+{{<instance-fail `A non-number value is invalid and no annotations are emitted`>}}
 "Hello World"
 {{</instance-fail>}}
