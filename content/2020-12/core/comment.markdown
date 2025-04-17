@@ -19,7 +19,7 @@ declare [TODO
 comments](https://en.wikipedia.org/wiki/Comment_%28computer_programming%29#Tags)
 in various parts of a schema.
 
-{{<common-pitfall>}} 
+{{<common-pitfall>}}
 
 Compared to other similar keywords from the [Meta Data]({{< ref
 "2020-12/meta-data" >}}) vocabulary, this keyword does not produce an
@@ -27,9 +27,9 @@ annotation. Furthermore, the specification explicitly prohibits any JSON Schema
 tooling from inferring meaning from this keyword or elevating its contents to
 the end user in any way.
 
-{{</common-pitfall>}} 
+{{</common-pitfall>}}
 
-{{<learning-more>}} 
+{{<learning-more>}}
 
 The JSON data format does not support any form of comments at the grammar
 level. While this is a common point of contention, comment support (or any
@@ -48,7 +48,7 @@ schemas and over the wire.
 
 ## Examples
 
-{{<schema `A schema that includes a top level and a nested comment`>}}
+{{<schema `A schema that declares a top level and a nested comment`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$comment": "This is an internal note about the schema that is ignored by the evaluation process",
