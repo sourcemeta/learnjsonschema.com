@@ -54,8 +54,6 @@ is through annotation collection.
 
 {{</common-pitfall>}}
 
-{{<metaschema-check-type `string`>}}
-
 ## Examples
 
 {{<schema `A schema that declares a top level description alongside a short title`>}}

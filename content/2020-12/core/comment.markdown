@@ -44,8 +44,6 @@ schemas and over the wire.
 
 {{</learning-more>}}
 
-{{<metaschema-check-type `string`>}}
-
 ## Examples
 
 {{<schema `A schema that declares a top level and a nested comment`>}}

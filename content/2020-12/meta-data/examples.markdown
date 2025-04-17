@@ -51,8 +51,6 @@ including this one.
 
 {{</best-practice>}}
 
-{{<metaschema-check-type `array`>}}
-
 ## Examples
 
 {{<schema `A schema that describes name and age properties and declares top level and nested valid examples`>}}

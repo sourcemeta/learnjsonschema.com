@@ -41,6 +41,7 @@
               <td class="text-break">
                 {{ if isset .Params "value" }}
                   <small>{{ .Params.value | markdownify }}</small>
+                  <small class="d-block mt-2 pt-1 border-top text-muted"><b>Hint:</b> Use the <a href="https://github.com/sourcemeta/jsonschema/blob/main/docs/metaschema.markdown"><code>jsonschema metaschema</code></a> command to catch keywords set to invalid values</small>
                 {{ else }}
                   {{ errorf "Keyword is missing value description" }}
                 {{ end }}
@@ -177,7 +178,7 @@
                 {{ if isset .Params "annotation" }}
                   {{ partial "instance-badges.html" (dict "types" .Params.annotation.kind) }}
                   <small>{{ .Params.annotation.description }}</small>
-                  <small class="d-block mt-2 pt-1 border-top"><b>Hint:</b> You can use the <a href="https://github.com/sourcemeta/jsonschema/blob/main/docs/validate.markdown"><code>jsonschema validate</code></a> command to collect annotations from the command-line</small>
+                  <small class="d-block mt-2 pt-1 border-top text-muted"><b>Hint:</b> Use the <a href="https://github.com/sourcemeta/jsonschema/blob/main/docs/validate.markdown"><code>jsonschema validate</code></a> command to collect annotations from the command-line</small>
                 {{ else }}
                   <small>None</small>
                 {{ end }}

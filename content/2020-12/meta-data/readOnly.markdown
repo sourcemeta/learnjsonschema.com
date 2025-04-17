@@ -63,8 +63,6 @@ conditions determined by a dynamic operator like [`anyOf`]({{< ref
 
 {{</common-pitfall>}}
 
-{{<metaschema-check-type `boolean`>}}
-
 ## Examples
 
 {{<schema `A schema that statically marks the id optional object property as read only`>}}
