@@ -27,90 +27,90 @@ related:
     keyword: deprecated
 ---
 
-The `title` keyword in JSON Schema is used to provide a human-readable label for a schema or its parts. It does not affect data validation but serves as an informative annotation.
+The `title` keyword is a placeholder for a concise human-readable string
+description of a schema or any of its subschemas. This keyword does not affect
+validation, but the evaluator will collect its value as an annotation.
+
+{{<best-practice>}}
+
+We heavily recommend to declare this keyword at the top level of every schema,
+as a human-readable introduction to what the schema is about.
+
+When doing so, note that the JSON Schema specification does not impose or
+recommend a maximum length for this keyword. However, it is common practice to
+stick to [Git commit message
+title](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
+conventions and set it to a capitalised string of *50 characters or less*. If
+you run out of space, you can move the additional information to the
+[`description`]({{< ref "2020-12/meta-data/description" >}}) keyword.
+
+{{</best-practice>}}
+
+{{<common-pitfall>}}
+
+Tooling makers must be careful when statically traversing schemas in search of
+occurences of this keyword. It is possible for schemas to make use of this
+keyword behind conditional operators, references, or any other type of keyword
+that makes it hard or even impossible to correctly locate these values without
+fully evaluating the schema against an instance. The only bullet proof method
+is through annotation collection.
+
+{{</common-pitfall>}}
+
+{{<metaschema-check-type `string`>}}
 
 ## Examples
 
-{{<schema `Schema with 'title' keyword`>}}
+{{<schema `A schema that declares a top level title`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Age of a person",
-  "type": "number"
+  "title": "Even Number",
+  "type": "number",
+  "multiple": 2
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with a numeric value is valid`>}}
-45
+{{<instance-pass `An even number value is valid and annotations are emitted`>}}
+10
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/title", "instance": "", "value": "Age of a person" }
+{ "keyword": "/title", "instance": "", "value": "Even number" }
 {{</instance-annotation>}}
 
-{{<schema `Schema with logical operators`>}}
+{{<instance-fail `An odd number value is invalid no annotations are emitted`>}}
+7
+{{</instance-fail>}}
+
+{{<schema `A schema that declares conditional refined titles for the same instance location`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Personal Info",
-  "properties": {
-    "name": { "type": "string" },
-    "age": { "type": "number" }
-  },
-  "if": {
-    "title": "if block",
-    "properties": {
-      "age": { "title": "'if' true", "minimum": 18 }
-    }
-  },
-  "then": {
-    "title": "then block",
-    "properties": {
-      "eligible": { "title": "then applied", "const": true }
-    }
-  },
-  "else": {
-    "title": "else block",
-    "properties": {
-      "eligible": { "title": "else applied", "const": false }
-    }
-  }
+  "title": "Number",
+  "type": "number",
+  "if": { "multipleOf": 2 },
+  "then": { "title": "Even Number" },
+  "else": { "title": "Odd Number" }
 }
 {{</schema>}}
 
-{{<instance-pass>}}
-{
-  "name": "John Doe",
-  "age": 25,
-  "eligible": true
-}
+{{<instance-pass `An even number value is valid and both the top level and even annotations are emitted`>}}
+10
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/title", "instance": "", "value": "Personal Info" }
-{ "keyword": "/if/title", "instance": "", "value": "if block" }
-{ "keyword": "/if/properties/age/title", "instance": "/age", "value": "'if' true" }
-{ "keyword": "/then/title", "instance": "", "value": "then block", }
-{ "keyword": "/then/properties/eligible/title", "instance": "/eligible", "value": "then applied" }
+{ "keyword": "/title", "instance": "", "value": "Number" }
+{ "keyword": "/then/title", "instance": "", "value": "Even Number" }
 {{</instance-annotation>}}
 
-{{<schema `Schema with multiple annotations for the same instance`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Person's name",
-  "$ref": "#/$defs/name",
-  "$defs": {
-    "name": {
-      "title": "Person's name",
-      "type": "string"
-    }
-  }
-}
-{{</schema>}}
-
-{{<instance-pass>}}
-"John Doe"
+{{<instance-pass `An odd number value is valid and both the top level and odd annotations are emitted`>}}
+7
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/title", "instance": "", "value": "Person's name" }
-{ "keyword": "/$ref/title", "instance": "", "value": "Person's name" }
+{ "keyword": "/title", "instance": "", "value": "Number" }
+{ "keyword": "/else/title", "instance": "", "value": "Odd Number" }
 {{</instance-annotation>}}
+
+{{<instance-fail `A non-number value is invalid no annotations are emitted`>}}
+"Hello World"
+{{</instance-fail>}}
