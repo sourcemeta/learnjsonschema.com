@@ -48,7 +48,7 @@ schemas and over the wire.
 
 ## Examples
 
-{{<schema `A schema that includes various comments`>}}
+{{<schema `A schema that includes a top level and a nested comment`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$comment": "This is an internal note about the schema that is ignored by the evaluation process",
