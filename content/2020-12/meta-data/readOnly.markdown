@@ -71,7 +71,7 @@ conditions determined by a dynamic operator like [`anyOf`]({{< ref
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "properties": {
-    "id": { "readOnly": true },
+    "id": { "type": "integer", "readOnly": true },
     "value": { "type": "integer" }
   }
 }
@@ -97,7 +97,7 @@ conditions determined by a dynamic operator like [`anyOf`]({{< ref
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "properties": {
-    "id": true,
+    "id": { "type": "integer" },
     "value": { "type": "integer" }
   },
   "dependentSchemas": {

@@ -28,80 +28,102 @@ related:
     keyword: deprecated
 ---
 
-the `writeOnly` keyword is used to indicate that an instance value should be writable, but it won't be included when the instance is retrieved from the owning authority. It's important to note that this doesn't imply the schema itself is writable; schemas must be treated as immutable. Instead, the keyword specifies instances where read/write operation semantics are use case specific.
+The `writeOnly` keyword, when set to `true`, signifies that an instance value
+(such as a specific object property) can be modified or removed but not read,
+whatever that means in the context of the system. For example, form generators
+may rely on this keyword to mark the corresponding input as as a password
+field. This keyword does not affect validation, but the evaluator will collect
+its value as an annotation.
 
-* `writeOnly` does not affect data validation but serves as an informative annotation.
+{{<best-practice>}}
+
+Avoid setting this keyword to the default value `false`. If an instance value
+is not considered to be write only, the best practice is to omit the use of
+this keyword altogether. This prevents unnecessarily generating and collecting
+an annotation that does not carry any additional meaning.
+
+Also avoid simultaneously setting this keyword and the [`readOnly`]({{< ref
+"2020-12/meta-data/readonly" >}}) keyword to `true` for the same instance
+location, resulting in ambiguous semantics.
+
+{{</best-practice>}}
+
+{{<common-pitfall>}}
+
+Tooling makers must be careful when statically traversing schemas in search of
+occurences of this keyword. It is possible for schemas to make use of this
+keyword behind conditional operators, references, or any other type of keyword
+that makes it hard or even impossible to correctly locate these values without
+fully evaluating the schema against an instance. The only bullet proof method
+is through annotation collection.
+
+For example, an instance property might only be read only under certain
+conditions determined by a dynamic operator like [`anyOf`]({{< ref
+"2020-12/applicator/anyof" >}}).
+
+{{</common-pitfall>}}
+
+{{<metaschema-check-type `boolean`>}}
 
 ## Examples
 
-{{<schema `Schema with 'writeOnly' keyword`>}}
+{{<schema `A schema that statically marks the password optional object property as write only`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "writeOnly": true,
-  "type": "number"
-}
-{{</schema>}}
-
-{{<instance-pass `An instance with a numeric value is valid`>}}
-45
-{{</instance-pass>}}
-
-{{<instance-annotation>}}
-{ "keyword": "/writeOnly", "instance": "", "value": true }
-{{</instance-annotation>}}
-
-{{<schema `Schema with logical operators`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "if": {
-    "properties": {
-      "sensitive": { "const": true }
-    }
-  },
-  "then": {
-    "writeOnly": true
-  },
-  "else": {
-    "writeOnly": false
+  "properties": {
+    "username": { "type": "string" }
+    "password": { "type": "string", "writeOnly": true },
   }
 }
 {{</schema>}}
 
-{{<instance-pass>}}
-{ "sensitive": false }
+{{<instance-pass `An object value that defines the write only property is valid but an annotation is emitted`>}}
+{ "username": "jviotti", "password": "mysupersecretpassword" }
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/else/writeOnly", "instance": "", "value": false }
+{ "keyword": "/properties/password/writeOnly", "instance": "/password", "value": true }
 {{</instance-annotation>}}
 
-{{<instance-pass>}}
-{ "sensitive": true }
+{{<instance-pass `An object value that does not define the write only property is valid and no annotation is emitted`>}}
+{ "username": "jviotti" }
 {{</instance-pass>}}
 
-{{<instance-annotation>}}
-{ "keyword": "/then/writeOnly", "instance": "", "value": true }
-{{</instance-annotation>}}
+{{<instance-fail `An object value that does not match the schema is invalid and no annotations are emitted`>}}
+{ "password": null }
+{{</instance-fail>}}
 
-{{<schema `Schema with multiple annotations for the same instance`>}}
+{{<schema `A schema that dynamically marks the password optional object property as write only based on the presence of the username property`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "writeOnly": true,
-  "$ref": "#/$defs/name",
-  "$defs": {
-    "name": {
-      "writeOnly": true,
-      "type": "string"
+  "properties": {
+    "username": { "type": "string" }
+    "password": { "type": "string" },
+  }
+  "dependentSchemas": {
+    "username": {
+      "properties": { "password": { "writeOnly": true } }
     }
   }
 }
 {{</schema>}}
 
-{{<instance-pass>}}
-"John Doe"
+{{<instance-pass `An object value that defines both properties is valid but an annotation is emitted`>}}
+{ "username": "jviotti", "password": "mysupersecretpassword" }
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/writeOnly", "instance": "", "value": true }
-{ "keyword": "/$ref/writeOnly", "instance": "", "value": true }
+{ "keyword": "/dependentSchemas/username/properties/password/writeOnly", "instance": "/password", "value": true }
 {{</instance-annotation>}}
+
+{{<instance-pass `An object value that only defines the username property is valid and no annotation is emitted`>}}
+{ "username": "jviotti" }
+{{</instance-pass>}}
+
+{{<instance-pass `An object value that only defines the password property is valid and no annotation is emitted`>}}
+{ "password": "mysupersecretpassword" }
+{{</instance-pass>}}
+
+{{<instance-fail `An object value that does not match the schema is invalid and no annotations are emitted`>}}
+{ "password": null }
+{{</instance-fail>}}
