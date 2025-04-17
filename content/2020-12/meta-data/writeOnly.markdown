@@ -57,7 +57,7 @@ that makes it hard or even impossible to correctly locate these values without
 fully evaluating the schema against an instance. The only bullet proof method
 is through annotation collection.
 
-For example, an instance property might only be read only under certain
+For example, an instance property might only be write only under certain
 conditions determined by a dynamic operator like [`anyOf`]({{< ref
 "2020-12/applicator/anyof" >}}).
 
