@@ -36,7 +36,7 @@ of its subschemas, typically for documentation purposes. This keyword does not
 affect validation, but the evaluator will collect its set of values as an
 annotation.
 
-{{<common-pitfall>}}
+{{<best-practice>}}
 
 Meta-schema validation will not check that the examples you declare are
 actually valid against their respective schemas, as JSON Schema does not offer
@@ -49,7 +49,7 @@ lint`](https://github.com/sourcemeta/jsonschema/blob/main/docs/lint.markdown)
 command, as this linter performs further checks to detect many corner cases,
 including this one.
 
-{{</common-pitfall>}}
+{{</best-practice>}}
 
 {{<metaschema-check-type `array`>}}
 
