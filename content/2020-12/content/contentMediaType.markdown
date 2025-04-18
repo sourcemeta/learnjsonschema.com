@@ -82,7 +82,7 @@ registered category and prefixed with `x-`.  For example,
 
 ## Examples
 
-{{<schema `Schema with 'contentMediaType' and 'contentEncoding' keyword`>}}
+{{<schema `A schema that describes JSON data encoded using Base 64`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "contentEncoding": "base64",
@@ -90,16 +90,26 @@ registered category and prefixed with `x-`.  For example,
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with a properly stringified JSON document encoded in base64 is valid`>}}
-"eyAibmFtZSI6ICJKb2huIERvZSIgfQ=="    // --> { "name": "John Doe" }
+{{<instance-pass `A string value that represents a valid JSON document encoded in Base 64 is valid and an annotations are emitted`>}}
+"eyAibmFtZSI6ICJKb2huIERvZSIgfQ==" // { "name": "John Doe" }
 {{</instance-pass>}}
 
-{{<instance-pass `An encoded value that represents invalid JSON data is still valid`>}}
-"eyAibmFtZSI6IH0="    // --> { "name": }
+{{<instance-annotation>}}
+{ "keyword": "/contentEncoding", "instance": "", "value": "base64" }
+{ "keyword": "/contentMediaType", "instance": "", "value": "application/json" }
+{{</instance-annotation>}}
+
+{{<instance-pass `A string value that represents an invalid JSON document encoded in Base 64 is valid and an annotations are emitted`>}}
+"eyAibmFtZSI6IH0=" // { "name": }
 {{</instance-pass>}}
 
-{{<instance-pass `A non-string instance is ignored`>}}
-true
+{{<instance-annotation>}}
+{ "keyword": "/contentEncoding", "instance": "", "value": "base64" }
+{ "keyword": "/contentMediaType", "instance": "", "value": "application/json" }
+{{</instance-annotation>}}
+
+{{<instance-pass `A non-string value is valid but (perhaps counter-intuitively) annotations are still emitted`>}}
+1234
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
