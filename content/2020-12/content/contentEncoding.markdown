@@ -55,8 +55,13 @@ MIME header used in conjunction with the
 [`Content-Type`](https://www.rfc-editor.org/rfc/rfc2045.html#section-5) header
 to transmit non-ASCII data over e-mail. For example, if you send a PNG image as
 an e-mail attachment, your e-mail client will likely send a multipart message
-that includes the Base64-encoded image, sets the `Content-Transfer-Encoding`
-header to `base64`, and sets the `Content-Type` header to `image/png`.
+that includes the Base64-encoded image, sets the
+[`Content-Transfer-Encoding`](https://www.rfc-editor.org/rfc/rfc2045.html#section-6)
+header to
+[`base64`](https://datatracker.ietf.org/doc/html/rfc2045#section-6.1), and sets
+the [`Content-Type`](https://www.rfc-editor.org/rfc/rfc2045.html#section-5)
+header to
+[`image/png`](https://www.iana.org/assignments/media-types/image/png).
 
 {{</learning-more>}}
 
