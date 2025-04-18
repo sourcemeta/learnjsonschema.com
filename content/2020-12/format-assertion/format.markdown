@@ -65,25 +65,25 @@ The supported formats are the following.
 
 | Format                    | Category             | Specification |
 |---------------------------|----------------------|---------------|
-| `"date-time"`             | Time                 | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.1 |
-| `"date"`                  | Time                 | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.1 |
-| `"time"`                  | Time                 | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.1 |
-| `"duration"`              | Time                 | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.1 |
-| `"email"`                 | Emails               | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.2 |
-| `"idn-email"`             | Emails               | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.2 |
-| `"hostname"`              | Hostnames            | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.3 |
-| `"idn-hostname"`          | Hostnames            | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.3 |
-| `"ipv4"`                  | IP Addresses         | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.4 |
-| `"ipv6"`                  | IP Addresses         | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.4 |
-| `"uri"`                   | Resource Identifiers | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.5 |
-| `"uri-reference"`         | Resource Identifiers | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.5 |
-| `"iri"`                   | Resource Identifiers | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.5 |
-| `"iri-reference"`         | Resource Identifiers | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.5 |
-| `"uuid"`                  | Resource Identifiers | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.5 |
-| `"uri-template"`          | Resource Identifiers | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.6 |
-| `"json-pointer"`          | JSON Pointer         | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.7 |
-| `"relative-json-pointer"` | JSON Pointer         | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.7 |
-| `"regex"`                 | Regular Expressions  | https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.8 |
+| `"date-time"`             | Time                 | [JSON Schema 2020-12 Validation Section 7.3.1](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.1) |
+| `"date"`                  | Time                 | [JSON Schema 2020-12 Validation Section 7.3.1](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.1) |
+| `"time"`                  | Time                 | [JSON Schema 2020-12 Validation Section 7.3.1](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.1) |
+| `"duration"`              | Time                 | [JSON Schema 2020-12 Validation Section 7.3.1](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.1) |
+| `"email"`                 | Emails               | [JSON Schema 2020-12 Validation Section 7.3.2](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.2) |
+| `"idn-email"`             | Emails               | [JSON Schema 2020-12 Validation Section 7.3.2](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.2) |
+| `"hostname"`              | Hostnames            | [JSON Schema 2020-12 Validation Section 7.3.3](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.3) |
+| `"idn-hostname"`          | Hostnames            | [JSON Schema 2020-12 Validation Section 7.3.3](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.3) |
+| `"ipv4"`                  | IP Addresses         | [JSON Schema 2020-12 Validation Section 7.3.4](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.4) |
+| `"ipv6"`                  | IP Addresses         | [JSON Schema 2020-12 Validation Section 7.3.4](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.4) |
+| `"uri"`                   | Resource Identifiers | [JSON Schema 2020-12 Validation Section 7.3.5](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.5) |
+| `"uri-reference"`         | Resource Identifiers | [JSON Schema 2020-12 Validation Section 7.3.5](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.5) |
+| `"iri"`                   | Resource Identifiers | [JSON Schema 2020-12 Validation Section 7.3.5](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.5) |
+| `"iri-reference"`         | Resource Identifiers | [JSON Schema 2020-12 Validation Section 7.3.5](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.5) |
+| `"uuid"`                  | Resource Identifiers | [JSON Schema 2020-12 Validation Section 7.3.5](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.5) |
+| `"uri-template"`          | Resource Identifiers | [JSON Schema 2020-12 Validation Section 7.3.6](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.6) |
+| `"json-pointer"`          | JSON Pointer         | [JSON Schema 2020-12 Validation Section 7.3.7](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.7) |
+| `"relative-json-pointer"` | JSON Pointer         | [JSON Schema 2020-12 Validation Section 7.3.7](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.7) |
+| `"regex"`                 | Regular Expressions  | [JSON Schema 2020-12 Validation Section 7.3.8](https://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.8) |
 
 {{<constraint-warning `string`>}}
 
