@@ -80,6 +80,8 @@ custom unregistered content media type is really needed, it must live within a
 registered category and prefixed with `x-`.  For example,
 `application/x-my-custom-media-type`.
 
+{{<constraint-warning `string`>}}
+
 ## Examples
 
 {{<schema `A schema that describes JSON data encoded using Base 64`>}}
