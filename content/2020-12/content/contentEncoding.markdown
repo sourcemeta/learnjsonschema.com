@@ -20,12 +20,12 @@ related:
     keyword: contentSchema
 ---
 
-The `contentEncoding` keyword signifies that an instance value (such as a
-specific object property) should be considered binary data encoded into a JSON
-string using the given encoding. This keyword does not affect validation, but
-the evaluator will collect its value as an annotation.  The use of this and
-related keywords is a common technique to encode and describe arbitrary binary
-data (such as image, audio, and video) in JSON.
+The `contentEncoding` keyword signifies that a string instance value (such as a
+specific object property) should be considered binary data serialised using the
+given encoding. This keyword does not affect validation, but the evaluator will
+collect its value as an annotation.  The use of this and related keywords is a
+common technique to encode and describe arbitrary binary data (such as image,
+audio, and video) in JSON.
 
 {{<best-practice>}}
 
@@ -51,10 +51,12 @@ supports content encoding/decoding and how to enable it.
 
 This keyword is inspired by the
 [`Content-Transfer-Encoding`](https://www.rfc-editor.org/rfc/rfc2045.html#section-6)
-RFC 2045 MIME header used to transmit non-ASCII data over e-mail. For example,
-if you send a picture as an e-mail attachment, your e-mail client will likely
-send a multipart message that includes the Base64-encoded representation of
-such picture, while setting the `Content-Transfer-Encoding` header to `base64`.
+MIME header used in conjunction with the
+[`Content-Type`](https://www.rfc-editor.org/rfc/rfc2045.html#section-5) header
+to transmit non-ASCII data over e-mail. For example, if you send a PNG image as
+an e-mail attachment, your e-mail client will likely send a multipart message
+that includes the Base64-encoded image, sets the `Content-Transfer-Encoding`
+header to `base64`, and sets the `Content-Type` header to `image/png`.
 
 {{</learning-more>}}
 
