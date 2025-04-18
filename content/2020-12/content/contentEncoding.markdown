@@ -58,8 +58,10 @@ such picture, while setting the `Content-Transfer-Encoding` header to `base64`.
 
 {{</learning-more>}}
 
-[RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) _(Format of Internet
-Message Bodies)_ defines the following standard encodings. In the interest of
+[RFC 4648](https://datatracker.ietf.org/doc/html/rfc4686) _(The Base16, Base32,
+and Base64 Data Encodings)_ and [RFC
+2045](https://datatracker.ietf.org/doc/html/rfc2045) _(Format of Internet
+Message Bodies)_ define the following standard encodings. In the interest of
 interoperability, avoid defining new content encodings.  While the JSON Schema
 specification does not provide explicit guidance on this, [RFC 2045 Section
 6.3](https://datatracker.ietf.org/doc/html/rfc2045#section-6.3) suggests that
@@ -68,31 +70,43 @@ For example, `x-my-new-encoding`.
 
 | Encoding   | Description                                                                                     | Reference |
 |------------|-------------------------------------------------------------------------------------------------|-----------|
+| `"base64"` | Encoding scheme using a 64-character hexadecimal alphabet | [RFC 4648 Section 4](https://datatracker.ietf.org/doc/html/rfc4648#section-4) |
+| `"base32"` | Encoding scheme using a 32-character hexadecimal alphabet                                   | [RFC 4648 Section 6](https://datatracker.ietf.org/doc/html/rfc4648#section-6) |
+| `"base16"` | Encoding scheme using a 16-character hexadecimal alphabet                       | [RFC 4648 Section 8](https://datatracker.ietf.org/doc/html/rfc4648#section-8) |
 | `"7bit"` | Encoding scheme that constrains ASCII to disallow octets greater than 127, disallow `NUL`, and restricts `CR` and `LF` to `CRLF` sequences | [RFC 2045 Section 2.7](https://datatracker.ietf.org/doc/html/rfc2045#section-2.7) |
 | `"8bit"` | Encoding scheme that constrains ASCII to permit octets greater than 127, disallow `NUL`, and restrict `CR` and `LF` to `CRLF` sequences | [RFC 2045 Section 2.8](https://datatracker.ietf.org/doc/html/rfc2045#section-2.8) |
 | `"binary"` | Encoding scheme where any sequence of octets is allowed | [RFC 2045 Section 2.9](https://datatracker.ietf.org/doc/html/rfc2045#section-2.9) |
 | `"quoted-printable"` | Encoding scheme that preserves ASCII printable characters and escapes the rest using a simple algorithm based on an hexadecimal alphabet | [RFC 2045 Section 6.7](https://datatracker.ietf.org/doc/html/rfc2045#section-6.7) |
-| `"base64"` | Encoding scheme using a 64-character hexadecimal alphabet | [RFC 2045 Section 6.8](https://datatracker.ietf.org/doc/html/rfc2045#section-6.8) |
+
+{{<constraint-warning `string`>}}
 
 ## Examples
 
-{{<schema `Schema with 'contentEncoding' keyword`>}}
+{{<schema `A schema that describes arbitrary data encoded using Base 64`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "contentEncoding": "base64"
 }
 {{</schema>}}
 
-{{<instance-pass `A properly encoded base64 string is valid`>}}
-"SGVsbG8gV29ybGQ="    // --> Hello World (base64 encoded)
+{{<instance-pass `A string value encoded in Base 64 is valid and an annotation is emitted`>}}
+"SGVsbG8gV29ybGQ=" // Hello World
 {{</instance-pass>}}
 
-{{<instance-pass `An incorrectly encoded base64 string is also valid`>}}
-"This is not base64 encoded!"
+{{<instance-annotation>}}
+{ "keyword": "/contentEncoding", "instance": "", "value": "base64" }
+{{</instance-annotation>}}
+
+{{<instance-pass `A string value that does not represent a Base 64 encoded value is valid and an annotation is still emitted`>}}
+"This is not Base 64"
 {{</instance-pass>}}
 
-{{<instance-pass `'contentEncoding' is irrelevant for instances with values other than strings`>}}
-[ "foo", "bar" ]
+{{<instance-annotation>}}
+{ "keyword": "/contentEncoding", "instance": "", "value": "base64" }
+{{</instance-annotation>}}
+
+{{<instance-pass `A non-string value is valid but (perhaps counter-intuitively) an annotation is still emitted`>}}
+1234
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
