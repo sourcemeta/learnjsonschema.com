@@ -1,7 +1,7 @@
 ---
 keyword: "contentEncoding"
 signature: "String"
-value: This keyword should be set to a standard (to increase interoperability) encoding name such as those defined in [RFC 4648](https://www.rfc-editor.org/info/rfc4686)
+value: This keyword should be set to a standard (to increase interoperability) encoding name such as those defined in [RFC 4648](https://www.rfc-editor.org/info/rfc4686) and [RFC 2045](https://www.rfc-editor.org/info/rfc2045.html)
 summary: "The string instance should be interpreted as encoded binary data and decoded using the encoding named by this property."
 kind: [ "annotation" ]
 instance: [ "string" ]
@@ -20,19 +20,59 @@ related:
     keyword: contentSchema
 ---
 
-The `contentEncoding` keyword is an annotation used to specify the encoding used to store the contents of a string, particularly when it represents binary data. It indicates how the string value should be interpreted and decoded. This keyword is not directly involved in the validation process but provides metadata about the content.
+The `contentEncoding` keyword signifies that an instance value (such as a
+specific object property) should be considered binary data encoded into a JSON
+string using the given encoding. This keyword does not affect validation, but
+the evaluator will collect its value as an annotation.  The use of this and
+related keywords is a common technique to encode and describe arbitrary binary
+data (such as image, audio, and video) in JSON.
 
-* `contentEncoding` doesn't enforce strict validation. However, it's recommended to use it correctly to ensure compatibility with applications that might interpret the encoding.
-* It represents the type of binary encoding used for the string under question. Some of the common encodings are listed [here](#common-encodings).
-* The JSON Schema specification doesn't publish a predefined list of possible encodings
+{{<best-practice>}}
 
-## Common Encodings
+It is recommended to set this keyword along with the [`contentMediaType`]({{<
+ref "2020-12/content/contentmediatype" >}}) keyword to declare the type of data
+being encoded (for example, an image in PNG format). Otherwise, the receiver
+must treat the instance value as a binary blob without knowing for sure the
+type of information it represents.
+
+{{</best-practice>}}
+
+{{<common-pitfall>}}
+
+The JSON Schema specification prohibits implementations, for security reasons,
+from automatically attempting to decode, parse, or validate encoded data
+without the consumer explicitly opting in to such behaviour. If you require
+this feature, consult the documentation of your tooling of choice to see if it
+supports content encoding/decoding and how to enable it.
+
+{{</common-pitfall>}}
+
+{{<learning-more>}}
+
+This keyword is inspired by the
+[`Content-Transfer-Encoding`](https://www.rfc-editor.org/rfc/rfc2045.html#section-6)
+RFC 2045 MIME header used to transmit non-ASCII data over e-mail. For example,
+if you send a picture as an e-mail attachment, your e-mail client will likely
+send a multipart message that includes the Base64-encoded representation of
+such picture, while setting the `Content-Transfer-Encoding` header to `base64`.
+
+{{</learning-more>}}
+
+[RFC 2045](https://datatracker.ietf.org/doc/html/rfc2045) _(Format of Internet
+Message Bodies)_ defines the following standard encodings. In the interest of
+interoperability, avoid defining new content encodings.  While the JSON Schema
+specification does not provide explicit guidance on this, [RFC 2045 Section
+6.3](https://datatracker.ietf.org/doc/html/rfc2045#section-6.3) suggests that
+if a custom content encoding is really needed, it must be prefixed with `x-`.
+For example, `x-my-new-encoding`.
 
 | Encoding   | Description                                                                                     | Reference |
 |------------|-------------------------------------------------------------------------------------------------|-----------|
-| `"base16"` | Encoding scheme for binary data using a 16-character hexadecimal alphabet                       | [RFC 4648 §8](https://datatracker.ietf.org/doc/html/rfc4648#section-8) |
-| `"base32"` | Encoding scheme for binary data using a 32-character hexadecimal alphabet                                   | [RFC 4648 §6](https://datatracker.ietf.org/doc/html/rfc4648#section-6) |
-| `"base64"` | Encoding scheme for binary data using a 64-character hexadecimal alphabet | [RFC 4648 §4](https://datatracker.ietf.org/doc/html/rfc4648#section-4) |
+| `"7bit"` | Encoding scheme that constrains ASCII to disallow octets greater than 127, disallow `NUL`, and restricts `CR` and `LF` to `CRLF` sequences | [RFC 2045 Section 2.7](https://datatracker.ietf.org/doc/html/rfc2045#section-2.7) |
+| `"8bit"` | Encoding scheme that constrains ASCII to permit octets greater than 127, disallow `NUL`, and restrict `CR` and `LF` to `CRLF` sequences | [RFC 2045 Section 2.8](https://datatracker.ietf.org/doc/html/rfc2045#section-2.8) |
+| `"binary"` | Encoding scheme where any sequence of octets is allowed | [RFC 2045 Section 2.9](https://datatracker.ietf.org/doc/html/rfc2045#section-2.9) |
+| `"quoted-printable"` | Encoding scheme that preserves ASCII printable characters and escapes the rest using a simple algorithm based on an hexadecimal alphabet | [RFC 2045 Section 6.7](https://datatracker.ietf.org/doc/html/rfc2045#section-6.7) |
+| `"base64"` | Encoding scheme using a 64-character hexadecimal alphabet | [RFC 2045 Section 6.8](https://datatracker.ietf.org/doc/html/rfc2045#section-6.8) |
 
 ## Examples
 

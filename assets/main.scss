@@ -118,6 +118,10 @@ article table {
   @extend .table;
 }
 
+article table td:first-child {
+  word-break: keep-all;
+}
+
 .table-light > th {
   @include color-mode(dark) {
     color: $gray-300;

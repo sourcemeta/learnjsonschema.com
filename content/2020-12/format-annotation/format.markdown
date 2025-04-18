@@ -66,7 +66,7 @@ annotation, never enabling validation support at the implementation level (even
 if supported), and performing validation using the [`pattern`]({{< ref
 "2020-12/validation/pattern" >}}) keyword.  {{</learning-more>}}
 
-The supported formats are the following:
+The supported formats are the following.
 
 | Format                    | Category             | Specification |
 |---------------------------|----------------------|---------------|

@@ -61,7 +61,7 @@ undefined behavior. As a best practice, stick to standardised formats. If
 needed, introduce a new keyword for custom string logical
 types.{{</best-practice>}}
 
-The supported formats are the following:
+The supported formats are the following.
 
 | Format                    | Category             | Specification |
 |---------------------------|----------------------|---------------|
