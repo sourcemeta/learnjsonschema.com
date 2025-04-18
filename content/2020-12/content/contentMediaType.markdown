@@ -84,25 +84,25 @@ registered category and prefixed with `x-`.  For example,
 
 ## Examples
 
-{{<schema `A schema that describes JSON data encoded using Base 64`>}}
+{{<schema `A schema that describes HTML data encoded using Base 64`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "contentEncoding": "base64",
-  "contentMediaType": "application/json"
+  "contentMediaType": "text/html"
 }
 {{</schema>}}
 
-{{<instance-pass `A string value that represents a valid JSON document encoded in Base 64 is valid and an annotations are emitted`>}}
-"eyAibmFtZSI6ICJKb2huIERvZSIgfQ==" // { "name": "John Doe" }
+{{<instance-pass `A string value that represents a valid HTML document encoded in Base 64 is valid and an annotations are emitted`>}}
+"PHA+SlNPTiBTY2hlbWE8L3A+" // <p>JSON Schema</p>
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
 { "keyword": "/contentEncoding", "instance": "", "value": "base64" }
-{ "keyword": "/contentMediaType", "instance": "", "value": "application/json" }
+{ "keyword": "/contentMediaType", "instance": "", "value": "text/html" }
 {{</instance-annotation>}}
 
-{{<instance-pass `A string value that represents an invalid JSON document encoded in Base 64 is valid and an annotations are emitted`>}}
-"eyAibmFtZSI6IH0=" // { "name": }
+{{<instance-pass `A string value that represents an invalid HTML document encoded in Base 64 is valid and an annotations are emitted`>}}
+"PFwvZm9v" // <\/foo
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
@@ -116,5 +116,5 @@ registered category and prefixed with `x-`.  For example,
 
 {{<instance-annotation>}}
 { "keyword": "/contentEncoding", "instance": "", "value": "base64" }
-{ "keyword": "/contentMediaType", "instance": "", "value": "application/json" }
+{ "keyword": "/contentMediaType", "instance": "", "value": "text/html" }
 {{</instance-annotation>}}
