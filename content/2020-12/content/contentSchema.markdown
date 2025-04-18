@@ -23,15 +23,28 @@ related:
     keyword: contentEncoding
 ---
 
-The `contentSchema` keyword allows you to specify a schema that describes the structure of the content within a string instance, particularly when used in conjunction with the `contentMediaType` keyword. This is useful when the string instance contains data conforming to the JSON data model.
+When the [`contentMediaType`]({{< ref "2020-12/content/contentmediatype" >}})
+keyword is set to a media type that adheres to the JSON data model (like JSON
+itself, [YAML](https://yaml.org) or [UBJSON](https://ubjson.org)), the
+`contentSchema` keyword declares the schema that describes the corresponding
+string instance value _after_ decoding it. This keyword does not affect
+validation, but the evaluator will collect its value as an annotation.
 
-However, it's important to note that `contentSchema` is merely an annotation and is not directly involved in the validation process. Instead, applications that consume JSON Schemas must use this information as they see fit. `contentSchema` must be a valid JSON Schema, but it is ignored if `contentMediaType` is absent.
+{{<common-pitfall>}}
 
-Applications utilizing JSON Schemas are expected to use the provided `contentSchema` to validate content if applicable. If a schema is provided but does not match the content structure, it should be considered an error.
+The JSON Schema specification prohibits implementations, for security reasons,
+from automatically attempting to decode, parse, or validate encoded data
+without the consumer explicitly opting in to such behaviour. If you require
+this feature, consult the documentation of your tooling of choice to see if it
+supports content encoding/decoding and how to enable it.
+
+{{</common-pitfall>}}
+
+{{<constraint-warning `string`>}}
 
 ## Examples
 
-{{<schema `Schema with 'contentSchema', 'contentMediaType' and 'contentEncoding' keyword`>}}
+{{<schema `A schema that describes JSON object values encoded using Base 64`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "contentMediaType": "application/json",
@@ -40,16 +53,38 @@ Applications utilizing JSON Schemas are expected to use the provided `contentSch
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with a properly stringified JSON document encoded in base64 is valid`>}}
-"eyAibmFtZSI6ICJKb2huIERvZSIgfQ=="    // --> { "name": "John Doe" }
+{{<instance-pass `A string value that represents a valid JSON object encoded in Base 64 is valid and an annotations are emitted`>}}
+"eyAibmFtZSI6ICJKb2huIERvZSIgfQ==" // { "name": "John Doe" }
 {{</instance-pass>}}
 
-{{<instance-pass `An encoded value that represents invalid JSON data is still valid`>}}
-"eyAibmFtZSI6IH0="    // --> { "name": }
+{{<instance-annotation>}}
+{ "keyword": "/contentMediaType", "instance": "", "value": "application/json" }
+{ "keyword": "/contentEncoding", "instance": "", "value": "base64" }
+{ "keyword": "/contentSchema", "instance": "", "value": { "type": "object" } }
+{{</instance-annotation>}}
+
+{{<instance-pass `A string value that represents an invalid JSON object encoded in Base 64 is valid and an annotations are still emitted`>}}
+"eyAibmFtZSI6IH0=" // { "name": }
 {{</instance-pass>}}
 
-{{<instance-pass `A non-object instance is ignored`>}}
-true
+{{<instance-annotation>}}
+{ "keyword": "/contentMediaType", "instance": "", "value": "application/json" }
+{ "keyword": "/contentEncoding", "instance": "", "value": "base64" }
+{ "keyword": "/contentSchema", "instance": "", "value": { "type": "object" } }
+{{</instance-annotation>}}
+
+{{<instance-pass `A string value that represents a valid JSON number encoded in Base 64 is valid and an annotations are still emitted`>}}
+"MTIzNA==" // 1234
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/contentMediaType", "instance": "", "value": "application/json" }
+{ "keyword": "/contentEncoding", "instance": "", "value": "base64" }
+{ "keyword": "/contentSchema", "instance": "", "value": { "type": "object" } }
+{{</instance-annotation>}}
+
+{{<instance-pass `A non-string value is valid but (perhaps counter-intuitively) annotations are still emitted`>}}
+1234
 {{</instance-pass>}}
 
 {{<instance-annotation>}}

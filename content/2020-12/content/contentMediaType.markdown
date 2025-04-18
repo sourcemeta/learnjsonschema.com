@@ -101,7 +101,7 @@ registered category and prefixed with `x-`.  For example,
 { "keyword": "/contentMediaType", "instance": "", "value": "text/html" }
 {{</instance-annotation>}}
 
-{{<instance-pass `A string value that represents an invalid HTML document encoded in Base 64 is valid and an annotations are emitted`>}}
+{{<instance-pass `A string value that represents an invalid HTML document encoded in Base 64 is valid and an annotations are still emitted`>}}
 "PFwvZm9v" // <\/foo
 {{</instance-pass>}}
 
