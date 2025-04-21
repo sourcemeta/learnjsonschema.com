@@ -66,6 +66,47 @@ command.  For example:
 $ jsonschema metaschema my-schema.json
 ```
 
+To debug the role of the `$schema` keyword on a schema (particularly schemas
+with embedded resources), try the [`jsonschema
+inspect`](https://github.com/sourcemeta/jsonschema/blob/main/docs/inspect.markdown)
+command. This command prints detailed information about each schema resource,
+subschema, location, and reference present in the schema. For example:
+
+```sh
+$ jsonschema inspect schema.json
+(RESOURCE) URI: https://example.com/schema
+    Type              : Static
+    Root              : https://example.com/schema
+    Pointer           :
+    Base              : https://example.com/schema
+    Relative Pointer  :
+    Dialect           : https://json-schema.org/draft/2020-12/schema
+    Base Dialect      : https://json-schema.org/draft/2020-12/schema
+    Parent            : <NONE>
+    Instance Location :
+
+...
+
+(SUBSCHEMA) URI: https://example.com/schema#/properties/foo
+    Type              : Static
+    Root              : https://example.com/schema
+    Pointer           : /properties/foo
+    Base              : https://example.com/schema
+    Relative Pointer  : /properties/foo
+    Dialect           : https://json-schema.org/draft/2020-12/schema
+    Base Dialect      : https://json-schema.org/draft/2020-12/schema
+    Parent            :
+    Instance Location : /foo
+
+...
+
+(REFERENCE) ORIGIN: /$schema
+    Type              : Static
+    Destination       : https://json-schema.org/draft/2020-12/schema
+    - (w/o fragment)  : https://json-schema.org/draft/2020-12/schema
+    - (fragment)      : <NONE>
+```
+
 ## Examples
 
 {{<schema `A schema described by the JSON Schema 2020-12 official dialect`>}}
