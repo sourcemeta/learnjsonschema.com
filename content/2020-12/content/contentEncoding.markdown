@@ -112,10 +112,6 @@ For example, `x-my-new-encoding`.
 { "keyword": "/contentEncoding", "instance": "", "value": "base64" }
 {{</instance-annotation>}}
 
-{{<instance-pass `A non-string value is valid but (perhaps counter-intuitively) an annotation is still emitted`>}}
+{{<instance-pass `A non-string value is valid but no annotations are emitted`>}}
 1234
 {{</instance-pass>}}
-
-{{<instance-annotation>}}
-{ "keyword": "/contentEncoding", "instance": "", "value": "base64" }
-{{</instance-annotation>}}

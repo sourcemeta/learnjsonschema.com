@@ -83,12 +83,6 @@ supports content encoding/decoding and how to enable it.
 { "keyword": "/contentSchema", "instance": "", "value": { "type": "object" } }
 {{</instance-annotation>}}
 
-{{<instance-pass `A non-string value is valid but (perhaps counter-intuitively) annotations are still emitted`>}}
+{{<instance-pass `A non-string value is valid but no annotations are emitted`>}}
 1234
 {{</instance-pass>}}
-
-{{<instance-annotation>}}
-{ "keyword": "/contentMediaType", "instance": "", "value": "application/json" }
-{ "keyword": "/contentEncoding", "instance": "", "value": "base64" }
-{ "keyword": "/contentSchema", "instance": "", "value": { "type": "object" } }
-{{</instance-annotation>}}

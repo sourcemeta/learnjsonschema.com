@@ -110,11 +110,6 @@ registered category and prefixed with `x-`.  For example,
 { "keyword": "/contentMediaType", "instance": "", "value": "application/json" }
 {{</instance-annotation>}}
 
-{{<instance-pass `A non-string value is valid but (perhaps counter-intuitively) annotations are still emitted`>}}
+{{<instance-pass `A non-string value is valid but no annotations are emitted`>}}
 1234
 {{</instance-pass>}}
-
-{{<instance-annotation>}}
-{ "keyword": "/contentEncoding", "instance": "", "value": "base64" }
-{ "keyword": "/contentMediaType", "instance": "", "value": "text/html" }
-{{</instance-annotation>}}
