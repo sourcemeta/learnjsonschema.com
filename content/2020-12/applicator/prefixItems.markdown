@@ -13,7 +13,7 @@ tests:
   - draft2020-12/prefixItems.json
 introduced_in: 2020-12
 annotation:
-   description: The largest index to which this keyword applied its subschema, or a boolean true if it was applied to every item of the instance
+   description: The largest inclusive index to which this keyword applied its subschema (starting from zero), or a boolean true if it was applied to every item of the instance
    kind: [ "number", "boolean" ]
 affects:
   - vocabulary: applicator
@@ -70,16 +70,12 @@ array.{{</common-pitfall>}}
 []
 {{</instance-pass>}}
 
-{{<instance-annotation>}}
-{ "keyword": "/prefixItems", "instance": "", "value": 0 }
-{{</instance-annotation>}}
-
 {{<instance-pass `An array value that consists of a boolean item is valid`>}}
 [ false ]
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/prefixItems", "instance": "", "value": 1 }
+{ "keyword": "/prefixItems", "instance": "", "value": 0 }
 {{</instance-annotation>}}
 
 {{<instance-pass `An array value that consists of a boolean item followed by a number item is valid`>}}
@@ -95,7 +91,7 @@ array.{{</common-pitfall>}}
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/prefixItems", "instance": "", "value": 2 }
+{ "keyword": "/prefixItems", "instance": "", "value": 1 }
 {{</instance-annotation>}}
 
 {{<instance-fail `An array value that does not consist of a boolean item followed by a number item is invalid`>}}
@@ -118,16 +114,12 @@ array.{{</common-pitfall>}}
 []
 {{</instance-pass>}}
 
-{{<instance-annotation>}}
-{ "keyword": "/prefixItems", "instance": "", "value": 0 }
-{{</instance-annotation>}}
-
 {{<instance-pass `An array value that consists of a boolean item is valid`>}}
 [ false ]
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/prefixItems", "instance": "", "value": 1 }
+{ "keyword": "/prefixItems", "instance": "", "value": 0 }
 {{</instance-annotation>}}
 
 {{<instance-pass `An array value that consists of a boolean item followed by a number item is valid`>}}
@@ -143,7 +135,7 @@ array.{{</common-pitfall>}}
 {{</instance-pass>}}
 
 {{<instance-annotation>}}
-{ "keyword": "/prefixItems", "instance": "", "value": 2 }
+{ "keyword": "/prefixItems", "instance": "", "value": 1 }
 { "keyword": "/items", "instance": "", "value": true }
 {{</instance-annotation>}}
 
