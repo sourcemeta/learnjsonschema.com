@@ -20,102 +20,61 @@ related:
     keyword: $dynamicRef
 ---
 
-The `$defs` keyword provides a standardized way to define reusable subschemas within a single schema document, promoting modularity, reducing code duplication, and improving schema organization. Each subschema within `$defs` has a unique name, acting as a location for referencing, without directly affecting validation.
+The `$defs` keyword is a container for storing re-usable schemas within a
+schema resource, which can be referenced using the [`$ref`]({{< ref
+"2020-12/core/ref" >}}) or [`$dynamicRef`]({{< ref "2020-12/core/dynamicref"
+>}}) keywords. From a software engineering point of view, this keyword is
+analogous to defining _internal_ helper functions as part of a larger program.
+
+{{<best-practice>}}
+
+Use this keyword to reduce duplication of internal declarations within a
+schema. However, **prefer extracting standalone entities that represent more
+than just internal helpers into separate schema files**, and externally
+referencing them instead. Otherwise, you will end up with big monolithic
+schemas that are challenging to understand and maintain. 
+
+If you need to resolve external references in advance (for distribution or
+analysis), look at the [`jsonschema
+bundle`](https://github.com/sourcemeta/jsonschema/blob/main/docs/bundle.markdown)
+command.
+
+{{</best-practice>}}
+
+{{<common-pitfall>}}
+
+This keyword declares helper schemas for use _within_ the same schema file or
+resource.  Defining schema files or resources that use this keyword (and
+typically no other keyword) to group common definitions for _other_ schema
+files or resources to reference is considered to be an anti-pattern. If you
+want to share a schema across multiple schema files or resources, that common
+schema should be a standalone schema file or resource itself.
+
+{{</common-pitfall>}}
 
 ## Examples
 
-{{<schema `Schema that describes the age of a person`>}}
+{{<schema `A schema that declares a helper schema to reduce duplication when defining multiple properties`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
   "properties": {
-    "age": {
-      "$ref": "#/$defs/positiveInteger"
-    }
+    "firstName": { "$ref": "#/$defs/nonEmptyString" },
+    "lastName": { "$ref": "#/$defs/nonEmptyString" }
   },
   "$defs": {
-    "positiveInteger": {
-      "type": "integer",
-      "minimum": 0
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
     }
   }
 }
 {{</schema>}}
 
-{{<instance-pass `The instance has a valid "age" property that meets the requirement specified in the "/$defs/positiveInteger" subschema`>}}
-{ "age": 25 }
+
+{{<instance-pass `An object value with non-empty first and last names is valid`>}}
+{ "firstName": "John", "lastName": "Doe" }
 {{</instance-pass>}}
 
-{{<instance-fail `A string is not an integer`>}}
-{ "age": "some_string" }
+{{<instance-fail `An object value with empty first and last names is invalid`>}}
+{ "firstName": "", "lastName": "" }
 {{</instance-fail>}}
-
-{{<schema `Schema for product data`>}}
-{
-  "type": "array",
-  "minItems": 1,
-  "items": { "$ref": "#/$defs/product" },
-  "$defs": {
-    "product": {
-      "type": "object",
-      "properties": {
-        "name": { "type": "string" },
-        "price": { "type": "number", "minimum": 0 }
-      }
-    }
-  }
-}
-{{</schema>}}
-
-{{<instance-pass `The instance has a valid array of objects with product data as described in the "/$defs/product" subschema`>}}
-[
-  { "name": "T-shirt", "price": 19.99 },
-  { "name": "Mug", "price": 8.50 }
-]
-
-{{</instance-pass>}}
-
-{{<instance-fail `The array is empty, violating the "minItems" constraint requiring at least one product`>}}
-[]
-{{</instance-fail>}}
-
-{{<schema `Schema for book details`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/books",
-  "type": "object",
-  "properties": {
-    "title": { "type": "string" },
-    "author": { "$ref": "#author" }
-  },
-  "required": [ "title", "author" ],
-  "$defs": {
-    "author": {
-      "$anchor": "author",
-      "type": "object",
-      "properties": {
-        "name": { "type": "string" },
-        "age": { "type": "integer" }
-      }
-    }
-  }
-}
-{{</schema>}}
-
-{{<instance-pass `Instance with the required properties is valid`>}}
-{
-  "title": "Fundamental Physics",
-  "author": {
-    "name": "John Doe",
-    "age": 55
-  }
-}
-{{</instance-pass>}}
-
-{{<instance-fail `'author' proeprty is required`>}}
-{
-  "title": "Fundamental Chemistry"
-}
-{{</instance-fail>}}
-
-- _**Note**: JSON Pointer isn't the only way of accessing a subschema. You can also use the `$anchor` keyword to reference a subschema within `$defs`._
