@@ -32,7 +32,7 @@ related:
 The `$id` keyword explicitly turns a schema into a _schema resource_ (a schema
 that is associated with a URI). Relative URIs are resolved against the
 _current_ base URI, which is either the closest parent `$id` keyword
-(applicable in the case of compound schemas) or the base URI as determined by
+(applicable in the case of compound schemas), or the base URI as determined by
 the context on which the schema is declared (i.e. serving a schema over HTTP
 _may_ implicitly award it such URL as the base).
 
