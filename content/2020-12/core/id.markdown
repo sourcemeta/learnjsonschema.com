@@ -29,34 +29,58 @@ related:
     keyword: $vocabulary
 ---
 
+The `$id` keyword explicitly turns a schema into a _schema resource_ (a schema
+that is associated with a URI). Relative URIs are resolved against the
+_current_ base URI, which is either the closest parent `$id` keyword
+(applicable in the case of compound schemas) or the base URI as determined by
+the context on which the schema is declared (i.e. serving a schema over HTTP
+_may_ implicitly award it such URL as the base).
+
+Note that you cannot set this keyword to a URI that contains a fragment
+identifier. Instead, fragment identifiers must be set with the [`$anchor`]({{<
+ref "2020-12/core/anchor" >}}) keyword.
+
 {{<learning-more>}}
-Generally, `schema` and `schema resource` might create confusion. Let's clarify the terminology first:
 
-**Schema**: This refers to the entire JSON boolean or JSON object passed to an evaluator.
+This keyword directly applies (without modifications or extensions) the concept
+of URIs to schemas. **If you are having a hard time following the concepts
+discussed in this page, it is probably because you don't have a strong grasp of
+URIs yet** (a notably hard but universal pre-requisite!).
 
-**Schema Resource**: A schema may consist of one or more schema resources (`$id` boundaries). When you introduce nested schema objects with `$id` in your schema, you create new schema resources.
+To learn more about URIs, we strongly suggest studying the [IETF RFC
+3986](https://www.rfc-editor.org/info/rfc3986) URI standard. To avoid
+confusion, note that there is also a [WHATWG URL
+Standard](https://url.spec.whatwg.org) that targets URLs in the context of web
+browsers. However, JSON Schema only implements and expects the IETF original
+standard.
 
-**Schema Object**: This is a single subschema in the schema tree, considering only its immediate keywords and not including nested subschemas.
-
-
-_Relationships_:
-* A _schema_ has one or more schema resources.
-* A _schema resource_ has one or more schema objects.
-* A _schema object_ has one or more keywords.
-
-_**Note**: A schema resource does not include its children schema resources, as they are conceptually distinct entities (just like html iframes in a web page), despite being nested.  However, all of them are part of the same schema. Refer to the last example for clarification._
 {{</learning-more>}}
 
-The `$id` keyword declares the URI for a schema, usually set at the top level. However, any subschema has the flexibility to declare its own `$id` to distinguish itself with a distinct URI. Each subschema with an `$id` in a compound schema is called a _schema resource_.
+{{<common-pitfall>}}
 
-* The top-level schema resource is referred to as the root schema resource.
-* The identifier of the root schema resource, if set, must be an absolute URI.
-* The presence of an identifier sets a new base URI for such schema resource.
+In JSON Schema, schema identifiers are merely identifiers and no behaviour is
+imposed on them. In particular, JSON Schema does not guarantee that a schema
+with an HTTP URL identifier is actually resolvable at such URL. To avoid
+surprises, JSON Schema implementations must be careful with automatically
+sending remote network requests when encountering supposely resolvable schema
+identifiers.
 
-It's worth noting that if the `$id` identifier is a URL, it's common for the URL to respond with the schema when accessed through a web browser, but this behavior is not mandatory; the URL primarily serves as an identifier. Additionally, for non-locatable URIs, such as those not intended for direct accessibility over the declared protocol (e.g., HTTPS), it is advisable to consider using URNs.
+{{</common-pitfall>}}
 
-_**Note:** Check out the [URI RFC](https://datatracker.ietf.org/doc/html/rfc3986) to gain a deeper understanding of how resolution works, providing valuable insights into the essential role of URIs in JSON Schema._
+{{<best-practice>}}
 
+It is strongly recommended for every schema file to explicitly declare an
+_absolute_ URI using this keyword. By doing so, you completely avoid various
+complex URI resolution edge cases, mainly when the base URI is implicit and
+context-dependent.
+
+If you are serving schemas over the network (i.e. over HTTP), a common practice
+is to set this keyword to the expected URL. However, if your schemas are not
+accessible over the network, prefer using a [URN (Uniform Resource
+Name)](https://en.wikipedia.org/wiki/Uniform_Resource_Name) or a non-locatable
+URI scheme such as a [Tag URI](https://www.taguri.org).
+
+{{</best-practice>}}
 
 ## Examples
 
