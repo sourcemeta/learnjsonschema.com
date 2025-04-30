@@ -74,8 +74,12 @@ and not from the root of the schema.
 {{<best-practice>}} 
 
 It is highly recommended to make use of _external_ references to break down
-complex monolithic schemas into smaller schema files. If you need a monolithic
-schema, you can automatically inline external references using the [`jsonschema
+complex monolithic schemas into smaller schema files. However, for performance
+and integrity reasons, avoid resolving these external schemas (i.e.  over HTTP
+or the filesystem) at runtime. 
+
+You can automatically inline external references at build time using the
+[`jsonschema
 bundle`](https://github.com/sourcemeta/jsonschema/blob/main/docs/bundle.markdown)
 command.
 
