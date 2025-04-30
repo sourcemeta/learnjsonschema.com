@@ -22,91 +22,79 @@ related:
     keyword: $dynamicAnchor
 ---
 
-The `$anchor` keyword is used to assign a unique identifier to a subschema within its schema resource. This identifier can then be referenced elsewhere using the `$ref` keyword.
+The `$anchor` keyword associates a subschema with the given URI fragment
+identifier, which can be referenced using the [`$ref`]({{< ref
+"2020-12/core/ref" >}}) keyword. The fragment identifier is resolved against
+the URI of the schema resource. Therefore, using this keyword to declare the
+same anchor more than once within the same schema resource results in an
+invalid schema.
 
-* The `$anchor` keyword allows for the creation of plain reusable name fragments that aren't tied to specific structural locations, offering a flexible alternative to using JSON Pointer fragments, which require knowledge of the schema's structure.
-* An anchor is resolved against the base URI of its schema resource.
+{{<learning-more>}}
+
+JSON Schema anchors were inspired by how web browsers [automatically
+scroll](https://html.spec.whatwg.org/multipage/browsing-the-web.html#scroll-to-the-fragment-identifier)
+to HTML elements given a matching URL fragment identifier.
+
+For example, a company website at `https://example.com` may define a contact
+form enclosed in an HTML element such as `<section id="contact">`.  When the
+user visits the `https://example.com#contact` URL, the web browser will
+automatically scroll to the location of such element. Furthermore, the website
+can move the contact form to a different location within the same page and the
+`https://example.com#contact` URL will continue directing the web browser to
+scroll to the correct location.
+
+{{</learning-more>}}
+
+{{<best-practice>}}
+
+This keyword rarely comes up in practice. The only common use in the wild we
+are aware of is to mark helpers in a location-independent manner, so the helper
+itself can be moved to a different location within the schema without breaking
+existing references to it.
+
+{{</best-practice>}}
+
+{{<common-pitfall>}}
+
+This keyword declares fragment identifiers (a.k.a. anchors) for use _within_
+the same schema file or resource.  Defining schema files or resources that
+reference anchors of _other_ schema files or resources is considered to be an
+anti-pattern. If you want to share a subschema across multiple schema files or
+resources, that common schema should be a standalone schema file or resource
+itself.
+
+{{</common-pitfall>}}
 
 ## Examples
 
-{{<schema `Schema with a named anchor (identifier)`>}}
+{{<schema `A schema that declares a helper schema associated with a location-independent identifier`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$ref": "#string",
-  "$defs": {
-    "string": {
-      "$anchor": "string",
-      "type": "string"
-    }
-  }
-}
-{{</schema>}}
-
-{{<instance-pass `An instance with a string is valid`>}}
-"Hello World!"
-{{</instance-pass>}}
-
-{{<instance-fail `An instance with a number is invalid`>}}
-44
-{{</instance-fail>}}
-
-{{<schema `Schema with identifiers having absolute URI`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/person",
   "properties": {
-    "name": { "$ref": "https://example.com/person/name#name" },
-    "age": { "$ref": "https://example.com/person/age#age" }
-  },
-  "required": [ "name", "age" ],
-  "$defs": {
-    "name": {
-      "$id": "https://example.com/person/name",
-      "$anchor": "name",
-      "type": "string"
+    "firstName": {
+      "$comment": "As a relative reference",
+      "$ref": "#internal-string"
     },
-    "age": {
-      "$id": "https://example.com/person/age",
-      "$anchor": "age",
-      "type": "integer"
+    "lastName": {
+      "$comment": "As an absolute reference",
+      "$ref": "https://example.com/person#internal-string"
     }
-  }
-}
-{{</schema>}}
-
-{{<instance-pass `An instance adhering to the schema is valid`>}}
-{
-  "name": "John",
-  "age": 55
-}
-{{</instance-pass>}}
-
-{{<instance-fail `The value of age must be an integer`>}}
-{
-  "name": "foo",
-  "age": "bar"
-}
-{{</instance-fail>}}
-
-{{<schema `Schema with location-independent identifier having base URI change in subschema`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/base",
-  "$ref": "https://example.com/nested#foo",
+  },
   "$defs": {
-    "foo": {
-      "$id": "nested",
-      "$anchor": "foo",
-      "type": "integer"
+    "nonEmptyString": {
+      "$anchor": "internal-string",
+      "type": "string",
+      "minLength": 1
     }
   }
 }
 {{</schema>}}
 
-{{<instance-pass `An instance with integer is valid`>}}
-99
+{{<instance-pass `An object value with non-empty first and last names is valid`>}}
+{ "firstName": "John", "lastName": "Doe" }
 {{</instance-pass>}}
 
-{{<instance-fail `An instance with boolean is invalid`>}}
-true
+{{<instance-fail `An object value with empty first and last names is invalid`>}}
+{ "firstName": "", "lastName": "" }
 {{</instance-fail>}}
-- Here the URI Reference of `foo` subschema is resolved to `https://example.com/nested` and the named anchor is used in the URI fragment to reference this subschema.

@@ -32,7 +32,7 @@ Use this keyword to reduce duplication of internal declarations within a
 schema. However, **prefer extracting standalone entities that represent more
 than just internal helpers into separate schema files**, and externally
 referencing them instead. Otherwise, you will end up with big monolithic
-schemas that are challenging to understand and maintain. 
+schemas that are challenging to understand and maintain.
 
 If you need to resolve external references in advance (for distribution or
 analysis), look at the [`jsonschema
@@ -69,7 +69,6 @@ schema should be a standalone schema file or resource itself.
   }
 }
 {{</schema>}}
-
 
 {{<instance-pass `An object value with non-empty first and last names is valid`>}}
 { "firstName": "John", "lastName": "Doe" }

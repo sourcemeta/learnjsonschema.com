@@ -41,7 +41,7 @@
               <td class="text-break">
                 {{ if isset .Params "value" }}
                   <small>{{ .Params.value | markdownify }}</small>
-                  <small class="d-block mt-2 pt-1 border-top text-muted"><b>Hint:</b> Use the <a href="https://github.com/sourcemeta/jsonschema/blob/main/docs/metaschema.markdown"><code>jsonschema metaschema</code></a> command to catch keywords set to invalid values</small>
+                  <small class="d-block mt-2 pt-1 border-top text-muted"><b>Hint:</b> Use the <a href="https://github.com/sourcemeta/jsonschema/blob/main/docs/metaschema.markdown"><code>jsonschema metaschema</code></a> and <a href="https://github.com/sourcemeta/jsonschema/blob/main/docs/lint.markdown"><code>jsonschema lint</code></a> commands to catch keywords set to invalid values</small>
                 {{ else }}
                   {{ errorf "Keyword is missing value description" }}
                 {{ end }}
