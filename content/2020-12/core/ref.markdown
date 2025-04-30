@@ -137,186 +137,67 @@ $ jsonschema inspect schema.json
 
 ## Examples
 
-{{<schema `Schema with a relative reference` >}}
+{{<schema `A schema that internally references the exact same helper schema in multiple equivalent ways`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/schemas/product.json",
-  "type": "object",
+  "$id": "https://example.com/my-schema",
   "properties": {
-    "productId": { "type": "integer" },
-    "name": { "$ref": "string" }
+    "byRelativeFragmentPointer": { 
+      "$ref": "#/$defs/helper"
+    },
+    "byAbsoluteFragmentPointer": { 
+      "$ref": "https://example.com/my-schema#/$defs/helper"
+    },
+    "byRelativeURI": { 
+      "$ref": "my-helper"
+    },
+    "byRelativeRootPathURI": { 
+      "$ref": "/my-helper"
+    },
+    "byRelativeBackslashURI": { 
+      "$ref": "my-schema/../my-helper"
+    },
+    "byAbsoluteURI": { 
+      "$ref": "https://example.com/my-helper"
+    }
   },
-  "required": [ "productId", "name" ],
   "$defs": {
-    "string": {
-      "$id": "string",
+    "helper": {
+      "$id": "my-helper",
       "type": "string"
     }
   }
 }
 {{</schema>}}
 
-{{<instance-pass `An instance including all the required properties is valid` >}}
-{
-  "productId": 123,
-  "name": "Widget"
-}
-{{</instance-pass>}}
-
-{{<instance-fail `An object instance with name property not set to string is invalid` >}}
-{
-  "productId": 217,
-  "name": 999
-}
-{{</instance-fail>}}
-
-{{<schema `Schema with an absolute reference to the previous schema` >}}
+{{<schema `A schema that externally references the exact same schema URL in multiple equivalent ways`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/schemas/order.json",
-  "type": "object",
+  "$id": "https://example.com/my-schema",
   "properties": {
-    "items": {
-      "type": "array",
-      "items": { "$ref": "schemas/product.json" }
+    "byAbsoluteURI": { 
+      "$ref": "https://example.com/my-other-schema"
+    },
+    "byRelativeURI": { 
+      "$ref": "my-other-schema"
+    },
+    "byRelativeRootPathURI": { 
+      "$ref": "/my-other-schema"
+    },
+    "byRelativeBackslashURI": { 
+      "$ref": "my-schema/../my-other-schema"
     }
   }
 }
 {{</schema>}}
 
-{{<instance-pass `Each item in the "items" array includes both the "productId" and "name" properties required by the referenced product schema` >}}
-{
-  "items": [
-    { "productId": 123, "name": "Widget" },
-    { "productId": 456, "name": "Gadget" }
-  ]
-}
-// Assuming http://example.com/schemas/product.json defines the product schema
-
-{{</instance-pass>}}
-
-{{<instance-fail `The first item is missing the "productId" property and the second item is missing the "name" property required by the product schema.` >}}
-{
-  "items": [
-    { "name": "Widget" },
-    { "productId": 456 }
-  ]
-}
-{{</instance-fail>}}
-
-{{<schema `Schema having an absolute reference with a JSON Pointer`>}}
+{{<schema `A schema that externally references a schema URN in the only possible way (URNs are always absolute)`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/schemas/product.json",
-  "$ref": "https://example.com/schemas/product.json#/$defs/string",
-  "$defs": {
-    "string": { "type": "string" }
-  }
-}
-{{</schema>}}
-
-{{<instance-pass `An instance with a string value is valid`>}}
-"John Doe"
-{{</instance-pass>}}
-
-{{<instance-fail `An instance with a boolean value is invalid`>}}
-true
-{{</instance-fail>}}
-
-{{<schema `Schema having absolute reference with an anchor`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/schemas/product.json",
-  "$ref": "https://example.com/schemas/product.json#string",
-  "$defs": {
-    "string": { "$anchor": "string", "type": "boolean" }
-  }
-}
-{{</schema>}}
-
-{{<instance-pass `An instance with a boolean value is valid`>}}
-false
-{{</instance-pass>}}
-
-{{<instance-fail `An instance with a numeric value is invalid`>}}
-99
-{{</instance-fail>}}
-
-{{<schema `Schema with a JSON Pointer`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com",
-  "type": "object",
   "properties": {
-    "name": { "$ref": "#/$defs/string" }
-  },
-  "required": [ "name" ],
-  "$defs": {
-    "string": { "type": "string" }
-  }
-}
-{{</schema>}}
-
-{{<instance-pass `Instance including all the required properties is valid` >}}
-{
-  "name": "John Doe"
-}
-{{</instance-pass>}}
-
-{{<instance-fail `Instance with name property set to boolean is invalid` >}}
-{
-  "name": true
-}
-{{</instance-fail>}}
-
-{{<schema `Schema with an anchor`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com",
-  "type": "object",
-  "properties": {
-    "counter": { "$ref": "#counter" }
-  },
-  "required": [ "counter" ],
-  "$defs": {
-    "string": { "$anchor": "counter", "type": "number" }
-  }
-}
-{{</schema>}}
-
-{{<instance-pass `Instance including all the required properties is valid` >}}
-{
-  "counter": 51
-}
-{{</instance-pass>}}
-
-{{<instance-fail `Instance with counter property set to string is invalid` >}}
-{
-  "counter": "59"
-}
-{{</instance-fail>}}
-
-{{<schema `Schema with '$id' set to URN`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:example:vehicle",
-  "$ref": "urn:example:phone",
-  "$defs": {
-    "phone": {
-      "$id": "urn:example:phone",
-      "type": "number"
+    "byAbsoluteURI": { 
+      "$ref": "urn:example:my-other-schema"
     }
   }
 }
 {{</schema>}}
-
-{{<instance-pass `An instance with a numeric value is valid` >}}
-7843559621
-{{</instance-pass>}}
-
-{{<instance-fail `An instance with a value other than a number is invalid` >}}
-{
-  "phone": 9866548907
-}
-{{</instance-fail>}}
-
