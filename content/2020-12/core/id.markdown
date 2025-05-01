@@ -121,7 +121,7 @@ or a non-locatable URI scheme such as a [Tag URI](https://www.taguri.org).
   "properties": {
     "foo": {
       "$comment": "The resolved URI of this nested schema resource is https://example.com/schemas/foo.json",
-      "$id": "foo.json",
+      "$id": "foo.json"
     },
     "bar": {
       "$comment": "The resolved URI of this nested schema resource is https://example.com/schemas/bar.json",
