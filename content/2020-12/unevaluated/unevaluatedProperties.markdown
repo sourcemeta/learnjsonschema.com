@@ -27,18 +27,54 @@ related:
     keyword: unevaluatedItems
 ---
 
-Validation with `unevaluatedProperties` applies only to the child values of instance names that do not appear in the `properties`, `patternProperties`, `additionalProperties`, or `unevaluatedProperties` annotation results that apply to the instance location being validated. For all such properties, validation succeeds if the child instance validates against the `unevaluatedProperties` schema.
+The [`unevaluatedProperties`]({{< ref
+"2020-12/unevaluated/unevaluatedproperties" >}}) keyword is a generalisation of
+the [`additionalProperties`]({{< ref "2020-12/applicator/additionalproperties"
+>}}) keyword that considers related keywords even when they are not direct
+siblings of this keyword. More specifically, this keyword is affected by
+occurences of [`properties`]({{< ref "2020-12/applicator/properties" >}}),
+[`patternProperties`]({{< ref "2020-12/applicator/patternproperties" >}}),
+[`additionalProperties`]({{< ref "2020-12/applicator/additionalproperties"
+>}}), and [`unevaluatedProperties`]({{< ref
+"2020-12/unevaluated/unevaluatedproperties" >}}) itself as long as the evaluate
+path that led to [`unevaluatedProperties`]({{< ref
+"2020-12/unevaluated/unevaluatedproperties" >}}) is a prefix of the evaluate
+path of the others.
 
-## Evaluation
+{{<best-practice>}}
 
-It's crucial to understand what evaluation means in this context.
+There are two common use cases for this keyword, both for reducing duplication:
+(1) Elegantly describing _additional_ object properties while declaring the
+[`properties`]({{< ref "2020-12/applicator/properties" >}}) or
+[`patternProperties`]({{< ref "2020-12/applicator/patternproperties" >}})
+keywords behind conditional logic without duplicating the
+[`additionalProperties`]({{< ref "2020-12/applicator/additionalproperties"
+>}}) keyword in every possible branch. (2) Re-using 
+the [`properties`]({{< ref "2020-12/applicator/properties" >}}) and
+[`patternProperties`]({{< ref "2020-12/applicator/patternproperties" >}})
+keywords, or the [`additionalProperties`]({{< ref
+"2020-12/applicator/additionalproperties" >}}) keyword, as helpers while
+specialising the helpers with other related keywords as needed in specific
+locations without having to inline the entire helper.
 
-`unevaluatedProperties` considers annotations from `properties`, `patternProperties`, and `additionalProperties`, both as adjacent keywords and in subschemas of adjacent keywords. Additionally, it is also affected by other `unevaluatedProperties` in nested schemas (if present).
+{{</best-practice>}}
 
-- The keywords `properties`, `patternProperties`, `additionalProperties`, and `unevaluatedProperties` produce annotations for the properties they successfully validate against.
-- If any of these keywords generate an annotation for a particular property at the same instance location (independently of the schema location), that property is considered as evaluated.
-- By definition, the `unevaluatedProperties` subschema is always applied after `properties`, `patternProperties`, and `additionalProperties` subschemas.
-- As its name implies, `unevaluatedProperties` applies to any object property that has not been previously evaluated.
+{{<learning-more>}}
+
+The JSON Schema specification defines the relationship between this keyword and
+the ones that affect it in terms of annotations. However, in practice, most
+implementations avoid the use of annotations for performance reasons, as
+emitting annotations and checking the annotation values of other keywords often
+involves significant memory allocation and complex data structure traversals.
+
+The paper [Elimination of annotation dependencies in validation for Modern JSON
+Schema](https://arxiv.org/abs/2503.11288) is a comprehensive mathematical study
+of how applicators can be automatically re-written to avoid annotation
+dependencies, leading to schemas that are simpler to evaluate.
+
+{{</learning-more>}}
+
+{{<constraint-warning `object`>}}
 
 ## Examples
 
