@@ -32,8 +32,9 @@ keyword is a generalisation of the [`items`]({{< ref "2020-12/applicator/items"
 >}}) keyword that considers related keywords even when they are not direct
 siblings of this keyword. More specifically, this keyword is affected by
 occurences of [`prefixItems`]({{< ref "2020-12/applicator/prefixitems" >}}),
-[`items`]({{< ref "2020-12/applicator/items" >}}), and [`unevaluatedItems`]({{<
-ref "2020-12/unevaluated/unevaluateditems"
+[`items`]({{< ref "2020-12/applicator/items" >}}), [`contains`]({{< ref
+"2020-12/applicator/contains" >}}), and [`unevaluatedItems`]({{< ref
+"2020-12/unevaluated/unevaluateditems"
 >}}) itself, as long as the evaluate path that led to
 [`unevaluatedItems`]({{< ref "2020-12/unevaluated/unevaluateditems"
 >}}) is a _prefix_ of the evaluate path of the others.
@@ -45,13 +46,15 @@ other keyword from every other vocabulary.
 
 There are two common use cases for this keyword, both for reducing duplication:
 (1) Elegantly describing additional array items while declaring the
-[`prefixItems`]({{< ref "2020-12/applicator/prefixitems" >}}) keyword behind
+[`prefixItems`]({{< ref "2020-12/applicator/prefixitems" >}}) or
+[`contains`]({{< ref "2020-12/applicator/contains" >}}) keywords behind
 conditional logic without duplicating the [`items`]({{< ref
 "2020-12/applicator/items"
 >}}) keyword in every possible branch. (2) Re-using
 helpers that consist of the [`prefixItems`]({{< ref
-"2020-12/applicator/prefixitems" >}}) or [`items`]({{< ref
-"2020-12/applicator/items" >}}) keywords, while specialising the helpers as
+"2020-12/applicator/prefixitems" >}}), [`items`]({{< ref
+"2020-12/applicator/items" >}}), or [`contains`]({{< ref
+"2020-12/applicator/contains" >}}) keywords, while specialising the helpers as
 needed in specific locations without having to inline the entire contents of
 the helper.
 
