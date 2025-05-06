@@ -47,18 +47,18 @@ other keyword from every other vocabulary.
 {{<best-practice>}}
 
 There are two common use cases for this keyword, both for reducing duplication:
-(1) Elegantly describing _additional_ object properties while declaring the
+(1) Elegantly describing additional object properties while declaring the
 [`properties`]({{< ref "2020-12/applicator/properties" >}}) or
 [`patternProperties`]({{< ref "2020-12/applicator/patternproperties" >}})
 keywords behind conditional logic without duplicating the
 [`additionalProperties`]({{< ref "2020-12/applicator/additionalproperties"
 >}}) keyword in every possible branch. (2) Re-using 
-subschemas that consist of the [`properties`]({{< ref
-"2020-12/applicator/properties" >}}) and [`patternProperties`]({{< ref
-"2020-12/applicator/patternproperties" >}}) keywords, or the
-[`additionalProperties`]({{< ref "2020-12/applicator/additionalproperties" >}})
-keyword, as helpers while specialising the helpers with other related keywords
-as needed in specific locations without having to inline the entire helper.
+helpers that consist of the [`properties`]({{< ref
+"2020-12/applicator/properties" >}}), [`patternProperties`]({{< ref
+"2020-12/applicator/patternproperties" >}}), or [`additionalProperties`]({{<
+ref "2020-12/applicator/additionalproperties" >}}) keywords, while specialising
+the helpers as needed in specific locations without having to inline the entire
+contents of the helper.
 
 {{</best-practice>}}
 
