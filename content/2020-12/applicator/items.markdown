@@ -42,9 +42,9 @@ related:
 ---
 
 The `items` keyword restricts array instance items not described by the
-[`prefixItems`]({{< ref "2020-12/applicator/prefixitems" >}}) keyword (if any),
-to validate against the given subschema. Whether this keyword was evaluated
-against any item of the array instance is reported using annotations.
+_sibling_ [`prefixItems`]({{< ref "2020-12/applicator/prefixitems" >}}) keyword
+(if any), to validate against the given subschema. Whether this keyword was
+evaluated against any item of the array instance is reported using annotations.
 
 {{<common-pitfall>}}This keyword does not prevent an array instance from being
 empty. If needed, use the [`minItems`]({{< ref "2020-12/validation/minitems"
