@@ -27,18 +27,52 @@ related:
     keyword: unevaluatedProperties
 ---
 
-If no relevant annotations are present, the `unevaluatedItems` subschema must be applied to all locations in the array. If a boolean true value is present from any of the relevant annotations, `unevaluatedItems` is ignored. Otherwise, the subschema must be applied to any index greater than the largest annotation value for `prefixItems`, which does not appear in any annotation value for `contains`.
+The [`unevaluatedItems`]({{< ref "2020-12/unevaluated/unevaluateditems" >}})
+keyword is a generalisation of the [`items`]({{< ref "2020-12/applicator/items"
+>}}) keyword that considers related keywords even when they are not direct
+siblings of this keyword. More specifically, this keyword is affected by
+occurences of [`prefixItems`]({{< ref "2020-12/applicator/prefixitems" >}}),
+[`items`]({{< ref "2020-12/applicator/items" >}}), and [`unevaluatedItems`]({{<
+ref "2020-12/unevaluated/unevaluateditems"
+>}}) itself, as long as the evaluate path that led to
+[`unevaluatedItems`]({{< ref "2020-12/unevaluated/unevaluateditems"
+>}}) is a _prefix_ of the evaluate path of the others.
 
-## Evaluation
+Given its evaluation-dependent nature, this keyword is evaluated after every
+other keyword from every other vocabulary.
 
-It's crucial to understand what evaluation means in this context.
+{{<best-practice>}}
 
-`unevaluatedItems` considers annotations from `prefixItems`, `items`, and `contains`, both as adjacent keywords and in subschemas of adjacent keywords. Additionally, it is also affected by other `unevaluatedItems` in nested schemas (if present).
+There are two common use cases for this keyword, both for reducing duplication:
+(1) Elegantly describing additional array items while declaring the
+[`prefixItems`]({{< ref "2020-12/applicator/prefixitems" >}}) keyword behind
+conditional logic without duplicating the [`items`]({{< ref
+"2020-12/applicator/items"
+>}}) keyword in every possible branch. (2) Re-using
+helpers that consist of the [`prefixItems`]({{< ref
+"2020-12/applicator/prefixitems" >}}) or [`items`]({{< ref
+"2020-12/applicator/items" >}}) keywords, while specialising the helpers as
+needed in specific locations without having to inline the entire contents of
+the helper.
 
-- The keywords `prefixItems`, `items`, `contains` and `unevaluatedItems` produce annotations for the indexes they successfully validate against.
-- If any of these keywords generate an annotation for a particular index, that index is considered as evaluated.
-- By definition, the `unevaluatedItems` subschema is always applied after  `prefixItems`, `items`, and `contains` subschemas.
-- As its name implies, `unevaluatedItems` applies to any array index that has not been previously evaluated.
+{{</best-practice>}}
+
+{{<learning-more>}}
+
+The JSON Schema specification defines the relationship between this keyword and
+the ones that affect it in terms of annotations. However, in practice, most
+implementations avoid the use of annotations for performance reasons, as
+emitting annotations and checking the annotation values of other keywords often
+involves significant memory allocation and complex data structure traversals.
+
+The paper [Elimination of annotation dependencies in validation for Modern JSON
+Schema](https://arxiv.org/abs/2503.11288) is a comprehensive mathematical study
+of how applicators can be automatically re-written to avoid annotation
+dependencies, leading to schemas that are simpler to evaluate.
+
+{{</learning-more>}}
+
+{{<constraint-warning `array`>}}
 
 ## Examples
 
