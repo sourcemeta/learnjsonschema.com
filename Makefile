@@ -3,6 +3,7 @@
 HUGO ?= hugo
 RMRF ?= rm -rf
 NPM ?= npm
+DOCKER ?= docker
 
 node_modules: package.json package-lock.json
 	$(NPM) ci
@@ -18,3 +19,9 @@ html: node_modules
 .PHONY: clean
 clean:
 	$(RMRF) resources dist
+	$(DOCKER) system prune --force --all --volumes || true
+
+.PHONY: docker
+docker:
+	$(DOCKER) build --tag learnjsonschema .
+	$(DOCKER) run --rm --volume "$(PWD)/dist:/site/dist" learnjsonschema
