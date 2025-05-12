@@ -39,7 +39,7 @@ be created out of simpler ones. A reference may set its URI fragment to a [JSON
 Pointer](https://www.rfc-editor.org/rfc/rfc6901) that determines the
 destination of the reference after first resolving the rest of the URI.
 
-{{<common-pitfall>}} 
+{{<common-pitfall>}}
 
 **Avoid referencing other schema files using their file paths**. While some
 implementations support this by automatically constructing schema URIs that
@@ -48,9 +48,9 @@ standard and guaranteed mechanism of declaring a schema URI for identification
 and referencing purposes is through the [`$id`]({{< ref "2020-12/core/id" >}})
 keyword.
 
-{{</common-pitfall>}} 
+{{</common-pitfall>}}
 
-{{<common-pitfall>}} 
+{{<common-pitfall>}}
 
 The target of a reference must be a schema. Referencing a JSON value that is
 not unambiguously recognised as a schema leads to undefined behaviour.  This
@@ -59,7 +59,7 @@ referencing parts of a schema that a JSON Schema evaluator does not consider to
 be a subschema.  For example, referencing the contents of the [`examples`]({{<
 ref "2020-12/meta-data/examples" >}}) keyword.
 
-{{</common-pitfall>}} 
+{{</common-pitfall>}}
 
 References are either _internal_ (pointing at schemas within the same schema
 definition) or _external_ (pointing at schema resources outside the given
@@ -71,19 +71,19 @@ are notable examples of the latter. A relative reference from a schema embedded
 in an OpenAPI specification is resolved from the root of the API specification,
 and not from the root of the schema.
 
-{{<best-practice>}} 
+{{<best-practice>}}
 
 It is highly recommended to make use of _external_ references to break down
 complex monolithic schemas into smaller schema files. However, for performance
 and integrity reasons, avoid resolving these external schemas (i.e.  over HTTP
-or the filesystem) at runtime. 
+or the filesystem) at runtime.
 
 You can automatically inline external references at build time using the
 [`jsonschema
 bundle`](https://github.com/sourcemeta/jsonschema/blob/main/docs/bundle.markdown)
 command.
 
-{{</best-practice>}} 
+{{</best-practice>}}
 
 Note that a reference to an absolute URI does not necessarily mean that the
 reference is external. Conversely, a reference to a relative URI does not
@@ -97,7 +97,7 @@ is considered internal. This internal-first lookup is what enables the standard
 ](https://json-schema.org/blog/posts/bundling-json-schema-compound-documents)
 process.
 
-{{<learning-more>}} 
+{{<learning-more>}}
 
 If you are having a hard time understanding references and some of its more
 subtle scenarios (like base URI resolution), it is probably because you don't
@@ -116,8 +116,8 @@ representation](https://www.rfc-editor.org/rfc/rfc6901#section-6).
 
 {{</learning-more>}}
 
-To debug references and how JSON Schema is interpreting your specific relative
-URIs, try the [`jsonschema
+To debug references and how JSON Schema is interpreting your relative URIs, try
+the [`jsonschema
 inspect`](https://github.com/sourcemeta/jsonschema/blob/main/docs/inspect.markdown)
 command. This command prints detailed information about each schema reference
 and of each location of the schema. For example:
@@ -142,22 +142,22 @@ $ jsonschema inspect schema.json
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.com/my-schema",
   "properties": {
-    "byRelativeFragmentPointer": { 
+    "byRelativeFragmentPointer": {
       "$ref": "#/$defs/helper"
     },
-    "byAbsoluteFragmentPointer": { 
+    "byAbsoluteFragmentPointer": {
       "$ref": "https://example.com/my-schema#/$defs/helper"
     },
-    "byRelativeURI": { 
+    "byRelativeURI": {
       "$ref": "my-helper"
     },
-    "byRelativeRootPathURI": { 
+    "byRelativeRootPathURI": {
       "$ref": "/my-helper"
     },
-    "byRelativeBackslashURI": { 
+    "byRelativeBackslashURI": {
       "$ref": "my-schema/../my-helper"
     },
-    "byAbsoluteURI": { 
+    "byAbsoluteURI": {
       "$ref": "https://example.com/my-helper"
     }
   },
@@ -175,16 +175,16 @@ $ jsonschema inspect schema.json
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.com/my-schema",
   "properties": {
-    "byAbsoluteURI": { 
+    "byAbsoluteURI": {
       "$ref": "https://example.com/my-other-schema"
     },
-    "byRelativeURI": { 
+    "byRelativeURI": {
       "$ref": "my-other-schema"
     },
-    "byRelativeRootPathURI": { 
+    "byRelativeRootPathURI": {
       "$ref": "/my-other-schema"
     },
-    "byRelativeBackslashURI": { 
+    "byRelativeBackslashURI": {
       "$ref": "my-schema/../my-other-schema"
     }
   }
@@ -195,7 +195,7 @@ $ jsonschema inspect schema.json
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "properties": {
-    "byAbsoluteURI": { 
+    "byAbsoluteURI": {
       "$ref": "urn:example:my-other-schema"
     }
   }

@@ -65,6 +65,40 @@ itself.
 
 {{</common-pitfall>}}
 
+To debug anchors and how JSON Schema is interpreting your relative URIs, try
+the [`jsonschema
+inspect`](https://github.com/sourcemeta/jsonschema/blob/main/docs/inspect.markdown)
+command. This command prints detailed information about each schema reference
+and of each anchor in the schema. For example:
+
+```sh
+$ jsonschema inspect schema.json
+
+...
+
+(ANCHOR) URI: https://example.com/person#internal-string
+    Type              : Static
+    Root              : https://example.com/person
+    Pointer           : /$defs/nonEmptyString
+    Base              : https://example.com/person
+    Relative Pointer  : /$defs/nonEmptyString
+    Dialect           : https://json-schema.org/draft/2020-12/schema
+    Base Dialect      : https://json-schema.org/draft/2020-12/schema
+    Parent            :
+    Instance Location : /firstName
+    Instance Location : /lastName
+
+...
+
+(REFERENCE) ORIGIN: /properties/firstName/$ref
+    Type              : Static
+    Destination       : https://example.com/person#internal-string
+    - (w/o fragment)  : https://example.com/person
+    - (fragment)      : internal-string
+
+...
+```
+
 ## Examples
 
 {{<schema `A schema that declares a helper schema associated with a location-independent identifier`>}}
