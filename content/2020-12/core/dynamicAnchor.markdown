@@ -38,7 +38,7 @@ traversed so far.
 In other words, **think of a schema declaring a dynamic anchor as offering an
 overridable extension hook**.  For example, a schema that declares a dynamic
 anchor `foo` says: _"I allow any parent schema to re-define this `foo`
-subschema as they desire"_, while keeping the rest of the schema intact. 
+subschema as they desire"_, while keeping the rest of the schema intact.
 
 {{<best-practice>}}
 
@@ -60,7 +60,7 @@ The official JSON Schema meta-schemas define, by convention, a dynamic anchor
 called `meta`. This is a fundamental building block for schema extensibility.
 The meta-schema of every vocabulary (official or third-party) hooks into this
 dynamic anchor to extend the recursive definition of what constitutes a valid
-schema for the given dialect. 
+schema for the given dialect.
 
 More specifically, by relying on the `meta` dynamic anchor, a vocabulary
 meta-schema can validate the presence of a new keyword and have those
@@ -78,41 +78,96 @@ informally referred to as the _bookending requirement_.
 
 {{</common-pitfall>}}
 
+To debug which dynamic anchor the evaluation process is jumping to, try the
+[`jsonschema
+validate`](https://github.com/sourcemeta/jsonschema/blob/main/docs/validate.markdown)
+command with the `--trace` option. This option prints a trace of every step in
+the evaluation process alongside the corresponding keywords and their
+respective locations, letting you know which destination was preferred when
+encountering a dynamic reference. For example:
+
+```sh
+$ jsonschema validate string-list.json instance.json --resolve generic-list.json --trace
+...
+
+-> (push) "/$ref/items/$dynamicRef" (ControlDynamicAnchorJump)
+   at "/0"
+   at keyword location "https://example.com/generic-list#/items/$dynamicRef"
+   at vocabulary "https://json-schema.org/draft/2020-12/vocab/core"
+
+-> (push) "/$ref/items/$dynamicRef/type" (AssertionTypeStrict)
+   at "/0"
+   at keyword location "https://example.com/string-list#/$defs/generic-list-item/type"
+   at vocabulary "https://json-schema.org/draft/2020-12/vocab/validation"
+
+...
+```
+
 ## Examples
 
-{{<schema `A '$dynamicRef' resolves to the first '$dynamicAnchor' still in scope that is encountered when the schema is evaluated`>}}
+{{<schema `A generic schema that describes an array where the items definition (by default anything) can be overriden through a dynamic anchor`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/root",
-  "$ref": "list",
+  "$id": "https://example.com/generic-list",
+  "type": "array",
+  "items": {
+    "$dynamicRef": "#generic-list-item"
+  },
   "$defs": {
-    "foo": {
-      "$dynamicAnchor": "items",
-      "type": "string"
-    },
-    "list": {
-      "$id": "list",
-      "type": "array",
-      "items": {
-        "$dynamicRef": "#items"
-      },
-      "$defs": {
-        "items": {
-          "$dynamicAnchor": "items",
-          "type": "number"
-        }
-      }
+    "default": {
+      "$comment": "This is a default declaration to satisfy the bookending requirement",
+      "$dynamicAnchor": "generic-list-item"
     }
   }
 }
 {{</schema>}}
 
-{{<instance-pass `An array of strings is valid`>}}
-[ "foo", "bar" ]
+{{<instance-pass `An empty array value is valid`>}}
+[]
 {{</instance-pass>}}
 
-{{<instance-fail `An array containing non-strings is invalid`>}}
-[ "foo", 42 ]
+{{<instance-pass `An array value with arbitrary items is valid`>}}
+[ 1, "foo", false ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/items", "instance": "", "value": true }
+{{</instance-annotation>}}
+
+{{<instance-fail `A non-array value is invalid`>}}
+"Hello World"
 {{</instance-fail>}}
 
-_**Note:** A `$dynamicRef` referencing a `$dynamicAnchor` within the same schema resource functions similarly to a standard `$ref` referencing an `$anchor`. Similarly, a `$dynamicRef` referencing an `$anchor` within the same schema resource behaves like a typical `$ref` referencing an `$anchor`. Likewise, a `$ref` targeting a `$dynamicAnchor` within the same schema resource behaves like a regular `$ref` targeting an `$anchor`._
+{{<schema `A schema that specialises the previous generic schema to declare that array items must be strings`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/string-list",
+  "$ref": "https://example.com/generic-list",
+  "$defs": {
+    "generic-list-item": {
+      "$dynamicAnchor": "generic-list-item",
+      "type": "string"
+    }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `An empty array value is valid`>}}
+[]
+{{</instance-pass>}}
+
+{{<instance-fail `An array value with arbitrary items is invalid`>}}
+[ 1, "foo", false ]
+{{</instance-fail>}}
+
+{{<instance-pass `An array value with string items is valid`>}}
+[ "foo", "bar", "baz" ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/$ref/items", "instance": "", "value": true }
+{{</instance-annotation>}}
+
+{{<instance-fail `A non-array value is invalid`>}}
+"Hello World"
+{{</instance-fail>}}
