@@ -12,6 +12,4 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - run: sudo apt update
-      - run: sudo apt install -y hugo
-      - run: make html
+      - run: make docker
