@@ -24,169 +24,155 @@ related:
     keyword: $defs
 ---
 
-The `$dynamicRef` keyword is a dynamic applicator that allows for runtime resolution of schema references. Unlike the static `$ref`, which resolves the referenced schema at schema load time, `$dynamicRef` defers full resolution until the instance is evaluated. It attempts to resolve the given fragment based on the dynamic scope at that given point in time.
-- This keyword is particularly useful for handling recursive schemas where the schema references itself or where the structure of the schema may change at runtime.
-- If the `$dynamicRef` includes more than just a fragment, the URI except for the fragment is statically resolved first, and then only the fragment is dynamically resolved.
-- Notably, official meta-schemas use this mechanism themselves for defining vocabularies!
+The [`$dynamicRef`]({{< ref "2020-12/core/dynamicref" >}}) keyword is an
+extension of the [`$ref`]({{< ref "2020-12/core/ref" >}}) keyword that enables
+a schema to reference another schema by its dynamic anchor, as declared by the
+[`$dynamicAnchor`]({{< ref "2020-12/core/dynamicanchor" >}}) keyword.  When
+resolving a dynamic anchor using this keyword, the base URI of the origin is
+not considered. Instead, the evaluator looks in the [dynamic
+scope](https://json-schema.org/blog/posts/dynamicref-and-generics) and jumps to
+the first encountered occurence of the given dynamic anchor in the [stack of
+schema
+resources](https://json-schema.org/blog/posts/understanding-lexical-dynamic-scopes#the-dynamic-scope-as-a-stack)
+traversed so far.
 
-{{<learning-more>}} URIs play a central role in JSON Schema. Going through the URI [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986) specification is a must for gaining a deeper understanding of references, identifiers, and
-anchors. More specifically, we recommend carefully studying [URI resolution](https://datatracker.ietf.org/doc/html/rfc3986#section-5), URLs vs URNs, and the difference between a URI and a URI Reference.
+In other words, **think of a schema declaring a dynamic reference as a
+reference that considers that its destination might have been re-defined by a
+parent schema**.  For example, a schema that dynamically references an anchor
+`foo` says: _"jump to the location set by the `foo` anchor, but if there are
+overriden variants of it, jump to the first of those instead"_.
 
-You may also find these blog posts helpful for gaining a deeper understanding of dynamic references.
-* [Understanding JSON Schema Lexical and Dynamic Scopes](https://json-schema.org/blog/posts/understanding-lexical-dynamic-scopes)
-* [Using Dynamic References to Support Generic Types](https://json-schema.org/blog/posts/dynamicref-and-generics)
+{{<best-practice>}}
+
+Use dynamic references when you need to define generic and extensible schemas.
+In fact, the dynamic referencing mechanism is a direct translation of generic
+programming facilities like [C++ template
+parameters](https://en.cppreference.com/w/cpp/language/template_parameters) and
+[Java generics](https://en.wikipedia.org/wiki/Generics_in_Java) to JSON Schema.
+See the blog post [Using Dynamic References to Support Generic
+Types](https://json-schema.org/blog/posts/dynamicref-and-generics#using-dynamic-references-to-support-generic-types)
+by Greg Dennis (co-author of the JSON Schema specification) for a hands-on
+discussion of this concept.
+
+{{</best-practice>}}
+
+{{<learning-more>}}
+
+The official JSON Schema meta-schemas define, by convention, a dynamic anchor
+called `meta`. This is a fundamental building block for schema extensibility.
+The meta-schema of every vocabulary (official or third-party) hooks into this
+dynamic anchor to extend the recursive definition of what constitutes a valid
+schema for the given dialect.
+
+More specifically, by relying on the `meta` dynamic anchor, a vocabulary
+meta-schema can validate the presence of a new keyword and have those
+constraints be automatically discovered and applied by any applicator of any
+other vocabulary (even future ones).
+
 {{</learning-more>}}
 
 {{<common-pitfall>}}
-**Bookending:** The bookending requirement means that when you use a `$dynamicRef`, the JSON Schema processor needs to find a matching `$dynamicAnchor` within the target schema resource, even if the target is different from the destination schema. This ensures that the reference resolves correctly by matching the actual anchor defined in the target schema resource, preventing unresolvable references due to scope issues.
+
+As a fallback, the specification allows the use of this keyword to reference
+static resources and non-dynamic anchors. However, to avoid confusion and keep
+your schemas easy to understand, don't rely on this fallback behaviour. Only
+make use of this keyword to reference dynamic anchors set by the
+[`$dynamicAnchor`]({{< ref "2020-12/core/dynamicanchor" >}}) keyword, without
+making use of any URI component (other than the fragment) as part of the
+reference.
+
 {{</common-pitfall>}}
+
+To debug which dynamic anchor the evaluation process is jumping to, try the
+[`jsonschema
+validate`](https://github.com/sourcemeta/jsonschema/blob/main/docs/validate.markdown)
+command with the `--trace` option. This option prints a trace of every step in
+the evaluation process alongside the corresponding keywords and their
+respective locations, letting you know which destination was preferred when
+encountering a dynamic reference. For example:
+
+```sh
+$ jsonschema validate string-list.json instance.json --resolve generic-list.json --trace
+...
+
+-> (push) "/$ref/items/$dynamicRef" (ControlDynamicAnchorJump)
+   at "/0"
+   at keyword location "https://example.com/generic-list#/items/$dynamicRef"
+   at vocabulary "https://json-schema.org/draft/2020-12/vocab/core"
+
+-> (push) "/$ref/items/$dynamicRef/type" (AssertionTypeStrict)
+   at "/0"
+   at keyword location "https://example.com/string-list#/$defs/generic-list-item/type"
+   at vocabulary "https://json-schema.org/draft/2020-12/vocab/validation"
+
+...
+```
 
 ## Examples
 
-{{<schema `After leaving a dynamic scope, '$dynamicAnchor' is not used by a '$dynamicRef'`>}}
+{{<schema `A generic schema that describes an array where the items definition (by default anything) can be overriden through a dynamic anchor`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/root",
-  "if": {
-    "$id": "firstScope",
-    "$defs": {
-      "thingy": {
-        "$comment": "this is firstScope#thingy",
-        "$dynamicAnchor": "thingy",
-        "type": "number"
-      }
-    }
-  },
-  "then": {
-    "$id": "secondScope",
-    "$ref": "start",
-    "$defs": {
-      "thingy": {
-        "$comment": "this is secondScope#thingy, the final destination of the $dynamicRef",
-        "$dynamicAnchor": "thingy",
-        "type": "null"
-      }
-    }
+  "$id": "https://example.com/generic-list",
+  "type": "array",
+  "items": {
+    "$dynamicRef": "#generic-list-item"
   },
   "$defs": {
-    "start": {
-      "$comment": "this is the landing spot from $ref",
-      "$id": "start",
-      "$dynamicRef": "innerScope#thingy"
-    },
-    "thingy": {
-      "$comment": "this is the first stop for the $dynamicRef",
-      "$id": "innerScope",
-      "$dynamicAnchor": "thingy",
+    "default": {
+      "$comment": "This is a default declaration to satisfy the bookending requirement",
+      "$dynamicAnchor": "generic-list-item"
+    }
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `An empty array value is valid`>}}
+[]
+{{</instance-pass>}}
+
+{{<instance-pass `An array value with arbitrary items is valid`>}}
+[ 1, "foo", false ]
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/items", "instance": "", "value": true }
+{{</instance-annotation>}}
+
+{{<instance-fail `A non-array value is invalid`>}}
+"Hello World"
+{{</instance-fail>}}
+
+{{<schema `A schema that specialises the previous generic schema to declare that array items must be strings`>}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/string-list",
+  "$ref": "https://example.com/generic-list",
+  "$defs": {
+    "generic-list-item": {
+      "$dynamicAnchor": "generic-list-item",
       "type": "string"
     }
   }
 }
 {{</schema>}}
 
-{{<instance-fail `String matches '/$defs/thingy', but the '$dynamicRef' does not stop here`>}}
-"a string"
-{{</instance-fail>}}
-
-{{<instance-fail `firstScope is not in dynamic scope for the '$dynamicRef'`>}}
-42
-{{</instance-fail>}}
-
-{{<instance-pass `'/then/$defs/thingy' is the final stop for the '$dynamicRef'`>}}
-null
+{{<instance-pass `An empty array value is valid`>}}
+[]
 {{</instance-pass>}}
 
-- The evaluation begins with the top-level schema, where the dynamic scope is the root schema resource.
-  - **Dynamic Scope:** `https://example.com/root`
-
-- Upon encountering the `if` applicator, a new schema resource (`https://example.com/firstScope`) is declared and added to the stack, expanding the dynamic scope.
-  - **Dynamic Scope:** `https://example.com/root` --> `https://example.com/firstScope`
-
-- Since `https://example.com/firstScope` doesn't reference any other schema resource, the evaluation of the `if` schema completes, and the stack unwinds, returning to the root schema resource.
-  - **Dynamic Scope:** `https://example.com/root`
-
-- The successful validation by the `if` subschema triggers entry into the `then` applicator, introducing another schema resource (`https://example.com/secondScope`), thus extending the dynamic scope.
-  - **Dynamic Scope:** `https://example.com/root` --> `https://example.com/secondScope`
-
-- Within the `then` subschema, a reference to another schema resource (`https://example.com/start`) further enriches the dynamic scope.
-  - **Dynamic Scope:** `https://example.com/root` --> `https://example.com/secondScope` --> `https://example.com/start`
-
-- Additionally, within the `then` subschema, a dynamic reference is made to another schema resource (`https://example.com/innerScope#thingy`). While the initial part of the URI is resolved statically to `/$defs/thingy`, the inclusion of `#thingy` fragment reults in the final resolution to `/then/$defs/thingy` because the first dynamic anchor encountered in the current dynamic scope is at `/then/$defs/thingy`. So, only a null value is valid in this case.
-
-**Note:** _The non-fragment part is always statically resolved, while the fragment may be dynamically resolved._
-
-{{<schema `Schema with '$dynamicRef' and '$dynamicAnchor' keywords in the same schema resource`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "required": [ "name", "age", "address" ],
-  "properties": {
-    "name": { "$dynamicRef": "#name" },
-    "age": { "$dynamicRef": "#age" },
-    "address": { "$ref": "#address" }
-  },
-  "$defs": {
-    "name": {
-      "$dynamicAnchor": "name",
-      "type": "string",
-      "minLength": 3
-    },
-    "age": {
-      "$anchor": "age",
-      "type": "integer"
-    },
-    "address": {
-      "$dynamicAnchor": "address",
-      "type": "string",
-      "maxLength": 50
-    }
-  }
-}
-{{</schema>}}
-
-{{<instance-pass `An instance adhering to the above schema is valid`>}}
-{
-  "name": "John",
-  "age": 35,
-  "address": "1234 Elm Street, Springfield, IL 62701, USA"
-}
-{{</instance-pass>}}
-
-{{<instance-fail `Required properties must be present`>}}
-{ "name": "Doe", "age": 61 }
+{{<instance-fail `An array value with arbitrary items is invalid`>}}
+[ 1, "foo", false ]
 {{</instance-fail>}}
 
-* _A `$dynamicRef` referencing a `$dynamicAnchor` within the same schema resource functions similarly to a standard `$ref` referencing an `$anchor`. Similarly, a `$dynamicRef` referencing an `$anchor` within the same schema resource behaves like a typical `$ref` referencing an `$anchor`. Likewise, a `$ref` targeting a `$dynamicAnchor` within the same schema resource behaves like a regular `$ref` targeting an `$anchor`._
-
-{{<schema `Schema with multiple '$dynamicAnchor' set to same value`>}}
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/root",
-  "$ref": "list",
-  "$defs": {
-    "foo": {
-      "$dynamicAnchor": "items",
-      "type": "string"
-    },
-    "list": {
-      "$id": "list",
-      "items": { "$dynamicRef": "#items" },
-      "$defs": {
-        "items": {
-          "$dynamicAnchor": "items",
-          "type": "integer"
-        }
-      }
-    }
-  }
-}
-{{</schema>}}
-
-{{<instance-pass `An instance adhering to the above schema is valid`>}}
-[ "foo", "bar" ]
+{{<instance-pass `An array value with string items is valid`>}}
+[ "foo", "bar", "baz" ]
 {{</instance-pass>}}
 
-{{<instance-fail `A non-string array is invalid`>}}
-[ 11, 22 ]
-{{</instance-fail>}}
+{{<instance-annotation>}}
+{ "keyword": "/$ref/items", "instance": "", "value": true }
+{{</instance-annotation>}}
 
-* _A `$dynamicRef` resolves to the first `$dynamicAnchor` still in scope that is encountered when the schema is evaluated._
+{{<instance-fail `A non-array value is invalid`>}}
+"Hello World"
+{{</instance-fail>}}
