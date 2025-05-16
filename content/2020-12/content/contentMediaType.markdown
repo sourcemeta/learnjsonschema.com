@@ -75,9 +75,9 @@ types. You can find the complete list at
 In the interest of interoperability, avoid using custom unregistered content
 media types. If required, register a new content media type with the IANA
 [here](https://www.iana.org/form/media-types).  Alternatively, [RFC 2046
-Section 6.3](https://datatracker.ietf.org/doc/html/rfc2046) suggests that if a
-custom unregistered content media type is really needed, it must live within a
-registered category and prefixed with `x-`.  For example,
+Section 6](https://datatracker.ietf.org/doc/html/rfc2046#section-6) suggests
+that if a custom unregistered content media type is really needed, it must live
+within a registered category and prefixed with `x-`.  For example,
 `application/x-my-custom-media-type`.
 
 {{<constraint-warning `string`>}}
