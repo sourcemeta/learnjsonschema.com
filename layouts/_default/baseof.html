@@ -20,7 +20,6 @@
     {{ $style := resources.Get "main.scss" | toCSS (dict "outputStyle" "compressed") | minify }}
 		<link rel="stylesheet" href="{{ $style.Permalink }}">
 
-    <script defer data-domain="learnjsonschema.com" src="https://plausible.io/js/script.outbound-links.js"></script>
     <script defer src="https://cdn.telemetrydeck.com/websdk/telemetrydeck.min.js" data-app-id="AD0CE63D-830F-45D4-A729-68CE29546ACC"></script>
 
     <script type="application/ld+json">
