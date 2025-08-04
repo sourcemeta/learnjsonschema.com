@@ -50,6 +50,16 @@ Bundling](https://github.com/sourcemeta/jsonschema/blob/main/docs/bundle.markdow
 to inline externally referenced schemas that might be based on different
 dialects of JSON Schema.
 
+{{<common-pitfall>}}JSON Schema prohibits referencing meta-schemas using
+relative URIs. The fundamental reason for this is that resolving the
+meta-schema is necessary for correctly determining the base URI of the schema,
+from which a relative meta-schema reference would be resolved, introducing a
+circular problem.
+
+A common occurrence of this issue is setting the `$schema` keyword to a
+relative path, which is again invalid according to the
+specification.{{</common-pitfall>}}
+
 {{<common-pitfall>}}JSON Schema prohibits the use of the this keyword on
 arbitrary subschemas that do not represent schema resources. It can only be
 present at the root of the schema (an implicit schema resource) or as a sibling
