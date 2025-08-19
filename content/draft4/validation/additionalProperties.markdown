@@ -11,7 +11,7 @@ tests:
   - draft4/additionalProperties.json
 default:
   value: "{}"
-introduced_in: draft1
+introduced_in: draft0
 index: -4
 interdependencies:
   - vocabulary: validation

@@ -12,7 +12,7 @@ tests:
 default:
   value: "{}"
 index: -998
-introduced_in: draft1
+introduced_in: draft0
 annotation:
    description: The set of instance property names validated by this keyword's subschema
    kind: [ "array" ]

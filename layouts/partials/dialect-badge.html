@@ -28,6 +28,9 @@
 {{ else if eq (.name) "draft1" }}
   <span class="badge text-bg-secondary"
     data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)">Draft 1</span>
+{{ else if eq (.name) "draft0" }}
+  <span class="badge text-bg-secondary"
+    data-bs-toggle="tooltip" data-bs-title="This dialect has not been documented on this site (yet)">Draft 0</span>
 {{ else }}
   {{ errorf "Unrecognized dialect: %q" .name }}
 {{ end }}

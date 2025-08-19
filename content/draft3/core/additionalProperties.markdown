@@ -11,7 +11,7 @@ tests:
   - draft3/additionalProperties.json
 default:
   value: "{}"
-introduced_in: draft1
+introduced_in: draft0
 index: -99987
 interdependencies:
   - vocabulary: core
