@@ -40,3 +40,140 @@ related:
   - vocabulary: applicator
     keyword: unevaluatedProperties
 ---
+
+The `additionalProperties` keyword restricts object instance properties not
+described by the _sibling_ [`properties`]({{< ref
+"2019-09/applicator/properties"
+>}}) and [`patternProperties`]({{< ref "2019-09/applicator/patternproperties"
+>}}) keywords (if any), to validate against the given subschema. Information
+about the properties that this keyword was evaluated for is reported using
+annotations.
+
+{{<common-pitfall>}}The use of the [`properties`]({{< ref
+"2019-09/applicator/properties" >}}) keyword **does not prevent the presence of
+other properties** in the object instance and **does not enforce the presence
+of the declared properties**. In other words, additional data that is not
+explicitly prohibited is permitted by default. This is intended behaviour to
+ease schema evolution (open schemas are backwards compatible by default) and to
+enable highly-expressive constraint-driven schemas.
+
+If you want to restrict instances to only contain the properties you declared,
+you must set this keyword to the boolean schema `false`, and if you want to
+enforce the presence of certain properties, you must use the [`required`]({{<
+ref "2019-09/validation/required" >}}) keyword accordingly.
+{{</common-pitfall>}}
+
+{{<learning-more>}}While the most common use of this keyword is setting it to
+the boolean schema `false` to prevent additional properties, it is possible to
+set it to a satisfiable schema. Doing this, while omitting the
+[`properties`]({{< ref "2019-09/applicator/properties" >}}) and
+[`patternProperties`]({{< ref "2019-09/applicator/patternproperties" >}})
+keywords, is an elegant way of describing how the value of every property in
+the object instance must look like independently of its
+name.{{</learning-more>}}
+
+{{<constraint-warning `object`>}}
+
+## Examples
+
+{{<schema `A schema that constrains object instances to not define additional properties`>}}
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "properties": {
+    "foo": { "type": "string" }
+  },
+  "patternProperties": {
+    "^x-": { "type": "integer" }
+  },
+  "additionalProperties": false
+}
+{{</schema>}}
+
+{{<instance-pass `An object value that defines properties that only match static and regular expression definitions is valid`>}}
+{ "foo": "bar", "x-test": 2 }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/properties", "instance": "", "value": [ "foo" ] }
+{ "keyword": "/patternProperties", "instance": "", "value": [ "x-test" ] }
+{{</instance-annotation>}}
+
+{{<instance-fail `An object value that defines valid properties and also defines additional properties is invalid`>}}
+{ "foo": "bar", "x-test": 2, "extra": true }
+{{</instance-fail>}}
+
+{{<instance-fail `An object value that only defines additional properties is invalid`>}}
+{ "extra": true, "random": 1234 }
+{{</instance-fail>}}
+
+{{<instance-pass `An empty object value is valid`>}}
+{}
+{{</instance-pass>}}
+
+{{<instance-pass `A non-object value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
+
+{{<schema `A schema that constrains object instances to only define integer properties`>}}
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "additionalProperties": { "type": "integer" }
+}
+{{</schema>}}
+
+{{<instance-pass `An object value that only defines integer properties is valid`>}}
+{ "foo": 1, "bar": 2, "baz": 3 }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/additionalProperties", "instance": "", "value": [ "foo", "bar", "baz" ] }
+{{</instance-annotation>}}
+
+{{<instance-fail `An object value that defines at least one non-integer property is invalid`>}}
+{ "foo": 1, "name": "John Doe" }
+{{</instance-fail>}}
+
+{{<instance-pass `An empty object value is valid`>}}
+{}
+{{</instance-pass>}}
+
+{{<instance-pass `A non-object value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
+
+{{<schema `A schema that constrains object instances to define boolean additional properties`>}}
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "properties": {
+    "foo": { "type": "string" }
+  },
+  "patternProperties": {
+    "^x-": { "type": "integer" }
+  },
+  "additionalProperties": {
+    "type": "boolean"
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `An object value that defines valid properties and boolean additional properties is valid`>}}
+{ "foo": "bar", "x-test": 2, "extra": true }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/properties", "instance": "", "value": [ "foo" ] }
+{ "keyword": "/patternProperties", "instance": "", "value": [ "x-test" ] }
+{ "keyword": "/additionalProperties", "instance": "", "value": [ "extra" ] }
+{{</instance-annotation>}}
+
+{{<instance-fail `An object value that defines valid properties and also defines non-boolean additional properties is invalid`>}}
+{ "foo": "bar", "x-test": 2, "extra": "should be a boolean" }
+{{</instance-fail>}}
+
+{{<instance-pass `An empty object value is valid`>}}
+{}
+{{</instance-pass>}}
+
+{{<instance-pass `A non-object value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
