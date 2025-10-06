@@ -28,23 +28,18 @@ related:
     keyword: not
 ---
 
-The {{<link keyword="allOf" vocabulary="validation">}} keyword restricts
+The [`allOf`]({{< ref "draft7/validation/allof" >}}) keyword restricts
 instances to validate against _every_ given subschema. This keyword can be
 thought of as a [logical
 conjunction](https://en.wikipedia.org/wiki/Logical_conjunction) (AND)
 operation, as instances are valid if they satisfy every constraint of every
 subschema (the intersection of the constraints).
 
-{{<common-pitfall>}} Note that in JSON Schema [Draft 7](/draft7) and earlier
-versions, any subschema declaring the `$ref` keyword is considered to be a
-_reference object_ and any other sibling keyword will be silently ignored. To
-avoid this, wrap subschemas with references that make use of other keywords
-using the [`allOf`]({{< ref "draft7/validation/allOf" >}}) keyword. {{</common-pitfall>}}
-
-{{<best-practice>}}This keyword typically has a single use case: combining one
-or more schemas through the use of (internal or external) references. If this
-is not the case, prefer elevating the keywords of every subschema to the outer
-schema and avoid using this keyword.  {{</best-practice>}}
+{{<best-practice>}}This keyword typically has a single use case: serving as an
+artificial wrapper for [`$ref`]({{< ref "draft7/core/ref" >}}) keywords, to
+avoid references overriding sibling keywords. If this is not the case, prefer
+elevating the keywords of every subschema to the outer schema and avoid using
+this keyword.  {{</best-practice>}}
 
 This keyword is equivalent to the `&&` operator found in most programming
 languages. For example:
@@ -124,10 +119,10 @@ result of this keyword given 3 subschemas: A, B, and C.
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "allOf": [
-    { "$ref": "#/$defs/foo" },
-    { "$ref": "#/$defs/bar" }
+    { "$ref": "#/definitions/foo" },
+    { "$ref": "#/definitions/bar" }
   ],
-  "$defs": {
+  "definitions": {
     "foo": { "type": "number" },
     "bar": { "type": "integer" }
   }

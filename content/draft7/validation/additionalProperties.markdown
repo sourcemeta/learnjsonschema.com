@@ -31,11 +31,11 @@ related:
     keyword: maxProperties
 ---
 
-The `additionalProperties` keyword restricts object instance properties not
-described by the _sibling_ [`properties`]({{< ref
-"draft7/validation/properties"
->}}) and [`patternProperties`]({{< ref "draft7/validation/patternproperties"
->}}) keywords (if any), to validate against the given subschema.
+The [`additionalProperties`]({{< ref "draft7/validation/additionalproperties"
+>}}) keyword restricts object instance properties not described by the _sibling_
+[`properties`]({{< ref "draft7/validation/properties" >}}) and
+[`patternProperties`]({{< ref "draft7/validation/patternproperties" >}})
+keywords (if any), to validate against the given subschema.
 
 {{<common-pitfall>}}The use of the [`properties`]({{< ref
 "draft7/validation/properties" >}}) keyword **does not prevent the presence of
