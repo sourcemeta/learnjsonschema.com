@@ -22,7 +22,7 @@ related:
     keyword: contains
 ---
 
-The `maxItems` keyword restricts array instances to consists of an inclusive
+The [`maxItems`]({{< ref "2020-12/validation/maxItems" >}}) keyword restricts array instances to consists of an inclusive
 maximum numbers of items.
 
 {{<common-pitfall>}} The presence of this keyword does not depend on the

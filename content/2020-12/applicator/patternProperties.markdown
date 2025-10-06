@@ -1,7 +1,7 @@
 ---
 keyword: "patternProperties"
 signature: "Object<String, Schema>"
-value: This keyword must be set to an object where each key is a valid regular expression, preferrably using the [ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) flavour, and each value is a valid JSON Schema
+value: This keyword must be set to an object where each key is a valid regular expression, preferably using the [ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) flavour, and each value is a valid JSON Schema
 summary: "Validation succeeds if, for each instance name that matches any regular expressions that appear as a property name in this keyword's value, the child instance for that name successfully validates against each schema that corresponds to a matching regular expression."
 kind: [ "applicator", "annotation" ]
 instance: [ "object" ]
@@ -42,10 +42,11 @@ related:
     keyword: unevaluatedProperties
 ---
 
-The `patternProperties` keyword restricts properties of an object instance that
-match certain regular expressions to match their corresponding subschemas
-definitions. Information about the properties that this keyword was evaluated
-for is reported using annotations.
+The [`patternProperties`]({{< ref "2020-12/applicator/patternProperties" >}}) keyword
+restricts properties of an object instance that match certain regular
+expressions to match their corresponding subschemas definitions. Information
+about the properties that this keyword was evaluated for is reported using
+annotations.
 
 {{<common-pitfall>}} This keyword is evaluated independently of the
 [`properties`]({{< ref "2020-12/applicator/properties" >}}) keyword. If an

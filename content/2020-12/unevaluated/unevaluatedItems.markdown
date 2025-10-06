@@ -31,7 +31,7 @@ The [`unevaluatedItems`]({{< ref "2020-12/unevaluated/unevaluateditems" >}})
 keyword is a generalisation of the [`items`]({{< ref "2020-12/applicator/items"
 >}}) keyword that considers related keywords even when they are not direct
 siblings of this keyword. More specifically, this keyword is affected by
-occurences of [`prefixItems`]({{< ref "2020-12/applicator/prefixitems" >}}),
+occurrences of [`prefixItems`]({{< ref "2020-12/applicator/prefixitems" >}}),
 [`items`]({{< ref "2020-12/applicator/items" >}}), [`contains`]({{< ref
 "2020-12/applicator/contains" >}}), and [`unevaluatedItems`]({{< ref
 "2020-12/unevaluated/unevaluateditems"
@@ -50,7 +50,7 @@ There are two common use cases for this keyword, both for reducing duplication:
 [`contains`]({{< ref "2020-12/applicator/contains" >}}) keywords behind
 conditional logic without duplicating the [`items`]({{< ref
 "2020-12/applicator/items"
->}}) keyword in every possible branch. (2) Re-using
+>}}) keyword in every possible branch. (2) Reusing
 helpers that consist of the [`prefixItems`]({{< ref
 "2020-12/applicator/prefixitems" >}}), [`items`]({{< ref
 "2020-12/applicator/items" >}}), or [`contains`]({{< ref

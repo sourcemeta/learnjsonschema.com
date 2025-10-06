@@ -33,7 +33,7 @@ subschema (the intersection of the constraints).
 versions, any subschema declaring the `$ref` keyword is considered to be a
 _reference object_ and any other sibling keyword will be silently ignored. To
 avoid this, wrap subschemas with references that make use of other keywords
-using the [`allOf`](../../validation/allOf) keyword. {{</common-pitfall>}}
+using the [`allOf`]({{< ref "draft6/validation/allOf" >}}) keyword. {{</common-pitfall>}}
 
 {{<best-practice>}}This keyword typically has a single use case: combining one
 or more schemas through the use of (internal or external) references. If this

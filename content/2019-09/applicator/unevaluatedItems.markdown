@@ -29,7 +29,7 @@ The [`unevaluatedItems`]({{< ref "2019-09/applicator/unevaluateditems" >}})
 keyword is a generalisation of the [`additionalItems`]({{< ref
 "2019-09/applicator/additionalitems" >}}) keyword that considers related
 keywords even when they are not direct siblings of this keyword. More
-specifically, this keyword is affected by occurences of [`items`]({{< ref
+specifically, this keyword is affected by occurrences of [`items`]({{< ref
 "2019-09/applicator/items" >}}), [`additionalItems`]({{< ref
 "2019-09/applicator/additionalitems" >}}), and [`unevaluatedItems`]({{< ref
 "2019-09/applicator/unevaluateditems" >}}) itself, as long as the evaluate path
@@ -45,7 +45,7 @@ There are two common use cases for this keyword, both for reducing duplication:
 (1) Elegantly describing additional array items while declaring the
 [`items`]({{< ref "2019-09/applicator/items" >}}) or [`additionalItems`]({{<
 ref "2019-09/applicator/additionalitems" >}}) keywords behind conditional logic
-without duplicating these keywords in every possible branch. (2) Re-using
+without duplicating these keywords in every possible branch. (2) Reusing
 helpers that consist of the [`items`]({{< ref "2019-09/applicator/items" >}})
 or [`additionalItems`]({{< ref "2019-09/applicator/additionalitems" >}})
 keywords, while specialising the helpers as needed in specific locations

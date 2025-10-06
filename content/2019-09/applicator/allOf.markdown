@@ -37,8 +37,8 @@ subschema (the intersection of the constraints).
 
 {{<common-pitfall>}} Wrapping a single instance of the [`$ref`]({{< ref
 "2019-09/core/ref" >}}) or [`$recursiveRef`]({{< ref
-"2019-09/core/recursiveref" >}}) keyword in an `allOf` operator is an
-anti-pattern.
+"2019-09/core/recursiveref" >}}) keyword in an [`allOf`]({{< ref
+"2019-09/applicator/allof" >}}) operator is an anti-pattern.
 
 This practice has historical roots. In JSON Schema [Draft 7](/draft7) and
 earlier versions, any subschema declaring the [`$ref`]({{< ref

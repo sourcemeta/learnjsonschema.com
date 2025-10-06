@@ -31,7 +31,7 @@ fragment identifier and records this association in the [dynamic
 scope](https://json-schema.org/blog/posts/dynamicref-and-generics).  When
 resolving this anchor using the [`$recursiveRef`]({{< ref
 "2019-09/core/recursiveref" >}}) keyword, the base URI of the origin is not
-considered. Instead, evaluation jumps to the first encountered occurence of the
+considered. Instead, evaluation jumps to the first encountered occurrence of the
 given recursive anchor in the [stack of schema
 resources](https://json-schema.org/blog/posts/understanding-lexical-dynamic-scopes#the-dynamic-scope-as-a-stack)
 traversed so far.
@@ -102,7 +102,7 @@ $ jsonschema validate custom-metaschema.json schema.json --trace
 }
 {{</schema>}}
 
-{{<instance-pass `An object with a top-level occurence of the custom keyword is valid`>}}
+{{<instance-pass `An object with a top-level occurrence of the custom keyword is valid`>}}
 { "my-custom-keyword": "foo" }
 {{</instance-pass>}}
 
@@ -110,7 +110,7 @@ $ jsonschema validate custom-metaschema.json schema.json --trace
 { "keyword": "/properties", "instance": "", "value": [ "my-custom-keyword" ] }
 {{</instance-annotation>}}
 
-{{<instance-pass `An object with a nested occurence of the custom keyword is valid`>}}
+{{<instance-pass `An object with a nested occurrence of the custom keyword is valid`>}}
 { "additionalProperties": { "my-custom-keyword": "foo" } }
 {{</instance-pass>}}
 
@@ -118,6 +118,6 @@ $ jsonschema validate custom-metaschema.json schema.json --trace
 { "keyword": "/properties", "instance": "/additionalProperties", "value": [ "my-custom-keyword" ] }
 {{</instance-annotation>}}
 
-{{<instance-fail `An object with an incorrect nested occurence of the custom keyword is invalid`>}}
+{{<instance-fail `An object with an incorrect nested occurrence of the custom keyword is invalid`>}}
 { "additionalProperties": { "my-custom-keyword": 1 } }
 {{</instance-fail>}}

@@ -32,7 +32,7 @@ related:
     keyword: $defs
 ---
 
-The `$ref` keyword enables a schema to reference another schema by its URI,
+The [`$ref`]({{< ref "2020-12/core/ref" >}}) keyword enables a schema to reference another schema by its URI,
 effectively importing its keywords into the current evaluation process. This
 keyword is the cornerstone of schema composition, allowing complex schemas to
 be created out of simpler ones. A reference may set its URI fragment to a [JSON

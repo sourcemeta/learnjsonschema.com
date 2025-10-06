@@ -28,7 +28,7 @@ related:
     keyword: writeOnly
 ---
 
-The `deprecated` keyword, when set to `true`, signifies that an instance value
+The [`deprecated`]({{< ref "2020-12/meta-data/deprecated" >}}) keyword, when set to `true`, signifies that an instance value
 (such as a specific object property) should not be used and may be removed or
 rejected in the future. This keyword does not affect validation, but the
 evaluator will collect its value as an annotation.
@@ -45,7 +45,7 @@ an annotation that does not carry any additional meaning.
 {{<common-pitfall>}}
 
 Tooling makers must be careful when statically traversing schemas in search of
-occurences of this keyword. It is possible for schemas to make use of this
+occurrences of this keyword. It is possible for schemas to make use of this
 keyword behind conditional operators, references, or any other type of keyword
 that makes it hard or even impossible to correctly locate these values without
 fully evaluating the schema against an instance. The only bullet proof method

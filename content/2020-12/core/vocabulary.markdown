@@ -19,15 +19,15 @@ related:
     keyword: $schema
 ---
 
-The `$vocabulary` keyword is a _mandatory_ component of a dialect meta-schema
+The [`$vocabulary`]({{< ref "2020-12/core/vocabulary" >}}) keyword is a _mandatory_ component of a dialect meta-schema
 to list the required and optional vocabularies available for use by the schema
 instances of such dialect. The vocabularies declared by a dialect meta-schema
 are not inherited by meta-schemas that derive from it. Each dialect meta-schema
-must explicitly state the vocabularies it imports using the `$vocabulary`
+must explicitly state the vocabularies it imports using the [`$vocabulary`]({{< ref "2020-12/core/vocabulary" >}})
 keyword.
 
-{{<common-pitfall>}}Declaring the `$vocabulary` keyword in a schema does not
-grant that same schema access to such vocabularies. Instead, the `$vocabulary`
+{{<common-pitfall>}}Declaring the [`$vocabulary`]({{< ref "2020-12/core/vocabulary" >}}) keyword in a schema does not
+grant that same schema access to such vocabularies. Instead, the [`$vocabulary`]({{< ref "2020-12/core/vocabulary" >}})
 keyword must be set in the dialect meta-schema that describes the desired
 schema.{{</common-pitfall>}}
 

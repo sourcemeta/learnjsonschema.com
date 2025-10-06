@@ -85,7 +85,7 @@ the object by setting the [`additionalProperties`]({{< ref
 "Hello World"
 {{</instance-pass>}}
 
-{{<schema `A schema that incorrecly constrains object property names to an impossible type`>}}
+{{<schema `A schema that incorrectly constrains object property names to an impossible type`>}}
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "propertyNames": { "type": "array" }

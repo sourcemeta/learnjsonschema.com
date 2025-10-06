@@ -24,7 +24,7 @@ related:
     keyword: multipleOf
 ---
 
-The `exclusiveMinimum` keyword restricts number instances to be strictly
+The [`exclusiveMinimum`]({{< ref "2020-12/validation/exclusiveMinimum" >}}) keyword restricts number instances to be strictly
 greater than the given number.
 
 {{<constraint-warning `number`>}}

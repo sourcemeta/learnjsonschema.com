@@ -37,16 +37,17 @@ related:
     keyword: unevaluatedItems
 ---
 
-The `prefixItems` keyword restricts a number of items from the start of an
-array instance to validate against the given sequence of subschemas, where the
-item at a given index in the array instance is evaluated against the subschema
-at the given index in the `prefixItems` array, if any.  Information about the
-number of subschemas that were evaluated against the array instance is reported
-using annotations.
+The [`prefixItems`]({{< ref "2020-12/applicator/prefixItems" >}}) keyword restricts a
+number of items from the start of an array instance to validate against the
+given sequence of subschemas, where the item at a given index in the array
+instance is evaluated against the subschema at the given index in the
+[`prefixItems`]({{< ref "2020-12/applicator/prefixItems" >}}) array, if any.  Information
+about the number of subschemas that were evaluated against the array instance
+is reported using annotations.
 
-Array items outside the range described by the `prefixItems` keyword is
-evaluated against the [`items`]({{< ref "2020-12/applicator/items" >}})
-keyword, if present.
+Array items outside the range described by the
+[`prefixItems`]({{< ref "2020-12/applicator/prefixItems" >}}) keyword is evaluated against
+the [`items`]({{< ref "2020-12/applicator/items" >}}) keyword, if present.
 
 {{<common-pitfall>}}This keyword does not restrict the size of the array. If
 the array instance has fewer number of items that the given subschemas, only

@@ -22,7 +22,7 @@ related:
     keyword: multipleOf
 ---
 
-The `maximum` keyword restricts number instances to be less than or equal to
+The [`maximum`]({{< ref "2020-12/validation/maximum" >}}) keyword restricts number instances to be less than or equal to
 the given number.
 
 {{<constraint-warning `number`>}}

@@ -2,7 +2,7 @@
 keyword: "$defs"
 signature: "Object<String, Schema>"
 value: This keyword must be set to an object where each value is a valid JSON Schema
-summary: "This keyword reserves a location for schema authors to inline re-usable JSON Schemas into a more general schema."
+summary: "This keyword reserves a location for schema authors to inline reusable JSON Schemas into a more general schema."
 kind: [ "location" ]
 instance: [ "any" ]
 specification: "https://json-schema.org/draft/2019-09/draft-handrews-json-schema-02#rfc.section.8.2.5"
@@ -21,7 +21,7 @@ related:
 ---
 
 The [`$defs`]({{< ref "2019-09/core/defs" >}}) keyword is a container for
-storing re-usable schemas within a schema resource, which can be referenced
+storing reusable schemas within a schema resource, which can be referenced
 using the [`$ref`]({{< ref "2019-09/core/ref" >}}) or [`$recursiveRef`]({{<
 ref "2019-09/core/recursiveref" >}}) keywords. From a software engineering
 point of view, this keyword is analogous to defining _internal_ helper

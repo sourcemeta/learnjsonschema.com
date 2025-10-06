@@ -24,7 +24,7 @@ related:
     keyword: contains
 ---
 
-The `minItems` keyword restricts array instances to consists of an inclusive
+The [`minItems`]({{< ref "2020-12/validation/minItems" >}}) keyword restricts array instances to consists of an inclusive
 minimum numbers of items.
 
 {{<common-pitfall>}} The presence of this keyword does not depend on the

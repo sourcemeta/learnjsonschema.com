@@ -1,7 +1,7 @@
 ---
 keyword: "format"
 signature: "String"
-value: This keyword must be set to a string, preferrably one that is standardized by JSON Schema to ensure interoperability
+value: This keyword must be set to a string, preferably one that is standardized by JSON Schema to ensure interoperability
 summary: "Define semantic information about a string instance."
 kind: [ "annotation" ]
 instance: [ "string" ]
@@ -24,7 +24,7 @@ related:
     keyword: format
 ---
 
-The `format` keyword communicates that string instances are of the given
+The [`format`]({{< ref "2020-12/format-annotation/format" >}}) keyword communicates that string instances are of the given
 logical type by producing an annotation value.
 
 {{<common-pitfall>}} By default, this keyword does not perform validation. If

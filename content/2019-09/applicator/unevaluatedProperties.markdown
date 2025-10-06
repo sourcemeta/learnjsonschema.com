@@ -32,7 +32,7 @@ The [`unevaluatedProperties`]({{< ref
 of the [`additionalProperties`]({{< ref
 "2019-09/applicator/additionalproperties" >}}) keyword that considers related
 keywords even when they are not direct siblings of this keyword. More
-specifically, this keyword is affected by occurences of [`properties`]({{<
+specifically, this keyword is affected by occurrences of [`properties`]({{<
 ref "2019-09/applicator/properties" >}}), [`patternProperties`]({{< ref
 "2019-09/applicator/patternproperties" >}}), [`additionalProperties`]({{< ref
 "2019-09/applicator/additionalproperties" >}}), and
@@ -52,7 +52,7 @@ declaring the [`properties`]({{< ref "2019-09/applicator/properties" >}}) or
 [`patternProperties`]({{< ref "2019-09/applicator/patternproperties" >}})
 keywords behind conditional logic without duplicating the
 [`additionalProperties`]({{< ref "2019-09/applicator/additionalproperties"
->}}) keyword in every possible branch. (2) Re-using helpers that consist of
+>}}) keyword in every possible branch. (2) Reusing helpers that consist of
 the [`properties`]({{< ref "2019-09/applicator/properties" >}}),
 [`patternProperties`]({{< ref "2019-09/applicator/patternproperties" >}}), or
 [`additionalProperties`]({{< ref "2019-09/applicator/additionalproperties"

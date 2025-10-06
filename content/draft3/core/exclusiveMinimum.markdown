@@ -2,7 +2,7 @@
 keyword: "exclusiveMinimum"
 signature: "Boolean"
 value: This keyword must be set to a boolean value
-summary: "When [`minimum`](/draft3/validation/minimum) is present and this keyword is set to true, the numeric instance must be greater than the value in [`minimum`](/draft3/validation/minimum)."
+summary: "When [`minimum`](/draft3/core/minimum) is present and this keyword is set to true, the numeric instance must be greater than the value in [`minimum`](/draft3/core/minimum)."
 kind: [ "assertion" ]
 instance: [ "number" ]
 specification: "https://json-schema.org/draft-03/draft-zyp-json-schema-03.pdf#5.11"

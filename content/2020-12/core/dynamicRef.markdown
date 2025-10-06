@@ -31,7 +31,7 @@ a schema to reference another schema by its dynamic anchor, as declared by the
 resolving a dynamic anchor using this keyword, the base URI of the origin is
 not considered. Instead, the evaluator looks in the [dynamic
 scope](https://json-schema.org/blog/posts/dynamicref-and-generics) and jumps to
-the first encountered occurence of the given dynamic anchor in the [stack of
+the first encountered occurrence of the given dynamic anchor in the [stack of
 schema
 resources](https://json-schema.org/blog/posts/understanding-lexical-dynamic-scopes#the-dynamic-scope-as-a-stack)
 traversed so far.
@@ -40,7 +40,7 @@ In other words, **think of a schema declaring a dynamic reference as a
 reference that considers that its destination might have been re-defined by a
 parent schema**.  For example, a schema that dynamically references an anchor
 `foo` says: _"jump to the location set by the `foo` anchor, but if there are
-overriden variants of it, jump to the first of those instead"_.
+overridden variants of it, jump to the first of those instead"_.
 
 {{<best-practice>}}
 
@@ -110,7 +110,7 @@ $ jsonschema validate string-list.json instance.json --resolve generic-list.json
 
 ## Examples
 
-{{<schema `A generic schema that describes an array where the items definition (by default anything) can be overriden through a dynamic anchor`>}}
+{{<schema `A generic schema that describes an array where the items definition (by default anything) can be overridden through a dynamic anchor`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.com/generic-list",
