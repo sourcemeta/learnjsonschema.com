@@ -32,12 +32,12 @@ related:
     keyword: unevaluatedItems
 ---
 
-The `contains` keyword restricts array instances to include one or more items
-(at any location of the array) that validate against the given subschema. The
-lower and upper bounds that are allowed to validate against the given subschema
-can be controlled using the [`minContains`]({{< ref
-"2019-09/validation/mincontains" >}}) and [`maxContains`]({{< ref
-"2019-09/validation/maxcontains" >}}) keywords.
+The [`contains`]({{< ref "2019-09/applicator/contains" >}}) keyword restricts
+array instances to include one or more items (at any location of the array) that
+validate against the given subschema. The lower and upper bounds that are
+allowed to validate against the given subschema can be controlled using the
+[`minContains`]({{< ref "2019-09/validation/mincontains" >}}) and
+[`maxContains`]({{< ref "2019-09/validation/maxcontains" >}}) keywords.
 
 {{<constraint-warning `array`>}}
 

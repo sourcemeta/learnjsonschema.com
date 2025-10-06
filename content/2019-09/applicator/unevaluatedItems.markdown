@@ -25,31 +25,31 @@ related:
     keyword: unevaluatedProperties
 ---
 
-The `unevaluatedItems` keyword is a generalisation of the
-[`additionalItems`]({{< ref "2019-09/applicator/additionalitems" >}}) keyword
-that considers related keywords even when they are not direct siblings of
-this keyword. More specifically, this keyword is affected by occurences of
-[`items`]({{< ref "2019-09/applicator/items" >}}), [`additionalItems`]({{<
-ref "2019-09/applicator/additionalitems" >}}), and `unevaluatedItems` itself,
-as long as the evaluate path that led to `unevaluatedItems` is a _prefix_ of
-the evaluate path of the others.
+The [`unevaluatedItems`]({{< ref "2019-09/applicator/unevaluateditems" >}})
+keyword is a generalisation of the [`additionalItems`]({{< ref
+"2019-09/applicator/additionalitems" >}}) keyword that considers related
+keywords even when they are not direct siblings of this keyword. More
+specifically, this keyword is affected by occurences of [`items`]({{< ref
+"2019-09/applicator/items" >}}), [`additionalItems`]({{< ref
+"2019-09/applicator/additionalitems" >}}), and [`unevaluatedItems`]({{< ref
+"2019-09/applicator/unevaluateditems" >}}) itself, as long as the evaluate path
+that led to [`unevaluatedItems`]({{< ref "2019-09/applicator/unevaluateditems"
+>}}) is a _prefix_ of the evaluate path of the others.
 
 Given its evaluation-dependent nature, this keyword is evaluated after every
 other keyword from every other vocabulary.
 
 {{<best-practice>}}
 
-There are two common use cases for this keyword, both for reducing
-duplication: (1) Elegantly describing additional array items while declaring
-the [`items`]({{< ref "2019-09/applicator/items" >}}) or
-[`additionalItems`]({{< ref "2019-09/applicator/additionalitems" >}})
-keywords behind conditional logic without duplicating the [`items`]({{< ref
-"2019-09/applicator/items" >}}) keyword in every possible branch. (2)
-Re-using helpers that consist of the [`items`]({{< ref
-"2019-09/applicator/items" >}}) or [`additionalItems`]({{< ref
-"2019-09/applicator/additionalitems" >}}) keywords, while specialising the
-helpers as needed in specific locations without having to inline the entire
-contents of the helper.
+There are two common use cases for this keyword, both for reducing duplication:
+(1) Elegantly describing additional array items while declaring the
+[`items`]({{< ref "2019-09/applicator/items" >}}) or [`additionalItems`]({{<
+ref "2019-09/applicator/additionalitems" >}}) keywords behind conditional logic
+without duplicating these keywords in every possible branch. (2) Re-using
+helpers that consist of the [`items`]({{< ref "2019-09/applicator/items" >}})
+or [`additionalItems`]({{< ref "2019-09/applicator/additionalitems" >}})
+keywords, while specialising the helpers as needed in specific locations
+without having to inline the entire contents of the helper.
 
 {{</best-practice>}}
 

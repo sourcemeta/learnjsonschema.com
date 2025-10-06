@@ -32,13 +32,13 @@ related:
     keyword: unevaluatedProperties
 ---
 
-The `propertyNames` keyword restricts object instances to only define
-properties whose names match the given schema. This keyword is evaluated
-against _every_ property of the object instance, independently of keywords
-that indirectly introduce property names such as [`properties`]({{< ref
-"2019-09/applicator/properties" >}}) and [`patternProperties`]({{< ref
-"2019-09/applicator/patternproperties" >}}). Annotations coming from inside
-this keyword are dropped.
+The [`propertyNames`]({{< ref "2019-09/applicator/propertynames" >}}) keyword
+restricts object instances to only define properties whose names match the given
+schema. This keyword is evaluated against _every_ property of the object
+instance, independently of keywords that indirectly introduce property names
+such as [`properties`]({{< ref "2019-09/applicator/properties" >}}) and
+[`patternProperties`]({{< ref "2019-09/applicator/patternproperties" >}}).
+Annotations coming from inside this keyword are dropped.
 
 {{<common-pitfall>}} As per the JSON grammar, the name of an object property
 must be a string. Therefore, setting this keyword to a schema that makes use

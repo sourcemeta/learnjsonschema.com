@@ -40,10 +40,10 @@ related:
     keyword: unevaluatedProperties
 ---
 
-The `properties` keyword restricts properties of an object instance, when
-present, to match their corresponding subschemas definitions. Information about
-the properties that this keyword was evaluated for is reported using
-annotations.
+The [`properties`]({{< ref "2019-09/applicator/properties" >}}) keyword
+restricts properties of an object instance, when present, to match their
+corresponding subschemas definitions. Information about the properties that this
+keyword was evaluated for is reported using annotations.
 
 {{<common-pitfall>}}The use of this keyword **does not prevent the presence of
 other properties** in the object instance and **does not enforce the presence

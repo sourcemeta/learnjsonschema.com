@@ -26,7 +26,7 @@ related:
     keyword: else
 ---
 
-The `dependentRequired` keyword restricts object instances to define certain
+The [`dependentRequired`]({{< ref "2019-09/validation/dependentrequired" >}}) keyword restricts object instances to define certain
 properties if other properties are also defined.
 
 {{<common-pitfall>}} Note that multiple potentially interrelated dependencies

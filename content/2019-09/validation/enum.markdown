@@ -22,8 +22,8 @@ related:
     keyword: oneOf
 ---
 
-The `enum` keyword restricts instances to a finite set of possible values,
-which may be of different types.
+The [`enum`]({{< ref "2019-09/validation/enum" >}}) keyword restricts instances
+to a finite set of possible values, which may be of different types.
 
 {{<best-practice>}} Constraining instances to a set of possible values by
 definition implies the given JSON types. Therefore, combining this keyword with

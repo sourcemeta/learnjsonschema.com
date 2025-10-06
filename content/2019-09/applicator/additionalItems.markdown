@@ -38,22 +38,24 @@ related:
     keyword: unevaluatedItems
 ---
 
-The `additionalItems` keyword restricts array instance items not described by
-the _sibling_ [`items`]({{< ref "2019-09/applicator/items" >}}) keyword (when
-[`items`]({{< ref "2019-09/applicator/items" >}}) is in array form), to
-validate against the given subschema. Whether this keyword was evaluated
-against any item of the array instance is reported using annotations.
+The [`additionalItems`]({{< ref "2019-09/applicator/additionalitems" >}})
+keyword restricts array instance items not described by the _sibling_
+[`items`]({{< ref "2019-09/applicator/items" >}}) keyword (when [`items`]({{<
+ref "2019-09/applicator/items" >}}) is in array form), to validate against the
+given subschema. Whether this keyword was evaluated against any item of the
+array instance is reported using annotations.
 
 {{<common-pitfall>}}This keyword **only** has an effect when the sibling
 [`items`]({{< ref "2019-09/applicator/items" >}}) keyword is set to an array of
-schemas. If [`items`]({{< ref "2019-09/applicator/items" >}}) is not present or is set to a schema (not an array),
-[`additionalItems`]({{< ref "2019-09/applicator/additionalitems" >}}) has no effect and is ignored. This is a common source of
-confusion.{{</common-pitfall>}}
+schemas. If [`items`]({{< ref "2019-09/applicator/items" >}}) is not present or
+is set to a schema (not an array of schemas), [`additionalItems`]({{< ref
+"2019-09/applicator/additionalitems" >}}) has no effect and is ignored.{{</common-pitfall>}}
 
 {{<common-pitfall>}}This keyword does not prevent an array instance from being
-empty or having fewer items than the [`items`]({{< ref "2019-09/applicator/items" >}}) array. If needed, use the
-[`minItems`]({{< ref "2019-09/validation/minitems" >}}) to assert on the minimum
-bounds of the array.{{</common-pitfall>}}
+empty or having fewer items than the [`items`]({{< ref
+"2019-09/applicator/items" >}}) array. If needed, use the [`minItems`]({{< ref
+"2019-09/validation/minitems" >}}) keyword to assert on the minimum bounds of
+the array.{{</common-pitfall>}}
 
 {{<constraint-warning `array`>}}
 
@@ -116,7 +118,7 @@ bounds of the array.{{</common-pitfall>}}
 [ false, 35, "foo" ]
 {{</instance-fail>}}
 
-{{<schema `A schema that demonstrates when this keyword has no effect`>}}
+{{<schema `A schema that describes open items and additional items leads to the additional items schema being ignored`>}}
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "items": { "type": "number" },
@@ -139,3 +141,18 @@ bounds of the array.{{</common-pitfall>}}
 {{<instance-annotation>}}
 { "keyword": "/items", "instance": "", "value": true }
 {{</instance-annotation>}}
+
+{{<schema `A schema with only additional items definitions leads to the additional items schema being ignored`>}}
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "additionalItems": { "type": "string" }
+}
+{{</schema>}}
+
+{{<instance-pass `Any array is valid`>}}
+[ 1, 2, 3 ]
+{{</instance-pass>}}
+
+{{<instance-pass `A non-array value is valid`>}}
+"Hello World"
+{{</instance-pass>}}

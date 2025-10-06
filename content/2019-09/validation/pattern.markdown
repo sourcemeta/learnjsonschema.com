@@ -24,8 +24,8 @@ related:
     keyword: patternProperties
 ---
 
-The `pattern` keyword restricts string instances to match the given regular
-expression.
+The [`pattern`]({{< ref "2019-09/validation/pattern" >}}) keyword restricts
+string instances to match the given regular expression.
 
 {{<learning-more>}} While the specification suggests the use of
 [ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/)

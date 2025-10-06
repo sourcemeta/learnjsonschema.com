@@ -48,8 +48,9 @@ might seem counter-intuitive, consider the following cases:
 {{<best-practice>}} Avoid the use of this keyword (usually negating the
 [`required`]({{< ref "2019-09/validation/required" >}}) keyword) to prohibit
 specific object properties from being defined. Instead, use the
-[`properties`]({{< ref "properties" >}}) keyword and set the disallowed object
-properties to the `false` boolean schema.{{</best-practice>}}
+[`properties`]({{< ref "2019-09/applicator/properties" >}}) keyword and set
+the disallowed object properties to the `false` boolean
+schema.{{</best-practice>}}
 
 This keyword is equivalent to the `!` operator found in most programming
 languages. For example:

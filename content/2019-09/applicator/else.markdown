@@ -39,11 +39,12 @@ instance.
 subschema. {{</common-pitfall>}}
 
 {{<best-practice>}} The [`if`]({{< ref "2019-09/applicator/if" >}}),
-[`then`]({{< ref "2019-09/applicator/then" >}}), and `else` keywords can be
-thought of as imperative variants of the [`anyOf`]({{< ref
-"2019-09/applicator/anyof" >}}) keyword, and both approaches are equally
-capable of describing arbitrary conditions. Choose the one that more elegantly
-describes your desired constraints.{{</best-practice>}}
+[`then`]({{< ref "2019-09/applicator/then" >}}), and [`else`]({{< ref
+"2019-09/applicator/else" >}}) keywords can be thought of as imperative
+variants of the [`anyOf`]({{< ref "2019-09/applicator/anyof" >}}) keyword,
+and both approaches are equally capable of describing arbitrary conditions.
+Choose the one that more elegantly describes your desired
+constraints.{{</best-practice>}}
 
 ## Examples
 

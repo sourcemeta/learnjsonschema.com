@@ -27,12 +27,13 @@ related:
     keyword: $vocabulary
 ---
 
-The `$id` keyword explicitly turns a schema into a _schema resource_ (a schema
-that is associated with a URI). Relative URIs are resolved against the
-_current_ base URI, which is either the closest parent `$id` keyword
-(applicable in the case of compound schemas), or the base URI as determined by
-the context on which the schema is declared (i.e. serving a schema over HTTP
-_may_ implicitly award it such URL as the base).
+The [`$id`]({{< ref "2019-09/core/id" >}}) keyword explicitly turns a
+schema into a _schema resource_ (a schema that is associated with a URI).
+Relative URIs are resolved against the _current_ base URI, which is either
+the closest parent [`$id`]({{< ref "2019-09/core/id" >}}) keyword
+(applicable in the case of compound schemas), or the base URI as determined
+by the context on which the schema is declared (i.e. serving a schema over
+HTTP _may_ implicitly award it such URL as the base).
 
 Note that you cannot set this keyword to a URI that contains a fragment
 identifier. Instead, fragment identifiers must be set with the [`$anchor`]({{<
@@ -82,8 +83,8 @@ or a non-locatable URI scheme such as a [Tag URI](https://www.taguri.org).
 
 {{</best-practice>}}
 
-To debug the role of the `$id` keyword on a schema (particularly schemas
-with embedded resources), try the [`jsonschema
+To debug the role of the [`$id`]({{< ref "2019-09/core/id" >}}) keyword on
+a schema (particularly schemas with embedded resources), try the [`jsonschema
 inspect`](https://github.com/sourcemeta/jsonschema/blob/main/docs/inspect.markdown)
 command. This command prints detailed information about each schema resource,
 subschema, location, and reference present in the schema. For example:

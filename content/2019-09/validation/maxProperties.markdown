@@ -22,7 +22,7 @@ related:
     keyword: additionalProperties
 ---
 
-The `maxProperties` keyword restricts object instances to consists of an
+The [`maxProperties`]({{< ref "2019-09/validation/maxproperties" >}}) keyword restricts object instances to consists of an
 inclusive maximum numbers of properties.
 
 {{<common-pitfall>}} The presence of this keyword does not depend on the

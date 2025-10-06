@@ -22,7 +22,7 @@ related:
     keyword: format
 ---
 
-The `minLength` keyword restricts string instances to consists of an inclusive
+The [`minLength`]({{< ref "2019-09/validation/minlength" >}}) keyword restricts string instances to consists of an inclusive
 minimum number of [Unicode](https://unicode.org) code-points (logical
 characters), which is not necessarily the same as the number of bytes in the
 string.

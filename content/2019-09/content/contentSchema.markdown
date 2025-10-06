@@ -26,7 +26,7 @@ related:
 When the [`contentMediaType`]({{< ref "2019-09/content/contentmediatype" >}})
 keyword is set to a media type that adheres to the JSON data model (like JSON
 itself, [YAML](https://yaml.org) or [UBJSON](https://ubjson.org)), the
-`contentSchema` keyword declares the schema that describes the corresponding
+[`contentSchema`]({{< ref "2019-09/content/contentschema" >}}) keyword declares the schema that describes the corresponding
 string instance value _after_ decoding it. This keyword does not affect
 validation, but the evaluator will collect its value as an annotation.
 

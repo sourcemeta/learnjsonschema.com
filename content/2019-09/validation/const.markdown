@@ -18,8 +18,8 @@ related:
     keyword: type
 ---
 
-The `const` keyword (short for "constant") restricts instances to a single
-specific JSON value of any type.
+The [`const`]({{< ref "2019-09/validation/const" >}}) keyword (short for
+"constant") restricts instances to a single specific JSON value of any type.
 
 {{<best-practice>}} Constraining instances to a constant value by definition
 implies the given JSON type. Therefore, combining this keyword with the

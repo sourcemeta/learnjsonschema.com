@@ -24,7 +24,7 @@ related:
     keyword: additionalProperties
 ---
 
-The `minProperties` keyword restricts object instances to consists of an
+The [`minProperties`]({{< ref "2019-09/validation/minproperties" >}}) keyword restricts object instances to consists of an
 inclusive minimum numbers of properties.
 
 {{<common-pitfall>}} The presence of this keyword does not depend on the

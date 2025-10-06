@@ -41,8 +41,9 @@ related:
     keyword: unevaluatedProperties
 ---
 
-The `additionalProperties` keyword restricts object instance properties not
-described by the _sibling_ [`properties`]({{< ref
+The [`additionalProperties`]({{< ref
+"2019-09/applicator/additionalproperties" >}}) keyword restricts object instance
+properties not described by the _sibling_ [`properties`]({{< ref
 "2019-09/applicator/properties" >}}) and [`patternProperties`]({{< ref
 "2019-09/applicator/patternproperties" >}}) keywords (if any), to validate
 against the given subschema. Information about the properties that this keyword

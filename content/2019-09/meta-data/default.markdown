@@ -28,7 +28,7 @@ related:
     keyword: deprecated
 ---
 
-The `default` keyword declares a default instance value for a schema or any of
+The [`default`]({{< ref "2019-09/meta-data/default" >}}) keyword declares a default instance value for a schema or any of
 its subschemas, typically to support specialised tooling like documentation and
 form generators. This keyword does not affect validation, but the evaluator
 will collect its value as an annotation.
@@ -62,7 +62,7 @@ including this one.
 {{<learning-more>}}
 
 You might be tempted to evaluate a schema against an instance and rely on
-`default` annotations to feed back the missing values back to it.  However,
+[`default`]({{< ref "2019-09/meta-data/default" >}}) annotations to feed back the missing values back to it.  However,
 there is a known limitation that prevents this approach: in JSON Schema,
 annotations are collected when a subschema is evaluated, which means that the
 default value annotation is only emitted when the corresponding instance

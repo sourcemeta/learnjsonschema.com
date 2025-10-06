@@ -42,21 +42,24 @@ related:
     keyword: unevaluatedItems
 ---
 
-The `items` keyword is used to validate array items and has two different modes
-of operation depending on its value:
+The [`items`]({{< ref "2019-09/applicator/items" >}}) keyword is used to
+validate array items and has two different modes of operation depending on the
+type of its value:
 
-**Schema Form**: When set to a schema, `items` validates that all items in
-the array instance validate against the given subschema. Whether this keyword
-was evaluated against any item of the array instance is reported using
-annotations.
+- **Schema**: When set to a schema, [`items`]({{< ref
+  "2019-09/applicator/items" >}}) validates that all items in the array
+  instance validate against the given subschema. Whether this keyword was
+  evaluated against any item of the array instance is reported using
+  annotations.
 
-**Array Form**: When set to an array of schemas, `items` validates each item
-in the array instance against the subschema at the corresponding position
-(tuple validation). Items beyond the length of the `items` array can be
-validated using the [`additionalItems`]({{< ref
-"2019-09/applicator/additionalitems" >}}) keyword. The annotation reports the
-largest index to which a subschema was applied, or true if it was applied to
-every item.
+- **Array**: When set to an array of schemas, [`items`]({{< ref
+  "2019-09/applicator/items" >}}) validates each item in the array instance
+  against the subschema at the corresponding position. Items beyond the length
+  of the [`items`]({{< ref "2019-09/applicator/items" >}}) array can be
+  validated using the [`additionalItems`]({{< ref
+  "2019-09/applicator/additionalitems" >}}) keyword. The annotation reports the
+  largest index to which a subschema was applied, or `true` if it was applied
+  to every item.
 
 {{<common-pitfall>}}This keyword does not prevent an array instance from being
 empty. If needed, use the [`minItems`]({{< ref "2019-09/validation/minitems"
@@ -65,8 +68,6 @@ empty. If needed, use the [`minItems`]({{< ref "2019-09/validation/minitems"
 {{<constraint-warning `array`>}}
 
 ## Examples
-
-### Schema Form
 
 {{<schema `A schema that constrains array instances to consist of number items`>}}
 {
@@ -94,8 +95,6 @@ empty. If needed, use the [`minItems`]({{< ref "2019-09/validation/minitems"
 {{<instance-pass `A non-array value is valid`>}}
 "Hello World"
 {{</instance-pass>}}
-
-### Array Form (Tuple Validation)
 
 {{<schema `A schema that constrains array instances to start with a boolean item followed by a number item`>}}
 {
@@ -135,8 +134,6 @@ empty. If needed, use the [`minItems`]({{< ref "2019-09/validation/minitems"
 {{<instance-pass `A non-array value is valid`>}}
 "Hello World"
 {{</instance-pass>}}
-
-### Array Form with additionalItems
 
 {{<schema `A schema that constrains array instances to start with a boolean item followed by a number item, with only string items allowed beyond that`>}}
 {

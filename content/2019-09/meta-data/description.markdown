@@ -27,7 +27,7 @@ related:
     keyword: deprecated
 ---
 
-The `description` keyword is a placeholder for a longer human-readable string
+The [`description`]({{< ref "2019-09/meta-data/description" >}}) keyword is a placeholder for a longer human-readable string
 summary of what a schema or any of its subschemas are about. This keyword does
 not affect validation, but the evaluator will collect its value as an
 annotation.

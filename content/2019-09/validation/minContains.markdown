@@ -24,10 +24,11 @@ related:
     keyword: additionalItems
 ---
 
-The `minContains` keyword modifies the [`contains`]({{< ref
-"2019-09/applicator/contains" >}}) keyword to constrain array instances to the
-given minimum number of containment matches. This keyword has no effect if the
-[`contains`]({{< ref "2019-09/applicator/contains" >}}) keyword is not declared.
+The [`minContains`]({{< ref "2019-09/validation/mincontains" >}}) keyword
+modifies the [`contains`]({{< ref "2019-09/applicator/contains" >}}) keyword to
+constrain array instances to the given minimum number of containment matches.
+This keyword has no effect if the [`contains`]({{< ref
+"2019-09/applicator/contains" >}}) keyword is not declared.
 
 {{<common-pitfall>}}Keep in mind that when collecting annotations, the
 evaluator might need to exhaustively check every item in the array past the
@@ -36,10 +37,11 @@ introducing additional computational overhead.
 
 For example, consider an array of 10 items where 5 of its items validate
 against the [`contains`]({{< ref "2019-09/applicator/contains" >}}) subschema
-and `minContains` is set to to 2. When not collecting annotations, validation
-will stop after encountering the second match. However, when collecting
-annotations, validation will have to proceed past the second match to report
-the 5 matching indexes.{{</common-pitfall>}}
+and [`minContains`]({{< ref "2019-09/validation/mincontains" >}}) is set to to
+2. When not collecting annotations, validation will stop after encountering the
+second match. However, when collecting annotations, validation will have to
+proceed past the second match to report the 5 matching
+indexes.{{</common-pitfall>}}
 
 {{<constraint-warning `array`>}}
 

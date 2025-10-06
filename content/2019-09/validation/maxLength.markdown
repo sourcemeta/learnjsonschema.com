@@ -20,7 +20,7 @@ related:
     keyword: format
 ---
 
-The `maxLength` keyword restricts string instances to consists of an inclusive
+The [`maxLength`]({{< ref "2019-09/validation/maxlength" >}}) keyword restricts string instances to consists of an inclusive
 maximum number of [Unicode](https://unicode.org) code-points (logical
 characters), which is not necessarily the same as the number of bytes in the
 string.

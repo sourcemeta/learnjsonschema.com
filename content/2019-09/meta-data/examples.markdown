@@ -31,7 +31,7 @@ related:
 ---
 
 
-The `examples` keyword declares a set of example instances for a schema or any
+The [`examples`]({{< ref "2019-09/meta-data/examples" >}}) keyword declares a set of example instances for a schema or any
 of its subschemas, typically for documentation purposes. This keyword does not
 affect validation, but the evaluator will collect its set of values as an
 annotation.

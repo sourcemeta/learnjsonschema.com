@@ -28,7 +28,7 @@ related:
     keyword: writeOnly
 ---
 
-The `deprecated` keyword, when set to `true`, signifies that an instance value
+The [`deprecated`]({{< ref "2019-09/meta-data/deprecated" >}}) keyword, when set to `true`, signifies that an instance value
 (such as a specific object property) should not be used and may be removed or
 rejected in the future. This keyword does not affect validation, but the
 evaluator will collect its value as an annotation.

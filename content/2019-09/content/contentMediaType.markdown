@@ -22,7 +22,7 @@ related:
 ---
 
 When the [`contentEncoding`]({{< ref "2019-09/content/contentencoding" >}})
-keyword is set, the `contentMediaType` keyword signifies that a string instance
+keyword is set, the [`contentMediaType`]({{< ref "2019-09/content/contentmediatype" >}}) keyword signifies that a string instance
 value (such as a specific object property) should be considered binary data
 that represents the given type. This keyword does not affect validation, but
 the evaluator will collect its value as an annotation.  The use of this and

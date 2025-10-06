@@ -32,7 +32,7 @@ and unambiguous behavior across JSON Schema implementations.
 {{</common-pitfall>}}
 
 {{<best-practice>}} While [technically
-allowed](https://json-schema.org/draft/2019-09/json-schema-validation#section-7.2.3)
+allowed](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.2.3)
 by the JSON Schema specification, extending this keyword with custom formats is
 considered to be an anti-pattern that can introduce interoperability issues and
 undefined behavior. As a best practice, stick to standardised formats. If
@@ -58,25 +58,25 @@ The supported formats are the following.
 
 | Format                    | Category             | Specification |
 |---------------------------|----------------------|---------------|
-| `"date-time"`             | Time                 | [JSON Schema 2019-09 Validation Section 7.3.1](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.1) |
-| `"date"`                  | Time                 | [JSON Schema 2019-09 Validation Section 7.3.1](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.1) |
-| `"time"`                  | Time                 | [JSON Schema 2019-09 Validation Section 7.3.1](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.1) |
-| `"duration"`              | Time                 | [JSON Schema 2019-09 Validation Section 7.3.1](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.1) |
-| `"email"`                 | Emails               | [JSON Schema 2019-09 Validation Section 7.3.2](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.2) |
-| `"idn-email"`             | Emails               | [JSON Schema 2019-09 Validation Section 7.3.2](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.2) |
-| `"hostname"`              | Hostnames            | [JSON Schema 2019-09 Validation Section 7.3.3](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.3) |
-| `"idn-hostname"`          | Hostnames            | [JSON Schema 2019-09 Validation Section 7.3.3](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.3) |
-| `"ipv4"`                  | IP Addresses         | [JSON Schema 2019-09 Validation Section 7.3.4](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.4) |
-| `"ipv6"`                  | IP Addresses         | [JSON Schema 2019-09 Validation Section 7.3.4](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.4) |
-| `"uri"`                   | Resource Identifiers | [JSON Schema 2019-09 Validation Section 7.3.5](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.5) |
-| `"uri-reference"`         | Resource Identifiers | [JSON Schema 2019-09 Validation Section 7.3.5](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.5) |
-| `"iri"`                   | Resource Identifiers | [JSON Schema 2019-09 Validation Section 7.3.5](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.5) |
-| `"iri-reference"`         | Resource Identifiers | [JSON Schema 2019-09 Validation Section 7.3.5](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.5) |
-| `"uuid"`                  | Resource Identifiers | [JSON Schema 2019-09 Validation Section 7.3.5](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.5) |
-| `"uri-template"`          | Resource Identifiers | [JSON Schema 2019-09 Validation Section 7.3.6](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.6) |
-| `"json-pointer"`          | JSON Pointer         | [JSON Schema 2019-09 Validation Section 7.3.7](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.7) |
-| `"relative-json-pointer"` | JSON Pointer         | [JSON Schema 2019-09 Validation Section 7.3.7](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.7) |
-| `"regex"`                 | Regular Expressions  | [JSON Schema 2019-09 Validation Section 7.3.8](https://json-schema.org/draft/2019-09/json-schema-validation.html#section-7.3.8) |
+| `"date-time"`             | Time                 | [JSON Schema 2019-09 Validation Section 7.3.1](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.1) |
+| `"date"`                  | Time                 | [JSON Schema 2019-09 Validation Section 7.3.1](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.1) |
+| `"time"`                  | Time                 | [JSON Schema 2019-09 Validation Section 7.3.1](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.1) |
+| `"duration"`              | Time                 | [JSON Schema 2019-09 Validation Section 7.3.1](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.1) |
+| `"email"`                 | Emails               | [JSON Schema 2019-09 Validation Section 7.3.2](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.2) |
+| `"idn-email"`             | Emails               | [JSON Schema 2019-09 Validation Section 7.3.2](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.2) |
+| `"hostname"`              | Hostnames            | [JSON Schema 2019-09 Validation Section 7.3.3](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.3) |
+| `"idn-hostname"`          | Hostnames            | [JSON Schema 2019-09 Validation Section 7.3.3](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.3) |
+| `"ipv4"`                  | IP Addresses         | [JSON Schema 2019-09 Validation Section 7.3.4](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.4) |
+| `"ipv6"`                  | IP Addresses         | [JSON Schema 2019-09 Validation Section 7.3.4](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.4) |
+| `"uri"`                   | Resource Identifiers | [JSON Schema 2019-09 Validation Section 7.3.5](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.5) |
+| `"uri-reference"`         | Resource Identifiers | [JSON Schema 2019-09 Validation Section 7.3.5](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.5) |
+| `"iri"`                   | Resource Identifiers | [JSON Schema 2019-09 Validation Section 7.3.5](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.5) |
+| `"iri-reference"`         | Resource Identifiers | [JSON Schema 2019-09 Validation Section 7.3.5](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.5) |
+| `"uuid"`                  | Resource Identifiers | [JSON Schema 2019-09 Validation Section 7.3.5](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.5) |
+| `"uri-template"`          | Resource Identifiers | [JSON Schema 2019-09 Validation Section 7.3.6](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.6) |
+| `"json-pointer"`          | JSON Pointer         | [JSON Schema 2019-09 Validation Section 7.3.7](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.7) |
+| `"relative-json-pointer"` | JSON Pointer         | [JSON Schema 2019-09 Validation Section 7.3.7](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.7) |
+| `"regex"`                 | Regular Expressions  | [JSON Schema 2019-09 Validation Section 7.3.8](https://json-schema.org/draft/2019-09/draft-handrews-json-schema-validation-02#rfc.section.7.3.8) |
 
 ## Examples
 
@@ -95,7 +95,7 @@ The supported formats are the following.
 { "keyword": "/format", "instance": "", "value": "email" }
 {{</instance-annotation>}}
 
-{{<instance-pass `A string value that represents an invalid e-mail address is valid`>}}
+{{<instance-pass `A string value that represents an invalid e-mail address is typically valid (implementation dependent)`>}}
 "foo-bar"
 {{</instance-pass>}}
 

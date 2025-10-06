@@ -41,11 +41,11 @@ subschema (the intersection of the constraints).
 anti-pattern.
 
 This practice has historical roots. In JSON Schema [Draft 7](/draft7) and
-earlier versions, any subschema declaring the `$ref` keyword was considered
-to be a _reference object_ and any other sibling keyword was silently ignored.
-As a consequence, subschemas with references that made use of other keywords
-had to artificially wrap the reference into its own subschema.
-{{</common-pitfall>}}
+earlier versions, any subschema declaring the [`$ref`]({{< ref
+"2019-09/core/ref" >}}) keyword was considered to be a _reference object_ and
+any other sibling keyword was silently ignored. As a consequence, subschemas
+with references that made use of other keywords had to artificially wrap the
+reference into its own subschema.  {{</common-pitfall>}}
 
 {{<best-practice>}}This keyword typically has a single use case: combining
 _multiple_ schemas through the use of (internal or external) references. If

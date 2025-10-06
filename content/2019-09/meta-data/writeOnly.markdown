@@ -28,7 +28,7 @@ related:
     keyword: deprecated
 ---
 
-The `writeOnly` keyword, when set to `true`, signifies that an instance value
+The [`writeOnly`]({{< ref "2019-09/meta-data/writeonly" >}}) keyword, when set to `true`, signifies that an instance value
 (such as a specific object property) can be modified or removed but not read,
 whatever that means in the context of the system. For example, form generators
 may rely on this keyword to mark the corresponding input as as a password

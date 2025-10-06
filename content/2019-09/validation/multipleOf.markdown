@@ -24,10 +24,11 @@ related:
     keyword: minimum
 ---
 
-The `multipleOf` keyword restricts number instances to be multiples of the
-given number. Note that the number `0` is a multiple of every number, as for
-every number `k`, the mutiplication `0 * k` yield an integer value (in this
-case always 0). This case is not to be confused with [division by
+The [`multipleOf`]({{< ref "2019-09/validation/multipleof" >}}) keyword
+restricts number instances to be multiples of the given number. Note that the
+number `0` is a multiple of every number, as for every number `k`, the
+mutiplication `0 * k` yield an integer value (in this case always 0). This case
+is not to be confused with [division by
 zero](https://en.wikipedia.org/wiki/Division_by_zero), which is not a permitted
 operation in most computer systems.
 

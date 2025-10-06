@@ -20,7 +20,7 @@ related:
     keyword: contentSchema
 ---
 
-The `contentEncoding` keyword signifies that a string instance value (such as a
+The [`contentEncoding`]({{< ref "2019-09/content/contentencoding" >}}) keyword signifies that a string instance value (such as a
 specific object property) should be considered binary data serialised using the
 given encoding. This keyword does not affect validation, but the evaluator will
 collect its value as an annotation.  The use of this and related keywords is a

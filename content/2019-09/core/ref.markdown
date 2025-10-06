@@ -31,12 +31,13 @@ related:
     keyword: $defs
 ---
 
-The `$ref` keyword enables a schema to reference another schema by its URI,
-effectively importing its keywords into the current evaluation process. This
-keyword is the cornerstone of schema composition, allowing complex schemas to
-be created out of simpler ones. A reference may set its URI fragment to a
-[JSON Pointer](https://www.rfc-editor.org/rfc/rfc6901) that determines the
-destination of the reference after first resolving the rest of the URI.
+The [`$ref`]({{< ref "2019-09/core/ref" >}}) keyword enables a schema to
+reference another schema by its URI, effectively importing its keywords into the
+current evaluation process. This keyword is the cornerstone of schema
+composition, allowing complex schemas to be created out of simpler ones. A
+reference may set its URI fragment to a [JSON
+Pointer](https://www.rfc-editor.org/rfc/rfc6901) that determines the destination
+of the reference after first resolving the rest of the URI.
 
 {{<common-pitfall>}}
 
@@ -61,14 +62,14 @@ consider to be a subschema.  For example, referencing the contents of the
 {{</common-pitfall>}}
 
 References are either _internal_ (pointing at schemas within the same schema
-definition) or _external_ (pointing at schema resources outside the given
-schema definition). If the reference is a relative URI, it is resolved
-against the _current_ base URI, which is either the closest parent URI as set
-by the [`$id`]({{< ref "2019-09/core/id" >}}) keyword, or the base URI as
-determined by the context on which the schema is declared. Schema wrappers
-like OpenAPI are notable examples of the latter. A relative reference from a
-schema embedded in an OpenAPI specification is resolved from the root of the
-API specification, and not from the root of the schema.
+definition) or _external_ (pointing at schema resources outside the given schema
+definition). If the reference is a relative URI, it is resolved against the
+_current_ base URI, which is either the closest parent URI as set by the
+[`$id`]({{< ref "2019-09/core/id" >}}) keyword, or the base URI as determined by
+the context on which the schema is declared. Schema wrappers like OpenAPI are
+notable examples of the latter. A relative reference from a schema embedded in
+an OpenAPI specification is resolved from the root of the API specification, and
+not from the root of the schema.
 
 {{<best-practice>}}
 

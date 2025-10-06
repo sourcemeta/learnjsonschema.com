@@ -28,7 +28,7 @@ related:
     keyword: deprecated
 ---
 
-The `readOnly` keyword, when set to `true`, signifies that an instance value
+The [`readOnly`]({{< ref "2019-09/meta-data/readonly" >}}) keyword, when set to `true`, signifies that an instance value
 (such as a specific object property) cannot be modified or removed, whatever
 that means in the context of the system. For example, form generators may rely
 on this keyword to mark the corresponding input as read only. This keyword does
