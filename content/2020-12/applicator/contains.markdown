@@ -53,7 +53,9 @@ containment lower bound instead of short-circuiting validation, potentially
 introducing additional computational overhead.
 
 For example, consider an array of 10 items where 5 of its items validate
-against the `contains` subschema (and neither `minContains` nor `maxContains`
+against the `contains` subschema (and neither [`minContains`]({{< ref
+"2020-12/validation/mincontains" >}}) nor [`maxContains`]({{< ref
+"2020-12/validation/maxcontains" >}})
 are declared, for simplicity). When not collecting annotations, validation will
 stop after encountering the first match. However, when collecting annotations,
 validation will have to proceed past the first match to report the 5 matching

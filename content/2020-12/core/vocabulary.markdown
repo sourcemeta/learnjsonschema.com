@@ -38,10 +38,10 @@ dialect. As a notable exception, every dialect must list the [Core]({{< ref
 vocabulary that implements the vocabulary system itself.
 
 {{<learning-more>}} By convention, every official JSON Schema dialect defines a
-dynamic anchor called `meta`. This serves as an extensibility point for
-arbitrary vocabularies to register syntactic constraints that are automatically
-applied to every JSON Schema subschema apart from the top-level one.
-{{</learning-more>}}
+[dynamic anchor]({{< ref "2020-12/core/dynamicanchor" >}}) called `meta`. This
+serves as an extensibility point for arbitrary vocabularies to register
+syntactic constraints that are automatically applied to every JSON Schema
+subschema apart from the top-level one.  {{</learning-more>}}
 
 ## Examples
 

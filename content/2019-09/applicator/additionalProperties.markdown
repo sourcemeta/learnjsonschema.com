@@ -41,36 +41,36 @@ related:
     keyword: unevaluatedProperties
 ---
 
-The `additionalProperties` keyword restricts object instance properties not
-described by the _sibling_ [`properties`]({{< ref
-"2019-09/applicator/properties"
->}}) and [`patternProperties`]({{< ref "2019-09/applicator/patternproperties"
->}}) keywords (if any), to validate against the given subschema. Information
-about the properties that this keyword was evaluated for is reported using
-annotations.
+The [`additionalProperties`]({{< ref
+"2019-09/applicator/additionalproperties" >}}) keyword restricts object instance
+properties not described by the _sibling_ [`properties`]({{< ref
+"2019-09/applicator/properties" >}}) and [`patternProperties`]({{< ref
+"2019-09/applicator/patternproperties" >}}) keywords (if any), to validate
+against the given subschema. Information about the properties that this keyword
+was evaluated for is reported using annotations.
 
 {{<common-pitfall>}}The use of the [`properties`]({{< ref
-"2019-09/applicator/properties" >}}) keyword **does not prevent the presence of
-other properties** in the object instance and **does not enforce the presence
-of the declared properties**. In other words, additional data that is not
-explicitly prohibited is permitted by default. This is intended behaviour to
-ease schema evolution (open schemas are backwards compatible by default) and to
-enable highly-expressive constraint-driven schemas.
+"2019-09/applicator/properties" >}}) keyword **does not prevent the presence
+of other properties** in the object instance and **does not enforce the
+presence of the declared properties**. In other words, additional data that
+is not explicitly prohibited is permitted by default. This is intended
+behaviour to ease schema evolution (open schemas are backwards compatible by
+default) and to enable highly-expressive constraint-driven schemas.
 
-If you want to restrict instances to only contain the properties you declared,
-you must set this keyword to the boolean schema `false`, and if you want to
-enforce the presence of certain properties, you must use the [`required`]({{<
-ref "2019-09/validation/required" >}}) keyword accordingly.
+If you want to restrict instances to only contain the properties you
+declared, you must set this keyword to the boolean schema `false`, and if you
+want to enforce the presence of certain properties, you must use the
+[`required`]({{< ref "2019-09/validation/required" >}}) keyword accordingly.
 {{</common-pitfall>}}
 
 {{<learning-more>}}While the most common use of this keyword is setting it to
-the boolean schema `false` to prevent additional properties, it is possible to
-set it to a satisfiable schema. Doing this, while omitting the
+the boolean schema `false` to prevent additional properties, it is possible
+to set it to a satisfiable schema. Doing this, while omitting the
 [`properties`]({{< ref "2019-09/applicator/properties" >}}) and
 [`patternProperties`]({{< ref "2019-09/applicator/patternproperties" >}})
 keywords, is an elegant way of describing how the value of every property in
-the object instance must look like independently of its
-name.{{</learning-more>}}
+the object instance must look like independently of its name.
+{{</learning-more>}}
 
 {{<constraint-warning `object`>}}
 

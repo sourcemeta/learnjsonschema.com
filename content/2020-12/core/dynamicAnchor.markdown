@@ -22,7 +22,6 @@ related:
     keyword: $anchor
 ---
 
-
 The [`$dynamicAnchor`]({{< ref "2020-12/core/dynamicanchor" >}}) keyword is an
 extension of the [`$anchor`]({{< ref "2020-12/core/anchor" >}}) keyword that
 not only associates a subschema with the given URI fragment identifier, but
@@ -73,7 +72,7 @@ other vocabulary (even future ones).
 
 The schema resource from where the dynamic anchor lookup originates _must_
 declare such dynamic anchor. Otherwise, the schema would be unusable until
-another schema provides a definition for dynamic such anchor. This rule is
+another schema provides a definition for such dynamic anchor. This rule is
 informally referred to as the _bookending requirement_.
 
 {{</common-pitfall>}}

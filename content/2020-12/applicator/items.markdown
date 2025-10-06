@@ -48,7 +48,7 @@ evaluated against any item of the array instance is reported using annotations.
 
 {{<common-pitfall>}}This keyword does not prevent an array instance from being
 empty. If needed, use the [`minItems`]({{< ref "2020-12/validation/minitems"
->}}) to assert on the minimum bounds of the array.{{</common-pitfall>}}
+>}}) keyword to assert on the minimum bounds of the array.{{</common-pitfall>}}
 
 {{<constraint-warning `array`>}}
 
