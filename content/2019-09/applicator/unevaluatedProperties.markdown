@@ -28,52 +28,52 @@ related:
 ---
 
 The [`unevaluatedProperties`]({{< ref
-"2019-09/applicator/unevaluatedproperties" >}}) keyword is a generalisation of
-the [`additionalProperties`]({{< ref "2019-09/applicator/additionalproperties"
->}}) keyword that considers related keywords even when they are not direct
-siblings of this keyword. More specifically, this keyword is affected by
-occurences of [`properties`]({{< ref "2019-09/applicator/properties" >}}),
-[`patternProperties`]({{< ref "2019-09/applicator/patternproperties" >}}),
-[`additionalProperties`]({{< ref "2019-09/applicator/additionalproperties"
->}}), and [`unevaluatedProperties`]({{< ref
-"2019-09/applicator/unevaluatedproperties" >}}) itself, as long as the
-evaluate path that led to [`unevaluatedProperties`]({{< ref
-"2019-09/applicator/unevaluatedproperties" >}}) is a _prefix_ of the evaluate
-path of the others.
+"2019-09/applicator/unevaluatedproperties" >}}) keyword is a generalisation
+of the [`additionalProperties`]({{< ref
+"2019-09/applicator/additionalproperties" >}}) keyword that considers related
+keywords even when they are not direct siblings of this keyword. More
+specifically, this keyword is affected by occurences of [`properties`]({{<
+ref "2019-09/applicator/properties" >}}), [`patternProperties`]({{< ref
+"2019-09/applicator/patternproperties" >}}), [`additionalProperties`]({{< ref
+"2019-09/applicator/additionalproperties" >}}), and
+[`unevaluatedProperties`]({{< ref "2019-09/applicator/unevaluatedproperties"
+>}}) itself, as long as the evaluate path that led to
+[`unevaluatedProperties`]({{< ref "2019-09/applicator/unevaluatedproperties"
+>}}) is a _prefix_ of the evaluate path of the others.
 
 Given its evaluation-dependent nature, this keyword is evaluated after every
 other keyword from every other vocabulary.
 
 {{<best-practice>}}
 
-There are two common use cases for this keyword, both for reducing duplication:
-(1) Elegantly describing additional object properties while declaring the
-[`properties`]({{< ref "2019-09/applicator/properties" >}}) or
+There are two common use cases for this keyword, both for reducing
+duplication: (1) Elegantly describing additional object properties while
+declaring the [`properties`]({{< ref "2019-09/applicator/properties" >}}) or
 [`patternProperties`]({{< ref "2019-09/applicator/patternproperties" >}})
 keywords behind conditional logic without duplicating the
 [`additionalProperties`]({{< ref "2019-09/applicator/additionalproperties"
->}}) keyword in every possible branch. (2) Re-using 
-helpers that consist of the [`properties`]({{< ref
-"2019-09/applicator/properties" >}}), [`patternProperties`]({{< ref
-"2019-09/applicator/patternproperties" >}}), or [`additionalProperties`]({{<
-ref "2019-09/applicator/additionalproperties" >}}) keywords, while specialising
-the helpers as needed in specific locations without having to inline the entire
-contents of the helper.
+>}}) keyword in every possible branch. (2) Re-using helpers that consist of
+the [`properties`]({{< ref "2019-09/applicator/properties" >}}),
+[`patternProperties`]({{< ref "2019-09/applicator/patternproperties" >}}), or
+[`additionalProperties`]({{< ref "2019-09/applicator/additionalproperties"
+>}}) keywords, while specialising the helpers as needed in specific locations
+without having to inline the entire contents of the helper.
 
 {{</best-practice>}}
 
 {{<learning-more>}}
 
-The JSON Schema specification defines the relationship between this keyword and
-the ones that affect it in terms of annotations. However, in practice, most
-implementations avoid the use of annotations for performance reasons, as
-emitting annotations and checking the annotation values of other keywords often
-involves significant memory allocation and complex data structure traversals.
+The JSON Schema specification defines the relationship between this keyword
+and the ones that affect it in terms of annotations. However, in practice,
+most implementations avoid the use of annotations for performance reasons, as
+emitting annotations and checking the annotation values of other keywords
+often involves significant memory allocation and complex data structure
+traversals.
 
-The paper [Elimination of annotation dependencies in validation for Modern JSON
-Schema](https://arxiv.org/abs/2503.11288) is a comprehensive mathematical study
-of how applicators can be automatically re-written to avoid annotation
-dependencies, leading to schemas that are simpler to evaluate.
+The paper [Elimination of annotation dependencies in validation for Modern
+JSON Schema](https://arxiv.org/abs/2503.11288) is a comprehensive
+mathematical study of how applicators can be automatically re-written to avoid
+annotation dependencies, leading to schemas that are simpler to evaluate.
 
 {{</learning-more>}}
 

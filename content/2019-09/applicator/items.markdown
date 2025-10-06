@@ -45,16 +45,18 @@ related:
 The `items` keyword is used to validate array items and has two different modes
 of operation depending on its value:
 
-**Schema Form**: When set to a schema, `items` validates that all items in the
-array instance validate against the given subschema. Whether this keyword was
-evaluated against any item of the array instance is reported using annotations.
+**Schema Form**: When set to a schema, `items` validates that all items in
+the array instance validate against the given subschema. Whether this keyword
+was evaluated against any item of the array instance is reported using
+annotations.
 
-**Array Form**: When set to an array of schemas, `items` validates each item in
-the array instance against the subschema at the corresponding position (tuple
-validation). Items beyond the length of the `items` array can be validated using
-the [`additionalItems`]({{< ref "2019-09/applicator/additionalitems" >}})
-keyword. The annotation reports the largest index to which a subschema was
-applied, or true if it was applied to every item.
+**Array Form**: When set to an array of schemas, `items` validates each item
+in the array instance against the subschema at the corresponding position
+(tuple validation). Items beyond the length of the `items` array can be
+validated using the [`additionalItems`]({{< ref
+"2019-09/applicator/additionalitems" >}}) keyword. The annotation reports the
+largest index to which a subschema was applied, or true if it was applied to
+every item.
 
 {{<common-pitfall>}}This keyword does not prevent an array instance from being
 empty. If needed, use the [`minItems`]({{< ref "2019-09/validation/minitems"

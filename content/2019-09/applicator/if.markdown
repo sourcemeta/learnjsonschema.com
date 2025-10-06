@@ -34,17 +34,19 @@ vocabulary="applicator">}} sibling subschemas (if present). Note that the
 evaluation outcome of this subschema controls which other subschema to apply
 (if any) but has no direct effect on the overall validation result.
 
-{{<best-practice>}} The [`if`]({{< ref "if" >}}), [`then`]({{< ref "then" >}}),
-and [`else`]({{< ref "else" >}}) keywords can be thought of as imperative
-variants of the [`anyOf`]({{< ref "anyOf" >}}) keyword, and both approaches are
-equally capable of describing arbitrary conditions. Choose the one that more
-elegantly describes your desired constraints.{{</best-practice>}}
+{{<best-practice>}} The `if`, [`then`]({{< ref "2019-09/applicator/then"
+>}}), and [`else`]({{< ref "2019-09/applicator/else" >}}) keywords can be
+thought of as imperative variants of the [`anyOf`]({{< ref
+"2019-09/applicator/anyof" >}}) keyword, and both approaches are equally
+capable of describing arbitrary conditions. Choose the one that more elegantly
+describes your desired constraints.{{</best-practice>}}
 
 {{<learning-more>}} This keyword has no effect if neither the [`then`]({{< ref
-"then" >}}) nor [`else`]({{< ref "else" >}}) keywords are declared within the
-same subschema. However, when collecting annotations, the JSON Schema
-implementation will still need to evaluate the [`if`]({{< ref "if" >}}) keyword
-in case its subschema emits annotations.{{</learning-more>}}
+"2019-09/applicator/then" >}}) nor [`else`]({{< ref
+"2019-09/applicator/else" >}}) keywords are declared within the same subschema.
+However, when collecting annotations, the JSON Schema implementation will still
+need to evaluate the `if` keyword in case its subschema emits annotations.
+{{</learning-more>}}
 
 The {{<link keyword="if" vocabulary="applicator">}}, {{<link keyword="then"
 vocabulary="applicator">}}, and {{<link keyword="else"
@@ -59,9 +61,10 @@ JSON Schema is a [constraint-driven
 language](https://modern-json-schema.com/json-schema-is-a-constraint-system).
 Therefore, omitting either the {{<link keyword="then"
 vocabulary="applicator">}} or the {{<link keyword="else"
-vocabulary="applicator">}} keywords is equivalent to setting the corresponding
-part of the ternary conditional operation to the boolean true. In other words,
-undefined consequent or alternative paths lead to success.  For example:
+vocabulary="applicator">}} keywords is equivalent to setting the
+corresponding part of the ternary conditional operation to the boolean true.
+In other words, undefined consequent or alternative paths lead to success.
+For example:
 
 ```c
 // If `then` is missing

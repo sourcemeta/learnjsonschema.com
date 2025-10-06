@@ -37,7 +37,7 @@ annotation.
 We heavily recommend to declare this keyword at the top level of every schema,
 as a human-readable longer description of what the schema is about.
 Note that this keyword is meant to be to be used in conjunction with the
-[`title`]({{< ref "2020-12/meta-data/title" >}}) keyword. The idea is to
+[`title`]({{< ref "2019-09/meta-data/title" >}}) keyword. The idea is to
 augment the short summary with a longer description, and not to avoid the
 concise summary altogether.
 

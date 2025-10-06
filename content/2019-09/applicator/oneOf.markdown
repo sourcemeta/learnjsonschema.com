@@ -29,24 +29,25 @@ related:
 The {{<link keyword="oneOf" vocabulary="applicator">}} keyword restricts
 instances to validate against _exactly one_ (and only one) of the given
 subschemas and fail on the rest. This keyword represents a [logical exclusive
-disjunction](https://en.wikipedia.org/wiki/Exclusive_or) (XOR) operation. In
-practice, the vast majority of schemas don't require exclusive disjunction
+disjunction](https://en.wikipedia.org/wiki/Exclusive_or) (XOR) operation.
+In practice, the vast majority of schemas don't require exclusive disjunction
 semantics but a simple disjunction. If you are not sure, the {{<link
 keyword="anyOf" vocabulary="applicator">}} keyword is probably a better fit.
 
 {{<common-pitfall>}}
 
 Avoid this keyword unless you absolutely need exclusive disjunction
-semantics, which is rarely the case.
-As its name implies, this keyword enforces the instance to
-be valid against **only one of its subschemas**. Therefore, a JSON Schema
-implementation will exhaustively evaluate every subschema to make sure the rest
-fails, potentially introducing unnecessary computational overhead.
+semantics, which is rarely the case. As its name implies, this keyword
+enforces the instance to be valid against **only one of its subschemas**.
+Therefore, a JSON Schema implementation will exhaustively evaluate every
+subschema to make sure the rest fails, potentially introducing unnecessary
+computational overhead.
 
 {{</common-pitfall>}}
 
 This keyword is equivalent to the following complex boolean construct that
-combines the `||`, `&&`, and `!` operators found in most programming languages:
+combines the `||`, `&&`, and `!` operators found in most programming
+languages:
 
 ```c
 bool valid = (A && !B && !C) || (!A && B && !C) || (!A && !B && C);

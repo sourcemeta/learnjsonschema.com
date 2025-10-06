@@ -27,25 +27,26 @@ related:
 
 The `unevaluatedItems` keyword is a generalisation of the
 [`additionalItems`]({{< ref "2019-09/applicator/additionalitems" >}}) keyword
-that considers related keywords even when they are not direct siblings of this
-keyword. More specifically, this keyword is affected by occurences of
-[`items`]({{< ref "2019-09/applicator/items" >}}), [`additionalItems`]({{< ref
-"2019-09/applicator/additionalitems" >}}), and `unevaluatedItems` itself, as
-long as the evaluate path that led to `unevaluatedItems` is a _prefix_ of the
-evaluate path of the others.
+that considers related keywords even when they are not direct siblings of
+this keyword. More specifically, this keyword is affected by occurences of
+[`items`]({{< ref "2019-09/applicator/items" >}}), [`additionalItems`]({{<
+ref "2019-09/applicator/additionalitems" >}}), and `unevaluatedItems` itself,
+as long as the evaluate path that led to `unevaluatedItems` is a _prefix_ of
+the evaluate path of the others.
 
 Given its evaluation-dependent nature, this keyword is evaluated after every
 other keyword from every other vocabulary.
 
 {{<best-practice>}}
 
-There are two common use cases for this keyword, both for reducing duplication:
-(1) Elegantly describing additional array items while declaring the [`items`]({{<
-ref "2019-09/applicator/items" >}}) or [`additionalItems`]({{< ref
-"2019-09/applicator/additionalitems" >}}) keywords behind conditional logic
-without duplicating the [`items`]({{< ref "2019-09/applicator/items" >}})
-keyword in every possible branch. (2) Re-using helpers that consist of the
-[`items`]({{< ref "2019-09/applicator/items" >}}) or [`additionalItems`]({{< ref
+There are two common use cases for this keyword, both for reducing
+duplication: (1) Elegantly describing additional array items while declaring
+the [`items`]({{< ref "2019-09/applicator/items" >}}) or
+[`additionalItems`]({{< ref "2019-09/applicator/additionalitems" >}})
+keywords behind conditional logic without duplicating the [`items`]({{< ref
+"2019-09/applicator/items" >}}) keyword in every possible branch. (2)
+Re-using helpers that consist of the [`items`]({{< ref
+"2019-09/applicator/items" >}}) or [`additionalItems`]({{< ref
 "2019-09/applicator/additionalitems" >}}) keywords, while specialising the
 helpers as needed in specific locations without having to inline the entire
 contents of the helper.
@@ -54,16 +55,17 @@ contents of the helper.
 
 {{<learning-more>}}
 
-The JSON Schema specification defines the relationship between this keyword and
-the ones that affect it in terms of annotations. However, in practice, most
-implementations avoid the use of annotations for performance reasons, as
-emitting annotations and checking the annotation values of other keywords often
-involves significant memory allocation and complex data structure traversals.
+The JSON Schema specification defines the relationship between this keyword
+and the ones that affect it in terms of annotations. However, in practice,
+most implementations avoid the use of annotations for performance reasons, as
+emitting annotations and checking the annotation values of other keywords
+often involves significant memory allocation and complex data structure
+traversals.
 
-The paper [Elimination of annotation dependencies in validation for Modern JSON
-Schema](https://arxiv.org/abs/2503.11288) is a comprehensive mathematical study
-of how applicators can be automatically re-written to avoid annotation
-dependencies, leading to schemas that are simpler to evaluate.
+The paper [Elimination of annotation dependencies in validation for Modern
+JSON Schema](https://arxiv.org/abs/2503.11288) is a comprehensive
+mathematical study of how applicators can be automatically re-written to avoid
+annotation dependencies, leading to schemas that are simpler to evaluate.
 
 {{</learning-more>}}
 

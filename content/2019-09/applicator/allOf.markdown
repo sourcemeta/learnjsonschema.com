@@ -35,21 +35,22 @@ conjunction](https://en.wikipedia.org/wiki/Logical_conjunction) (AND)
 operation, as instances are valid if they satisfy every constraint of every
 subschema (the intersection of the constraints).
 
-{{<common-pitfall>}} Wrapping a single instance of the [`$ref`](../../core/ref)
-or [`$dynamicRef`](../../core/dynamicref) keyword in an `allOf` operator is an
+{{<common-pitfall>}} Wrapping a single instance of the [`$ref`]({{< ref
+"2019-09/core/ref" >}}) or [`$recursiveRef`]({{< ref
+"2019-09/core/recursiveref" >}}) keyword in an `allOf` operator is an
 anti-pattern.
 
 This practice has historical roots. In JSON Schema [Draft 7](/draft7) and
-earlier versions, any subschema declaring the `$ref` keyword was considered to
-be a _reference object_ and any other sibling keyword was silently ignored. As
-a consequence, subschemas with references that made use of other keywords had
-to artificially wrap the reference into its own subschema.
+earlier versions, any subschema declaring the `$ref` keyword was considered
+to be a _reference object_ and any other sibling keyword was silently ignored.
+As a consequence, subschemas with references that made use of other keywords
+had to artificially wrap the reference into its own subschema.
 {{</common-pitfall>}}
 
 {{<best-practice>}}This keyword typically has a single use case: combining
 _multiple_ schemas through the use of (internal or external) references. If
-this is not the case, prefer elevating the keywords of every subschema to the
-outer schema and avoid using this keyword.  {{</best-practice>}}
+this is not the case, prefer elevating the keywords of every subschema to
+the outer schema and avoid using this keyword.  {{</best-practice>}}
 
 This keyword is equivalent to the `&&` operator found in most programming
 languages. For example:

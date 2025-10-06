@@ -36,7 +36,7 @@ _may_ implicitly award it such URL as the base).
 
 Note that you cannot set this keyword to a URI that contains a fragment
 identifier. Instead, fragment identifiers must be set with the [`$anchor`]({{<
-ref "2020-12/core/anchor" >}}) keyword.
+ref "2019-09/core/anchor" >}}) keyword.
 
 {{<learning-more>}}
 

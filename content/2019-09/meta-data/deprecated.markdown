@@ -53,7 +53,7 @@ is through annotation collection.
 
 For example, an instance property might only be deprecated under certain
 conditions determined by a dynamic operator like [`anyOf`]({{< ref
-"2020-12/applicator/anyof" >}}).
+"2019-09/applicator/anyof" >}}).
 
 {{</common-pitfall>}}
 

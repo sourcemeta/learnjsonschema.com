@@ -24,7 +24,7 @@ related:
 
 The `$anchor` keyword associates a subschema with the given URI fragment
 identifier, which can be referenced using the [`$ref`]({{< ref
-"2020-12/core/ref" >}}) keyword. The fragment identifier is resolved against
+"2019-09/core/ref" >}}) keyword. The fragment identifier is resolved against
 the URI of the schema resource. Therefore, using this keyword to declare the
 same anchor more than once within the same schema resource results in an
 invalid schema.

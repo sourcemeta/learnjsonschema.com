@@ -22,12 +22,12 @@ related:
 
 The `dependentSchemas` keyword restricts object instances to validate against
 one or more of the given subschemas if the corresponding properties are
-defined.  Note that the given subschemas are evaluated against the object that
-defines the property dependency.
+defined.  Note that the given subschemas are evaluated against the object
+that defines the property dependency.
 
 {{<learning-more>}}The [`dependentRequired`]({{< ref
-"2020-12/validation/dependentrequired" >}}) keyword is a specialisation of this
-keyword to describe object dependencies that only consist in property
+"2019-09/validation/dependentrequired" >}}) keyword is a specialisation of
+this keyword to describe object dependencies that only consist in property
 requirement.{{</learning-more>}}
 
 {{<constraint-warning `object`>}}

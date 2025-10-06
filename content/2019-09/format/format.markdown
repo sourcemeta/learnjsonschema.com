@@ -23,15 +23,13 @@ annotation:
 The `format` keyword communicates that string instances are of the given
 logical type by producing an annotation value.
 
-{{<common-pitfall>}} By default, this keyword does not perform validation. If
-validation is desired, the best practice is to combine this keyword with the
-[`pattern`]({{< ref "2019-09/validation/pattern" >}}) keyword. This guarantees
-interoperable and unambiguous behavior across JSON Schema implementations.
-
-Another option is to produce a custom dialect that opts-in to the [Format
-Assertion]({{< ref "2019-09/format" >}}) vocabulary. However, this vocabulary is
-considered optional by the official JSON Schema Test Suite. As a consequence,
-not many implementations support it.{{</common-pitfall>}}
+{{<common-pitfall>}} By default, this keyword does not perform validation, as
+validating formats is considered optional by the official JSON Schema Test
+Suite. As a consequence, not many implementations support it. If validation is
+desired, the best practice is to combine this keyword with the [`pattern`]({{<
+ref "2019-09/validation/pattern" >}}) keyword. This guarantees interoperable
+and unambiguous behavior across JSON Schema implementations.
+{{</common-pitfall>}}
 
 {{<best-practice>}} While [technically
 allowed](https://json-schema.org/draft/2019-09/json-schema-validation#section-7.2.3)
@@ -50,12 +48,6 @@ Schema implementations did support validation, leading schema-writers to rely
 on it. At the same time, a second problem emerged: implementations often didn't
 agree on the strictness of validation, mainly on complex logical types like
 e-mail addresses, leading to various interoperability issues.
-
-In JSON Schema 2020-12, the specification introduces two mutually incompatible
-vocabularies to clarify whether the keyword acts as an annotation or as an
-assertion. Confusingly enough, it also allows implementations to perform
-validation even when the annotation variant is in use, but only as a setting
-that is disabled by default.
 
 To avoid the gray areas of this keyword, we recommend only treating it as an
 annotation, never enabling validation support at the implementation level (even

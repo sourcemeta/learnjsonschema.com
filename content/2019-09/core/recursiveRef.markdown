@@ -24,25 +24,26 @@ related:
     keyword: $defs
 ---
 
-The `$recursiveRef` keyword is used together with [`$recursiveAnchor`]({{< ref
-"2019-09/core/recursiveanchor" >}}) to enable dynamic referencing for recursive
-structures, particularly useful for extending meta-schemas. This keyword works
-by looking up the dynamic scope at runtime to find the appropriate schema to
-reference.
+The `$recursiveRef` keyword is used together with [`$recursiveAnchor`]({{<
+ref "2019-09/core/recursiveanchor" >}}) to enable dynamic referencing for
+recursive structures, particularly useful for extending meta-schemas. This
+keyword works by looking up the dynamic scope at runtime to find the
+appropriate schema to reference.
 
 In 2019-09, `$recursiveRef` is limited to referencing the schema root (using
 `"#"` as the fragment). When a `$recursiveRef` with fragment `"#"` is
 encountered, the evaluator looks back through the dynamic evaluation path to
-find the outermost schema that has `"$recursiveAnchor": true` at its root, and
-uses that schema for validation.
+find the outermost schema that has `"$recursiveAnchor": true` at its root,
+and uses that schema for validation.
 
 This mechanism is primarily used in JSON Schema meta-schemas to allow proper
 extension and customization of vocabularies.
 
-{{<common-pitfall>}}In JSON Schema 2019-09, `$recursiveRef` only supports the
-special empty fragment `"#"`. It cannot be used with named anchors or JSON
+{{<common-pitfall>}}In JSON Schema 2019-09, `$recursiveRef` only supports
+the special empty fragment `"#"`. It cannot be used with named anchors or JSON
 Pointer fragments. This limitation was addressed in JSON Schema 2020-12 with
-the more flexible `$dynamicRef` and `$dynamicAnchor` keywords.{{</common-pitfall>}}
+the more flexible `$dynamicRef` and `$dynamicAnchor`
+keywords.{{</common-pitfall>}}
 
 ## Examples
 
@@ -80,7 +81,7 @@ the more flexible `$dynamicRef` and `$dynamicAnchor` keywords.{{</common-pitfall
 }
 {{</schema>}}
 
-In this example, when `$recursiveRef` is evaluated in the `nested` property, it
-will resolve to the extended meta-schema (the outermost schema with
-`$recursiveAnchor: true`), allowing the `custom` property to be validated even
-in nested schema definitions.
+In this example, when `$recursiveRef` is evaluated in the `nested` property,
+it will resolve to the extended meta-schema (the outermost schema with
+`$recursiveAnchor: true`), allowing the `custom` property to be validated
+even in nested schema definitions.

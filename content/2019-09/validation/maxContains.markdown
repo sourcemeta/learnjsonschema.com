@@ -23,20 +23,20 @@ related:
 ---
 
 The `maxContains` keyword modifies the [`contains`]({{< ref
-"2020-12/applicator/contains" >}}) keyword to constrain array instances to the
+"2019-09/applicator/contains" >}}) keyword to constrain array instances to the
 given maximum number of containment matches. This keyword has no effect if the
-[`contains`]({{< ref "2020-12/applicator/contains" >}}) keyword is not
+[`contains`]({{< ref "2019-09/applicator/contains" >}}) keyword is not
 declared.
 
 {{<learning-more>}}
-Using [`contains`]({{< ref "2020-12/applicator/contains"
->}}) with both [`minContains`]({{< ref "2020-12/validation/mincontains" >}})
-and [`maxContains`]({{< ref "2020-12/validation/maxcontains" >}}) set to the
-same value restricts arrays to contain exactly that number of items that match
-the given subschema. Furthermore, setting these keywords to zero is a common
-trick to restrict arrays to not contain an item that matches the given
-subschema without making use of the [`not`]({{< ref "2020-12/applicator/not"
->}}) applicator.
+Using [`contains`]({{< ref "2019-09/applicator/contains" >}}) with both
+[`minContains`]({{< ref "2019-09/validation/mincontains" >}}) and
+[`maxContains`]({{< ref "2019-09/validation/maxcontains" >}}) set to the same
+value restricts arrays to contain exactly that number of items that match the
+given subschema. Furthermore, setting these keywords to zero is a common trick
+to restrict arrays to not contain an item that matches the given subschema
+without making use of the [`not`]({{< ref "2019-09/applicator/not" >}})
+applicator.
 {{</learning-more>}}
 
 {{<constraint-warning `array`>}}

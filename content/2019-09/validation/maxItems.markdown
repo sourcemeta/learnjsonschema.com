@@ -26,11 +26,11 @@ The `maxItems` keyword restricts array instances to consists of an inclusive
 maximum numbers of items.
 
 {{<common-pitfall>}} The presence of this keyword does not depend on the
-presence of the [`items`]({{< ref "2020-12/applicator/items" >}}) keyword.
+presence of the [`items`]({{< ref "2019-09/applicator/items" >}}) keyword.
 {{</common-pitfall>}}
 
 {{<best-practice>}}To restrict array instances to the empty array, prefer using
-the [`const`]({{< ref "2020-12/validation/const" >}}) keyword instead of
+the [`const`]({{< ref "2019-09/validation/const" >}}) keyword instead of
 setting this keyword to `0`. {{</best-practice>}}
 
 {{<constraint-warning `array`>}}

@@ -34,14 +34,16 @@ instances to validate against the given subschema if the {{<link keyword="if"
 vocabulary="applicator">}} sibling keyword successfully validated against the
 instance.
 
-{{<common-pitfall>}} This keyword has no effect if the [`if`]({{< ref "if" >}})
-keyword is not declared within the same subschema.  {{</common-pitfall>}}
+{{<common-pitfall>}} This keyword has no effect if the [`if`]({{< ref
+"2019-09/applicator/if" >}}) keyword is not declared within the same
+subschema. {{</common-pitfall>}}
 
-{{<best-practice>}} The [`if`]({{< ref "if" >}}), [`then`]({{< ref "then" >}}),
-and [`else`]({{< ref "else" >}}) keywords can be thought of as imperative
-variants of the [`anyOf`]({{< ref "anyOf" >}}) keyword, and both approaches are
-equally capable of describing arbitrary conditions. Choose the one that more
-elegantly describes your desired constraints.{{</best-practice>}}
+{{<best-practice>}} The [`if`]({{< ref "2019-09/applicator/if" >}}),
+`then`, and [`else`]({{< ref "2019-09/applicator/else" >}}) keywords can be
+thought of as imperative variants of the [`anyOf`]({{< ref
+"2019-09/applicator/anyof" >}}) keyword, and both approaches are equally
+capable of describing arbitrary conditions. Choose the one that more elegantly
+describes your desired constraints.{{</best-practice>}}
 
 ## Examples
 

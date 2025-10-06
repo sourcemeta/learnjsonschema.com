@@ -46,7 +46,7 @@ might seem counter-intuitive, consider the following cases:
 {{</learning-more>}}
 
 {{<best-practice>}} Avoid the use of this keyword (usually negating the
-[`required`]({{< ref "/2020-12/validation/required" >}}) keyword) to prohibit
+[`required`]({{< ref "2019-09/validation/required" >}}) keyword) to prohibit
 specific object properties from being defined. Instead, use the
 [`properties`]({{< ref "properties" >}}) keyword and set the disallowed object
 properties to the `false` boolean schema.{{</best-practice>}}

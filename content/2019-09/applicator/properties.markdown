@@ -54,22 +54,22 @@ enable highly-expressive constraint-driven schemas.
 
 If you want to restrict instances to only contain the properties you declared,
 you must set the [`additionalProperties`]({{< ref
-"2020-12/applicator/additionalproperties" >}}) keyword to the boolean schema
+"2019-09/applicator/additionalproperties" >}}) keyword to the boolean schema
 `false`, and if you want to enforce the presence of certain properties, you
-must use the [`required`]({{< ref "2020-12/validation/required" >}}) keyword
+must use the [`required`]({{< ref "2019-09/validation/required" >}}) keyword
 accordingly.  {{</common-pitfall>}}
 
 {{<learning-more>}}Setting properties defined by this keyword to the boolean
 schema `false` is an common trick to express that such properties are
 forbidden. This is considered more elegant (and usually more performant) than
-using the [`not`]({{< ref "2020-12/applicator/not" >}}) applicator to negate
-the [`required`]({{< ref "2020-12/validation/required"
->}}) keyword. However, setting properties defined by this keyword to the
-boolean `true` is considered to be redundant and an anti-pattern, as additional
-properties are permitted by default.  {{</learning-more>}}
+using the [`not`]({{< ref "2019-09/applicator/not" >}}) applicator to negate
+the [`required`]({{< ref "2019-09/validation/required" >}}) keyword. However,
+setting properties defined by this keyword to the boolean `true` is considered
+to be redundant and an anti-pattern, as additional properties are permitted by
+default.  {{</learning-more>}}
 
 {{<common-pitfall>}} This keyword is evaluated independently of the
-[`patternProperties`]({{< ref "2020-12/applicator/patternproperties" >}})
+[`patternProperties`]({{< ref "2019-09/applicator/patternproperties" >}})
 keyword. If an object property is described by both keywords, then both schemas
 must successfully validate against the given property for validation to
 succeed.  {{</common-pitfall>}}

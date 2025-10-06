@@ -22,7 +22,7 @@ in various parts of a schema.
 {{<common-pitfall>}}
 
 Compared to other similar keywords from the [Meta Data]({{< ref
-"2020-12/meta-data" >}}) vocabulary, this keyword does not produce an
+"2019-09/meta-data" >}}) vocabulary, this keyword does not produce an
 annotation. Furthermore, the specification explicitly prohibits any JSON Schema
 tooling from inferring meaning from this keyword or elevating its contents to
 the end user in any way.

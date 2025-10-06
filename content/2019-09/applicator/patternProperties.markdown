@@ -48,7 +48,7 @@ definitions. Information about the properties that this keyword was evaluated
 for is reported using annotations.
 
 {{<common-pitfall>}} This keyword is evaluated independently of the
-[`properties`]({{< ref "2020-12/applicator/properties" >}}) keyword. If an
+[`properties`]({{< ref "2019-09/applicator/properties" >}}) keyword. If an
 object property is described by both keywords, then both subschemas must
 successfully validate against the given property for validation to succeed.
 Furthermore, an instance property may match more than one regular expression

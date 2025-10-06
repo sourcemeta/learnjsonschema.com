@@ -63,7 +63,7 @@ specification.{{</common-pitfall>}}
 {{<common-pitfall>}}JSON Schema prohibits the use of the this keyword on
 arbitrary subschemas that do not represent schema resources. It can only be
 present at the root of the schema (an implicit schema resource) or as a sibling
-of the [`$id`]({{< ref "2020-12/core/id" >}}) keyword (an explicit schema
+of the [`$id`]({{< ref "2019-09/core/id" >}}) keyword (an explicit schema
 resource).{{</common-pitfall>}}
 
 A schema is considered syntactic valid if it successfully validates against its
@@ -119,7 +119,7 @@ $ jsonschema inspect schema.json
 
 ## Examples
 
-{{<schema `A schema described by the JSON Schema 2020-12 official dialect`>}}
+{{<schema `A schema described by the JSON Schema 2019-09 official dialect`>}}
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "type": "string"
@@ -132,7 +132,7 @@ $ jsonschema inspect schema.json
 }
 {{</schema>}}
 
-{{<schema `A valid schema that mixes the 2020-12 and 2019-09 official dialects`>}}
+{{<schema `A valid schema that mixes the 2019-09 and 2020-12 official dialects`>}}
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "properties": {
@@ -143,7 +143,7 @@ $ jsonschema inspect schema.json
   },
   "$defs": {
     "discount": {
-      "$schema": "https://json-schema.org/draft/2019-09/schema",
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
       "type": "number"
     }
   }

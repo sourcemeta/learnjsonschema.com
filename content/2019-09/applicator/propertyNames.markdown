@@ -34,30 +34,29 @@ related:
 
 The `propertyNames` keyword restricts object instances to only define
 properties whose names match the given schema. This keyword is evaluated
-against _every_ property of the object instance, independently of keywords that
-indirectly introduce property names such as [`properties`]({{< ref
-"2020-12/applicator/properties" >}}) and [`patternProperties`]({{< ref
-"2020-12/applicator/patternproperties" >}}). Annotations coming from inside
+against _every_ property of the object instance, independently of keywords
+that indirectly introduce property names such as [`properties`]({{< ref
+"2019-09/applicator/properties" >}}) and [`patternProperties`]({{< ref
+"2019-09/applicator/patternproperties" >}}). Annotations coming from inside
 this keyword are dropped.
 
 {{<common-pitfall>}} As per the JSON grammar, the name of an object property
-must be a string. Therefore, setting this keyword to a schema that makes use of
-keywords that only apply to types other than strings (such as the
-[`properties`]({{< ref "2020-12/applicator/properties" >}}) keyword) is either
-meaningless or leads to unsatisfiable schemas. Conversely, explicitly setting
-the [`type`]({{< ref "2020-12/validation/type"
->}}) keyword to `string` is redundant.
-{{</common-pitfall>}}
+must be a string. Therefore, setting this keyword to a schema that makes use
+of keywords that only apply to types other than strings (such as the
+[`properties`]({{< ref "2019-09/applicator/properties" >}}) keyword) is
+either meaningless or leads to unsatisfiable schemas. Conversely, explicitly
+setting the [`type`]({{< ref "2019-09/validation/type" >}}) keyword to
+`string` is redundant.  {{</common-pitfall>}}
 
 {{<best-practice>}} This keyword is useful when describing JSON objects whose
 properties cannot be known in advance. For example, allowing extensions that
 must adhere to a certain name convention. If that's not the case, prefer
 explicitly listing every permitted property using the [`properties`]({{< ref
-"2020-12/applicator/properties" >}}) or [`patternProperties`]({{< ref
-"2020-12/applicator/patternproperties" >}}) keywords, and potentially closing
+"2019-09/applicator/properties" >}}) or [`patternProperties`]({{< ref
+"2019-09/applicator/patternproperties" >}}) keywords, and potentially closing
 the object by setting the [`additionalProperties`]({{< ref
-"2020-12/applicator/additionalproperties"
->}}) keyword to `false`.  {{</best-practice>}}
+"2019-09/applicator/additionalproperties" >}}) keyword to `false`.
+{{</best-practice>}}
 
 {{<constraint-warning `object`>}}
 

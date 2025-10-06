@@ -23,7 +23,7 @@ related:
     keyword: contentEncoding
 ---
 
-When the [`contentMediaType`]({{< ref "2020-12/content/contentmediatype" >}})
+When the [`contentMediaType`]({{< ref "2019-09/content/contentmediatype" >}})
 keyword is set to a media type that adheres to the JSON data model (like JSON
 itself, [YAML](https://yaml.org) or [UBJSON](https://ubjson.org)), the
 `contentSchema` keyword declares the schema that describes the corresponding

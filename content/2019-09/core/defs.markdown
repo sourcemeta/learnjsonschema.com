@@ -22,9 +22,10 @@ related:
 
 The `$defs` keyword is a container for storing re-usable schemas within a
 schema resource, which can be referenced using the [`$ref`]({{< ref
-"2020-12/core/ref" >}}) or [`$dynamicRef`]({{< ref "2020-12/core/dynamicref"
->}}) keywords. From a software engineering point of view, this keyword is
-analogous to defining _internal_ helper functions as part of a larger program.
+"2019-09/core/ref" >}}) or [`$recursiveRef`]({{< ref
+"2019-09/core/recursiveref" >}}) keywords. From a software engineering point of
+view, this keyword is analogous to defining _internal_ helper functions as part
+of a larger program.
 
 {{<best-practice>}}
 

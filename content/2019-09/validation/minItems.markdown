@@ -28,7 +28,7 @@ The `minItems` keyword restricts array instances to consists of an inclusive
 minimum numbers of items.
 
 {{<common-pitfall>}} The presence of this keyword does not depend on the
-presence of the [`items`]({{< ref "2020-12/applicator/items" >}}) keyword.
+presence of the [`items`]({{< ref "2019-09/applicator/items" >}}) keyword.
 {{</common-pitfall>}}
 
 {{<constraint-warning `array`>}}

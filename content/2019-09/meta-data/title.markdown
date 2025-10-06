@@ -43,7 +43,7 @@ stick to [Git commit message
 title](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
 conventions and set it to a capitalised string of *50 characters or less*. If
 you run out of space, you can move the additional information to the
-[`description`]({{< ref "2020-12/meta-data/description" >}}) keyword.
+[`description`]({{< ref "2019-09/meta-data/description" >}}) keyword.
 
 {{</best-practice>}}
 

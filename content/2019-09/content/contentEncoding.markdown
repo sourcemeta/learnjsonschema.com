@@ -30,7 +30,7 @@ audio, and video) in JSON.
 {{<best-practice>}}
 
 It is recommended to set this keyword along with the [`contentMediaType`]({{<
-ref "2020-12/content/contentmediatype" >}}) keyword to declare the type of data
+ref "2019-09/content/contentmediatype" >}}) keyword to declare the type of data
 being encoded (for example, an image in PNG format). Otherwise, the receiver
 must treat the instance value as a binary blob without knowing for sure the
 type of information it represents.

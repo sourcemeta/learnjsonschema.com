@@ -28,7 +28,7 @@ The `minProperties` keyword restricts object instances to consists of an
 inclusive minimum numbers of properties.
 
 {{<common-pitfall>}} The presence of this keyword does not depend on the
-presence of the [`properties`]({{< ref "2020-12/applicator/properties" >}})
+presence of the [`properties`]({{< ref "2019-09/applicator/properties" >}})
 keyword.  {{</common-pitfall>}}
 
 {{<constraint-warning `object`>}}

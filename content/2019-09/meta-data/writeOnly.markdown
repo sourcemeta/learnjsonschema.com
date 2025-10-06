@@ -43,7 +43,7 @@ this keyword altogether. This prevents unnecessarily generating and collecting
 an annotation that does not carry any additional meaning.
 
 Also avoid simultaneously setting this keyword and the [`readOnly`]({{< ref
-"2020-12/meta-data/readonly" >}}) keyword to `true` for the same instance
+"2019-09/meta-data/readonly" >}}) keyword to `true` for the same instance
 location, resulting in ambiguous semantics.
 
 {{</best-practice>}}
@@ -59,7 +59,7 @@ is through annotation collection.
 
 For example, an instance property might only be write only under certain
 conditions determined by a dynamic operator like [`anyOf`]({{< ref
-"2020-12/applicator/anyof" >}}).
+"2019-09/applicator/anyof" >}}).
 
 {{</common-pitfall>}}
 

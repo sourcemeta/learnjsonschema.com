@@ -32,13 +32,13 @@ properties if other properties are also defined.
 {{<common-pitfall>}} Note that multiple potentially interrelated dependencies
 can be declared at once, in which case every dependency must be transitively
 fulfilled for the object instance to be valid. For example, if a schema marks
-the property `B` as required if the property `A` is present and also marks the
-property `C` as required if the property `B` is present, defining the property
-`A` transitively requires _both_ the `B` and `C` properties to be present in
-the object instance.  {{</common-pitfall>}}
+the property `B` as required if the property `A` is present and also marks
+the property `C` as required if the property `B` is present, defining the
+property `A` transitively requires _both_ the `B` and `C` properties to be
+present in the object instance.  {{</common-pitfall>}}
 
 {{<learning-more>}}The [`dependentSchemas`]({{< ref
-"2020-12/applicator/dependentschemas" >}}) keyword is a generalisation of this
+"2019-09/applicator/dependentschemas" >}}) keyword is a generalisation of this
 keyword to describe object dependencies beyond property
 requirement.{{</learning-more>}}
 

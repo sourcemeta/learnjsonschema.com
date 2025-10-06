@@ -29,19 +29,19 @@ related:
 The {{<link keyword="anyOf" vocabulary="applicator">}} keyword restricts
 instances to validate against _at least one_ (but potentially multiple) of the
 given subschemas. This keyword represents a [logical
-disjunction](https://en.wikipedia.org/wiki/Logical_disjunction) (OR) operation,
-as instances are valid if they satisfy the constraints of one or more
-subschemas (the union of the constraints).
+disjunction](https://en.wikipedia.org/wiki/Logical_disjunction) (OR)
+operation, as instances are valid if they satisfy the constraints of one or
+more subschemas (the union of the constraints).
 
 {{<learning-more>}}Keep in mind that when collecting annotations, the JSON
 Schema implementation will need to exhaustively evaluate every subschema past
-the first match instead of short-circuiting validation, potentially introducing
-additional computational overhead.
+the first match instead of short-circuiting validation, potentially
+introducing additional computational overhead.
 
 For example, consider 3 subschemas where the instance validates against the
 first. When not collecting annotations, validation will stop after evaluating
-the first subschema. However, when collecting annotations, evaluation will have
-to proceed past the first subschema in case the others emit
+the first subschema. However, when collecting annotations, evaluation will
+have to proceed past the first subschema in case the others emit
 annotations.{{</learning-more>}}
 
 This keyword is equivalent to the `||` operator found in most programming
