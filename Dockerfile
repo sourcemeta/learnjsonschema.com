@@ -1,6 +1,6 @@
 FROM debian:bookworm-slim
 RUN apt-get update \
-  && apt-get install -y make nodejs npm curl ca-certificates \
+  && apt-get install -y make nodejs npm curl ca-certificates codespell \
   && rm -rf /var/lib/apt/lists/*
 
 ARG HUGO_VERSION=0.147.2

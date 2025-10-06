@@ -18,7 +18,7 @@ related:
     keyword: type
 ---
 
-The `const` keyword (short for "constant") restricts instances to a single
+The [`const`]({{< ref "2020-12/validation/const" >}}) keyword (short for "constant") restricts instances to a single
 specific JSON value of any type.
 
 {{<best-practice>}} Constraining instances to a constant value by definition
@@ -29,7 +29,7 @@ anti-pattern.{{</best-practice>}}
 
 {{<common-pitfall>}} There are programming languages, such as JavaScript, that
 [cannot distinguish between integers and real
-numbers](https://2ality.com/2012/04/number-encoding.html). To accomodate for
+numbers](https://2ality.com/2012/04/number-encoding.html). To accommodate for
 those cases, JSON Schema considers a real number with a zero fractional part to
 be equal to the corresponding integer. For example, in JSON Schema, `1` is
 considered to be equal to `1.0`.{{</common-pitfall>}}

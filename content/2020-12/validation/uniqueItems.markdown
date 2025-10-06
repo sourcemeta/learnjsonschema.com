@@ -21,7 +21,7 @@ related:
     keyword: contains
 ---
 
-When set to `true`, the `uniqueItems` keyword restricts array instances to
+When set to `true`, the [`uniqueItems`]({{< ref "2020-12/validation/uniqueItems" >}}) keyword restricts array instances to
 items that only occur once in the array. Note that empty arrays and arrays that
 consist of a single item satisfy uniqueness by definition.
 

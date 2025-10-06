@@ -22,7 +22,7 @@ related:
     keyword: multipleOf
 ---
 
-The `minimum` keyword restricts number instances to be greater than or equal to
+The [`minimum`]({{< ref "2020-12/validation/minimum" >}}) keyword restricts number instances to be greater than or equal to
 the given number.
 
 {{<constraint-warning `number`>}}

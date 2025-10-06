@@ -29,7 +29,7 @@ also records this association in the [dynamic
 scope](https://json-schema.org/blog/posts/dynamicref-and-generics).  When
 resolving a dynamic anchor using the [`$dynamicRef`]({{< ref
 "2020-12/core/dynamicref" >}}) keyword, the base URI of the origin is not
-considered. Instead, evaluation jumps to the first encountered occurence of the
+considered. Instead, evaluation jumps to the first encountered occurrence of the
 given dynamic anchor in the [stack of schema
 resources](https://json-schema.org/blog/posts/understanding-lexical-dynamic-scopes#the-dynamic-scope-as-a-stack)
 traversed so far.
@@ -104,7 +104,7 @@ $ jsonschema validate string-list.json instance.json --resolve generic-list.json
 
 ## Examples
 
-{{<schema `A generic schema that describes an array where the items definition (by default anything) can be overriden through a dynamic anchor`>}}
+{{<schema `A generic schema that describes an array where the items definition (by default anything) can be overridden through a dynamic anchor`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.com/generic-list",

@@ -24,11 +24,11 @@ related:
     keyword: minProperties
 ---
 
-The `required` keyword restricts object instances to define the given set of properties.
+The [`required`]({{< ref "2020-12/validation/required" >}}) keyword restricts object instances to define the given set of properties.
 
 {{<common-pitfall>}} The presence of this keyword does not depend on the
 presence of the [`properties`]({{< ref "2020-12/applicator/properties" >}})
-keyword. The `required` keyword mandates that certain properties are present
+keyword. The [`required`]({{< ref "2020-12/validation/required" >}}) keyword mandates that certain properties are present
 (independently of their value), while the [`properties`]({{< ref
 "2020-12/applicator/properties" >}}) keyword describes the value of such
 properties when present.{{</common-pitfall>}}

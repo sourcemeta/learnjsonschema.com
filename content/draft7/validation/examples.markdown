@@ -1,7 +1,7 @@
 ---
 keyword: "examples"
 signature: "Array<Any>"
-value: This keyword must be set to an array of JSON values that preferrably successfully validates against the corresponding subschema
+value: This keyword must be set to an array of JSON values that preferably successfully validates against the corresponding subschema
 summary: "This keyword is used to provide sample JSON values associated with a particular schema, for the purpose of illustrating usage."
 kind: [ "annotation" ]
 instance: [ "any" ]

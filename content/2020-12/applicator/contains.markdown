@@ -38,14 +38,14 @@ related:
     keyword: uniqueItems
 ---
 
-The `contains` keyword restricts array instances to include one or more items
-(at any location of the array) that validate against the given subschema. The
-lower and upper bounds that are allowed to validate against the given subschema
-can be controlled using the [`minContains`]({{< ref
-"2020-12/validation/mincontains" >}}) and [`maxContains`]({{< ref
-"2020-12/validation/maxcontains" >}}) keywords. Information about the items
-that were successfully validated against the given subschema is reported using
-annotations.
+The [`contains`]({{< ref "2020-12/applicator/contains" >}}) keyword restricts array
+instances to include one or more items (at any location of the array) that
+validate against the given subschema. The lower and upper bounds that are
+allowed to validate against the given subschema can be controlled using the
+[`minContains`]({{< ref "2020-12/validation/mincontains" >}}) and
+[`maxContains`]({{< ref "2020-12/validation/maxcontains" >}}) keywords.
+Information about the items that were successfully validated against the given
+subschema is reported using annotations.
 
 {{<learning-more>}}Keep in mind that when collecting annotations, the
 evaluator might need to exhaustively check every item in the array past the
@@ -53,13 +53,13 @@ containment lower bound instead of short-circuiting validation, potentially
 introducing additional computational overhead.
 
 For example, consider an array of 10 items where 5 of its items validate
-against the `contains` subschema (and neither [`minContains`]({{< ref
-"2020-12/validation/mincontains" >}}) nor [`maxContains`]({{< ref
-"2020-12/validation/maxcontains" >}})
-are declared, for simplicity). When not collecting annotations, validation will
-stop after encountering the first match. However, when collecting annotations,
-validation will have to proceed past the first match to report the 5 matching
-indexes.{{</learning-more>}}
+against the [`contains`]({{< ref "2020-12/applicator/contains" >}}) subschema (and neither
+[`minContains`]({{< ref "2020-12/validation/mincontains" >}}) nor
+[`maxContains`]({{< ref "2020-12/validation/maxcontains" >}}) are declared, for
+simplicity). When not collecting annotations, validation will stop after
+encountering the first match. However, when collecting annotations, validation
+will have to proceed past the first match to report the 5 matching indexes.
+{{</learning-more>}}
 
 {{<constraint-warning `array`>}}
 

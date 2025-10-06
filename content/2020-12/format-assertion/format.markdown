@@ -1,7 +1,7 @@
 ---
 keyword: "format"
 signature: "String"
-value: This keyword must be set to a string, preferrably one that is standardized by JSON Schema to ensure interoperability
+value: This keyword must be set to a string, preferably one that is standardized by JSON Schema to ensure interoperability
 summary: "Define and assert semantic information about a string instance."
 kind: [ "annotation", "assertion" ]
 instance: [ "string" ]
@@ -44,7 +44,7 @@ related:
     keyword: format
 ---
 
-The `format` keyword restricts string instances to the given logical type and
+The [`format`]({{< ref "2020-12/format-annotation/format" >}}) keyword restricts string instances to the given logical type and
 produces an annotation value.
 
 However, this vocabulary is not used by default in the JSON Schema 2020-12

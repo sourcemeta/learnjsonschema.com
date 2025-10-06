@@ -22,7 +22,7 @@ related:
     keyword: items
 ---
 
-The `maxContains` keyword modifies the [`contains`]({{< ref
+The [`maxContains`]({{< ref "2020-12/validation/maxContains" >}}) keyword modifies the [`contains`]({{< ref
 "2020-12/applicator/contains" >}}) keyword to constrain array instances to the
 given maximum number of containment matches. This keyword has no effect if the
 [`contains`]({{< ref "2020-12/applicator/contains" >}}) keyword is not

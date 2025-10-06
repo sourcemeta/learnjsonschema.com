@@ -31,7 +31,7 @@ the [`$recursiveAnchor`]({{< ref "2019-09/core/recursiveanchor" >}}) keyword.
 When resolving a recursive anchor using this keyword, the base URI of the
 origin is not considered. Instead, the evaluator looks in the [dynamic
 scope](https://json-schema.org/blog/posts/dynamicref-and-generics) and jumps to
-the first encountered occurence of the recursive anchor in the [stack of schema
+the first encountered occurrence of the recursive anchor in the [stack of schema
 resources](https://json-schema.org/blog/posts/understanding-lexical-dynamic-scopes#the-dynamic-scope-as-a-stack)
 traversed so far.
 
@@ -39,7 +39,7 @@ In other words, **think of a schema declaring the recursive reference as a
 reference that considers that its destination might have been re-defined by a
 parent schema**.  For example, a schema that references the recursive anchor
 says: _"jump to the location set by the recursive anchor, but if there are
-overriden variants of it, jump to the first of those instead"_.
+overridden variants of it, jump to the first of those instead"_.
 
 {{<common-pitfall>}}The [`$recursiveRef`]({{< ref "2019-09/core/recursiveref"
 >}}) keyword only supports the special empty fragment `"#"` and it cannot be
@@ -112,7 +112,7 @@ $ jsonschema validate custom-metaschema.json schema.json --trace
 }
 {{</schema>}}
 
-{{<instance-pass `An object with a top-level occurence of the custom keyword is valid`>}}
+{{<instance-pass `An object with a top-level occurrence of the custom keyword is valid`>}}
 { "my-custom-keyword": "foo" }
 {{</instance-pass>}}
 
@@ -120,7 +120,7 @@ $ jsonschema validate custom-metaschema.json schema.json --trace
 { "keyword": "/properties", "instance": "", "value": [ "my-custom-keyword" ] }
 {{</instance-annotation>}}
 
-{{<instance-pass `An object with a nested occurence of the custom keyword is valid`>}}
+{{<instance-pass `An object with a nested occurrence of the custom keyword is valid`>}}
 { "additionalProperties": { "my-custom-keyword": "foo" } }
 {{</instance-pass>}}
 
@@ -128,6 +128,6 @@ $ jsonschema validate custom-metaschema.json schema.json --trace
 { "keyword": "/properties", "instance": "/additionalProperties", "value": [ "my-custom-keyword" ] }
 {{</instance-annotation>}}
 
-{{<instance-fail `An object with an incorrect nested occurence of the custom keyword is invalid`>}}
+{{<instance-fail `An object with an incorrect nested occurrence of the custom keyword is invalid`>}}
 { "additionalProperties": { "my-custom-keyword": 1 } }
 {{</instance-fail>}}

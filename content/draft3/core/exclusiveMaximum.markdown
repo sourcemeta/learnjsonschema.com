@@ -2,7 +2,7 @@
 keyword: "exclusiveMaximum"
 signature: "Boolean"
 value: This keyword must be set to a boolean value
-summary: "When [`maximum`](/draft3/validation/maximum) is present and this keyword is set to true, the numeric instance must be less than the value in [`maximum`](/draft3/validation/maximum)."
+summary: "When [`maximum`](/draft3/core/maximum) is present and this keyword is set to true, the numeric instance must be less than the value in [`maximum`](/draft3/core/maximum)."
 summary: "Validation succeeds if the numeric instance is less than the given number."
 kind: [ "assertion" ]
 instance: [ "number" ]

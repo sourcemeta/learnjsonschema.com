@@ -63,7 +63,7 @@ Rauschmayer for a more detailed overview of JavaScript's numeric
 limitations.{{</common-pitfall>}}
 
 {{<learning-more>}}JSON allows numbers to be represented in [scientific
-expontential
+exponential
 notation](https://en.wikipedia.org/wiki/Scientific_notation#E_notation). For
 example, numbers like `1.0e+28` (equivalent to 10000000000000000000000000000.0)
 are valid according to the JSON grammar. This notation is convenient for
@@ -89,7 +89,7 @@ standard.{{</learning-more>}}
 3.14
 {{< /instance-pass >}}
 
-{{< instance-pass "A number in scientific expontential notation is valid" >}}
+{{< instance-pass "A number in scientific exponential notation is valid" >}}
 1.0e+28
 {{< /instance-pass >}}
 

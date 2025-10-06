@@ -1,7 +1,7 @@
 ---
 keyword: "pattern"
 signature: "String"
-value: This keyword must be set to a regular expression, preferrably using the [ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) flavour
+value: This keyword must be set to a regular expression, preferably using the [ECMA-262](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) flavour
 summary: "A string instance is considered valid if the regular expression matches the instance successfully."
 kind: [ "assertion" ]
 instance: [ "string" ]
@@ -26,7 +26,7 @@ related:
     keyword: type
 ---
 
-The `pattern` keyword restricts string instances to match the given regular
+The [`pattern`]({{< ref "2020-12/validation/pattern" >}}) keyword restricts string instances to match the given regular
 expression.
 
 {{<learning-more>}} While the specification suggests the use of

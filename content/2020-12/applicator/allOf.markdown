@@ -35,16 +35,17 @@ conjunction](https://en.wikipedia.org/wiki/Logical_conjunction) (AND)
 operation, as instances are valid if they satisfy every constraint of every
 subschema (the intersection of the constraints).
 
-{{<common-pitfall>}} Wrapping a single instance of the [`$ref`](../../core/ref)
-or [`$dynamicRef`](../../core/dynamicref) keyword in an `allOf` operator is an
-anti-pattern.
+{{<common-pitfall>}} Wrapping a single instance of the
+[`$ref`]({{< ref "2020-12/core/ref" >}}) or [`$dynamicRef`]({{< ref
+"2020-12/core/dynamicref" >}}) keyword in an [`allOf`]({{< ref
+"2020-12/applicator/allof" >}}) operator is an anti-pattern.
 
 This practice has historical roots. In JSON Schema [Draft 7](/draft7) and
-earlier versions, any subschema declaring the `$ref` keyword was considered to
-be a _reference object_ and any other sibling keyword was silently ignored. As
-a consequence, subschemas with references that made use of other keywords had
-to artificially wrap the reference into its own subschema.
-{{</common-pitfall>}}
+earlier versions, any subschema declaring the [`$ref`]({{< ref
+"2020-12/core/ref" >}}) keyword was considered to be a _reference object_ and
+any other sibling keyword was silently ignored. As a consequence, subschemas
+with references that made use of other keywords had to artificially wrap the
+reference into its own subschema. {{</common-pitfall>}}
 
 {{<best-practice>}}This keyword typically has a single use case: combining
 _multiple_ schemas through the use of (internal or external) references. If
@@ -125,7 +126,8 @@ result of this keyword given 3 subschemas: A, B, and C.
 
 ## Examples
 
-{{<schema `A schema that constrains instances with two internally referenced schemas`>}}
+{{<schema `A schema that constrains instances with two internally referenced
+schemas`>}}
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "allOf": [
