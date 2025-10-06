@@ -21,3 +21,41 @@ related:
   - vocabulary: applicator
     keyword: additionalProperties
 ---
+
+The `maxProperties` keyword restricts object instances to consists of an
+inclusive maximum numbers of properties.
+
+{{<common-pitfall>}} The presence of this keyword does not depend on the
+presence of the [`properties`]({{< ref "2020-12/applicator/properties" >}})
+keyword.  {{</common-pitfall>}}
+
+{{<best-practice>}}To restrict object instances to the empty object, prefer
+using the [`const`]({{< ref "2020-12/validation/const" >}}) keyword instead of
+setting this keyword to `0`. {{</best-practice>}}
+
+{{<constraint-warning `object`>}}
+
+## Examples
+
+{{<schema `A schema that constrains object instances to define at most 2 properties`>}}
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "maxProperties": 2
+}
+{{</schema>}}
+
+{{<instance-fail `An object value with more than 2 properties is invalid`>}}
+{ "foo": 1, "bar": 2, "baz": 3 }
+{{</instance-fail>}}
+
+{{<instance-pass `An object value with 2 properties is valid`>}}
+{ "foo": 1, "bar": 2 }
+{{</instance-pass>}}
+
+{{<instance-pass `An object value with less than 2 properties is valid`>}}
+{ "foo": 1 }
+{{</instance-pass>}}
+
+{{<instance-pass `A non-object value is valid`>}}
+"Hello World"
+{{</instance-pass>}}

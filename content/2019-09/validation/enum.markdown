@@ -21,3 +21,82 @@ related:
   - vocabulary: applicator
     keyword: oneOf
 ---
+
+The `enum` keyword restricts instances to a finite set of possible values,
+which may be of different types.
+
+{{<best-practice>}} Constraining instances to a set of possible values by
+definition implies the given JSON types. Therefore, combining this keyword with
+the [`type`]({{< ref "2020-12/validation/type" >}}) keyword is redundant (or
+even invalid if types don't agree), and considered an
+anti-pattern.{{</best-practice>}}
+
+{{<common-pitfall>}} There are programming languages, such as JavaScript, that
+[cannot distinguish between integers and real
+numbers](https://2ality.com/2012/04/number-encoding.html). To accomodate for
+those cases, JSON Schema considers a real number with a zero fractional part to
+be equal to the corresponding integer. For example, in JSON Schema, `1` is
+considered to be equal to `1.0`.{{</common-pitfall>}}
+
+## Examples
+
+{{<schema `A schema that constrains instances to an homogeneous string enumeration`>}}
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "enum": [ "red", "green", "blue" ]
+}
+{{</schema>}}
+
+{{<instance-pass `A string value that equals a value in the enumeration is valid`>}}
+"green"
+{{</instance-pass>}}
+
+{{<instance-fail `A string value that does not equal a value in the enumeration is invalid`>}}
+"black"
+{{</instance-fail>}}
+
+{{<instance-fail `Any other value is invalid`>}}
+2
+{{</instance-fail>}}
+
+{{<schema `A schema that constrains instances to an homogeneous numeric enumeration`>}}
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "enum": [ 1, 2.0, 3 ]
+}
+{{</schema>}}
+
+{{<instance-pass `An integer value that equals a value in the enumeration is valid`>}}
+1
+{{</instance-pass>}}
+
+{{<instance-pass `An integer representation of a real value that equals a value in the enumeration is valid`>}}
+2
+{{</instance-pass>}}
+
+{{<instance-fail `Any other number value is invalid`>}}
+5
+{{</instance-fail>}}
+
+{{<instance-fail `Any other non-number value is invalid`>}}
+"Hello"
+{{</instance-fail>}}
+
+{{<schema `A schema that constrains instances to an heterogeneous enumeration`>}}
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "enum": [ "red", 123, true, { "foo": "bar" }, [ 1, 2 ], null ]
+}
+{{</schema>}}
+
+{{<instance-pass `A boolean value that equals a value in the enumeration is valid`>}}
+true
+{{</instance-pass>}}
+
+{{<instance-pass `An object value that equals a value in the enumeration is valid`>}}
+{ "foo": "bar" }
+{{</instance-pass>}}
+
+{{<instance-fail `An object value that does not equal a value in the enumeration is invalid`>}}
+{ "foo": "baz" }
+{{</instance-fail>}}

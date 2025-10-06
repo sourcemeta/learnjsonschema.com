@@ -22,3 +22,67 @@ related:
   - vocabulary: content
     keyword: contentEncoding
 ---
+
+When the [`contentMediaType`]({{< ref "2020-12/content/contentmediatype" >}})
+keyword is set to a media type that adheres to the JSON data model (like JSON
+itself, [YAML](https://yaml.org) or [UBJSON](https://ubjson.org)), the
+`contentSchema` keyword declares the schema that describes the corresponding
+string instance value _after_ decoding it. This keyword does not affect
+validation, but the evaluator will collect its value as an annotation.
+
+{{<common-pitfall>}}
+
+The JSON Schema specification prohibits implementations, for security reasons,
+from automatically attempting to decode, parse, or validate encoded data
+without the consumer explicitly opting in to such behaviour. If you require
+this feature, consult the documentation of your tooling of choice to see if it
+supports content encoding/decoding and how to enable it.
+
+{{</common-pitfall>}}
+
+{{<constraint-warning `string`>}}
+
+## Examples
+
+{{<schema `A schema that describes JSON object values encoded using Base 64`>}}
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "contentMediaType": "application/json",
+  "contentEncoding": "base64",
+  "contentSchema": { "type": "object" }
+}
+{{</schema>}}
+
+{{<instance-pass `A string value that represents a valid JSON object encoded in Base 64 is valid and an annotations are emitted`>}}
+"eyAibmFtZSI6ICJKb2huIERvZSIgfQ==" // { "name": "John Doe" }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/contentMediaType", "instance": "", "value": "application/json" }
+{ "keyword": "/contentEncoding", "instance": "", "value": "base64" }
+{ "keyword": "/contentSchema", "instance": "", "value": { "type": "object" } }
+{{</instance-annotation>}}
+
+{{<instance-pass `A string value that represents an invalid JSON object encoded in Base 64 is valid and an annotations are still emitted`>}}
+"eyAibmFtZSI6IH0=" // { "name": }
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/contentMediaType", "instance": "", "value": "application/json" }
+{ "keyword": "/contentEncoding", "instance": "", "value": "base64" }
+{ "keyword": "/contentSchema", "instance": "", "value": { "type": "object" } }
+{{</instance-annotation>}}
+
+{{<instance-pass `A string value that represents a valid JSON number encoded in Base 64 is valid and an annotations are still emitted`>}}
+"MTIzNA==" // 1234
+{{</instance-pass>}}
+
+{{<instance-annotation>}}
+{ "keyword": "/contentMediaType", "instance": "", "value": "application/json" }
+{ "keyword": "/contentEncoding", "instance": "", "value": "base64" }
+{ "keyword": "/contentSchema", "instance": "", "value": { "type": "object" } }
+{{</instance-annotation>}}
+
+{{<instance-pass `A non-string value is valid but no annotations are emitted`>}}
+1234
+{{</instance-pass>}}

@@ -23,3 +23,37 @@ related:
   - vocabulary: applicator
     keyword: contains
 ---
+
+The `minItems` keyword restricts array instances to consists of an inclusive
+minimum numbers of items.
+
+{{<common-pitfall>}} The presence of this keyword does not depend on the
+presence of the [`items`]({{< ref "2020-12/applicator/items" >}}) keyword.
+{{</common-pitfall>}}
+
+{{<constraint-warning `array`>}}
+
+## Examples
+
+{{<schema `A schema that constrains array instances to contain at least 3 items`>}}
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "minItems": 3
+}
+{{</schema>}}
+
+{{<instance-pass `An array value with more than 3 items is valid`>}}
+[ 1, 2, 3, 4 ]
+{{</instance-pass>}}
+
+{{<instance-pass `An array value with 3 items is valid`>}}
+[ 1, true, "hello" ]
+{{</instance-pass>}}
+
+{{<instance-fail `An array value with less than 3 items is invalid`>}}
+[ false, "foo" ]
+{{</instance-fail>}}
+
+{{<instance-pass `A non-array value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
