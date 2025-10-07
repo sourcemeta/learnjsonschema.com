@@ -20,8 +20,9 @@ annotation:
    kind: [ "string" ]
 ---
 
-The `format` keyword communicates that string instances are of the given
-logical type by producing an annotation value.
+The [`format`]({{< ref "2019-09/format/format" >}}) keyword communicates that
+string instances are of the given logical type by producing an annotation
+value.
 
 {{<common-pitfall>}} By default, this keyword does not perform validation, as
 validating formats is considered optional by the official JSON Schema Test

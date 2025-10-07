@@ -118,10 +118,10 @@ result of this keyword given 3 subschemas: A, B, and C.
 {
   "$schema": "http://json-schema.org/draft-06/schema#",
   "allOf": [
-    { "$ref": "#/$defs/foo" },
-    { "$ref": "#/$defs/bar" }
+    { "$ref": "#/definitions/foo" },
+    { "$ref": "#/definitions/bar" }
   ],
-  "$defs": {
+  "definitions": {
     "foo": { "type": "number" },
     "bar": { "type": "integer" }
   }

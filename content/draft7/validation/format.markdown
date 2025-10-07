@@ -17,8 +17,8 @@ changed_in:
   - draft6
 ---
 
-The `format` keyword communicates that string instances are of the given
-logical type.
+The [`format`]({{< ref "draft7/validation/format" >}}) keyword communicates
+that string instances are of the given logical type.
 
 {{<common-pitfall>}} By default, this keyword does not perform validation, as
 validating formats is considered optional by the official JSON Schema Test

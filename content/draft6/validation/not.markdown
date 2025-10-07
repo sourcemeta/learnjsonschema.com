@@ -21,3 +21,59 @@ related:
   - vocabulary: validation
     keyword: oneOf
 ---
+
+
+The [`not`]({{< ref "draft6/validation/not" >}}) keyword restricts
+instances to fail validation against the given subschema. This keyword
+represents a [logical negation](https://en.wikipedia.org/wiki/Negation) (NOT)
+operation. In other words, the instance successfully validates against the
+schema only if it does not match the given subschema.
+
+
+{{<best-practice>}} Avoid the use of this keyword (usually negating the
+[`required`]({{< ref "draft6/validation/required" >}}) keyword) to prohibit
+specific object properties from being defined. Instead, use the
+[`properties`]({{< ref "draft6/validation/properties" >}}) keyword and set
+the disallowed object properties to the `false` boolean
+schema.{{</best-practice>}}
+
+This keyword is equivalent to the `!` operator found in most programming
+languages. For example:
+
+```c
+bool valid = !not_schema;
+```
+
+## Examples
+
+{{<schema `A schema that constrains instances to not be a specific value`>}}
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "not": {
+    "const": "Prohibited"
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `A value that does not equal the prohibited value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
+
+{{<instance-fail `A value that equals the prohibited value is invalid`>}}
+"Prohibited"
+{{</instance-fail>}}
+
+{{<schema `A schema that negates an unsatisfiable schema matches every possible instance`>}}
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "not": {
+    "type": "string",
+    "minLength": 10,
+    "maxLength": 9
+  }
+}
+{{</schema>}}
+
+{{<instance-pass `Any value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
