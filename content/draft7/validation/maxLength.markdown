@@ -19,3 +19,56 @@ related:
   - vocabulary: validation
     keyword: format
 ---
+
+The [`maxLength`]({{< ref "draft7/validation/maxlength" >}}) keyword restricts string instances to consists of an inclusive
+maximum number of [Unicode](https://unicode.org) code-points (logical
+characters), which is not necessarily the same as the number of bytes in the
+string.
+
+{{<learning-more>}} While the [IETF RFC
+8259](https://www.rfc-editor.org/rfc/rfc8259) JSON standard recommends the use
+of [UTF-8](https://en.wikipedia.org/wiki/UTF-8), other Unicode encodings are
+permitted. Therefore a JSON string may be represented in up to 4x the number of
+bytes as its number of code-points (assuming
+[UTF-32](https://en.wikipedia.org/wiki/UTF-32) as the upper bound).
+
+JSON Schema does not provide a mechanism to assert on the byte size of a JSON
+string, as this is an implementation-dependent property of the JSON parser in
+use.  {{</learning-more>}}
+
+{{<common-pitfall>}} Be careful when making use of this keyword to
+inadvertently assert on the byte length of JSON strings before inserting them
+into byte-sensitive destinations like fixed-size buffers. Always assume that
+the byte length of a JSON string can arbitrary larger that the number of
+logical characters.{{</common-pitfall>}}
+
+{{<best-practice>}}To restrict string instances to the empty string, prefer
+using the [`const`]({{< ref "draft7/validation/const" >}}) keyword instead of
+setting this keyword to `0`. {{</best-practice>}}
+
+{{<constraint-warning `string`>}}
+
+## Examples
+
+{{<schema `A schema that constrains string instances to contain at most 3 code points`>}}
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "maxLength": 3
+}
+{{</schema>}}
+
+{{<instance-pass `A string value that consists of 3 code-points is valid`>}}
+"foo"
+{{</instance-pass>}}
+
+{{<instance-fail `A string value that consists of more than 3 code-points is invalid`>}}
+"こんにちは"
+{{</instance-fail>}}
+
+{{<instance-pass `A string value that consists of less than 3 code-points is valid`>}}
+"hi"
+{{</instance-pass>}}
+
+{{<instance-pass `A non-string value is valid`>}}
+55
+{{</instance-pass>}}
