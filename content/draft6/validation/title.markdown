@@ -61,18 +61,18 @@ you run out of space, you can move the additional information to the
 
 {{<schema `A schema that declares conditional refined titles for the same instance location`>}}
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-06/schema#",
   "title": "Number",
   "type": "number",
   "anyOf": [
-    { 
+    {
       "title": "Even Number",
-      "multipleOf": 2 
+      "multipleOf": 2
     },
-    { 
+    {
       "title": "Odd Number",
       "not": {
-        "multipleOf": 2 
+        "multipleOf": 2
       }
     }
   ]

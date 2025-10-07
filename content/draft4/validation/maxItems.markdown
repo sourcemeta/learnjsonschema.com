@@ -19,3 +19,42 @@ related:
   - vocabulary: validation
     keyword: minItems
 ---
+
+
+The [`maxItems`]({{< ref "draft4/validation/maxitems" >}}) keyword restricts array instances to consists of an inclusive
+maximum numbers of items.
+
+{{<common-pitfall>}} The presence of this keyword does not depend on the
+presence of the [`items`]({{< ref "draft4/validation/items" >}}) keyword.
+{{</common-pitfall>}}
+
+{{<best-practice>}}To restrict array instances to the empty array, prefer using
+the [`enum`]({{< ref "draft4/validation/enum" >}}) keyword with a single empty
+array value instead of setting this keyword to `0`. {{</best-practice>}}
+
+{{<constraint-warning `array`>}}
+
+## Examples
+
+{{<schema `A schema that constrains array instances to contain at most 3 items`>}}
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "maxItems": 3
+}
+{{</schema>}}
+
+{{<instance-fail `An array value with more than 3 items is invalid`>}}
+[ 1, 2, 3, 4 ]
+{{</instance-fail>}}
+
+{{<instance-pass `An array value with 3 items is valid`>}}
+[ 1, true, "hello" ]
+{{</instance-pass>}}
+
+{{<instance-pass `An array value with less than 3 items is valid`>}}
+[ false, "foo" ]
+{{</instance-pass>}}
+
+{{<instance-pass `A non-array value is valid`>}}
+"Hello World"
+{{</instance-pass>}}
