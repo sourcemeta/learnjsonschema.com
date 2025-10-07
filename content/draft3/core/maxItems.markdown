@@ -41,4 +41,3 @@ related:
 {{<instance-fail `An array instance with greater than the maxItems value is invalid`>}}
 ["learn", "json", "schema", "draft3"]
 {{</instance-fail>}}
-

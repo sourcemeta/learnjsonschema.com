@@ -15,3 +15,7 @@ related:
   - vocabulary: core
     keyword: default
 ---
+
+We are looking for contributors to help us fully expand the documentation to
+cover this dialect. If that sounds like you, [send a pull
+request on GitHub](https://github.com/sourcemeta/learnjsonschema.com/pulls)!
