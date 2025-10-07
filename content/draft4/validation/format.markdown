@@ -14,3 +14,69 @@ index: 97
 changed_in:
   - draft3
 ---
+
+
+The [`format`]({{< ref "draft4/validation/format" >}}) keyword communicates
+that string instances are of the given logical type.
+
+{{<common-pitfall>}} By default, this keyword does not perform validation, as
+validating formats is considered optional by the official JSON Schema Test
+Suite. As a consequence, not many implementations support it. If validation is
+desired, the best practice is to combine this keyword with the [`pattern`]({{< ref "draft4/validation/pattern" >}}) keyword. This guarantees interoperable
+and unambiguous behavior across JSON Schema implementations.
+{{</common-pitfall>}}
+
+{{<best-practice>}} While [technically
+allowed](https://json-schema.org/draft-04/draft-fge-json-schema-validation-00#rfc.section.7)
+by the JSON Schema specification, extending this keyword with custom formats is
+considered to be an anti-pattern that can introduce interoperability issues and
+undefined behavior. As a best practice, stick to standardised formats. If
+needed, introduce a new keyword for custom string logical
+types.{{</best-practice>}}
+
+{{<learning-more>}} This keyword and its validation guarantees are a common
+source of confusion of the JSON Schema specification across versions.
+
+Since the introduction of this keyword, the JSON Schema specifications
+clarified that validation was not mandatory. However, the majority of older
+Schema implementations did support validation, leading schema-writers to rely
+on it. At the same time, a second problem emerged: implementations often didn't
+agree on the strictness of validation, mainly on complex logical types like
+e-mail addresses, leading to various interoperability issues.
+
+To avoid the gray areas of this keyword, we recommend only treating it as
+semantic metadata, never enabling validation support at the implementation
+level (even if supported), and performing validation using the [`pattern`]({{<
+ref "draft4/validation/pattern" >}}) keyword.  {{</learning-more>}}
+
+The supported formats are the following.
+
+| Format            | Category             | Specification |
+|-------------------|----------------------|---------------|
+| `"date-time"`     | Time                 | [JSON Schema Draft 4 Validation Section 7.3.1](https://json-schema.org/draft-04/draft-fge-json-schema-validation-00#rfc.section.7.3.1) |
+| `"email"`         | Emails               | [JSON Schema Draft 4 Validation Section 7.3.2](https://json-schema.org/draft-04/draft-fge-json-schema-validation-00#rfc.section.7.3.2) |
+| `"hostname"`      | Hostnames            | [JSON Schema Draft 4 Validation Section 7.3.3](https://json-schema.org/draft-04/draft-fge-json-schema-validation-00#rfc.section.7.3.3) |
+| `"ipv4"`          | IP Addresses         | [JSON Schema Draft 4 Validation Section 7.3.4](https://json-schema.org/draft-04/draft-fge-json-schema-validation-00#rfc.section.7.3.4) |
+| `"ipv6"`          | IP Addresses         | [JSON Schema Draft 4 Validation Section 7.3.5](https://json-schema.org/draft-04/draft-fge-json-schema-validation-00#rfc.section.7.3.5) |
+| `"uri"`           | Resource Identifiers | [JSON Schema Draft 4 Validation Section 7.3.6](https://json-schema.org/draft-04/draft-fge-json-schema-validation-00#rfc.section.7.3.6) |
+
+## Examples
+
+{{<schema `A schema that describes string instances as e-mail addresses`>}}
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "format": "email"
+}
+{{</schema>}}
+
+{{<instance-pass `A string value that represents a valid e-mail address is valid`>}}
+"john.doe@example.com"
+{{</instance-pass>}}
+
+{{<instance-pass `A string value that represents an invalid e-mail address is typically valid (implementation dependent)`>}}
+"foo-bar"
+{{</instance-pass>}}
+
+{{<instance-pass `Any non-string value is valid`>}}
+45
+{{</instance-pass>}}

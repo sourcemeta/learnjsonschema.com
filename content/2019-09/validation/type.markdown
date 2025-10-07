@@ -37,12 +37,11 @@ JSON parsers.
 | `"string"`  | A JSON string                            | [UTF-8](https://en.wikipedia.org/wiki/UTF-8) Unicode encoding                                            |
 
 Note that while the JSON grammar does not distinguish between integer and real
-numbers, JSON Schema provides the [`integer`]({{< ref
-"2019-09/validation/type" >}}) logical type that matches either integers (such
-as `2`), or real numbers where the fractional part is zero (such as `2.0`).
-Additionally, numeric constructs inherent to floating point encodings (like
-`NaN` and `Infinity`) are not permitted in JSON. However, the negative zero
-(`-0`) is permitted.
+numbers, JSON Schema provides the `integer` logical type that matches either
+integers (such as `2`), or real numbers where the fractional part is zero (such
+as `2.0`).  Additionally, numeric constructs inherent to floating point
+encodings (like `NaN` and `Infinity`) are not permitted in JSON. However, the
+negative zero (`-0`) is permitted.
 
 {{<best-practice>}} To avoid interoperability issues, do not produce JSON
 documents with numbers that exceed the [IETF RFC

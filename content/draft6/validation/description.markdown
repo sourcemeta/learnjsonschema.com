@@ -67,7 +67,7 @@ cases.
 
 {{<schema `A schema that declares conditional descriptions alongside a top level title`>}}
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-06/schema#",
   "title": "Number",
   "type": "number",
   "anyOf": [
