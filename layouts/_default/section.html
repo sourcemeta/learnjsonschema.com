@@ -27,6 +27,7 @@
 <div class="d-flex bg-body flex-fill">
   {{ partial "sidebar.html" . }}
   <div class="flex-xl-grow-1 mw-100">
+    {{ partial "training.html" . }}
     <main class="px-3 px-lg-5 pt-4 pb-3">
       <header class="mb-3">
         <h1>{{ .Title }}
@@ -232,7 +233,6 @@
       {{ end }}
     </main>
 
-    {{ partial "book.html" . }}
     {{ partial "help.html" . }}
   </div>
 </div>

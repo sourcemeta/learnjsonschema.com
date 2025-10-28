@@ -1,0 +1,27 @@
+{{ $courseURL := "https://www.sourcemeta.com/courses/jsonschema-for-openapi" }}
+{{ $oreilly := "https://www.oreilly.com/library/view/unifying-business-data/9781098144999/" }}
+
+<section class="bg-light-subtle border-bottom py-3">
+  <div class="container-fluid px-3 px-lg-5">
+    <div class="d-flex flex-md-row align-items-center gap-3">
+      <div class="flex-shrink-0 d-none d-md-block">
+        <a href="{{ $courseURL }}" target="_blank" class="d-block position-relative" style="width: 140px;">
+          <img src="{{ .Site.BaseURL }}/course.webp" alt="JSON Schema for OpenAPI course" class="img-fluid rounded shadow-sm" style="width: 100%; object-fit: cover;">
+          <div class="position-absolute top-50 start-50 translate-middle">
+            <div class="bg-dark bg-opacity-90 rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
+              <i class="bi bi-play-fill text-white" style="font-size: 1.1rem; margin-left: 2px;"></i>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="flex-grow-1 text-center text-md-start">
+        <h3 class="h6 fw-bold mb-1">Looking to master JSON Schema for OpenAPI?</h3>
+        <p class="mb-2 text-muted small">A 9+ hour course taught by a member of the JSON Schema Technical Steering Committee</p>
+        <div class="d-flex align-items-center justify-content-center justify-content-md-start flex-wrap gap-3">
+          <a href="{{ $courseURL }}" target="_blank" class="btn btn-sm btn-dark">Take the Video Course <i class="bi bi-arrow-right ms-1"></i></a>
+          <span class="text-muted small">Also check out our <a href="{{ $oreilly }}" target="_blank">O'Reilly book</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
