@@ -11,6 +11,7 @@ default:
   value: "\"any\""
 tests:
   - draft3/type.json
+  - draft3/optional/zeroTerminatedFloats.json
 index: -99995
 introduced_in: draft1
 changed_in:

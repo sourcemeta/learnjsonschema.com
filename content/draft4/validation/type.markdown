@@ -11,6 +11,7 @@ default:
   value: "[ \"null\", \"boolean\", \"object\", \"array\", \"number\", \"string\" ]"
 tests:
   - draft4/type.json
+  - draft4/optional/zeroTerminatedFloats.json
 index: -99999
 introduced_in: draft1
 ---
