@@ -62,6 +62,16 @@ keyword. If an object property is described by both keywords, then both schemas
 must successfully validate against the given property for validation to
 succeed.  {{</common-pitfall>}}
 
+{{<best-practice>}} While JSON Schema allows property names to contain any
+characters (including spaces, special characters, and even empty strings),
+consider restricting property names to match the regular expression
+`[A-Za-z_][A-Za-z0-9_]*`, as suggested by the [JSON Structure
+specification](https://json-structure.github.io/core/draft-vasters-json-structure-core.html#section-3.6).
+This makes it easier to convert your schemas into programming language type
+definitions (such as classes or structs), database schemas (such as SQL
+tables), and other systems that have stricter naming requirements.
+{{</best-practice>}}
+
 {{<constraint-warning `object`>}}
 
 ## Examples
