@@ -1,7 +1,7 @@
 ---
 keyword: "$id"
 signature: "URI Reference"
-value: This keyword must be set to an absolute URI or a relative reference as defined by [RFC 3986](https://www.rfc-editor.org/info/rfc3986)
+value: "This keyword must be set to an absolute URI or a relative reference as defined by [RFC 3986](https://www.rfc-editor.org/info/rfc3986), where any fragment must match the regular expression `^[A-Za-z][-A-Za-z0-9.:_]*$`"
 summary: "This keyword declares an identifier for the schema resource."
 kind: [ "identifier" ]
 instance: [ "any" ]
@@ -51,6 +51,23 @@ with an HTTP URL identifier is actually resolvable at such URL. To avoid
 surprises, JSON Schema implementations must be careful with automatically
 sending remote network requests when encountering supposely resolvable schema
 identifiers.
+
+{{</common-pitfall>}}
+
+{{<common-pitfall>}}
+
+The specification restricts the kinds of fragments that may appear in
+[`$id`]({{< ref "draft7/core/id" >}}). Only _plain-name_ fragments (matching
+the regular expression `^[A-Za-z][-A-Za-z0-9.:_]*$`) are allowed, and they
+declare a location-independent identifier (an anchor) for the schema. JSON
+Pointer fragments such as `#/definitions/foo` are _not_ valid in
+[`$id`]({{< ref "draft7/core/id" >}}), even though they are valid in
+[`$ref`]({{< ref "draft7/core/ref" >}}). The behaviour of any other fragment
+form is undefined.
+
+This anchor-style usage of [`$id`]({{< ref "draft7/core/id" >}}) was later
+replaced by the dedicated [`$anchor`]({{< ref "2019-09/core/anchor" >}})
+keyword starting in JSON Schema 2019-09.
 
 {{</common-pitfall>}}
 
