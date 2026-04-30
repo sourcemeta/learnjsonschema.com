@@ -1,7 +1,7 @@
 ---
 keyword: "$anchor"
 signature: "String"
-value: This keyword must be set to a string starting with a letter and containing letters, digits, hyphens, underscores, colons, or periods
+value: "This keyword must be set to a string that starts with a letter or underscore and may continue with letters, digits, hyphens, periods, or underscores (matching the regular expression `^[A-Za-z_][-A-Za-z0-9._]*$`)"
 summary: "This keyword is used to create plain name fragments that are not tied to any particular structural location for referencing purposes, which are taken into consideration for static referencing."
 kind: [ "identifier" ]
 instance: [ "any" ]
