@@ -9,6 +9,17 @@ specification: "https://json-schema.org/draft-03/draft-zyp-json-schema-03.pdf#5.
 metaschema: "http://json-schema.org/draft-03/schema#"
 tests:
   - draft3/format.json
+  - draft3/optional/format/color.json
+  - draft3/optional/format/date-time.json
+  - draft3/optional/format/date.json
+  - draft3/optional/format/ecmascript-regex.json
+  - draft3/optional/format/email.json
+  - draft3/optional/format/host-name.json
+  - draft3/optional/format/ip-address.json
+  - draft3/optional/format/ipv6.json
+  - draft3/optional/format/regex.json
+  - draft3/optional/format/time.json
+  - draft3/optional/format/uri.json
 introduced_in: draft1
 index: 99919
 changed_in:

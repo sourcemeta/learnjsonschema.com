@@ -12,6 +12,7 @@ tests:
   - draft2020-12/optional/format/date-time.json
   - draft2020-12/optional/format/date.json
   - draft2020-12/optional/format/duration.json
+  - draft2020-12/optional/format/ecmascript-regex.json
   - draft2020-12/optional/format/email.json
   - draft2020-12/optional/format/hostname.json
   - draft2020-12/optional/format/idn-email.json
