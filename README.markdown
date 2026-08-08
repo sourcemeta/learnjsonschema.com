@@ -25,4 +25,6 @@ License
 -------
 
 This project is governed by the [GNU Affero General Public License](./LICENSE)
-(GNU AGPL).
+(GNU AGPL). By contributing to this project, you agree to our organisation-wide
+[contribution
+guidelines](https://github.com/sourcemeta/.github/blob/main/CONTRIBUTING.md).
