@@ -9,8 +9,6 @@ specification: "https://spec.openapis.org/oas/v3.2.1.html#schema-xml"
 metaschema: "https://spec.openapis.org/oas/3.2/meta/2026-02-26"
 index: -999
 introduced_in: openapi-3.1
-changed_in:
-  - openapi-3.1
 interdependencies:
   - vocabulary: core
     keyword: $ref
@@ -29,6 +27,4 @@ related:
     keyword: items
   - vocabulary: applicator
     keyword: prefixItems
-  - vocabulary: content
-    keyword: contentMediaType
 ---

@@ -29,8 +29,4 @@ related:
     keyword: allOf
   - vocabulary: validation
     keyword: required
-  - vocabulary: validation
-    keyword: const
-  - vocabulary: validation
-    keyword: enum
 ---

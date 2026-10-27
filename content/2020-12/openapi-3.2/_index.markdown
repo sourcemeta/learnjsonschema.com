@@ -4,7 +4,7 @@ summary: "A vocabulary that defines the keywords that the OpenAPI Specification 
 specification: "https://spec.openapis.org/oas/v3.2.1.html#base-vocabulary"
 uri: "https://spec.openapis.org/oas/3.2/vocab/base"
 metaschema: "https://spec.openapis.org/oas/3.2/meta/2026-02-26"
-index: 99999
+index: 99998
 related:
   - openapi-3.1
 ---

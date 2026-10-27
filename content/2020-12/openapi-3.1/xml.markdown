@@ -14,8 +14,6 @@ changed_in:
 interdependencies:
   - vocabulary: validation
     keyword: type
-  - vocabulary: applicator
-    keyword: items
 related:
   - vocabulary: openapi-3.2
     keyword: xml
@@ -25,6 +23,4 @@ related:
     keyword: properties
   - vocabulary: applicator
     keyword: items
-  - vocabulary: content
-    keyword: contentMediaType
 ---
