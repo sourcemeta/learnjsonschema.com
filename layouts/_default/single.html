@@ -196,7 +196,7 @@
                         {{ $interdependentVocabularyURL := .vocabulary | printf "/%s/%s" $dialect }}
                         {{ $interdependentKeywordURL := (replace .keyword "$" "") | printf "%s/%s/%s" $dialect .vocabulary }}
                         <a class="font-monospace" href="{{ ref $ $interdependentKeywordURL }}">{{ .keyword }}</a>
-                        <small>(Vocabulary: <a href="{{ ref $ $interdependentVocabularyURL }}">{{ title .vocabulary }}</a>)</small>
+                        <small>(Vocabulary: <a href="{{ ref $ $interdependentVocabularyURL }}">{{ ($.Site.GetPage $interdependentVocabularyURL).Title }}</a>)</small>
                       </li>
                     {{ end }}
                   </ul>
@@ -216,7 +216,7 @@
                         {{ $affectedVocabularyURL := .vocabulary | printf "/%s/%s" $dialect }}
                         {{ $affectedKeywordURL := (replace .keyword "$" "") | printf "%s/%s/%s" $dialect .vocabulary }}
                         <a class="font-monospace" href="{{ ref $ $affectedKeywordURL }}">{{ .keyword }}</a>
-                        <small>(Vocabulary: <a href="{{ ref $ $affectedVocabularyURL }}">{{ title .vocabulary }}</a>)</small>
+                        <small>(Vocabulary: <a href="{{ ref $ $affectedVocabularyURL }}">{{ ($.Site.GetPage $affectedVocabularyURL).Title }}</a>)</small>
                       </li>
                     {{ end }}
                   </ul>
@@ -236,7 +236,7 @@
                         {{ $relatedVocabularyURL := .vocabulary | printf "/%s/%s" $dialect }}
                         {{ $relatedKeywordURL := (replace .keyword "$" "") | printf "%s/%s/%s" $dialect .vocabulary }}
                         <a class="font-monospace" href="{{ ref $ $relatedKeywordURL }}">{{ .keyword }}</a>
-                        <small>(Vocabulary: <a href="{{ ref $ $relatedVocabularyURL }}">{{ title .vocabulary }}</a>)</small>
+                        <small>(Vocabulary: <a href="{{ ref $ $relatedVocabularyURL }}">{{ ($.Site.GetPage $relatedVocabularyURL).Title }}</a>)</small>
                       </li>
                     {{ end }}
                   </ul>
