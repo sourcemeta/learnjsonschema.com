@@ -141,7 +141,7 @@
                     {{ range (.Params.related) }}
                       <li>
                         {{ $relatedVocabularyURL := . | printf "/%s/%s" $dialect }}
-                        <a href="{{ ref $ $relatedVocabularyURL }}">{{ title (replace . "-" " ") }}</a>
+                        <a href="{{ ref $ $relatedVocabularyURL }}">{{ ($.Site.GetPage $relatedVocabularyURL).Title }}</a>
                       </li>
                     {{ end }}
                   </ul>
