@@ -29,7 +29,7 @@ annotation.
 >}}) keyword instead. The OpenAPI Specification recommends reaching for this
 one [only if compatibility with OAS v3.0 or earlier is
 required](https://spec.openapis.org/oas/v3.2.1.html#choosing-which-field-s-to-use).
-The dialect meta-schema also annotates this keyword as [`deprecated`]({{< ref
+The vocabulary meta-schema also annotates this keyword as [`deprecated`]({{< ref
 "2020-12/meta-data/deprecated" >}}). Validating a schema against that
 meta-schema therefore reports the deprecation for you. {{</best-practice>}}
 
